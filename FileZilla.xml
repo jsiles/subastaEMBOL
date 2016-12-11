@@ -1,0 +1,1189 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<FileZilla3>
+    <Servers>
+        <Server>
+            <Host>195.218.197.3</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <Logontype>0</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>195.218.197.3</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>195.218.197.3&#x0A;        
+        </Server>
+        <Server>
+            <Host>accc-scz.com</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>acccscz</User>
+            <Pass>4+d5dc7scz</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>accc</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>accc&#x0A;        
+        </Server>
+        <Server>
+            <Host>67.225.225.0</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>adventur</User>
+            <Pass>4dv3n7ur5a</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>adventureonsouthamerica.com</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>adventureonsouthamerica.com&#x0A;        
+        </Server>
+        <Server>
+            <Host>67.225.225.0</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>grupoalc</User>
+            <Pass>logos4k8</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>Alcos</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>Alcos&#x0A;        
+        </Server>
+        <Server>
+            <Host>www.amupei.bo</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>amupeib</User>
+            <Pass>4mup31</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>amupei</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>amupei&#x0A;        
+        </Server>
+        <Server>
+            <Host>aulavirtual.ap.gob.bo</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>ftpuser</User>
+            <Pass>Autoridad123</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>ap</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>ap&#x0A;        
+        </Server>
+        <Server>
+            <Host>fundacionarcoiris.org.bo</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>arcoiris</User>
+            <Pass>4rcoi1ris</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>Arcoiris</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>Arcoiris&#x0A;        
+        </Server>
+        <Server>
+            <Host>80.32.174.187</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>bajar</User>
+            <Pass>ps2</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>Bajar</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>Bajar&#x0A;        
+        </Server>
+        <Server>
+            <Host>67.225.130.177</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>boabo</User>
+            <Pass>b54bol1</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>BOA</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>BOA&#x0A;        
+        </Server>
+        <Server>
+            <Host>67.225.225.0</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>cadetour</User>
+            <Pass>c4d+87_ou</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>Cadetours</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>Cadetours&#x0A;        
+        </Server>
+        <Server>
+            <Host>cibermedica.com</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>cibermed</User>
+            <Pass>c1b3rmed4</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>Cibermedica</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>Cibermedica&#x0A;        
+        </Server>
+        <Server>
+            <Host>www.cipebolivia.org</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>cipe</User>
+            <Pass>c1p3+hd5</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>cipe</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>cipe&#x0A;        
+        </Server>
+        <Server>
+            <Host>www.bodegaslaconcepcion.com</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>concep</User>
+            <Pass>b0d3g4a#08</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>concepcion</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>concepcion&#x0A;        
+        </Server>
+        <Server>
+            <Host>67.225.225.0</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>consenso</User>
+            <Pass>c+8f+fso4</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>consenso</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>consenso&#x0A;        
+        </Server>
+        <Server>
+            <Host>www.contodorespeto.com.bo</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>nelo</User>
+            <Pass>chinitafea</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>CTR</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>CTR&#x0A;        
+        </Server>
+        <Server>
+            <Host>dev-zone.info</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>devzone</User>
+            <Pass>james</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>dev-zone.info</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>dev-zone.info&#x0A;        
+        </Server>
+        <Server>
+            <Host>elalto-gestionturistica.cebem.org</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>gestionturistica</User>
+            <Pass>ga01alto35</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>elalto-gestionturistica.cebem.org</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>elalto-gestionturistica.cebem.org&#x0A;        
+        </Server>
+        <Server>
+            <Host>www.empoderamientomujeres.org</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>empodera</User>
+            <Pass>3mpo85+d</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>empoderamiento</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>empoderamiento&#x0A;        
+        </Server>
+        <Server>
+            <Host>fundacionestasvivo.org</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>estasviv</User>
+            <Pass>35td4d+</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>Estasvivo</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>Estasvivo&#x0A;        
+        </Server>
+        <Server>
+            <Host>67.225.130.177</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>ffpfie</User>
+            <Pass>fie54ffp2</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>ffpfie</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>ffpfie&#x0A;        
+        </Server>
+        <Server>
+            <Host>www.forumproducciones.com</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>forumpro</User>
+            <Pass>jf663</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>Forum</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>Forum&#x0A;        
+        </Server>
+        <Server>
+            <Host>www.forum.simple99.com</Host>
+            <Port>80</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>simple99</User>
+            <Pass>qwerty123</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>FORUMSIMPLE</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>FORUMSIMPLE&#x0A;        
+        </Server>
+        <Server>
+            <Host>64.82.19.65</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <Logontype>0</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>ftp://64.82.19.65/</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>ftp://64.82.19.65/&#x0A;        
+        </Server>
+        <Server>
+            <Host>fundacionestasvivo.org</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>estasviv</User>
+            <Pass>35td4d+</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>Fundacion</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>Fundacion&#x0A;        
+        </Server>
+        <Server>
+            <Host>gobernabilidad.org.bo</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>goberna</User>
+            <Pass>g0b3rn4b1l1d4d</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>gobernabilidad.org.bo</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>gobernabilidad.org.bo&#x0A;        
+        </Server>
+        <Server>
+            <Host>67.225.130.177</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>gobol</User>
+            <Pass>g0b011v14</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>Gobolivia</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>Gobolivia&#x0A;        
+        </Server>
+        <Server>
+            <Host>ftp.grupoalcos.com</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>grupoalc</User>
+            <Pass>logos4k8</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>Grupo Alcos</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>Grupo Alcos&#x0A;        
+        </Server>
+        <Server>
+            <Host>192.168.1.254</Host>
+            <Port>22</Port>
+            <Protocol>1</Protocol>
+            <Type>0</Type>
+            <User>root</User>
+            <Pass>s1mpl3</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>hades</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>hades&#x0A;        
+        </Server>
+        <Server>
+            <Host>10.20.3.5</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>lampp</User>
+            <Pass>Viva123</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>intranet rrhh</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>intranet rrhh&#x0A;        
+        </Server>
+        <Server>
+            <Host>www.jorgemaydana.com</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>jorgemay</User>
+            <Pass>4752319lp</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>jorgemaydana</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>jorgemaydana&#x0A;        
+        </Server>
+        <Server>
+            <Host>ftp.downloads1.kaspersky-labs.com</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <Logontype>0</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>KAV</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>KAV&#x0A;        
+        </Server>
+        <Server>
+            <Host>ftp.lafar.net</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>lafar@lafar.net</User>
+            <Pass>smartdrive</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>lafar</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>lafar&#x0A;        
+        </Server>
+        <Server>
+            <Host>ftp.lakauta.com</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>lakauta</User>
+            <Pass>l4k47425</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>lakauta</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>lakauta&#x0A;        
+        </Server>
+        <Server>
+            <Host>logoscomunicaciones.net</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>logosnet</User>
+            <Pass>s1mp7329</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>logosnet</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>logosnet&#x0A;        
+        </Server>
+        <Server>
+            <Host>www.lottito.net</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>lottito</User>
+            <Pass>l277i7jj+</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>loterias</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>loterias&#x0A;        
+        </Server>
+        <Server>
+            <Host>67.225.225.0</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>rodrigom</User>
+            <Pass>r7p+d5m8ga</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>Melgarejo</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>Melgarejo&#x0A;        
+        </Server>
+        <Server>
+            <Host>www.multivision.com.bo</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>user002@multivision.com.bo</User>
+            <Pass>9xbYGw_3</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>multivision</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>multivision&#x0A;        
+        </Server>
+        <Server>
+            <Host>195.218.197.3</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <Logontype>0</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>MUSICAACAGAR</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>MUSICAACAGAR&#x0A;        
+        </Server>
+        <Server>
+            <Host>ftp2.use.nero.com</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <Logontype>0</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>nero</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>nero&#x0A;        
+        </Server>
+        <Server>
+            <Host>200.58.160.21</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>oscarortiz</User>
+            <Pass>Sitio2007</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>oscarortiz</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>oscarortiz&#x0A;        
+        </Server>
+        <Server>
+            <Host>67.225.225.0</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>oscarort</User>
+            <Pass>o5c4od+_s5</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>oscarortiz_logos</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>oscarortiz_logos&#x0A;        
+        </Server>
+        <Server>
+            <Host>67.225.130.177</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>pharmama</User>
+            <Pass>ph4d5+dk3t</Pass>
+            <Account>PharmaMarket</Account>
+            <Logontype>4</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_PASSIVE</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>pharmamarket</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>pharmamarket&#x0A;        
+        </Server>
+        <Server>
+            <Host>67.225.130.177</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>podemos</User>
+            <Pass>p0d3m05</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>podemos</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>podemos&#x0A;        
+        </Server>
+        <Server>
+            <Host>85.30.231.25</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <Logontype>0</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>PS2 Games 1</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>PS2 Games 1&#x0A;        
+        </Server>
+        <Server>
+            <Host>www.quehacer.com</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>omarlogos</User>
+            <Pass>Logoscomm1</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>quehacer</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>quehacer&#x0A;        
+        </Server>
+        <Server>
+            <Host>remtebolivia.org</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>remtebol</User>
+            <Pass>r3m7e8ol</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>Remte</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>Remte&#x0A;        
+        </Server>
+        <Server>
+            <Host>ftp.ritzbolivia.com</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>user_web@ritzbolivia.com</User>
+            <Pass>r1tzs1st3m4</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>RiztBolivia</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>RiztBolivia&#x0A;        
+        </Server>
+        <Server>
+            <Host>ftp.ruayelectric.com</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>ruayelec</User>
+            <Pass>8uay-3l3c84+39</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>ruayelectric</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>ruayelectric&#x0A;        
+        </Server>
+        <Server>
+            <Host>192.168.1.7</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>admin</User>
+            <Pass>simple</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>Server Local</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>Server Local&#x0A;        
+        </Server>
+        <Server>
+            <Host>67.225.225.0</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>simple99</User>
+            <Pass>s1m7tl3+hsg</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>SIMPLE99</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>SIMPLE99&#x0A;        
+        </Server>
+        <Server>
+            <Host>simuladoresdegestion.com</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>simulado</User>
+            <Pass>51mul4d</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>simulado</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>simulado&#x0A;        
+        </Server>
+        <Server>
+            <Host>sonidocaceres.com</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>sonidoca</User>
+            <Pass>5on1dosca</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>SonidoCaceres</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>SonidoCaceres&#x0A;        
+        </Server>
+        <Server>
+            <Host>club-thestrongest.com</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>clubthes</User>
+            <Pass>t84d+df5et</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>the_strongest</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>the_strongest&#x0A;        
+        </Server>
+        <Server>
+            <Host>67.225.130.177</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>tiempo</User>
+            <Pass>_#x2PbWd</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>Tiempo</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>Tiempo&#x0A;        
+        </Server>
+        <Server>
+            <Host>khatus.com</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>khatusc</User>
+            <Pass>s34f2Tp8@*</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>tiempo en khatus</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>tiempo en khatus&#x0A;        
+        </Server>
+        <Server>
+            <Host>uscomplianceinstitute.com</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>tempftp</User>
+            <Pass>tmpl0g0s</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>usci</Name>
+            <Comments />
+            <LocalDir>D:\xampp\htdocs\usci\</LocalDir>
+            <RemoteDir>1 0 3 www</RemoteDir>
+            <SyncBrowsing>0</SyncBrowsing>usci&#x0A;        
+        </Server>
+        <Server>
+            <Host>67.225.225.0</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>victorhu</User>
+            <Pass>v1+t7o5+6h+</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>vh</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>vh&#x0A;        
+        </Server>
+        <Server>
+            <Host>76.74.255.175</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>nuevatelorg@nuevatel.org</User>
+            <Pass>alex99</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>viva</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>viva&#x0A;        
+        </Server>
+        <Server>
+            <Host>76.74.255.175</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>nuevatelorg@nuevatel.org</User>
+            <Pass>alex99</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>viva</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>viva&#x0A;        
+        </Server>
+        <Server>
+            <Host>www.vivagsm.com</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>nuevatelorg</User>
+            <Pass>alex99</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>viva2</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>viva2&#x0A;        
+        </Server>
+        <Server>
+            <Host>h22.megalink.com</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>vnet@vnet.bo</User>
+            <Pass>nuevatel</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>Vnet</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>Vnet&#x0A;        
+        </Server>
+        <Server>
+            <Host>wallstreetpresswire.com</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <User>wallstre</User>
+            <Pass>w4llstr54</Pass>
+            <Logontype>1</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>wallstreet</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>wallstreet&#x0A;        
+        </Server>
+        <Server>
+            <Host>85.30.192.39</Host>
+            <Port>21</Port>
+            <Protocol>0</Protocol>
+            <Type>0</Type>
+            <Logontype>0</Logontype>
+            <TimezoneOffset>0</TimezoneOffset>
+            <PasvMode>MODE_DEFAULT</PasvMode>
+            <MaximumMultipleConnections>0</MaximumMultipleConnections>
+            <EncodingType>Auto</EncodingType>
+            <BypassProxy>0</BypassProxy>
+            <Name>xxx</Name>
+            <Comments />
+            <LocalDir />
+            <RemoteDir />
+            <SyncBrowsing>0</SyncBrowsing>xxx&#x0A;        
+        </Server>
+    </Servers>
+</FileZilla3>

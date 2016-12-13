@@ -29,7 +29,7 @@
       <tr>
         <td valign="top"><table width="100%" border="0" cellpadding="0" cellspacing="0" id="header">
           <tr>
-            <td width="21%" rowspan="2"><h1 align="center">Subastas online</h1></td>
+            <td width="21%" rowspan="2"><img src="lib/bg_header.jpg" width="50" alt="embol logo"></td>
             <td width="66%" height="36">&nbsp;</td>
             <td width="13%" align="center"><table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>

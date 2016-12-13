@@ -10,13 +10,14 @@ $pass = "";*/
 
 //SQL SERVER
 $basedatos = "subasta";
-$host = "DESKTOP-FG08IPJ\SQLEXPRESS2014";
-
+//$host = "DESKTOP-FG08IPJ\SQLEXPRESS2014";
+$host = "007-LAPTOP\SQLEXP2014"; 
 //$host = "JORGES\JORGES_SQL";
 //$host = "DESKTOP-ADCBS9A\SQLEXPRESS";
-$user = "userSubasta";
-$pass = "Abc-12345678";
-
+//$user = "userSubasta";
+//$pass = "Abc-12345678";
+$user = "sa";
+$pass = "simple";
 
 $tiempoMax=15;
 
@@ -40,7 +41,8 @@ define("DBPASSWORD","");
 
 //for localhost
 
-	$xpath = "/subasta";
+	//$xpath = "/subasta";
+	$xpath = "/subasta/subastaEMBOL";
 	$urlLanguage=1;
 	$urlPositionTitle	=	1;
 	$urlPositionSubtitle=	2;

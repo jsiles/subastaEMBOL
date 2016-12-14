@@ -9,9 +9,9 @@
 <link rel="stylesheet" href="css/dhtml_horiz.css" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>admin</title>
-<META NAME="author" CONTENT="Logos Comunicaciones">
-<META NAME="reply-to" CONTENT="info@logoscomunicaciones.com">
-<META NAME="copyright" CONTENT="Software propietario de Logos Comunicaciones">
+<META NAME="author" CONTENT="DEVZONE">
+<META NAME="reply-to" CONTENT="info@devzone.xyz">
+<META NAME="copyright" CONTENT="Software propietario de DEVZONE">
 <META NAME="rating" CONTENT="General">
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 <link rel="stylesheet" href="css/style.css" type="text/css" />

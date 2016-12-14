@@ -184,5 +184,5 @@ if ($FILES2["name"] != '')
 	}
 $token=admin::getParam("token");
 unset($_POST);
-header('Location: ../../subastasList.php?token='.$token);	
+header('Location: ../../subastasNew2.php?token='.$token);	
 ?>

@@ -11,9 +11,9 @@
 <!--[if gte IE 5.5]>
 <script language="JavaScript" src="css/dhtml.js" type="text/JavaScript"></script>
 <![endif]-->
-<meta name="author" content="Logos Comunicaciones">
-<meta name="reply-to" content="info@logoscomunicaciones.com">
-<meta name="copyright" content="Software propietario de Logos Comunicaciones">
+<meta name="author" content="DEVZONE">
+<meta name="reply-to" content="info@devzone.xyz">
+<meta name="copyright" content="Software propietario de DEVZONE">
 <meta name="rating" content="General">
 <meta name="ROBOTS" content="NOINDEX,NOFOLLOW">
 <META HTTP-EQUIV="Content-Type" content="text/html; ISO-8859-1">

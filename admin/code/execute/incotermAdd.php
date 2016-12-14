@@ -10,7 +10,7 @@ $inc_ajuste=admin::getParam("inc_ajuste");
 
 $maxUid=admin::getDBvalue("SELECT max(inc_uid) FROM mdl_incoterm");
 $maxUid++;
-// REGISTRANDO LENGUAGE DE LAS CATEGORIAS
+// REGISTRANDO LENGUAJE DE LAS CATEGORIAS
 $sql = "insert into mdl_incoterm(
 					inc_uid,
 					inc_cli_uid,

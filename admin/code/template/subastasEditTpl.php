@@ -39,14 +39,14 @@ $prod = $db->next_record();
 				<td width="29%"><?=admin::labels('category','label');?>:</td>
 				<td width="64%"><div id="div_doc_dca_uid_select">
 				<select name="sub_pca_uid" id="sub_pca_uid" class="input" >
-                	<?
+                	<?php
                     $sql2 = "select pca_uid, pca_name from mdl_pro_category where pca_delete=0 and pca_uid!=6";
 					$db2->query($sql2);
 					while ($content=$db2->next_record())
 					{	
 					?>
 					<option <? if($content["pca_uid"]==$prod["sub_pca_uid"]) echo 'selected="selected"'; ?> value="<?=$content["pca_uid"]?>"><?=$content["pca_name"]?></option>					
-					<?
+					<?php
 					}
                     ?>
 				</select>
@@ -118,17 +118,17 @@ $prod = $db->next_record();
 			</table>
 			</div>
 			<div id="image_add_<?=$prod["pro_uid"]?>" style="display:none;"></div>
-			<?	}
+			<?php	}
 			else
 				{ ?>
 				<input type="file" name="pro_image" id="pro_image" size="32" class="input">
 				<span id="div_pro_uid" class="error" style="display:none">Solo archivos jpg bmp gif png </span>	
-			<?	} ?>			</td>
+			<?php	} ?>			</td>
           </tr>
           <tr>
             <td valign="top"><?=admin::labels('annex','adjunt');?>:</td>
             <td>
-			<? 
+			<?php 
 			$imgSavedroot2=PATH_ROOT."/docs/subasta/".$prod["pro_document"];
 			$imgSaveddomain2=PATH_DOMAIN."/docs/subasta/".$prod["pro_document"];
 			//echo $imgSaveddomain2;die;
@@ -167,18 +167,20 @@ $prod = $db->next_record();
 			</div>
 			</div>
 			<div id="document_add_<?=$news["new_uid"]?>" style="display:none;"></div>
-			<? } 
+			<?php 
+                        } 
 			else
 				{ ?>
 				<input type="file" name="pro_document" id="pro_document" size="31" class="input">
-			<?	} ?>
+			<?php
+                        } ?>
 			</td>
           </tr>
           <tr>
             <td valign="top"><?=admin::labels('status');?></td>
             <td><select name="sub_status" class="listMenu" id="sub_status">
-            	<option <? if ('ACTIVE'==$prod["sub_status"]) echo 'selected="selected"';?> value="ACTIVE"><?=admin::labels('active');?></option>
-              	<option  <? if ('INACTIVE'==$prod["sub_status"]) echo 'selected="selected"';?> value="INACTIVE"><?=admin::labels('inactive');?></option>
+            	<option <?php if ('ACTIVE'==$prod["sub_status"]) echo 'selected="selected"';?> value="ACTIVE"><?=admin::labels('active');?></option>
+              	<option  <?php if ('INACTIVE'==$prod["sub_status"]) echo 'selected="selected"';?> value="INACTIVE"><?=admin::labels('inactive');?></option>
 			</select>
 			<span id="div_sub_status" style="display:none;" class="error"></span></td>
           </tr>
@@ -199,10 +201,10 @@ $prod = $db->next_record();
 				<td width="29%">Modalidad de subasta:</td>
 				<td width="64%">
 				<select name="sub_modalidad" id="sub_modalidad" class="input" onchange="subastaOpcion();">
-                	<option  <? if ('TIEMPO'==$prod["sub_modalidad"]) echo 'selected="selected"';?> value="TIEMPO">Por tiempo</option>
-                     <option <? if ('HOLANDESA'==$prod["sub_modalidad"]) echo 'selected="selected"';?> value="HOLANDESA">Inversa Holandesa</option>
-                    <option <? if ('JAPONESA'==$prod["sub_modalidad"]) echo 'selected="selected"';?> value="JAPONESA">Inversa Japonesa</option>
-                    <option <? if ('ITEM'==$prod["sub_modalidad"]) echo 'selected="selected"';?> value="ITEM">Por Item</option>
+                	<option  <?php if ('TIEMPO'==$prod["sub_modalidad"]) echo 'selected="selected"';?> value="TIEMPO">Por tiempo</option>
+                     <option <?php if ('HOLANDESA'==$prod["sub_modalidad"]) echo 'selected="selected"';?> value="HOLANDESA">Inversa Holandesa</option>
+                    <option <?php if ('JAPONESA'==$prod["sub_modalidad"]) echo 'selected="selected"';?> value="JAPONESA">Inversa Japonesa</option>
+                    <option <?php if ('ITEM'==$prod["sub_modalidad"]) echo 'selected="selected"';?> value="ITEM">Por Item</option>
                     </select>
 				<br /><span id="div_sub_modalidad" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>	
 				</td>
@@ -213,8 +215,8 @@ $prod = $db->next_record();
 				<td width="29%">Tipo de subasta:</td>
 				<td width="64%">
 				<select name="sub_type" id="sub_type" class="input" onchange="subastaOpcion();" >
-                	<option <? if ('COMPRA'==$prod["sub_type"]) echo 'selected="selected"';?> value="COMPRA">Compra</option>
-                    <option <? if ('VENTA'==$prod["sub_type"]) echo 'selected="selected"';?> value="VENTA">Venta</option>										
+                	<option <?php if ('COMPRA'==$prod["sub_type"]) echo 'selected="selected"';?> value="COMPRA">Compra</option>
+                    <option <?php if ('VENTA'==$prod["sub_type"]) echo 'selected="selected"';?> value="VENTA">Venta</option>										
 				</select>
 				<br /><span id="div_sub_type" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>	
 				</td>
@@ -226,7 +228,7 @@ $prod = $db->next_record();
 			<td valign="top">
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr><td width="28%" valign="middle"> 
-                <?
+                <?php
                 $date_end1=admin::changeFormatDate(substr($prod["sub_hour_end"],0,10),2);
 				$hour_end1=substr($prod["sub_hour_end"],11,5);
 				?>
@@ -312,7 +314,7 @@ $prod = $db->next_record();
 				</td>
 			</tr>	
 		<tr><td colspan="2">
-         <?
+         <?php
 		 $countBids=admin::getDBvalue("SELECT count(*) FROM mdl_bid where bid_sub_uid='".$prod["sub_uid"]."' and bid_cli_uid!=0");
 		 if ($countBids>0){
 		 ?>
@@ -340,11 +342,11 @@ $prod = $db->next_record();
 				<td width="40%"><?=$clientName?></td>
 				<td width="30%"><?=$content["bid_date"]?></td>
                 <td width="30%"><?=$content["bid_mount"]?></td></tr>
-             	<?
+             	<?php
 				 }
 				 ?>    
         </table>
-         <?
+         <?php
 		 }
 		 ?>
         </td></tr>	
@@ -453,7 +455,7 @@ $prod = $db->next_record();
 					{	
 					?>
 					<option value="<?=$content["inl_uid"]?>"><?=$content["inl_name"]?></option>					
-					<?
+					<?php
 					}
                     ?>
 				</select>
@@ -481,7 +483,7 @@ $prod = $db->next_record();
     
     </td>
     </tr>
-   <? 
+   <?php 
    $sSQL= "select * from mdl_incoterm, mdl_incoterm_language, mdl_transporte, mdl_client where inc_inl_uid=inl_uid and inc_tra_uid=tra_uid and inc_cli_uid=cli_uid and inc_delete=0 and inc_sub_uid='".$sub_uid."' order by inc_uid desc";
    $nroReg = $db2->numrows($sSQL);
 $db2->query($sSQL);
@@ -507,7 +509,7 @@ if ($nroReg>0)
 	</table>
     </div>
 <div class="itemList" id="itemList" style="width:99%">  
-	<?
+	<?php
 $i=1;
 while ($list = $db2->next_record())
 	{
@@ -563,28 +565,28 @@ while ($list = $db2->next_record())
     <td width="12%"><input name="inc_lugar_entrega" id="inc_lugar_entrega" type="text"  size="15" value="<?=utf8_decode($inc_lugar_entrega)?>" /></td>
     <td width="12%">
     				<select name="inc_tra_uid<?=$tra_uid?>" id="inc_tra_uid<?=$tra_uid?>" class="input"  >
-                	<?
+                	<?php
                     $sql3 = "select tra_uid, tra_name from mdl_transporte where tra_delete=0";
 					$db3->query($sql3);
 					while ($content=$db3->next_record())
 					{	
 					?>
 					<option <? if($content["tra_name"]==$tra_name) echo 'selected="selected"';?> value="<?=$content["tra_uid"]?>"><?=utf8_decode($content["tra_name"])?></option>					
-					<?
+					<?php
 					}
                     ?>
 				</select>
                 </td>
     <td width="12%">
 				<select name="inc_inl_uid" id="inc_inl_uid" class="input"  >
-                	<?
+                	<?php
                     $sql3 = "select inl_uid, inl_name from mdl_incoterm_language where inl_delete=0";
 					$db3->query($sql3);
 					while ($content=$db3->next_record())
 					{	
 					?>
 					<option <? if($content["inl_name"]==$inl_name) echo 'selected="selected"';?> value="<?=$content["inl_uid"]?>"><?=$content["inl_name"]?></option>					
-					<?
+					<?php
 					}
                     ?>
 				</select>
@@ -606,14 +608,15 @@ while ($list = $db2->next_record())
      <input name="inc_uid" id="inc_uid" value="<?=$inc_uid?>" type="hidden" />
     </form>
      </div>
-	<?
+	<?php
 	$i++;
 	} 
  ?>
 </div> 
     </td>
     </tr>
-    <? 	} 
+    <?php
+    } 
 else
 	{ ?>
     <tr>
@@ -634,7 +637,7 @@ else
 </td></tr></table>
 </td>
 </tr>
-<? 	} ?>
+<?php 	} ?>
 <tr>
 <td colspan="2">
 <br />
@@ -666,5 +669,4 @@ else
 </table>
  
       
-<iframe width=174 height=189 name="gToday:normal:agenda.js" id="gToday:normal:agenda.js" src="calendario/ipopeng.htm" scrolling="no" frameborder="0" style="visibility:visible; z-index:999; position:absolute; top:-500px; left:-500px;">
-</iframe>
+<iframe width=174 height=189 name="gToday:normal:agenda.js" id="gToday:normal:agenda.js" src="calendario/ipopeng.htm" scrolling="no" frameborder="0" style="visibility:visible; z-index:999; position:absolute; top:-500px; left:-500px;"></iframe>

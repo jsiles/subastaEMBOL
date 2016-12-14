@@ -10,9 +10,9 @@ admin::initialize('content','contentList');
 <link rel="shortcut icon" href="lib/favicon.ico" />
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 <link rel="stylesheet" href="css/dhtml_horiz.css" type="text/css" />
-<META NAME="author" CONTENT="Logos Comunicaciones">
-<META NAME="reply-to" CONTENT="info@logoscomunicaciones.com">
-<META NAME="copyright" CONTENT="Software propietario de Logos Comunicaciones">
+<META NAME="author" CONTENT="DEVZONE">
+<META NAME="reply-to" CONTENT="info@devzone.xyz">
+<META NAME="copyright" CONTENT="Software propietario de DEVZONE">
 <META NAME="rating" CONTENT="General">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; ISO-8859-1">
 <script type="text/javascript" src="js/jquery.js"></script>

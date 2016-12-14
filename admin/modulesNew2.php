@@ -14,9 +14,9 @@
 <meta http-equiv="Last-Modified" content="0">
 <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<META NAME="author" CONTENT="Logos Comunicaciones">
-<META NAME="reply-to" CONTENT="info@logoscomunicaciones.com">
-<META NAME="copyright" CONTENT="Software propietario de Logos Comunicaciones">
+<META NAME="author" CONTENT="DEVZONE">
+<META NAME="reply-to" CONTENT="info@devzone.xyz">
+<META NAME="copyright" CONTENT="Software propietario de DEVZONE">
 <META NAME="rating" CONTENT="General">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; ISO-8859-1">
 <script language="javascript" type="text/javascript" src="js/jquery-pack.js"></script>

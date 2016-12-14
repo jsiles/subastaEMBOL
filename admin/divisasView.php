@@ -12,9 +12,9 @@
 <!--[if gte IE 5.5]>
 <script language="JavaScript" src="css/dhtml.js" type="text/JavaScript"></script>
 <![endif]-->
-<meta name="author" content="Logos Comunicaciones">
-<meta name="reply-to" content="info@logoscomunicaciones.com">
-<meta name="copyright" content="Software propietario de Logos Comunicaciones">
+<meta name="author" content="DEVZONE">
+<meta name="reply-to" content="info@devzone.xyz">
+<meta name="copyright" content="Software propietario de DEVZONE">
 <meta name="rating" content="General">
 <META HTTP-EQUIV="Content-Type" content="text/html; ISO-8859-1">
 <script language="javascript" type="text/javascript" src="js/jquery-1.3.2.js"></script>

@@ -1,3 +1,12 @@
+<?php
+$pro_uid = admin::toSql($_GET["pro_uid"],"String");
+$sub_uid=admin::getParam("pro_uid");
+if (!$pro_uid) header('Location: ../../subastasList.php?token='.$token);
+$sql = "SELECT * FROM mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_status='ACTIVE' and pro_uid='".$pro_uid."'";
+$db->query($sql);
+$prod = $db->next_record();
+
+?>
 <div id="DIV_WAIT1" style="display:none;"><img border="0" src="lib/loading.gif"></div>
 <br />
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -20,7 +29,7 @@
 	</table>
     </div>
     <div id="add<?=$ind_uid?>" class="row0">
-    <form name="frmIncoterm" action="code/execute/incotermAdd.php" enctype="multipart/form-data" > 
+    <form name="frmIncoterm" action="code/execute/incotermAdd2.php" enctype="multipart/form-data" > 
 	<table class="list" width="100%">
 	<tr><td width="12%"><!--<input name="cli_name" id="cli_name" onkeyup="lookup(this.value);" type="text" size="15"  onfocus="document.getElementById('div_cli_name_error').style.display='none';" onblur="document.getElementById('div_cli_name_error').style.display='none';" onclick="document.getElementById('div_cli_name_error').style.display='none';" autocomplete='off' />
 					   	

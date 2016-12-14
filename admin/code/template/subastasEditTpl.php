@@ -363,25 +363,10 @@ $prod = $db->next_record();
 <input id="pro_uid" name="pro_uid" value="<?=$prod["pro_uid"]?>" type="hidden" />
 <input id="sub_uid" name="sub_uid" value="<?=$prod["sub_uid"]?>" type="hidden" />
 
-<div id="contentButton">
-	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
-		<tr>
-		<td width="59%" align="center">
-		<a href="javascript:verifysubasta();" class="button">
-		<?=admin::labels('save');?>
-		</a> 
-		</td>
-		<td width="41%" style="font-size:11px;">
-		<?=admin::labels('or');?> <a href="subastasList.php?token=<?=admin::getParam("token")?>" ><?=admin::labels('cancel');?></a> 
-		</td>
-		</tr>
-     </table>
-</div>
 </td></tr>
 </table>
 </form>
 <div id="DIV_WAIT1" style="display:none;"><img border="0" src="lib/loading.gif"></div>
-<br />
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
       <td width="77%" height="40"><span class="title">Proveedores habilitados</span></td>
@@ -656,7 +641,22 @@ else
       <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subasta" style="display:">
 			<tr>
 				<td width="59%" align="center">
-				<a href="subastasList.php?token=<?=admin::getParam("token")?>" class="button">Volver</a></td>
+                                    
+                                    <div id="contentButton">
+                                            <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                                    <tr>
+                                                    <td width="59%" align="center">
+                                                    <a href="javascript:verifysubasta();" class="button">
+                                                    <?=admin::labels('save');?>
+                                                    </a> 
+                                                    </td>
+                                                    <td width="41%" style="font-size:11px;">
+                                                    <?=admin::labels('or');?> <a href="subastasList.php?token=<?=admin::getParam("token")?>" ><?=admin::labels('cancel');?></a> 
+                                                    </td>
+                                                    </tr>
+                                         </table>
+                                    </div>
+                                </td>
 		<td width="41%" style="font-size:11px;">&nbsp;
 		</td>
           
@@ -667,6 +667,4 @@ else
 <br /><br /><br /><br /><br />
 </td></tr>
 </table>
- 
-      
 <iframe width=174 height=189 name="gToday:normal:agenda.js" id="gToday:normal:agenda.js" src="calendario/ipopeng.htm" scrolling="no" frameborder="0" style="visibility:visible; z-index:999; position:absolute; top:-500px; left:-500px;"></iframe>

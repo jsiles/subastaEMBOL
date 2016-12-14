@@ -13,19 +13,19 @@ padding:0px;
 }
 
 a:link,a:visited { 
-color: #16652f; /*verde oficial*/
+color: #16652f;
 text-decoration: none;
 }
 a:hover {
-color: #000; 
+color: #000;
 text-decoration:  none;
 }
 #container{
 
 }
 #header{
-background-image: url(../lib/bg_header.jpg);
-background-repeat: repeat-x;
+/*background-image: url(../lib/bg_header.gif);
+background-repeat: repeat-x;*/
 height: 67px;
 background-color: #fff;
 color: #000;
@@ -35,7 +35,7 @@ font-size: 10px;
 height: 34px;
 font-size: 13px;
 color: #fff;
-background-color: #1f9044;  /*verde oficial*/
+background-color: #1f9044;
 padding-left: 190px;
 font-weight: 700;
 }
@@ -50,7 +50,7 @@ padding: 0 25px;
 height: 30px;
 font-size: 9px;
 color: #fff;
-background-color: #1f9044;  /*verde oficial*/
+background-color: #1f9044;
 }
 /* LISTING */
 
@@ -209,7 +209,7 @@ background-color: #fff;
 /* height: 145px; */ 
 }
 .title{
-color: #16652f; /*verde oficial*/
+color: #16652f;
 font-size: 18px;
 line-height: 24px;
 text-align: left;
@@ -218,7 +218,7 @@ text-align: left;
 font-weight: 700;
 }
 .color2 { 
-color: #16652f; /*verde*/
+color: #16652f;
 }
 .txt10 { 
 font-size: 10px;
@@ -236,7 +236,7 @@ padding-right:4px;
 font-size: 10px;
 }
 .titleBox { 
-color: #16652f; /*verde*/
+color: #16652f;
 text-transform: uppercase;
 }
 #contentButton { 
@@ -250,11 +250,11 @@ float: right;
 /*LINKS*/
 
 a.button:link, a.button:visited  { 
-	color: #16652f; /*verde*/
+	color: #16652f;
 	text-decoration: none; 
 	font-size: 18px;
-	background-color: #fff; /*blanco*/
-	border: double #16652f 2px;  /*verde oficial*/
+	background-color: #fff;
+	border: double #16652f 2px;
 	padding: 5px;
 	display:block;
 	text-align: center;
@@ -331,7 +331,7 @@ a.submenu:hover {
 	font-weight: 400;
 	}
 a.small:link, a.small:visited  { 
-	color: #000;  /*oficial*/
+	color: #000;
 	text-decoration: none;   
   	font-size: 10;
 	}
@@ -720,7 +720,7 @@ font-size: 11px;
 
 .input6{
 float: none;
-color: #16652f;  /*verde oficial*/
+color: #16652f;
 font-size: 14px;
 border: 1px solid #d8dadd;
 background-color: #fdfdfd;
@@ -781,7 +781,7 @@ font-weight: 700;
 }
 
 a.down:link, a.down:visited  { 
-color: #16652f; /*verde oficial*/
+color: #16652f;
 font-size: 11px;
 background: url(../lib/bullet_down.gif) right no-repeat;
 padding-right: 15px;
@@ -792,7 +792,7 @@ text-decoration: none;
 }
 
 a.up:link, a.up:visited  { 
-color: #16652f; /*verde oficial*/
+color: #16652f;
 font-size: 11px;
 background: url(../lib/bullet_up.gif) no-repeat right;
 padding-right: 15px;
@@ -863,7 +863,7 @@ width: 40px;
 
 .boxAdd{
 float: left;
-border: 1px solid #16652f; /*verde oficial*/
+border: 1px solid #16652f;
 padding: 10px;
 margin-left: 25px;
 width: 520px;
@@ -874,7 +874,7 @@ float: right;
 }
 
 a.button5:link, a.button5:visited  { 
-	color: #fff; /*oficial*/
+	color: #fff;
 	text-decoration: none; 
 	font-size: 11px;
 	background-color: #eef0f1;
@@ -1024,12 +1024,12 @@ padding: 4px;
 
 /* 1 ABRIL */
 a.linkBold2:link, a.linkBold2:visited  { 
-color: #16652f; /*verde oficial*/
+color: #16652f;
 font-weight: 700;
 text-decoration: none;   
 }
 a.linkBold2:hover { 
-color: #1f9044; /*verde oficial*/
+color: #1f9044;
 }
 
 a.deleteDay:link,a.deleteDay:visited,a.deleteDay:hover {
@@ -1053,7 +1053,7 @@ padding: 10px 0 20px 0;
 
 .dayBox textarea{
 float: left;
-color: #1f9044; /*verde oficial*/
+color: #1f9044;
 font-size:  1em;
 font-family: "Arial", Tahoma, Verdana;
 border: solid 1px #d8dadd;
@@ -1087,7 +1087,7 @@ padding: 10px;
 
 .dayBox .titleAct{
 display: block;
-color: #16652f; /*verde oficial*/
+color: #16652f;
 font-size: 9px;
 margin-top: 10px;
 width: 100px;
@@ -1095,7 +1095,7 @@ width: 100px;
 
 .dayBox .titleAct0{
 display: block;
-color: #16652f; /*verde oficial*/
+color: #16652f;
 font-size: 9px;
 margin-top: 10px;
 width: 100px;

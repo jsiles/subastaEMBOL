@@ -21,12 +21,12 @@ $prod = $db->next_record();
     <div class="row0">
     <table class="list" width="100%">
 	<tr>
-    <td width="15%" style="color:#f6821f" align="left">Producto</td>
-    <td width="15%" style="color:#f6821f" align="left">Descripci&oacute;n</td>
-    <td width="20%" style="color:#f6821f" align="left">Imagen</td>
-    <td width="10%" style="color:#f6821f" align="left">Precio Base</td>
-    <td width="15%" style="color:#f6821f" align="left">Unidad de mejora</td>
-	<td width="15%" style="color:#f6821f" align="left">Proveedor</td> <td align="center" width="10%" height="5">&nbsp;</td>
+    <td width="15%" style="color:#16652f" align="left">Producto</td>
+    <td width="15%" style="color:#16652f" align="left">Descripci&oacute;n</td>
+    <td width="20%" style="color:#16652f" align="left">Imagen</td>
+    <td width="10%" style="color:#16652f" align="left">Precio Base</td>
+    <td width="15%" style="color:#16652f" align="left">Unidad de mejora</td>
+	<td width="15%" style="color:#16652f" align="left">Proveedor</td> <td align="center" width="10%" height="5">&nbsp;</td>
     
 	</tr>
 	</table>
@@ -88,12 +88,12 @@ if ($nroReg>0)
     <div class="row0">
     <table class="list" width="100%">
 	<tr>
-    <td width="12%" style="color:#f6821f">Producto</td>
-    <td width="12%" style="color:#f6821f">Descripci&oacute;n</td>
-    <td width="12%" style="color:#f6821f">Imagen</td>
-    <td width="12%" style="color:#f6821f">Precio base</td>
-    <td width="12%" style="color:#f6821f">Unidad de mejora</td>
-	<td width="12%" style="color:#f6821f">Proveedor</td>
+    <td width="12%" style="color:#16652f">Producto</td>
+    <td width="12%" style="color:#16652f">Descripci&oacute;n</td>
+    <td width="12%" style="color:#16652f">Imagen</td>
+    <td width="12%" style="color:#16652f">Precio base</td>
+    <td width="12%" style="color:#16652f">Unidad de mejora</td>
+	<td width="12%" style="color:#16652f">Proveedor</td>
 	<td align="center" width="12%" height="5">&nbsp;</td>
 	</tr>
 	</table>

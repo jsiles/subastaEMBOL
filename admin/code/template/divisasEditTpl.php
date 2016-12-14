@@ -281,11 +281,11 @@ if($countBids>0) $style=""; else $style="none"
     <td colspan="2" id="contentListing0">
     <div class="row0">
     <table class="list" width="100%">
-	<tr><td width="12%" style="color:#f6821f">Oferente</td>
-    <td width="12%" style="color:#f6821f">Lugar de entrega</td>
-    <td width="12%" style="color:#f6821f">Medio de transporte</td>
-    <td width="12%" style="color:#f6821f">Incoterm</td>
-    <td width="12%" style="color:#f6821f">Factor de ajuste</td>
+	<tr><td width="12%" style="color:#16652f">Oferente</td>
+    <td width="12%" style="color:#16652f">Lugar de entrega</td>
+    <td width="12%" style="color:#16652f">Medio de transporte</td>
+    <td width="12%" style="color:#16652f">Incoterm</td>
+    <td width="12%" style="color:#16652f">Factor de ajuste</td>
 	<td align="center" width="12%" height="5">&nbsp;</td>
     
 	</tr>
@@ -376,11 +376,11 @@ if ($nroReg>0)
     <td colspan="2" id="contentListing">
     <div class="row0">
     <table class="list" width="100%">
-	<tr><td width="12%" style="color:#f6821f">Oferente</td>
-    <td width="12%" style="color:#f6821f">Lugar de entrega</td>
-    <td width="12%" style="color:#f6821f">Medio de transporte</td>
-    <td width="12%" style="color:#f6821f">Incoterm</td>
-    <td width="12%" style="color:#f6821f">Factor de ajuste</td>
+	<tr><td width="12%" style="color:#16652f">Oferente</td>
+    <td width="12%" style="color:#16652f">Lugar de entrega</td>
+    <td width="12%" style="color:#16652f">Medio de transporte</td>
+    <td width="12%" style="color:#16652f">Incoterm</td>
+    <td width="12%" style="color:#16652f">Factor de ajuste</td>
 	<td align="center" width="12%" height="5">&nbsp;</td>
     <td align="center" width="12%" height="5">&nbsp;</td>
 	</tr>

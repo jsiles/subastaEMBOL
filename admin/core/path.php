@@ -11,13 +11,13 @@ $pass = "";*/
 //SQL SERVER
 $basedatos = "subasta";
 //$host = "DESKTOP-FG08IPJ\SQLEXPRESS2014";
-//$host = "007-LAPTOP\SQLEXP2014"; 
-$host = "JORGES\JORGES_SQL";
+$host = "007-LAPTOP\SQLEXP2014"; 
+//$host = "JORGES\JORGES_SQL";
 //$host = "DESKTOP-ADCBS9A\SQLEXPRESS";
-$user = "userSubasta";
-$pass = "Abc-12345678";
-//$user = "sa";
-//$pass = "simple";
+//$user = "userSubasta";
+//$pass = "Abc-12345678";
+$user = "sa";
+$pass = "simple";
 
 $tiempoMax=15;
 

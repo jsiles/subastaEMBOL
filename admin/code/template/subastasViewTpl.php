@@ -282,11 +282,11 @@ if ($nroReg>0)
     <td colspan="2" id="contentListing">
     <div class="row0">
     <table class="list" width="100%">
-	<tr><td width="12%" style="color:#ed1b21">Oferente</td>
-    <td width="12%" style="color:#ed1b21">Lugar de entrega</td>
-    <td width="12%" style="color:#ed1b21">Medio de transporte</td>
-    <td width="12%" style="color:#ed1b21">Incoterm</td>
-    <td width="12%" style="color:#ed1b21">Factor de ajuste</td>
+	<tr><td width="12%" style="color:#16652f">Oferente</td>
+    <td width="12%" style="color:#16652f">Lugar de entrega</td>
+    <td width="12%" style="color:#16652f">Medio de transporte</td>
+    <td width="12%" style="color:#16652f">Incoterm</td>
+    <td width="12%" style="color:#16652f">Factor de ajuste</td>
 	<td align="center" width="12%" height="5">&nbsp;</td>
     <td align="center" width="12%" height="5">&nbsp;</td>
 	</tr>

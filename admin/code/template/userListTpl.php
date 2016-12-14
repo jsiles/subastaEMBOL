@@ -83,12 +83,12 @@ if ($nroReg>0){
     <td colspan="2" width="98%">
   <table width="100%" >
 	<tr>
-    	<td width="14%" class="list1a" style="color:#ed1b21">
+    	<td width="14%" class="list1a" style="color:#16652f">
          	<a href="userList.php?order=<?=$titOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$titClass;?>">
 		 		<?=admin::labels('firstname');?>:
             </a>
         </td>
-		<td width="14%" class="list1a" style="color:#ed1b21">
+		<td width="14%" class="list1a" style="color:#16652f">
         	<a href="userList.php?order=<?=$nameOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$nameClass;?>">
 				<?=admin::labels('lastname');?>:
             </a>

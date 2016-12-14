@@ -83,7 +83,7 @@ font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
     z-index:1000;
      border-right: solid 1px #ff7e24;
-     background-color: #ed1b21;
+     background-color: #16652f; /*verde oficial*/
       padding-bottom: 6px;    /*quitar*/ 
       background-image: url(../lib/bg_menu.gif);
 background-repeat: repeat-x;
@@ -141,7 +141,7 @@ ul#navlistmenu li:hover li:hover li:hover a,
 ul#navlistmenu li.iehover li.iehover li a:hover,
 ul#navlistmenu li.iehover li.iehover li.iehover a {
   width: 297px;
-  background: #ed1b21;
+  background: #16652f; /*verde oficial*/
   color: #FFF;
   padding-bottom: 0px;   /*espacio para nivel-2 menu cortando el bottom  */
 }

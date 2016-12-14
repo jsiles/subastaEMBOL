@@ -30,7 +30,7 @@
         <td valign="top"><table width="100%" border="0" cellpadding="0" cellspacing="0" id="header">
           <tr>
             <td width="21%" rowspan="2"></td>
-            <td width="66%" height="36"><img src="lib/logo.png" width="70" alt="bnb logo"></td>
+            <td width="66%" height="36"><img src="lib/embol_logo.png" width="70" alt="embol logo"></td>
             <td width="13%" align="center"><table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td align="center"></td>

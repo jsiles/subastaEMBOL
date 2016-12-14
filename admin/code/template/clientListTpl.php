@@ -79,18 +79,18 @@ if ($nroReg>0)
     <td colspan="2" width="98%">
   <table width="100%" >
 	<tr>
-    	<td width="14%" class="list1a" style="color:#f6821f">
+    	<td width="14%" class="list1a" style="color:#ed1b21">
          	<a href="clientList.php?order=<?=$titOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$titClass;?>">
 		 		<?=admin::labels('firstname');?>:
             </a>
         </td>
-		<td width="14%" class="list1a" style="color:#f6821f">
+		<td width="14%" class="list1a" style="color:#ed1b21">
         	<a href="clientList.php?order=<?=$nameOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$nameClass;?>">
 				<?=admin::labels('lastname');?>:
             </a>
         </td>
-		<td width="15%" style="color:#f6821f">Usuario</td>
-        <td width="8%" style="color:#f6821f">Contrase&ntilde;a</td>
+		<td width="15%" style="color:#ed1b21">Usuario</td>
+        <td width="8%" style="color:#ed1b21">Contrase&ntilde;a</td>
         <td align="center" width="11%" height="5"></td>
    		<td align="center" width="12%" height="5"></td>
 		<td align="center" width="12%" height="5"></td>

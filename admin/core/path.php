@@ -42,7 +42,7 @@ define("DBPASSWORD","");
 //for localhost
 
 	//$xpath = "/subasta";
-	$xpath = "/subasta/subastaEMBOL";
+	$xpath = "/subastaEMBOL";
 	$urlLanguage=1;
 	$urlPositionTitle	=	1;
 	$urlPositionSubtitle=	2;

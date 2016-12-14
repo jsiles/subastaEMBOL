@@ -83,9 +83,9 @@ font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
     z-index:1000;
 	 border-right: solid 1px #a61317;
-	 /*background-color: #ff6904;*/
+	 background-color: #ed1b21;
 	  padding-bottom: 6px;    /*quitar*/ 
-	  background-image: url(../lib/bg_menu.gif);
+	  /*background-image: url(../lib/bg_menu.gif);*/
 background-repeat: repeat-x;
 }
 
@@ -95,7 +95,7 @@ ul#navmenu li:hover a,
 ul#navmenu li.iehover a {
   padding-bottom: 6px;    /*espacio para nivel-1 menu - espacio bottom */
   background: #ed1b21;
-  color: #FFF;
+  color: #000;
   padding-bottom: 6px;    /*quitar*/ 
    border-right: solid 1px #ed1b21;
 }
@@ -105,7 +105,7 @@ ul#navmenu li:hover li a,
 ul#navmenu li.iehover li a {
 background-color: #00266f;
   float: none;
-  color: #fff;
+  color: #000;
   height: 20px; /*espacio para nivel-2 menu  */
   border-bottom: solid 1px #024587;
   width: 150px;
@@ -118,7 +118,7 @@ ul#navmenu li.iehover li a:hover,
 ul#navmenu li.iehover li.iehover a {
 background-color: #024587;
   float: none;
-  color: #fff;
+  color: #000;
 
   height: 20px; /*espacio para nivel-2 menu  */
   border-bottom: solid 1px #024587;
@@ -141,8 +141,8 @@ ul#navmenu li:hover li:hover li:hover a,
 ul#navmenu li.iehover li.iehover li a:hover,
 ul#navmenu li.iehover li.iehover li.iehover a {
   width: 297px;
-  background: #f9a70b;
-  color: #FFF;
+  background: #ed1b21;
+  color: #000;
   padding-bottom: 0px;   /*espacio para nivel-2 menu cortando el bottom  */
 }
 

@@ -71,7 +71,7 @@ if ($nroReg>0)
 			<input type="text" name="sim_search" id="sim_search" value="<?=$_REQUEST["keyword"]?>" class="input7" onkeyup="if (event.keyCode == 13) filter_search(document.getElementById('sim_search').value,'usersList.php');"/>
 			
 			</td>
-            <td><input name="Buscar" type="image" id="Buscar" src="lib/btn_search.gif" onclick="filter_search(document.getElementById('sim_search').value,'usersList.php')" /></td>
+            <td><input name="Buscar" type="image" id="Buscar" src="lib/buscar.png" onclick="filter_search(document.getElementById('sim_search').value,'usersList.php')" /></td>
           </tr>
         </table>
 		</div>

@@ -13,7 +13,7 @@ padding:0px;
 }
 
 a:link,a:visited { 
-color: #16652f; /*verde oficial*/
+color: #000; /*verde oficial*/
 text-decoration: none;
 }
 a:hover {
@@ -24,9 +24,9 @@ text-decoration:  none;
 
 }
 #header{
-background-image: url(../lib/bg_header.jpg);
-background-repeat: repeat-x;
-height: 67px;
+/*background-image: url(../lib/bg_header.jpg);
+background-repeat: repeat-x;*/
+/*height: 67px;*/
 background-color: #fff;
 color: #000;
 font-size: 10px;
@@ -209,7 +209,7 @@ background-color: #fff;
 /* height: 145px; */ 
 }
 .title{
-color: #16652f; /*verde oficial*/
+color: #000; /*verde oficial*/
 font-size: 18px;
 line-height: 24px;
 text-align: left;
@@ -766,7 +766,7 @@ height: 38px;
 .input7{
 float: none;
 font-size: 14px;
-border: 1px solid #fe860c;
+border: 1px solid #cdffdd;
 background-color: #fff;
 height: 25px;
 width: 190px;

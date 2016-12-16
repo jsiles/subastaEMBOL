@@ -69,7 +69,7 @@ if ($nroReg>0){
             <input type="text" name="search" id="search" value="<?=$search?>" class="input7" />
           </td>
           <td>
-          <input name="Buscar" id="Buscar" type="image" src="lib/btn_search.gif" />
+          <input name="Buscar" id="Buscar" type="image" src="lib/buscar.png" />
            <input type="hidden" name="qfiltro" id="qfiltro" value="1"/>
            <input type="hidden" name="token" value="<?=admin::getParam("token")?>" />
           </td>

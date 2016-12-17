@@ -5,7 +5,7 @@
 <tr><td valign="top">    
     <table width="100%" border="0" cellpadding="0" cellspacing="0" id="header">
       <tr>
-        <td width="22%" rowspan="2" align="center"><img src="lib/logo.png" width="70" h alt="bnb logo"></td>
+        <td width="22%" rowspan="2" align="center"><img src="lib/logo.png" width="50" h alt="bnb logo"></td>
         <td width="52%" height="36">&nbsp;</td>
 		<td width="26%" rowspan="2">
 		<div id="changeDiv" style="display:none;">

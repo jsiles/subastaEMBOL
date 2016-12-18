@@ -58,8 +58,15 @@ while($con_category = $db3->next_record())
 $i++;
 }?>
 </ul>
-<div class="clear"></div>
-		</div>
-		<p>Copyright (c) 2011 subastas en l&iacute;nea. <?=time()?> </p>
-	</div>
+</br></br>
+<div>
+	<div style="float:left; margin-left:50px">
+    	</br><span>DERECHOS RESERVADOS - Copyright (c) 2016 </span> </br>
+        <span>SCLE LTDA.</span> </br>
+        <span>SOLUCIONES DE COMPRAS Y LOGISTICA EMPRESARIAL</span>
+    </div>
+    <div  style="float:right; margin-right:50px">
+    <img  src="<?=$domain?>/lib/scle.png" alt="scle">
+    </div>
 </div>
+</br>

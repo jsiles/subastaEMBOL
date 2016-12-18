@@ -14,17 +14,7 @@ $foto = admin::getDbValue("select cli_photo from mdl_client where cli_uid=".$uid
 				
 			<div id="top-banner">
 				<div id="colA">
-					<h2>Subastas Online</h2>
-                    <h2>Antonio Cabrera Osio</h2>
-					<!--<p class="byline">Antonio Cabrera Osio</p>-->
-					<?php
-                    if(!admin::getSession("uidClient"))
-					{
-					?>
-                    <p class="link"><a href="<?=$domain?>/registro/">Registrate aqu&iacute;</a></p>
-					<?php
-					}
-					?>
+					<img src="<?=$domain?>/lib/banner1.jpg" alt="banner1" title="banner1" border="0"/>
 				</div>
 				<?php if($uidClient){?>
                 <div id="colB">

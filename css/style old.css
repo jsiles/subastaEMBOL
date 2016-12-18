@@ -1,44 +1,16 @@
-/* RESET */
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{
-margin: 0;
-padding: 0;
-border: 0;
-outline: 0;
-font-size: 100%;
-vertical-align: baseline;
-background: transparent;
-}
-body{
-line-height: 1;
-}
-ol,ul{
-list-style: none;
-}
-blockquote,q{
-quotes: none;
-}
-blockquote:before,blockquote:after,q:before,q:after{
-content: '';
-content: none;
-}
-focus{
-outline: 0;
-}
-ins{
-text-decoration: none;
-}
-del{
-text-decoration: line-through;
-}
-table{
-border-collapse: collapse;
-border-spacing: 0;
-}
-/* RESET */
 
+html, body {
+	height: 100%;
+}
+
+html {
+}
 
 body {
-	font-family: Verdana, Arial, Helvetica, sans-serif, Tahoma, ;
+	margin: 0px;
+	padding: 0px;
+	background: url(images/bg1_01.jpg) repeat-x left top;
+	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
 	font-size: 11px;
 	color: #696969;
 }
@@ -122,17 +94,15 @@ ol.style2 li {
 /** WRAPPER */
 
 #wrapper {
-	overflow: hidden;
-	width: 100%;
-	margin: auto;
+	background: url(images/bg1_03.jpg) no-repeat center top;
 }
 
 #wrapper-bgbtm {
-	/*background-color:#eaecee;*/
+	background: url(images/bg1_04.jpg) no-repeat center bottom;
 }
 
 .container {
-	width: 95%;
+	width: 950px;
 	margin: 0px auto;
 }
 
@@ -143,7 +113,8 @@ ol.style2 li {
 /** HEADER */
 
 #top-header {
-	padding-top: 5px;
+	height: 155px;
+	padding-top: 95px;
 }
 
 /** LOGO */
@@ -151,8 +122,8 @@ ol.style2 li {
 #logo {
 	position: relative;
 	float: left;
-	width: 20%;
-	height: 50px;
+	width: 250px;
+	height: 155px;
 }
 
 #logo h1, #logo p {
@@ -164,27 +135,28 @@ ol.style2 li {
 #logo h1 a {
 	display: block;
 	position: absolute;
-	width: 100%;
-	height: 100px;
-	background-image:url(../lib/bg_header%20-%20Copy.jpg);
-    background-repeat: no-repeat;
-    background-size: contain;
+	top: 0px;
+	left: 0px;
+	width: 250px;
+	height: 155px;
+	background: url(images/homepage01.jpg) no-repeat left top;
 }
 
 /** TOP BANNER */
 
 #top-banner {
-	float: left;
-	width: 80%;
-	height: 100px;
+	float: right;
+	width: 470px;
+	height: 155px;
+	margin: 0px;
+	padding: 0px 40px 0px 190px;
 }
 
 #top-banner #colA {
 	float: left;
-	width: 75%;
-	height:100px;
-	alignment-adjust:central;
-	
+	width: 270px;
+	margin-top: 40px;
+	color: #929292;
 }
 
 #top-banner #colA h2 {
@@ -205,13 +177,17 @@ ol.style2 li {
 
 #top-banner #colA .link {
 	height: 20px;
+	margin: 0px;
+	padding: 0px 0px 0px 25px;
+	background: url(images/homepage02.gif) no-repeat left top;
 	font-size: 14px;
 	color: #DA0900;
 }
 
 #top-banner #colB {
 	float: right;
-	width: 20%;
+	width: 200px;
+	margin-top: 30px;
 	text-align: center;
 	color: #696969;
 }
@@ -220,25 +196,12 @@ ol.style2 li {
 	color: #FF0900;
 }
 
-#top-banner #colB p {
-	float: right;
-	width:50px;
-}
-
-#top-banner #colB p a {
-	float: right;
-	height:13px;
-	width:13px;
-	background:url(../lib/close.gif) no-repeat left top; 
-}
-
 #top-banner #colB .viewcart {
 	display: inline-block;
 	width: 118px;
 	height: 25px;
 	padding: 8px 0px 0px 10px;
-	/*background: url(images/homepage03.jpg) no-repeat left top;*/
-	background-color:#960;
+	background: url(images/homepage03.jpg) no-repeat left top;
 	text-align: center;
 	text-decoration: none;
 	font-weight: bold;
@@ -249,15 +212,14 @@ ol.style2 li {
 
 #header {
 	height: 63px;
-	margin-bottom:2px;
 }
 
 /** MENU */
 
 #menu {
 	float: left;
-	width: 80%;
-	height: 50px;
+	width: 680px;
+	height: 63px;
 }
 
 #menu ul {
@@ -293,74 +255,67 @@ ol.style2 li {
 }
 
 #menu li.active {
-	/*background: url(images/subpage4_01.gif) no-repeat left top;*/
-	background-color:#C96;
+	background: url(images/subpage4_01.gif) no-repeat left top;
 }
 
 #menu li.active a {
-	/*background: url(images/subpage4_03.gif) no-repeat right top;*/
-	background-color:#663;
+	background: url(images/subpage4_03.gif) no-repeat right top;
 }
 
 #menu li.active span {
-	/*background: url(images/subpage4_02.gif) no-repeat center bottom;*/
-	background-color:#36F;
+	background: url(images/subpage4_02.gif) no-repeat center bottom;
 }
 
 /** SEARCH */
 
 #search {
-	float: left;
-	width: 20%;
-	height: 50px;
-	/*background-color:#999;*/
+	float: right;
+	width: 270px;
+	height: 63px;
+	background-color:#999;
 }
 
 #search form, #search fieldset {
 	margin: 0px;
 	padding: 0px;
-	/*border: none;*/
+	border: none;
 }
 
 #search form {
-	padding: 5px 0px 0px 30px;
+	padding: 19px 0px 0px 30px;
 }
 
 #search input {
 	float: left;
 	margin: 0px;
 	padding: 0px;
-	width: 130px;
+	
+	background-color:#FFF;
 }
 
 #search .input-text {
-	width: 200px;
-	height: 40px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: white;
-    background-image: url('../lib/searchicon.png');
-    background-position: 10px 10px; 
-    background-repeat: no-repeat;
-	padding-left:35px;
+	width: 175px;
+	margin: 0px;
+	padding: 7px 0px 0px 0px;
+	background: none;
+	border: none;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 11px;
+	color: #929292;
 }
 
 /** PAGE */
 
 #page {
 	overflow: hidden;
-	padding: 5px 0px;
-	border-color:#eee;
-	border-top:double;
+	padding: 20px 0px;
 }
 
 /** CONTENT */
 
 #content {
 	float: right;
-	width: 75%;
+	width: 690px;
 }
 
 .single #content {
@@ -371,34 +326,34 @@ ol.style2 li {
 
 #sidebar {
 	float: left;
-	width: 25%;
+	width: 250px;
 }
 
 /** FOOTER */
 
 #footer-wrapper {
-
+	background: url(images/bg1_02.jpg) repeat-x left top;
 }
 
 #footer {
-	height: 3px;
-	background-color:#eee;
+	height: 234px;
+	background: url(images/bg1_05.jpg) no-repeat center top;
 }
 
 #footer-menu {
-	height: 20px;
+	height: 91px;
 }
 
 #footer p {
 	margin: 0px;
-	padding: 2px 0px 0px 0px;
+	padding: 30px 0px 0px 0px;
 	text-align: center;
-	color: #000;
+	color: #575757;
 }
 
 #footer ul {
 	margin: 0px;
-	padding: 2px 0px 0px 0px;
+	padding: 37px 0px 0px 0px;
 	list-style: none;
 	text-align: center;
 }
@@ -406,7 +361,7 @@ ol.style2 li {
 #footer li {
 	display: inline;
 	padding: 0px 15px;
-	/*background: url(images/homepage14.jpg) no-repeat left 2px;*/
+	background: url(images/homepage14.jpg) no-repeat left 2px;
 }
 
 #footer li a {
@@ -451,18 +406,19 @@ ol.style2 li {
 }
 
 .box-style .title {
-
+	background: url(images/homepage04.jpg) repeat-x left top;
 }
 
 .box-style h2 {
-
+	background: url(images/homepage05.jpg) no-repeat left top;
 }
 
 .box-style span {
 	display: block;
-	height: 20px;
+	height: 36px;
 	margin: 0px;
-	padding: 14px 25px 0px 5px;
+	padding: 14px 25px 0px 25px;
+	background: url(images/homepage06.jpg) no-repeat right top;
 	font-size: 14px;
 	font-weight: bold;
 	color: #323232;
@@ -490,14 +446,14 @@ ol.style2 li {
 
 .box-style li {
 	padding: 7px 0px 12px 0px;
+	background: url(images/homepage07.jpg) repeat-x left bottom;
 }
 
 .box-style .link1 {
 	display: block;
 	margin: 30px 0px 10px 0px;
 	padding: 1px 0px 5px 25px;
-	/*background: url(images/homepage08.gif) no-repeat left top;*/
-	background-color:#9C3;
+	background: url(images/homepage08.gif) no-repeat left top;
 	color: #FF0900;
 }
 
@@ -505,8 +461,7 @@ ol.style2 li {
 	display: inline-block;
 	margin: 10px 0px 10px 0px;
 	padding: 1px 0px 5px 20px;
-	/*background: url(images/homepage13.gif) no-repeat left 2px;*/
-	background-color:#060;
+	background: url(images/homepage13.gif) no-repeat left 2px;
 	color: #FF0900;
 }
 
@@ -520,15 +475,14 @@ ol.style2 li {
 .item-box {
 	overflow: hidden;
 	width: 380px;
-	margin-bottom: 3px;
+	margin-bottom: 20px;
 	padding: 0px 25px 20px 25px;
-	border-radius: 5px;
-	background-color:#eee;
+	background: url(images/homepage10.jpg) no-repeat left bottom;
 }
 
 .listings .item-box {
 	width: 640px;
-	border-color:#666;
+	background: url(images/subpage1_04.gif) no-repeat left bottom;
 }
 
 .details .item-box {
@@ -548,6 +502,7 @@ ol.style2 li {
 	height: 25px;
 	margin: 10px 0px;
 	padding: 8px 0px 0px 15px;
+	background: url(images/homepage09.gif) no-repeat left top;
 	text-align: center;
 	text-decoration: none;
 	font-weight: bold;
@@ -646,14 +601,13 @@ color:#000;/*dd2d26; style="width:500px;margin-top:9px;margin-left:4px;height:25
 
 .formLabel .addcart
 {
-	border-radius:5px;
-	background-color:#ddd;
-color:#000;
+background:url("images/homepage09.gif") no-repeat scroll left top transparent;
+color:#fff;
 display:inline-block;
 font-weight:bold;
 height:25px;
 margin:10px 0;
-padding:10px 0 0 5px;
+padding:8px 0 0 15px;
 text-align:center;
 text-decoration:none;
 width:90px;

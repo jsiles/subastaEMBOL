@@ -14,7 +14,22 @@ $order=0;
 $queryFilter = admin::toSql(admin::getParam("qfiltro"),"Number");
 $rolAplica = false;
 $rol = $_SESSION["usr_rol"];
-if(($rol>3)&&($rol<7))
+$sql =  "select count(*) from mdl_rav where rav_tipologia=1 and rav_rol_uid=$rol";
+$valida = admin::getDbValue($sql);
+if($valida>0)
+{
+    $montoMenor = admin::getDbValue("SELECT rav_monto_inf FROM mdl_rav WHERE rav_rol_uid=".$rol);
+    $montoMayor = admin::getDbValue("SELECT rav_monto_sup FROM mdl_rav WHERE rav_rol_uid=".$rol);
+    $rolAplica = true;
+    if($montoMayor!=0){
+            $valSQL = " AND sub_mount_base between ". $montoMenor." and ".$montoMayor;
+    }
+    else {
+            $valSQL = " AND sub_mount_base >= ". $montoMenor;
+    }
+}
+
+/*if(($rol>3)&&($rol<7))
 {
 	$montoMenor = admin::getDbValue("SELECT adj_monto FROM mdl_adjudicar WHERE adj_rol_uid=".$rol);
 	$montoMayor = admin::getDbValue("SELECT adj_monto_superior FROM mdl_adjudicar WHERE adj_rol_uid=".$rol);
@@ -25,7 +40,7 @@ if(($rol>3)&&($rol<7))
         else {
             $valSQL = " AND sub_mount_base >= ". $montoMenor;
         }
-}
+}*/
 $search2 = admin::toSql(admin::getParam("search2"),"String");
 if ($search2) $searchURL='&search2='.$search2.'&qfiltro=1';
 else $searchURL='';
@@ -303,7 +318,7 @@ while ($subasta_list = $pagDb->next_record())
 		<img src="lib/adjudicar_off.png" border="0" title="ADJUDICAR" alt="ADJUDICAR">
     <?php }
 	else {?>
-	   <a href="adjudicarSubasta" onclick="adjudicarSubasta('<?=$sub_uid?>');return false;">
+	   <a href="adjudicarSubasta.php?token=<?=admin::getParam("token")?>&pro_uid=<?=$pro_uid?>">
 		<img src="lib/adjudicar_on.png" border="0" title="ADJUDICAR" alt="ADJUDICAR">
 		</a>
 		<?php

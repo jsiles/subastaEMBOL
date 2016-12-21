@@ -26,7 +26,7 @@
 						$sWhere=" and pca_uid=$uidFirst";
 						}
 					}
-							$sql2 = "SELECT pro_uid, pro_url, pro_name, pro_image, sub_description,sub_mount_base,sub_moneda,sub_moneda1,sub_hour_end, pca_url, sub_deadtime,pro_quantity, pro_unidad, sub_uid FROM mdl_product, mdl_subasta, mdl_pro_category, mdl_incoterm WHERE sub_uid=inc_sub_uid and sub_uid=pro_sub_uid and sub_pca_uid=pca_uid and sub_delete=0 and inc_delete=0 and sub_status='ACTIVE' and sub_finish in (1,2)and inc_cli_uid=$cli_uid $sWhere order by sub_hour_end asc";
+							$sql2 = "SELECT pro_uid, sub_uid, pro_url, pro_name, pro_image, sub_description,sub_mount_base,sub_moneda,sub_moneda1,sub_hour_end, pca_url, sub_deadtime,pro_quantity, pro_unidad, sub_uid FROM mdl_product, mdl_subasta, mdl_pro_category, mdl_incoterm WHERE sub_uid=inc_sub_uid and sub_uid=pro_sub_uid and sub_pca_uid=pca_uid and sub_delete=0 and inc_delete=0 and sub_status='ACTIVE' and sub_finish in (1,2)and inc_cli_uid=$cli_uid $sWhere order by sub_hour_end asc";
                                                         //echo $sql2;
 							$db2->query($sql2);
 							while ($content=$db2->next_record())
@@ -41,7 +41,7 @@
 								$timetobe=admin::time_diff($content["sub_hour_end"],date('Y-m-d H:i:s'));
 								$timedead=admin::time_diff($content["sub_deadtime"],date('Y-m-d H:i:s'));
 								$finish=$content["sub_finish"];
-								//echo $timetobe."#".$content["sub_deadtime"]."#".$timedead;
+								//echo date('Y-m-d H:i:s')."#". $timetobe."#".$content["sub_hour_end"]."#".$content["sub_deadtime"]."#".$timedead;
 								if (($timetobe>0)&&($finish==0)){
 								//$daystobe=intval($timetobe/86400);
 								//$timetobe=$timetobe-($daystobe*86400);
@@ -55,10 +55,10 @@
 								else $faltante='Concluido';
 								
 								//$valTerminos=admin::getDbValue("select count(*) from mdl_terminos where ter_sub_uid=".$content["sub_uid"]." and ter_cli_uid=".admin::getSession("uidClient"));
-								$valIcoterms=admin::getDbValue("select count(*) from mdl_incoterm where inc_sub_uid=".$content["pro_uid"]." and inc_cli_uid=".admin::getSession("uidClient"));
+								$valIcoterms=admin::getDbValue("select count(*) from mdl_incoterm where inc_sub_uid=".$content["sub_uid"]." and inc_cli_uid=".admin::getSession("uidClient"));
 								//echo "select count(*) from mdl_incoterm where inc_sub_uid=".$content["pro_uid"]." and inc_cli_uid=".admin::getSession("uidClient");
 
-								$bidsCompra=admin::getDBvalue("SELECT a.sub_type FROM mdl_subasta a where a.sub_uid=".$content["pro_uid"]);								
+								$bidsCompra=admin::getDBvalue("SELECT a.sub_type FROM mdl_subasta a where a.sub_uid=".$content["sub_uid"]);								
 								//echo $content["pro_uid"].$bidsCompra."#".$valIcoterms."#";
 								
 								if($valIcoterms==0)

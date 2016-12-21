@@ -12,7 +12,7 @@ $timedead=admin::time_diff($details["sub_deadtime"],date('Y-m-d H:i:s'));
 $finish=$details["sub_finish"];
 $timeSubasta = $details["sub_tiempo"];
 //echo $timedead."--".$details["sub_deadtime"];
-if (($timetobe>0)&&($finish==0)){
+if (($timetobe>0)){
 $daystobe=intval($timetobe/86400);
 $timetobe=$timetobe-($daystobe*86400);
 $hourstobe=intval($timetobe/3600);
@@ -22,7 +22,7 @@ $timetobe=$timetobe-($minutetobe*60);
 $faltante =$daystobe.'d '.$hourstobe.'h '.$minutetobe.'m '.$timetobe.'s ';
 $timeInicio = 1;
 }
-elseif(($timedead>0)&&($finish==0))
+elseif(($timedead>0))
 {
 $faltante='Iniciada';
 $daysdead=intval($timedead/86400);

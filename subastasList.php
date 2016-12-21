@@ -6,7 +6,7 @@ $sql = "SELECT * FROM mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=p
 $db->query($sql);
 $details = $db->next_record();
 $moneda = admin::getDbValue("select cur_description from mdl_currency where cur_uid='".$details["sub_moneda"]."'");
-echo "123".$details["sub_modalidad"];die;
+//echo "123".$details["sub_modalidad"];die;
 if($details)
 switch($details["sub_modalidad"])
 {
@@ -25,6 +25,5 @@ switch($details["sub_modalidad"])
 	default:
 			echo "Modalidad de subasta no soportada";				
 }
-
 //echo $details["sub_modalidad"];
 ?>

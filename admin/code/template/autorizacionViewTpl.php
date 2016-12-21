@@ -426,7 +426,7 @@ else
 	  	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 			<tr>
 				<td width="59%" align="center">
-				<a href="autorzacionViewList.php?token=<?=admin::getParam("token")?>" class="button" >Volver</a>
+				<a href="autorizacionList.php?token=<?=admin::getParam("token")?>" class="button" >Volver</a>
 				</td>
           
         </tr>

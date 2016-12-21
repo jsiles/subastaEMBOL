@@ -11,6 +11,7 @@
                                 $arrayURL = admin::urlArray();
                                 //print_r($arrayURL);
                                 //echo $urlPositionSubtitle;
+                                $cli_uid = admin::getSession("uidClient");
                                 if($arrayURL[$urlPositionSubtitle]) {
 				$uidCatgory= admin::getDbValue("select pca_uid from mdl_pro_category where pca_url='".$arrayURL[$urlPositionSubtitle]."' and pca_delete=0");
 				//echo "select pca_uid from mdl_pro_category where pca_url='".$arrayURL[$urlPositionSubtitle]."' and pca_delete=0";
@@ -25,7 +26,8 @@
 						$sWhere=" and pca_uid=$uidFirst";
 						}
 					}
-							$sql2 = "SELECT pro_uid, pro_url, pro_name, pro_image, sub_description,sub_mount_base,sub_moneda,sub_moneda1,sub_hour_end, pca_url, sub_deadtime,pro_quantity, pro_unidad, sub_uid FROM mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and sub_pca_uid=pca_uid and sub_delete=0 and sub_status='ACTIVE' and sub_finish>=1 $sWhere order by sub_hour_end asc";
+							$sql2 = "SELECT pro_uid, pro_url, pro_name, pro_image, sub_description,sub_mount_base,sub_moneda,sub_moneda1,sub_hour_end, pca_url, sub_deadtime,pro_quantity, pro_unidad, sub_uid FROM mdl_product, mdl_subasta, mdl_pro_category, mdl_incoterm WHERE sub_uid=inc_sub_uid and sub_uid=pro_sub_uid and sub_pca_uid=pca_uid and sub_delete=0 and inc_delete=0 and sub_status='ACTIVE' and sub_finish in (1,2)and inc_cli_uid=$cli_uid $sWhere order by sub_hour_end asc";
+                                                        //echo $sql2;
 							$db2->query($sql2);
 							while ($content=$db2->next_record())
 							{

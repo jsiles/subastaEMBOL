@@ -263,7 +263,7 @@ $prod = $db->next_record();
 <br />
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
-      <td width="77%" height="40"><span class="title">Usuarios habilitados</span></td>
+      <td width="77%" height="40"><span class="title">Lista de la Puja</span></td>
     <td width="23%" height="40">&nbsp;</td>
   </tr>
     
@@ -426,7 +426,7 @@ else
 	  	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 			<tr>
 				<td width="59%" align="center">
-				<a href="autorzacionViewList.php?token=<?=admin::getParam("token")?>" class="button" >Volver</a>
+				<a href="autorizacionList.php?token=<?=admin::getParam("token")?>" class="button" >Volver</a>
 				</td>
           
         </tr>

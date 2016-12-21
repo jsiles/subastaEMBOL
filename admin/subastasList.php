@@ -67,7 +67,7 @@ function removeList(id){
 					  $.ajax({
 						url: 'code/execute/subastasDel.php',
 						type: 'POST',
-						data: 'uid='+id
+						data: 'sub_uid='+id
 					});
 				/********BeginResetColorDelete*************/  
 				//	  resetOrderRemove(id);  

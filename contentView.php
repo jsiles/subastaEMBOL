@@ -1,5 +1,6 @@
 <?php 
 include_once("admin/core/admin.php");
+
 define("SYS_LANG","es");
 $uidClient = admin::getSession("uidClient");
 $con_uid=0;
@@ -47,6 +48,7 @@ $countWord=strlen($urlSearch)+1;
 $urlSearch2=substr($urlTitle,0,$countWord);
 if ($urlSearch.'='==$urlSearch2) {$varSearch=str_replace($urlSearch.'=',"",$urlTitle);  $urlTitle=$urlSearch;} 
 //////////////////// ***************************fin busqueda variable************************************/////////////////////////////////////
+//print_r($urlTitle);
 if ($urlTitle!='')
     {
   	if ($urlTitle!='session') 
@@ -79,7 +81,7 @@ if ($urlTitle!='')
 //echo $uid;
 		}
 		else $uid=0;
-		//echo $uid."####";die;
+	   //echo $uid."####";die;
 	  switch($uid){
 		
 		case 0:
@@ -175,7 +177,7 @@ if ($urlTitle!='')
 				$con_uid=$uid;
 				break;
 	}
- 	include_once($page); 
+ 	include_once($page);        
 	}	
 else
 	{

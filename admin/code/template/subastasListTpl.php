@@ -115,11 +115,11 @@ if ($nroReg>0)
   </tr>
   <tr>
     <td id="contentListing" colspan="2">
- 	<?
+ 	<?php
 $i=1;
 ?>
 <div class="itemList" id="itemList" style="width:99%"> 
-<?
+<?php
 $j=0;
 while ($subasta_list = $pagDb->next_record())
 	{
@@ -129,9 +129,7 @@ while ($subasta_list = $pagDb->next_record())
 	$sub_uid = $subasta_list["sub_uid"];
 	$sub_type = $subasta_list["sub_type"];
 	$pro_status = $subasta_list["sub_status"];
-
-//	echo $pro_status;
-	$deadtime = $subasta_list["deadtime"];
+        $deadtime = $subasta_list["deadtime"];
 	$sub_finish = $subasta_list["estado"];
     /*
     
@@ -185,28 +183,28 @@ while ($subasta_list = $pagDb->next_record())
     
     <div id="list_<?=$pro_uid?>" class="<?=$class?>" style="width:100%" >
     
-    <table class="list" width="100%" style="display:;">
+    <table class="list" width="100%" style="">
 	<tr>
 		<td width="5%" ><span <?=$dest?>><?=admin::toHtml($sub_uid)?></span></td>
         <td width="15%" ><span <?=$dest?>><?=ucfirst(strtolower(trim(admin::toHtml($pro_name))))?></span></td>
         <td width="10%" ><span <?=$dest?>><?=ucwords(strtolower(trim(admin::toHtml($pca_name))))?></span></td>
         <td width="15%" ><span><?=$sub_estado?></span></td>
 		<td align="left" width="10%" height="5">
-         <?
+         <?php
 		 $countBids=admin::getDBvalue("SELECT count(*) FROM mdl_bid where bid_sub_uid='".$sub_uid."' and bid_cli_uid!=0");
 		 if ($countBids>0){
 		 ?>
         <a href="excel" onclick="document.location.href='ficheroExcel.php?subasta=<?=$sub_uid?>'; return false;" class="xls">
 				<img src="lib/ext/excel.png" border="0" alt="Excel" title="Excel" />
 					</a>
-		<? }?>	
+		<?php }?>	
 		</td>
         <td align="center" width="5%" height="5">
-        <a href="subastasView.php?pro_uid=<?=$pro_uid?>&token=<?=admin::getParam("token");?>"><img src="lib/view_es.gif" border="0" title="<?=admin::labels('view')?>" alt="<?=admin::labels('view')?>">
+        <a href="subastasView.php?pro_uid=<?=$pro_uid?>&token=<?=admin::getParam("token");?>&sub_uid=<?=$sub_uid?>"><img src="lib/view_es.gif" border="0" title="<?=admin::labels('view')?>" alt="<?=admin::labels('view')?>">
 	</a>
         </td>
 	<td align="center" width="12%" height="5">
-    <? 
+    <?php 
 	if($sub_finish!=0)
 		{
 	?>
@@ -215,14 +213,14 @@ while ($subasta_list = $pagDb->next_record())
 		}else{
 	?>
 
-		<a href="subastasEdit.php?token=<?=admin::getParam("token")?>&pro_uid=<?=$pro_uid?>">
+		<a href="subastasEdit.php?token=<?=admin::getParam("token")?>&pro_uid=<?=$pro_uid?>&sub_uid=<?=$sub_uid?>">
 		<img src="<?=admin::labels('edit','linkImage')?>" border="0" title="<?=admin::labels('edit')?>" alt="<?=admin::labels('edit')?>">
 		</a>
-        <? }
+        <?php }
         ?>
 	</td>
 	<td align="center" width="12%" height="5">
-    <? 
+    <?php 
 		if($sub_finish!=0)
 		{
 	?>
@@ -230,7 +228,7 @@ while ($subasta_list = $pagDb->next_record())
 	<?php
 		}else{
 	?>
-		<a href="removeList" onclick="removeList('<?=$pro_uid?>');return false;">
+		<a href="removeList" onclick="removeList('<?=$sub_uid?>');return false;">
 		<img src="<?=admin::labels('delete','linkImage')?>" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
 		</a>
         <?php
@@ -262,12 +260,13 @@ while ($subasta_list = $pagDb->next_record())
 	</td>
 		</tr>
 	</table>
-<?
+<?php
 $i++; 
-$j++; ?>
+$j++; 
+?>
 </div>
 </div>
-<? } 
+<?php } 
 ?>
 </div>
     </td>
@@ -279,45 +278,13 @@ $j++; ?>
     </tr>
     <tr>
     <td colspan="2">
-    <!--<table width="100%">
-	<form>    
-    <tr style="display:none">
-    <td align="right">
-      <p><span>Ir a:</span> <input name='webPag' id='webPag' type="text" maxlength="5" size="6"/><input type="button" onclick="goToPag();" value="Ir" /><span name='div_webPag' id='div_webPag'></span></p>
-    </td>
-  <td align="right" width="10%">
-   <select name="maxLineP" onchange="RowsF(this.value);">
-   	<option value="10" <? if ($maxLineP==20)  echo 'selected="selected"';?>>20 resultados</option>
-    <option value="20" <? if ($maxLineP==30)  echo 'selected="selected"';?>>30 resultados</option>
-    <option value="30" <? if ($maxLineP==40)  echo 'selected="selected"';?>>40 resultados</option>
-    <option value="50" <? if ($maxLineP==50)  echo 'selected="selected"';?>>50 resultados</option>
-    <option value="100"<? if ($maxLineP==100)  echo 'selected="selected"';?>>100 resultados</option>
-   </select>
-  </td>
-	<td align="right" class="txt11" width="20%">
-	<?	
-	//Incluimos la barra de navegación
-	if ($nroReg==0) 
-		{
-		echo "<font face=arial></font>";
-		}
-		else
-		{
-		echo $_pagi_navegacion;
-		//Incluimos la información de la página actual
-		echo $_pagi_info;
-		}		
-	?>
-	</td>
-    </tr>
-	</form>
-    </table>-->
+    
     </td>
 	</tr>
 </table><br />
 <br />
 <br />
-<? 	} 
+<?php 	} 
 else
 	{ ?>
 	<br />
@@ -342,5 +309,5 @@ else
 </table>
 </form>
 
-<? 	} 
+<?php 	} 
 ?>

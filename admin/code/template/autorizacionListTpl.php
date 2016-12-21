@@ -1,11 +1,22 @@
 <?php
 /*
+
+ * ROLES
  * 3 ANALISTA
  * 4 SUBASTADOR
  * 5 JEFE NAL
  * 6 GERENTE
- * 
- * 
+
+    ESTADOS DE UNA SUBASTA
+    sub_finish
+    0 SOLICITUD
+    1 APROBADA
+    2 SUBASTANDOSE
+    3 CONCLUIDA
+    4 ADJUDICADA
+    5 ANULADA
+    6 RECHAZADA
+    7 DESIERTA
  */
 define (SYS_LANG,$lang);
 $maxLine=20;
@@ -14,50 +25,12 @@ $order=0;
 $queryFilter = admin::toSql(admin::getParam("qfiltro"),"Number");
 $rolAplica = false;
 $rol = $_SESSION["usr_rol"];
-$sql =  "select count(*) from mdl_rav where rav_tipologia=1 and rav_rol_uid=$rol";
-$valida = admin::getDbValue($sql);
-if($valida>0)
-{
-    $montoMenor = admin::getDbValue("SELECT rav_monto_inf FROM mdl_rav WHERE rav_rol_uid=".$rol);
-    $montoMayor = admin::getDbValue("SELECT rav_monto_sup FROM mdl_rav WHERE rav_rol_uid=".$rol);
-    $rolAplica = true;
-    if($montoMayor!=0){
-            $valSQL = " AND sub_mount_base between ". $montoMenor." and ".$montoMayor;
-    }
-    else {
-            $valSQL = " AND sub_mount_base >= ". $montoMenor;
-    }
-}
-
-/*if(($rol>3)&&($rol<7))
-{
-	$montoMenor = admin::getDbValue("SELECT adj_monto FROM mdl_adjudicar WHERE adj_rol_uid=".$rol);
-	$montoMayor = admin::getDbValue("SELECT adj_monto_superior FROM mdl_adjudicar WHERE adj_rol_uid=".$rol);
-	$rolAplica = true;
-        if($montoMayor!=0){
-            $valSQL = " AND sub_mount_base between ". $montoMenor." and ".$montoMayor;
-        }
-        else {
-            $valSQL = " AND sub_mount_base >= ". $montoMenor;
-        }
-}*/
 $search2 = admin::toSql(admin::getParam("search2"),"String");
 if ($search2) $searchURL='&search2='.$search2.'&qfiltro=1';
 else $searchURL='';
 $timeNow= date("Y-m-d H:i:s");//sub_finish<>0
 //echo $timeNow;
-if($rolAplica)
-{
-	if ($queryFilter==1)
-	{
-
-		if ($search2) $qsearch="SELECT pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif('$timeNow'>sub_deadtime,'concluida','subastandose') as deadtime, sub_finish as estado, sub_mount_base FROM mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and (pro_name like '%" .$search2. "%' or pro_uid like '%" .$search2. "%')) and sub_delete=0 and sub_mode='SUBASTA' and sub_finish in (0,3) ".$valSQL;
-		else $qsearch="SELECT pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif(sub_finish<>0,'concluida','subastandose') as deadtime, sub_finish as estado, sub_mount_base FROM mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' and sub_finish in (0,3) ".$valSQL;
-	}
-	else $qsearch="SELECT pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif('$timeNow'>sub_deadtime,'concluida','subastandose') as deadtime, sub_finish as estado, sub_mount_base FROM mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' and sub_finish in (0,3) ".$valSQL;
-
-}
-else $qsearch="SELECT pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif('$timeNow'>sub_deadtime,'concluida','subastandose') as deadtime, sub_finish as estado, sub_mount_base FROM mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' and sub_finish=-1 ";
+$qsearch="SELECT pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif('$timeNow'>sub_deadtime,'concluida','subastandose') as deadtime, sub_finish as estado, sub_mount_base FROM mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' and sub_finish in (0,3) ";
 $maxLine2 = admin::toSql(admin::getParam("maxLineP"),"Number");
 if ($maxLine2) {$maxLine=$maxLine2; admin::setSession("maxLineP",$maxLine2);}
 else {
@@ -299,11 +272,35 @@ while ($subasta_list = $pagDb->next_record())
 	?>
 		<img src="lib/aprobar_off.png" border="0" title="APROBAR" alt="APROBAR">
     <?php }
-	else{?>
+	else{
+            $rolAplica = false;
+            $sql =  "select count(*) from mdl_rav where rav_tipologia=1 and rav_rol_uid=$rol";
+            $valida = admin::getDbValue($sql);
+            if($valida>0)
+            {   
+                $montoBase = $sub_monto;
+                $montoMenor = admin::getDbValue("SELECT rav_monto_inf FROM mdl_rav WHERE rav_tipologia=1 and rav_rol_uid=".$rol);
+                $montoMayor = admin::getDbValue("SELECT rav_monto_sup FROM mdl_rav WHERE rav_tipologia=1 and rav_rol_uid=".$rol);
+                if($montoMayor!=0){
+            
+                    if(($montoBase>=$montoMenor)&&($montoBase<=$montoMayor)) $rolAplica=true;
+                   
+                }else{if($montoBase>=$montoMenor) $rolAplica=true;}                
+            }
+
+            if($rolAplica)
+            {
+            ?>
 	   <a href="aprobarSubasta" onclick="aprobarSubasta('<?=$sub_uid?>');return false;">
 		<img src="lib/aprobar_on.png" border="0" title="APROBAR" alt="APROBAR">
 		</a>
 		<?php
+            }else{
+                ?>
+		<img src="lib/aprobar_off.png" border="0" title="APROBAR" alt="APROBAR">
+    <?php
+                
+            }
 	}
 		?>
 	</div>
@@ -312,17 +309,46 @@ while ($subasta_list = $pagDb->next_record())
 	<td align="center" width="5%" height="5">
 	<div id="status_<?=$sub_uid?>">
 	<?php
-		if($sub_finish<3)
+            //echo "Estado:" .$sub_finish;
+		if($sub_finish!=3)
 		{
 	?>
 		<img src="lib/adjudicar_off.png" border="0" title="ADJUDICAR" alt="ADJUDICAR">
     <?php }
-	else {?>
-	   <a href="adjudicarSubasta.php?token=<?=admin::getParam("token")?>&pro_uid=<?=$pro_uid?>">
+	else {
+            $adjudicaFlag=false;
+                    
+            $sql =  "select count(*) from mdl_rav where rav_tipologia=2 and rav_rol_uid=$rol";
+            $valida = admin::getDbValue($sql);
+            if($valida>0)
+            {
+
+                    $montoBase = $sub_monto;
+                    $montoMenor = admin::getDbValue("SELECT rav_monto_inf FROM mdl_rav WHERE rav_tipologia=2 and rav_rol_uid=".$rol);
+                    $montoMayor = admin::getDbValue("SELECT rav_monto_sup FROM mdl_rav WHERE rav_tipologia=2 and rav_rol_uid=".$rol);
+                    if($montoMayor!=0){
+
+                        if(($montoBase>=$montoMenor)&&($montoBase<=$montoMayor)) $adjudicaFlag=true;
+
+                    }else{if($montoBase>=$montoMenor) $adjudicaFlag=true;}
+                    
+                    //echo $montoBase. " MonM:". $montoMenor . " MonMayor:".$montoMayor. " Flag:".$adjudicaFlag;
+            }
+                if($adjudicaFlag)
+                {
+            ?>
+                <a href="adjudicarSubasta.php?token=<?=admin::getParam("token")?>&pro_uid=<?=$pro_uid?>">
 		<img src="lib/adjudicar_on.png" border="0" title="ADJUDICAR" alt="ADJUDICAR">
 		</a>
 		<?php
-	}
+                }else{
+                    ?>
+		<img src="lib/adjudicar_off.png" border="0" title="ADJUDICAR" alt="ADJUDICAR">
+                <?php
+                }
+            }
+        
+            
 		?>
 	</div>
 

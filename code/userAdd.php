@@ -7,7 +7,7 @@ $email = admin::toSql($_REQUEST["email"],"Text");
 $firstnameClient = admin::toSql($_REQUEST["firstnameClient"],"Text");
 $lastnameClient = admin::toSql($_REQUEST["lastnameClient"],"Text");
 
-$sSQL = "insert into mdl_client values (null,'$companyName','$reasonSocial','$user', '".SymmetricCrypt::encrypt(12345)."', '$firstnameClient', '$lastnameClient',  '$email', 'INACTIVE', 0, now(), '')";
+$sSQL = "insert into mdl_client values (null,'$companyName','$reasonSocial','$user', '".SymmetricCrypt::encrypt(12345)."', '$firstnameClient', '$lastnameClient',  '$email', 'INACTIVE', 0, GETDATE(), '')";
 //echo $sSQL;die;
 $db->query($sSQL);
 

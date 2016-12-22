@@ -46,9 +46,9 @@ $sql = "insert into mdl_contents(
 								" . admin::toSql($conlevel,"Number") . ", 
 								" . admin::toSql($position,"Number") . ", 
 								" . admin::toSql($_SESSION["usr_uid"],"Number") . ", 
-								now(), 
+								GETDATE(), 
 								" . admin::toSql($_SESSION["usr_uid"],"Number") . ", 
-								now(), 
+								GETDATE(), 
 								0)";
 $db->query($sql);
 

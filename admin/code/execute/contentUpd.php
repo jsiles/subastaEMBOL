@@ -44,7 +44,7 @@ $sql = "update mdl_contents set
 							con_position=" . $con_position . ", 
 							con_level=" . $conlevel . ", 							
 							con_updateuser=" . $_SESSION["usr_uid"] . ", 
-							con_updatedate=now()
+							con_updatedate=GETDATE()
 		where con_uid='" . $_POST["con_uid"]."'";
         //echo $sql;die;
         $db->query($sql);

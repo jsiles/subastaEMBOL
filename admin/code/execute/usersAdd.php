@@ -59,7 +59,7 @@ $sql = "insert into mdl_users(
 							'" . $use_country . "',
 							'" . $use_city . "',
 							'" . $use_address . "',
-							now(),
+							GETDATE(),
 							'" . $use_status . "',
 							" . $changepass2 . "
 							'" . $use_phone . "',

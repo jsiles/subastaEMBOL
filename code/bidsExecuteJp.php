@@ -41,7 +41,7 @@ if($bidsCompra=='COMPRA')
 		$maxUid=admin::getDBvalue("SELECT max(bid_uid) FROM mdl_bid");
 		$maxUid++;
 		$sql = "insert into mdl_bid( bid_uid, bid_sub_uid, bid_pro_uid, bid_cli_uid, bid_mount, bid_mountxfac, bid_date, bid_pca_uid)
-						values	($maxUid,$sub_uid, $pro_uid,$cli_uid ,$orig_monto_ofertado, $monto_ofertado, now(),$catUid)";
+						values	($maxUid,$sub_uid, $pro_uid,$cli_uid ,$orig_monto_ofertado, $monto_ofertado, GETDATE(),$catUid)";
 		$db->query($sql);
 		//$sql = "update mdl_subasta set sub_finish=1 where sub_uid=".$sub_uid;
 		//$db->query($sql);
@@ -57,7 +57,7 @@ if($bidsCompra=='COMPRA')
 		$maxUid=admin::getDBvalue("SELECT max(bid_uid) FROM mdl_bid");
 		$maxUid++;
 		$sql = "insert into mdl_bid( bid_uid, bid_sub_uid, bid_pro_uid, bid_cli_uid, bid_mount, bid_date, bid_pca_uid)
-						values	($maxUid,$sub_uid, $pro_uid,$cli_uid,$monto_ofertado,now(),$catUid)";
+						values	($maxUid,$sub_uid, $pro_uid,$cli_uid,$monto_ofertado,GETDATE(),$catUid)";
 		$db->query($sql);
 		//$sql = "update mdl_subasta set sub_finish=1 where sub_uid=".$sub_uid;
 		//$db->query($sql);

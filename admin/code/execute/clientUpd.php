@@ -30,7 +30,7 @@ $sql = "update mdl_client set
 			cli_lastname='".$cli_lastname."',
 			cli_status='".$cli_status."',
 			".$changepass."
-			cli_date=now()
+			cli_date=GETDATE()
 		where cli_uid=".$cli_uid;
 //echo $sql;//die; 
 $db->query($sql);

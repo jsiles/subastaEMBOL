@@ -47,9 +47,9 @@ $sql = "insert into mdl_contents(
 								1, 
 								".$maxPosition.", 
 								1, 
-								now(), 
+								GETDATE(), 
 								1, 
-								now(), 
+								GETDATE(), 
 								0, 
 								1)";
 $db->query($sql);

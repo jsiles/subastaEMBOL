@@ -165,8 +165,8 @@ ol.style2 li {
 	display: block;
 	position: absolute;
 	width: 100%;
-	height: 100px;
-	background-image:url(../lib/bg_header%20-%20Copy.jpg);
+	height: 90px;
+	background-image:url(../lib/logo.png);
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -257,12 +257,12 @@ ol.style2 li {
 #menu {
 	float: left;
 	width: 80%;
-	height: 50px;
+	height: 55px;
 }
 
 #menu ul {
-	margin: 0px;
-	padding: 17px 0px 0px 25px;
+	margin-left: 30%;
+	padding: 17px 40px 0px 25px;
 	list-style: none;
 	line-height: normal;
 }
@@ -274,7 +274,7 @@ ol.style2 li {
 #menu span {
 	float: left;
 	display: block;
-	height: 35px;
+	height: 25px;
 	padding-top: 6px;
 }
 
@@ -285,7 +285,7 @@ ol.style2 li {
 	text-decoration: none;
 	font-size: 13px;
 	font-weight: bold;
-	color: #FFFFFF;
+	color: #000;
 }
 
 #menu a:hover {
@@ -293,18 +293,15 @@ ol.style2 li {
 }
 
 #menu li.active {
-	/*background: url(images/subpage4_01.gif) no-repeat left top;*/
-	background-color:#C96;
+	background-color:#eee;
 }
 
 #menu li.active a {
-	/*background: url(images/subpage4_03.gif) no-repeat right top;*/
-	background-color:#663;
+	background-color:#ddd;
 }
 
 #menu li.active span {
-	/*background: url(images/subpage4_02.gif) no-repeat center bottom;*/
-	background-color:#36F;
+	background-color:#ddd;
 }
 
 /** SEARCH */

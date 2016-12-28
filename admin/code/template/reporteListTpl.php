@@ -12,7 +12,7 @@ $timeNow= date("Y-m-d H:i:s");//sub_finish<>0
 //echo $timeNow;
 if ($queryFilter==1)
 {
-	if ($search2) $qsearch="select pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif('$timeNow'>sub_deadtime,'concluida','subastandose') as deadtime, sub_finish as estado from mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and (MATCH(pro_name,pro_uid) AGAINST('+".$search2."%' IN BOOLEAN MODE) or (pro_name like '%" .$search2. "%' or pro_uid like '%" .$search2. "%')) and sub_delete=0 and sub_mode='SUBASTA' ";
+	if ($search2) $qsearch="select pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif('$timeNow'>sub_deadtime,'concluida','subastandose') as deadtime, sub_finish as estado from mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and (pro_name like '%" .$search2. "%' or pro_uid like '%" .$search2. "%') and sub_delete=0 and sub_mode='SUBASTA' ";
 	else $qsearch="select pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif(sub_finish<>0,'concluida','subastandose') as deadtime, sub_finish as estado from mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' ";
 }
 else $qsearch="select distinct pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif('$timeNow'>sub_deadtime,'concluida','subastandose') as deadtime, sub_finish as estado from mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' ";
@@ -73,13 +73,13 @@ if ($nroReg>0)
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
    <tr>
       <td width="77%" height="40"><span class="title">Reporte de subastas</span></td>
-    <td width="23%" height="40" align="right"><a href="subastasNew.php?token=<?=admin::getParam("token")?>"><?=admin::labels('subastas','create');?></a></td>
+    <td width="23%" height="40" align="right"></td>
   </tr>
   <tr>
 	<td width="90%" height="40"></td>
     <td>
         <div class="boxSearch">
-        <form name="frmSubastasSearch" action="subastasList.php" >
+        <form name="frmSubastasSearch" action="reporteList.php" >
         <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
          <tr>
           <td>
@@ -97,18 +97,14 @@ if ($nroReg>0)
    </td>
   </tr>
   <tr>
-  <td>
+  <td colspan="2">
   <table width="100%" border="0">
 	<tr>
-		<td width="8%"><a href="subastasList.php?order=<?=$uidOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$uidClass;?>"><?=admin::labels('code');?>:</a></td>
-        <td width="18%" ><a href="subastasList.php?order=<?=$nameOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$nameClass;?>"><?=admin::labels('name');?>:</a></td>
-        <td width="13%" ><a href="subastasList.php?order=<?=$linOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$linClass;?>"><?=admin::labels('category');?>:</a></td>
-        <td width="15%" ><span class="txt11 color2">Estado:</span></td>
-		<td align="center" width="10%" height="5"><span class="txt11 color2">Lista de pujas</span></td>
-        <td width="11%"></td>		
-		<td align="center" width="12%" height="5"></td>
-		<td align="center" width="12%" height="5"></td>
-		<td align="center" width="14%" height="5"></td>
+		<td width="10%"><a href="reporteList.php?order=<?=$uidOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$uidClass;?>"><?=admin::labels('code');?>:</a></td>
+        <td width="25%" ><a href="reporteList.php?order=<?=$nameOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$nameClass;?>"><?=admin::labels('name');?>:</a></td>
+        <td width="25%" ><a href="reporteList.php?order=<?=$linOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$linClass;?>"><?=admin::labels('category');?>:</a></td>
+        <td width="25%" ><span class="txt11 color2">Reporte XLS:</span></td>
+        <td width="15%" align="center"><span class="txt11 color2">Reporte PDF:</span></td>		
 	</tr>
 	</table>
   </td>
@@ -120,7 +116,6 @@ $i=1;
 ?>
 <div class="itemList" id="itemList" style="width:99%"> 
 <?php
-$j=0;
 while ($subasta_list = $pagDb->next_record())
 	{
 	$pro_uid = trim($subasta_list["pro_uid"]);		
@@ -132,34 +127,6 @@ while ($subasta_list = $pagDb->next_record())
         $deadtime = $subasta_list["deadtime"];
 	$sub_finish = $subasta_list["estado"];
 
-
-    switch ($sub_finish) {
-    	case  0:
-    		$sub_estado  ='SOLICITUD';
-    		break;
-    	case  1:
-    		$sub_estado  ='APROBADA';
-    		break;
-    	case  2:
-    		$sub_estado  ='SUBASTANDOSE';
-    		break;
-    	case  3:
-    		$sub_estado  ='CONCLUIDA';
-    		break;
-    	case  4:
-    		$sub_estado  ='ADJUDICADA';
-    		break;
-    	case  5:
-    		$sub_estado  ='ANULADA';
-    		break;
-    	
-    	default:
-    		$sub_estado  ='SOLICITUD';
-    		break;
-    }
-
-	if ($pro_status=='ACTIVE') $labels_content='status_on';
-	else $labels_content='status_off';
 
 	if ($i%2==0) $class='row';
 	else  $class='row0';	
@@ -173,83 +140,18 @@ while ($subasta_list = $pagDb->next_record())
     
     <table class="list" width="100%" style="">
 	<tr>
-		<td width="5%" ><span <?=$dest?>><?=admin::toHtml($sub_uid)?></span></td>
-        <td width="15%" ><span <?=$dest?>><?=ucfirst(strtolower(trim(admin::toHtml($pro_name))))?></span></td>
-        <td width="10%" ><span <?=$dest?>><?=ucwords(strtolower(trim(admin::toHtml($pca_name))))?></span></td>
-        <td width="15%" ><span><?=$sub_estado?></span></td>
-		<td align="left" width="10%" height="5">
-         <?php
-		 $countBids=admin::getDBvalue("SELECT count(*) FROM mdl_bid where bid_sub_uid='".$sub_uid."' and bid_cli_uid!=0");
-		 if ($countBids>0){
-		 ?>
-        <a href="excel" onclick="document.location.href='ficheroExcel.php?subasta=<?=$sub_uid?>'; return false;" class="xls">
-				<img src="lib/ext/excel.png" border="0" alt="Excel" title="Excel" />
-					</a>
-		<?php }?>	
-		</td>
-        <td align="center" width="5%" height="5">
-        <a href="code/execute/reporteTplXlsPdf.php?token=<?=admin::getParam("token")?>&pro=<?=$pro_uid?>"> XLS </a> 
-        </td>
-	<td align="center" width="12%" height="5">
-    <?php 
-	if($sub_finish!=0)
-		{
-	?>
-		<img src="lib/edit_off_es.gif" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
-	<?php
-		}else{
-	?>
-
-		<a href="subastasEdit.php?token=<?=admin::getParam("token")?>&pro_uid=<?=$pro_uid?>&sub_uid=<?=$sub_uid?>">
-		<img src="<?=admin::labels('edit','linkImage')?>" border="0" title="<?=admin::labels('edit')?>" alt="<?=admin::labels('edit')?>">
-		</a>
-        <?php }
-        ?>
-	</td>
-	<td align="center" width="12%" height="5">
-    <?php 
-		if($sub_finish!=0)
-		{
-	?>
-		<img src="lib/delete_off_es.gif" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
-	<?php
-		}else{
-	?>
-		<a href="removeList" onclick="removeList('<?=$sub_uid?>');return false;">
-		<img src="<?=admin::labels('delete','linkImage')?>" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
-		</a>
-        <?php
-        }?>
-	</td>
-	<td align="center" width="14%" height="5">
-	<div id="status_<?=$sub_uid?>">
-	<?php
-		if($sub_finish!=0)
-		{
-        if ($pro_status=='ACTIVE'){
-	?>
-		<img src="lib/active_off_es.gif" border="0" title="<?=admin::labels($labels_content)?>" alt="<?=admin::labels($labels_content)?>">
-    <?php
-  }else{
-    ?>
-    <img src="lib/inactive_off_es.gif" border="0" title="<?=admin::labels($labels_content)?>" alt="<?=admin::labels($labels_content)?>">
-
-    <?php }
-  }
-	else{?>
-	   <a href="javascript:subastatatus('<?=$sub_uid?>','<?=$pro_status?>');">
-		<img src="<?=admin::labels($labels_content,'linkImage')?>" border="0" title="<?=admin::labels($labels_content)?>" alt="<?=admin::labels($labels_content)?>">
-		</a>
-		<?php
-	}
-		?>
-	</div>
+		<td width="10%" ><span <?=$dest?>><?=admin::toHtml($sub_uid)?></span></td>
+        <td width="25%" ><span <?=$dest?>><?=ucfirst(strtolower(trim(admin::toHtml($pro_name))))?></span></td>
+        <td width="25%" ><span <?=$dest?>><?=ucwords(strtolower(trim(admin::toHtml($pca_name))))?></span></td>
+        <td width="25%" ><a href="code/execute/reporteTplXlsPdf.php?token=<?=admin::getParam("token")?>&pro=<?=$sub_uid?>&type=xls">
+        <img src="lib/ext/excel.png" border="0" alt="Excel" title="Excel" /></a></td>
+	<td align="center" width="15%" height="5"> <a href="code/execute/reporteTplXlsPdf.php?token=<?=admin::getParam("token")?>&pro=<?=$sub_uid?>&type=pdf"><img src="lib/ext/acrobat.png" border="0" alt="Excel" title="Excel" /></a>
+    
 	</td>
 		</tr>
 	</table>
 <?php
 $i++; 
-$j++; 
 ?>
 </div>
 </div>
@@ -281,14 +183,14 @@ else
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
       <td width="77%" height="40"><span class="title">Reporte de subastas</span></td>
-    <td width="23%" height="40" align="right"><a href="newsNew.php"><?=admin::labels('subastas','create');?></a></td>
+    <td width="23%" height="40" align="right"></td>
   </tr>
   <tr>
     <td colspan="2" id="contentListing">
 <div  style="background-color: #f7f8f8;">
 <table class="list"  width="100%">
 	<tr><td height="30px" align="center" class="bold">
-	<?=admin::labels('subastas','nosubasta')?>
+	No se encontraron Subastas
 	</td></tr>	
  </table>
 </div>

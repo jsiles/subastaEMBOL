@@ -1,30 +1,8 @@
 <?php
 include_once("../../core/admin.php");
 admin::initialize('reportes','reporteList',false);
-require_once '../../excelPdf/PHPExcel.php';
-/*include_once ('../../excelPdf/PHPExcel/Writer/PDF.php');
-require_once ('../../excelPdf/PHPExcel/IOFactory.php');*/
-//include_once ('../../excelPdf/PHPExcel/Writer/Excel2007.php');
-
-$objPHPExcel = new PHPExcel();
-		
-date_default_timezone_set('America/La_Paz');
 $pro_uid =admin::toSql(admin::getParam("pro"),"Number");
-
-// Se asignan las propiedades del reporte
-$objPHPExcel->getProperties()->setCreator("SCLE") 
-							 ->setLastModifiedBy("SCLE") 
-							 ->setTitle("Parametrización de subasta")
-							 ->setSubject("Parametrización de subasta")
-							 ->setDescription("Reporte de subasta")
-							 ->setKeywords("Parametrización de subasta")
-							 ->setCategory("Reporte excel");
-
-$tituloReporte = "Parametrización de subasta";
-$fechaReporte = 'Fecha: '.date("d/m/Y");
-$tituloReporte1 = "1: Datos generales de la subasta";
-$tituloReporte2 = "2: Datos particulares de la subasta";
-$tituloReporte3 = "3: Proveedores habilitados";
+$formato =admin::toSql(admin::getParam("type"),"String");
 
 $sql ="SELECT pro_name,pca_name,pro_description,pro_quantity,pro_unidad,sub_status, sub_modalidad, sub_type, sub_hour_end, sub_mount_base, sub_mount_unidad, sub_tiempo, sub_uid 
 FROM mdl_subasta, mdl_product,mdl_pro_category
@@ -32,7 +10,7 @@ WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_status='ACTIVE' and pr
 $db->query($sql);
 while ($firstPart = $db->next_record())
 { 
-	$pca_name=$firstPart['pro_name'];
+	$pro_name=$firstPart['pro_name'];
 	$pca_name=$firstPart['pca_name'];
 	$pro_description=$firstPart['pro_description'];
 	$pro_quantity=$firstPart['pro_quantity'];
@@ -46,45 +24,37 @@ while ($firstPart = $db->next_record())
 	$sub_tiempo=$firstPart['sub_tiempo'];
 	$sub_uid=$firstPart['sub_uid'];
 }
-						
-		// Se agregan los titulos del reporte
-		$objPHPExcel->setActiveSheetIndex(0)
-		 			->setCellValue('D3',  $tituloReporte)
-        		    ->setCellValue('G4',  $fechaReporte)
-		            ->setCellValue('B7',  $tituloReporte1)
-					->setCellValue('B15',  $tituloReporte2)
-					->setCellValue('B23',  $tituloReporte3)
-					->setCellValue('B9',  'Nombre:')
-					->setCellValue('B10',  'Categoria:')
-					->setCellValue('B11',  'Descripcion:')
-					->setCellValue('B12',  $pro_description)
-					->setCellValue('C9',  $pca_name)
-					->setCellValue('C10',  $pca_name)
-					->setCellValue('F9',  'Cantidad:')
-					->setCellValue('F10',  'Unidades:')
-					->setCellValue('G9',  $pro_quantity)
-        		    ->setCellValue('G10', $pro_unidad)
-					->setCellValue('B17', 'Modalidad de subasta:')
-					->setCellValue('B18', 'Tipo de subasta:')
-					->setCellValue('B19', 'Monto base:')
-					->setCellValue('B20', 'Unidad de mejorar:')
-					->setCellValue('C17', $sub_modalidad)
-					->setCellValue('C18', $sub_type)
-					->setCellValue('C19', $sub_mount_base)
-					->setCellValue('C20', $sub_mount_unidad)
-					->setCellValue('F17', 'Fecha de subasta:')
-					->setCellValue('F18', 'Hora de subasta:')
-					->setCellValue('F20', 'Tiempo límite de mejora en min.:')
-					->setCellValue('G17', $sub_hour_end[0])
-					->setCellValue('G18', $sub_hour_end[1])
-					->setCellValue('G20', $sub_tiempo)
-					->setCellValue('B25', 'Ofertante')
-					->setCellValue('C25', 'Lugar de entrega')
-					->setCellValue('D25', 'Medio de transporte')
-					->setCellValue('E25', 'Incoterm')
-					->setCellValue('F25', 'Factor de ajuste');
-		
-		//Se agregan los datos de las subastas
+
+$html= '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Documento sin título</title>
+</head>
+
+<body>
+<table width="100%">
+<tr><td ><img src="../../lib/logo.png" width="100" /></td><td colspan="4"><h1>Parametrizacion</h1><br /><span>Fecha: '.date("d/m/Y").'</span></td></tr>
+<tr><td><br /><br /></td><td><br /><br /></td></tr>
+<tr><td colspan="5"><h2>1: Datos generales de la subasta</h2></td></tr>
+<tr><td><br /></td><td><br /></td></tr>
+<tr><td width="21%">Nombre:</td><td width="21%">'.$pro_name.'</td><td width="6%"></td><td width="21%">Cantidad:</td><td width="21%">'.$pro_quantity.'</td></tr>
+<tr><td width="21%">Categoria:</td><td width="21%">'.$pca_name.'</td><td width="6%"></td><td width="21%">Unidades:</td><td width="21%">'.$pro_unidad.'</td></tr>
+<tr><td width="21%">Descripcion:</td><td width="21%"></td><td width="6%"></td><td width="21%"></td><td width="21%"></td></tr>
+<tr><td colspan="5">'.$pro_description.'</td></tr>
+<tr><td><br /><br /></td><td><br /><br /></td></tr>
+<tr><td colspan="5"><h2>2: Datos particulares de la subasta</h2></td></tr>
+<tr><td><br /></td><td><br /></td></tr>
+<tr><td width="26%">Modalidad de subasta:</td><td width="21%">'.$sub_modalidad.'</td><td width="6%"></td><td width="26%">Fecha de subasta:</td><td width="21%">'.$sub_hour_end[0].'</td></tr>
+<tr><td width="21%">Tipo de subasta:</td><td width="21%">'.$sub_type.'</td><td width="6%"></td><td width="21%">Hora de subasta:</td><td width="21%">'.$sub_hour_end[1].'</td></tr>
+<tr><td width="21%">Monto base:</td><td width="21%">'.$sub_mount_base.'</td><td width="6%"></td><td width="21%">Tiempo límite de mejora en min.:</td><td width="21%">'.$sub_tiempo.'</td></tr>
+<tr><td width="21%">Unidad de mejorar:</td><td width="21%">'.$sub_mount_unidad.'</td><td width="6%"></td><td width="21%"></td><td width="21%"></td></tr>
+<tr><td><br /><br /></td><td><br /><br a/></td></tr>
+<tr><td colspan="5"><h2>3: Proveedores habilitados</h2></td></tr>
+<tr><td><br /></td><td><br /></td></tr>
+<tr><td colspan="5">
+	<table width="100%">
+    	<tr><th width="20%">Oferente:</th><th width="20%">Lugar de entrega:</th><th width="20%">Medio de transporte:</th><th width="20%">Incoterm:</th><th width="20%">Factor de ajuste:</th></tr>';
 
 $sql ="select concat(cli_firstname,' ',cli_lastname) as nombre, inc_lugar_entrega, tra_name, inl_name, inc_ajuste 
 from mdl_incoterm, mdl_incoterm_language, mdl_transporte, mdl_client 
@@ -93,57 +63,34 @@ order by inc_uid desc";
 $db2->query($sql);	
 $i = 26;
 while ($secPart = $db2->next_record())
-{ 
-	$objPHPExcel->setActiveSheetIndex(0)
-        		    ->setCellValue('B'.$i, $secPart['nombre'])
-		            ->setCellValue('C'.$i, $secPart['inc_lugar_entrega'])
-        		    ->setCellValue('D'.$i, $secPart['tra_name'])
-					->setCellValue('E'.$i, $secPart['inl_name'])
-            		->setCellValue('F'.$i, $secPart['inc_ajuste']);
-					$i++;
+{		
+     $html.= '<tr><td width="20%">'.$secPart['nombre'].'</td><td width="20%">'.$secPart['inc_lugar_entrega'].'</td><td width="20%">'.$secPart['tra_name'].'</td><td width="20%">'.$secPart['inl_name'].'</td><td width="20%">'.$secPart['inc_ajuste'].'</td></tr>';
+ }   
+$html.=	'</table>
+</td></tr>
+<tr><td><br /><br /><br /><br /></td><td><br /><br /><br /><br /></td></tr>
+<tr><td colspan="5">
+	<table width="100%">
+    	<tr><th width="33%">Elaborado</th><th width="33%">Revisado</th><th width="33%">Autorizado</th></tr>
+    </table>
+</td></tr>
+</table>
+</body>
+</html>
+';
+if ($formato=="pdf") {
+	 require '../../MPDF57/mpdf.php';
+	 $mpdf = new mPDF('win-1252', 'A4', '', '', 10, '', '', '', '', '');
+	 $mpdf -> useOnlyCoreFonts = true;
+	 $mpdf -> SetDisplayMode('fullpage');
+	 $mpdf -> WriteHTML($html);
+	 $mpdf-> Output('Reportedesubastas-'.date("YmdHis").'.pdf','D');
+	 exit;
 }
-
-		/*
-		$gdImage = imagecreatefromjpeg('../../lib/logo.png');
-		// Add a drawing to the worksheetecho date('H:i:s') . " Add a drawing to the worksheet\n";
-		$objDrawing = new PHPExcel_Worksheet_MemoryDrawing();
-		$objDrawing->setName('Sample image');$objDrawing->setDescription('Sample image');
-		$objDrawing->setImageResource($gdImage);
-		$objDrawing->setRenderingFunction(PHPExcel_Worksheet_MemoryDrawing::RENDERING_JPEG);
-		$objDrawing->setMimeType(PHPExcel_Worksheet_MemoryDrawing::MIMETYPE_DEFAULT);
-		$objDrawing->setHeight(70);
-		$objDrawing->setWorksheet($objPHPExcel->getActiveSheet());
-		$objDrawing->setCoordinates('B2');
-*/
-        //$objPHPExcel->getActiveSheet()->getStyle('B1:G45')->getAlignment()->setWrapText(true);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(4);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('B:G')->setWidth(20);
-		$objPHPExcel->getActiveSheet()->getStyle("D3")->getFont()->setSize(16);
-		
-		/*for($i = 'B'; $i <= 'H'; $i++){
-			$objPHPExcel->setActiveSheetIndex(0)			
-				->getColumnDimension($i)->setAutoSize(TRUE);
-		}*/
-		
-		// Se asigna el nombre a la hoja
-		$objPHPExcel->getActiveSheet()->setTitle('ReporteSubasta');
-		// Se activa la hoja para que sea la que se muestre cuando el archivo se abre
-		$objPHPExcel->setActiveSheetIndex(0);
-		// Inmovilizar paneles 
-		//$objPHPExcel->getActiveSheet(0)->freezePane('A4');
-		$objPHPExcel->getActiveSheet(0)->freezePaneByColumnAndRow(0,4);
-		// Se manda el archivo al navegador web, con el nombre que se indica (Excel2007)
-		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-		header('Content-Disposition: attachment;filename="Reportedesubastas-'.date("YmdHis").'.xlsx"');
-		header('Cache-Control: max-age=0');
-
-		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-
-		$objWriter->save('php://output');
-		exit;
-/*		
-	}
-	else{
-		print_r('No hay resultados para mostrar');
-	}*/
+else {
+	header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+	header('Content-Disposition: attachment;filename="Reportedesubastas-'.date("YmdHis").'.xls"');
+	header('Cache-Control: max-age=0');
+	echo $html;
+}
 ?>

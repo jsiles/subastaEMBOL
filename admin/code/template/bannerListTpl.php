@@ -5,12 +5,12 @@ var items =new Array();
 ";
 /********EndResetColorDelete*************/
 $sSQL="select * 
-		from mdl_banners 
-		where ban_delete<>1  
-		order by ban_position ,ban_uid";
-//	krumo($sSQL);	
+		from mdl_banners_contents, mdl_banners
+		where mbc_delete<>1 and mbc_ban_uid=ban_uid
+		order by mbc_position ,mbc_ban_uid";
+$nroReg = $db->numrows($sSQL);
 $db->query($sSQL);
-$nroReg = $db->numrows();
+
 if ($nroReg>0)
 	{
 	?>
@@ -26,26 +26,13 @@ if ($nroReg>0)
 <?php
 $i=1;
 $j=0;
-while ($banner_list = $db->next_record())
+while ($nroReg = $db->next_record())
 	{
-	$ban_uid = $banner_list["ban_uid"];
-	$ban_position = $banner_list["ban_position"];
-	if($ban_position=="MAIN")
-		$ban_pos = " (" . admin::labels('banner','main') . ")";
-	else
-		$ban_pos = " (" . $ban_position . ")";
-		/*
-	switch ($ban_position)
-		{
-		case "MAIN": $ban_pos = " (" . admin::labels('banner','main') . ")"; break;
-		case "LEFT": $ban_pos = " (" . admin::labels('banner','left') . ")"; break;
-		case "RIGHT": $ban_pos = " (" . admin::labels('banner','right') . ")"; break;
-		case "FOOTER": $ban_pos = " (" . admin::labels('banner','footer') . ")"; break;
-		case "CONTENT": $ban_pos = " (" . admin::labels('banner','content') . ")"; break;
-		}
-		*/
-	$ban_title = $banner_list["ban_title"];
-	$ban_status = $banner_list["ban_status"];
+	$ban_uid = $nroReg["mbc_ban_uid"];
+	$ban_position = $nroReg["mbc_position"];
+
+	$ban_title = $nroReg["ban_title"];
+	$ban_status = $nroReg["mbc_status"];
 	if ($ban_status=='ACTIVE') $labels_content='status_on';
 	else $labels_content='status_off';
 	if ($i%2==0) $class='row';
@@ -57,14 +44,12 @@ while ($banner_list = $db->next_record())
       <div class="groupItem" id="<?=$ban_uid?>">
             <div id="list_<?=$ban_uid?>" class="<?=$class?>" style="width:100%">
 <table class="list" width="100%">
-	<tr><td width="50%"><?=$ban_title?> <?=$ban_pos?></td>
+	<tr><td width="50%"><?=$ban_title?></td>
 	<td align="center" width="12%" height="5">
-		   <a href="bannerView.php?ban_uid=<?=$ban_uid?>">
-		<img src="<?=admin::labels('view','linkImage')?>" border="0" title="<?=admin::labels('view')?>" alt="<?=admin::labels('view')?>">
-		</a>
+		   
 	</td>
 	<td align="center" width="12%" height="5">
-		<a href="bannerEdit.php?ban_uid=<?=$ban_uid?>">
+		<a href="bannerEdit.php?ban_uid=<?=$ban_uid?>&token=<?=admin::getParam("token")?>">
 		<img src="<?=admin::labels('edit','linkImage')?>" border="0" title="<?=admin::labels('edit')?>" alt="<?=admin::labels('edit')?>">
 		</a>
 	</td>
@@ -133,7 +118,7 @@ else
 <div  style="background-color: #f7f8f8;">
 <table class="list"  width="100%">
 	<tr><td height="30px" align="center" class="bold">
-	<?=admin::labels('nocontent')?>
+	En este momento el sitio no tiene banners.
 	</td></tr>	
  </table>
 </div>

@@ -1,31 +1,14 @@
 <? 
-function enum_select($table,$field) { 
-    $result=mysql_query("SHOW COLUMNS FROM `$table` LIKE '$field'"); 
-    if(mysql_num_rows($result)>0){ 
-        $row=mysql_fetch_row($result); 
-        $options=explode("','", preg_replace("/(enum|set)\('(.+?)'\)/","\\2", $row[1])); 
-        $options2 = array(); 
-        foreach ($options as $value) { 
-            $options2[] = array( 
-                'value' => $value, 
-                'display' => htmlentities($value) 
-            ); 
-        } 
-    } else { 
-        $options=array(); 
-    } 
-    return $options2; 
-}
-
 $sql =  "select distinct mdl_banners.*, mbc_place, mbc_status from mdl_banners, mdl_banners_contents where mbc_ban_uid=ban_uid and ban_uid=".$_REQUEST["ban_uid"]." and mbc_delete=0";
-			  
+$bannerexist = $db->numrows($sql);  
 $db->query($sql);
-$bannerexist = $db->numrows();
-if ($bannerexist==0) echo '<script language="javascript" type="text/javascript">document.location.href=\'bannerList.php?token='.admin::getParam("token").'</script>';
 $banner = $db->next_record();
+
+if ($bannerexist==0) echo '<script language="javascript" type="text/javascript">document.location.href=\'bannerList.php?token='.admin::getParam("token").'</script>';
+
 ?>
 <br />
-<form name="frmBanner" method="post" action="code/execute/bannerUpd.php?token=adminE99::getParam("token");?>" onsubmit="return false;" enctype="multipart/form-data">
+<form name="frmBanner" method="post" action="code/execute/bannerUpd.php?token=<?=admin::getParam("token");?>" onsubmit="return false;" enctype="multipart/form-data">
 <input type="hidden" name="uid" value="<?=$banner["ban_uid"]?>" />
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
@@ -46,20 +29,7 @@ $banner = $db->next_record();
 <br /><span id="div_ban_title" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('banner','titleerror');?></span>
 			</td>
           </tr>
-         
-          <tr style="display: ">
-            <td><?=admin::labels('banner','place');?>: </td>
-            <td>
-           <select name="ban_place" class="listMenu" id="ban_place" ><!--onchange="viewBannerContent(this);"-->				
-		   <? 
-		   	$bannerTypeArray = enum_select('mdl_banners_contents','mbc_place');	
-			foreach ($bannerTypeArray as $bannerType) {?>
-               <option value="<?=$bannerType["value"]?>" <? if($banner["mbc_place"]==$bannerType["value"]) echo 'selected="selected"';?>><?=$bannerType["value"]?></option>
-           <? }?> 
-           </select>
-            </td>
-          </tr>
-          
+                           
          <tr>
             <td valign="top"><?=admin::labels('banner','label');?>:</td>
             <td>
@@ -70,7 +40,6 @@ $banner = $db->next_record();
 			if (file_exists($imgSavedroot1) && $banner["ban_file"]!="")
 				{
 				$extensionFile = admin::getExtension($banner["ban_file"]);
-				if ($extensionFile=='swf') $imgSaveddomain1 = PATH_DOMAIN."/img/banner/swf.bmp";
 			?>
 			<div id="image_edit_<?=$banner["ban_uid"]?>">
 			<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tableUpload">
@@ -99,22 +68,7 @@ $banner = $db->next_record();
 				<span id="div_ban_adjunt" class="error" style="display:none">Solo extenciones bmp, jpg, jpeg, gif, png, swf</span>	
 			<?	} ?>			</td>
           </tr>
-        <tr>
-            <td width="29%">Url:</td>
-            <td width="64%">
-<input name="ban_url" type="text" class="input" id="ban_url" size="50" onfocus="setClassInput(this,'ON');document.getElementById('div_ban_url').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_ban_url').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_ban_url').style.display='none';" value="<?=$banner["ban_url"]?>" />
-<br /><span id="div_ban_url" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('banner','titleerror');?></span>
-			</td>
-          </tr>
-          <tr>
-            <td>Target: </td>
-            <td>
-           <select name="ban_target" class="listMenu" id="ban_target">				
-               <option value="_self" <? if($banner["ban_target"]=="_self") echo 'selected="selected"';?>>_self</option>
-               <option value="_blank" <? if($banner["ban_target"]=="_blank") echo 'selected="selected"';?>>_blank</option>
-           </select>
-            </td>
-          </tr>
+        
           <tr>
             <td><?=admin::labels('status');?>:</td>
             <td>

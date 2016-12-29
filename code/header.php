@@ -3,8 +3,8 @@ $uidClient = admin::getSession("uidClient");
 if($uidClient){
 $name = admin::getDbValue("select concat(cli_firstname,' ',cli_lastname) from mdl_client where cli_uid=".$uidClient);
 $foto = admin::getDbValue("select cli_photo from mdl_client where cli_uid=".$uidClient);
-
 }
+$imgs = admin::getDbValue("select top 1 ban_content from mdl_banners_contents, mdl_banners where mbc_delete<>1  and mbc_ban_uid=ban_uid order by mbc_position ,mbc_ban_uid");
 ?>
 <div id="top-header" class="container">
 			<div id="logo">
@@ -14,7 +14,7 @@ $foto = admin::getDbValue("select cli_photo from mdl_client where cli_uid=".$uid
 				
 			<div id="top-banner">
 				<div id="colA">
-					<img src="<?=$domain?>/lib/banner1.jpg" alt="banner1" title="banner1" border="0"/>
+					<?=$imgs?>
 				</div>
 				<?php if($uidClient){?>
                 <div id="colB">

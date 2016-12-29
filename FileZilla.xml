@@ -399,11 +399,11 @@
             <SyncBrowsing>0</SyncBrowsing>Forum&#x0A;        
         </Server>
         <Server>
-            <Host>www.forum.simple99.com</Host>
+            <Host>www.forum.admin.com</Host>
             <Port>80</Port>
             <Protocol>0</Protocol>
             <Type>0</Type>
-            <User>simple99</User>
+            <User>admin</User>
             <Pass>qwerty123</Pass>
             <Logontype>1</Logontype>
             <TimezoneOffset>0</TimezoneOffset>
@@ -926,7 +926,7 @@
             <Port>21</Port>
             <Protocol>0</Protocol>
             <Type>0</Type>
-            <User>simple99</User>
+            <User>admin</User>
             <Pass>s1m7tl3+hsg</Pass>
             <Logontype>1</Logontype>
             <TimezoneOffset>0</TimezoneOffset>
@@ -934,11 +934,11 @@
             <MaximumMultipleConnections>0</MaximumMultipleConnections>
             <EncodingType>Auto</EncodingType>
             <BypassProxy>0</BypassProxy>
-            <Name>SIMPLE99</Name>
+            <Name>admin</Name>
             <Comments />
             <LocalDir />
             <RemoteDir />
-            <SyncBrowsing>0</SyncBrowsing>SIMPLE99&#x0A;        
+            <SyncBrowsing>0</SyncBrowsing>admin&#x0A;        
         </Server>
         <Server>
             <Host>simuladoresdegestion.com</Host>

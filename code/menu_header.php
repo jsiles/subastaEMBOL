@@ -54,7 +54,7 @@ while($con_category = $db3->next_record())
  ?>	
 	<li class="<?=$aClass?>">
     	<a href="<?=$domain?>/<?=$urlLangAux?><?=$con_category["col_url"]?>/<?=$firstSublvl?>"  accesskey="<?=$i?>" title="<?=$con_category["col_title"];?>">
-      <span><?=strtolower($con_category["col_title"])?></span></a>
+      <span><?=$con_category["col_title"]?></span></a>
     </li > 
 <?php 
 $i++;

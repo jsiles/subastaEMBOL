@@ -1,6 +1,6 @@
 <?php
-include_once("../../core/simple99.php");
-SIMPLE99::initialize('users','createRoles',false);
+include_once("../../core/admin.php");
+admin::initialize('users','createRoles',false);
 
 $uid = $_POST["uid"];
 $status = $_POST["status"];
@@ -18,5 +18,5 @@ $sql="update mdl_roles set rol_status='" . $newStatus . "' where rol_uid=" . $ui
 $db->query($sql);
 ?>
 <a href="javascript:userCS('<?=$uid?>','<?=$newStatus?>');">
-<img border="0" src="<?=$imgStatus?>" title="<?=SIMPLE99::labels('status_on')?>" alt="<?=SIMPLE99::labels('status_on')?>">
+<img border="0" src="<?=$imgStatus?>" title="<?=admin::labels('status_on')?>" alt="<?=admin::labels('status_on')?>">
 </a>

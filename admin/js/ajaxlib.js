@@ -2316,3 +2316,34 @@ function delCurrency1()
 	}
 	else $("#div_add_currency_error1").show();
 }
+
+function verifyadjudicar()
+	{
+	sw=true;
+        document.getElementById('div_elaborado').style.display='none';
+        document.getElementById('div_aprobado').style.display='none';
+        document.getElementById('div_observaciones').style.display='none';
+        
+	if (document.getElementById('elaborado').value=='')
+		{
+		document.getElementById('elborado').className='inputError';
+		document.getElementById('div_elaborado').style.display='';
+		sw=false;
+		}
+	if (document.getElementById('aprobado').value=='')
+		{
+		document.getElementById('aprobado').className='inputError';
+		document.getElementById('div_aprobado').style.display='';
+		sw=false;
+		}
+        if (document.getElementById('observaciones').value=='')
+		{
+		document.getElementById('observaciones').className='inputError';
+		document.getElementById('div_observaciones').style.display='';
+		sw=false;
+		}        
+	if (sw) 
+		{
+		document.frmsubasta.submit();
+		}
+	}

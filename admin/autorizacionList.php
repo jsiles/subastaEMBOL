@@ -113,6 +113,32 @@ function aprobarSubasta(id){
 	});
 }
 
+function rechazarSubasta(id){
+	var txt = 'Esta seguro de Rechazar esta Solicitud?<br><input type="hidden" id="list" name="list" value="'+ id +'" />';
+	$.prompt(txt,{
+		show:'fadeIn' ,
+		opacity:0,
+		buttons:{Rechazar:true, Cancelar:false},
+		callback: function(v,m){
+										   
+			if(v){
+				var uid = m.find('#list').val();
+				  $('#sub_'+id).fadeOut(500, function(){ $(this).remove(); });
+					  $.ajax({
+						url: 'code/execute/autorizacionRechazar.php',
+						type: 'POST',
+						data: 'uid='+id,
+						 success: function() { 
+								window.location.href='./autorizacionList.php?token=<?=admin::getParam("token")?>';
+							}
+					});
+					 
+				}
+			else {}
+		//$("#list_"+id).hide();	
+		}
+	});
+}
 function adjudicarSubasta(id){
 	var txt = '<span style="align="left">Orden de compra <input type="file" id="adjuntarID" name="adjuntarID" value="" /></span><br>(Pdf,Excel, Word)<br><br><br><br> * Sólo para compras con montos <?=$valAdj.$rolMax?> ';
 	$.prompt(txt,{

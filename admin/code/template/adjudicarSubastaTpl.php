@@ -1,7 +1,9 @@
 <?php
-$pro_uid = admin::toSql($_GET["pro_uid"],"String");
+$pro_uid = admin::toSql(admin::getParam("pro_uid"),"String");
 $sub_uid=admin::getParam("pro_uid");
-if (!$pro_uid) header('Location: ../../subastasList.php?token='.$token);
+if (!$pro_uid) {
+    header('Location: ../../subastasList.php?token='.$token);
+}
 $sql = "SELECT * FROM mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_status='ACTIVE' and pro_uid='".$pro_uid."'";
 $db->query($sql);
 $prod = $db->next_record();
@@ -9,7 +11,7 @@ $prod = $db->next_record();
 ?>
 <br />
 <div id="div_wait" style="display:none;"><img border="0" src="lib/loading.gif"></div>
-<form name="frmsubasta" method="post" action="code/execute/subastasUpd.php?token=<?=admin::getParam("token")?>" enctype="multipart/form-data" >
+<form name="frmsubasta" method="post" action="code/execute/adjudicarSubasta.php?token=<?=admin::getParam("token")?>&sub_uid=<?=$prod["sub_uid"]?>" enctype="multipart/form-data" >
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 		<td width="77%" height="40">
@@ -258,7 +260,6 @@ $prod = $db->next_record();
     </tr>
 
 </table>
-</form>
 <div id="DIV_WAIT1" style="display:none;"><img border="0" src="lib/loading.gif"></div>
 <br />
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -360,13 +361,22 @@ else
     <div class="row0">
     <table class="list" width="100%">
 	<tr>
-            <td width="12%" style="color:#16652f">Elaborado por:</td><td><input name="elab" value="<?=$_SESSION["usr_firstname"] ." ".$_SESSION["usr_lastname"]?>"></td>
+            <td width="12%" style="color:#16652f">Elaborado por:</td>
+            <td><input id="elaborado" name="elaborado" value="<?=$_SESSION["usr_firstname"] ." ".$_SESSION["usr_lastname"]?>">
+            <br /><span id="div_elaborado" style="display:none; padding-left:5px; padding-right:5px;" class="error">* Campo requerido</span>
+            </td>
         </tr>
         <tr>
-            <td width="12%" style="color:#16652f">Aprobado por:</td><td><input name="aprb"></td>
+            <td width="12%" style="color:#16652f">Aprobado por:</td>
+            <td><input id="aprobado" name="aprobado">
+            <br /><span id="div_aprobado" style="display:none; padding-left:5px; padding-right:5px;" class="error">* Campo requerido</span>
+            </td>
         </tr>
         <tr>
-            <td width="12%" style="color:#16652f">Observaciones:</td><td><textarea rows="4" cols="45" name="obser"></textarea> </td>
+            <td width="12%" style="color:#16652f">Observaciones:</td>
+            <td><textarea id="observaciones" rows="4" cols="45" name="observaciones"></textarea>
+            <br /><span id="div_observaciones" style="display:none; padding-left:5px; padding-right:5px;" class="error">* Campo requerido</span>
+            </td>
         </tr>
     </table>
     </div>
@@ -379,13 +389,15 @@ else
 	  	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 			<tr>
 				<td width="59%" align="center">
-				<a href="autorizacionList.php?token=<?=admin::getParam("token")?>" class="button" >Adjudicar</a>
+                                    <a href="#" class="button" onclick="verifyadjudicar();" >Adjudicar</a>
 				</td>
                                 <td width="41%" style="font-size:11px;">
                                     o <a href="autorizacionList.php?token=<?=admin::getParam("token")?>" >Cancelar</a> 
                                 </td>
         </tr>
-      </table></div>
+      </table>
+</div>
 <br /><br /><br /><br /><br />
 </td></tr>
 </table>
+</form>

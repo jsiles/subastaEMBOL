@@ -306,6 +306,51 @@ while ($subasta_list = $pagDb->next_record())
 	</div>
 
 	</td>
+        
+        <td align="center" width="5%" height="5">
+	<div id="status_<?=$sub_uid?>">
+	<?php
+		if($sub_finish!=0)
+		{
+	?>
+		<img src="lib/rechazar_off.png" border="0" title="RECHAZAR" alt="RECHAZAR">
+    <?php }
+	else{
+            $rolAplica = false;
+            $sql =  "select count(*) from mdl_rav where rav_tipologia=1 and rav_rol_uid=$rol";
+            $valida = admin::getDbValue($sql);
+            if($valida>0)
+            {   
+                $montoBase = $sub_monto;
+                $montoMenor = admin::getDbValue("SELECT rav_monto_inf FROM mdl_rav WHERE rav_tipologia=1 and rav_rol_uid=".$rol);
+                $montoMayor = admin::getDbValue("SELECT rav_monto_sup FROM mdl_rav WHERE rav_tipologia=1 and rav_rol_uid=".$rol);
+                if($montoMayor!=0){
+            
+                    if(($montoBase>=$montoMenor)&&($montoBase<=$montoMayor)) $rolAplica=true;
+                   
+                }else{if($montoBase>=$montoMenor) $rolAplica=true;}                
+            }
+
+            if($rolAplica)
+            {
+            ?>
+	   <a href="rechazarSubasta" onclick="rechazarSubasta('<?=$sub_uid?>');return false;">
+		<img src="lib/rechazar_on.png" border="0" title="RECHAZAR" alt="RECHAZAR">
+		</a>
+		<?php
+            }else{
+                ?>
+		<img src="lib/rechazar_off.png" border="0" title="RECHAZAR" alt="RECHAZAR">
+    <?php
+                
+            }
+	}
+		?>
+	</div>
+
+	</td>
+        
+        
 	<td align="center" width="5%" height="5">
 	<div id="status_<?=$sub_uid?>">
 	<?php

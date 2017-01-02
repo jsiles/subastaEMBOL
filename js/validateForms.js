@@ -1,7 +1,7 @@
 /*
 Javascript Document
 Library Control & validates forms
-Design: Logos Comunicaciones
+Design: DEVZONE
 www.logoscomunicaciones.com
 created: 2008-02-08 by JS
 */

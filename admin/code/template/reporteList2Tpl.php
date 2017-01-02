@@ -8,13 +8,14 @@ $queryFilter = admin::toSql(admin::getParam("qfiltro"),"Number");
 $search2 = admin::toSql(admin::getParam("search2"),"String");
 if ($search2) $searchURL='&search2='.$search2.'&qfiltro=1';
 else $searchURL='';
-$timeNow= date("Y-m-d H:i:s");
+$timeNow= date("Y-m-d H:i:s");//sub_finish<>0
+//echo $timeNow;
 if ($queryFilter==1)
 {
-	if ($search2) $qsearch="select pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif('$timeNow'>sub_deadtime,'concluida','subastandose') as deadtime, sub_finish as estado from mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and (pro_name like '%" .$search2. "%' or pro_uid like '%" .$search2. "%') and sub_delete=0 and sub_mode='SUBASTA' ";
-	else $qsearch="select pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif(sub_finish<>0,'concluida','subastandose') as deadtime, sub_finish as estado from mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' ";
+	if ($search2) $qsearch="select pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif('$timeNow'>sub_deadtime,'concluida','subastandose') as deadtime, sub_finish as estado from mdl_product, mdl_subasta, mdl_pro_category , mdl_bid WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and bid_sub_uid = sub_uid and bid_sub_uid='1' and bid_cli_uid!=0 and (pro_name like '%" .$search2. "%' or pro_uid like '%" .$search2. "%') and sub_delete=0 ";
+	else $qsearch="select pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif(sub_finish<>0,'concluida','subastandose') as deadtime, sub_finish as estado from mdl_product, mdl_subasta, mdl_pro_category, mdl_bid WHERE sub_uid=pro_sub_uid and bid_sub_uid = sub_uid and bid_sub_uid='1' and bid_cli_uid!=0 and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' ";
 }
-else $qsearch="select distinct pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif('$timeNow'>sub_deadtime,'concluida','subastandose') as deadtime, sub_finish as estado from mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' ";
+else $qsearch="select distinct pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif('$timeNow'>sub_deadtime,'concluida','subastandose') as deadtime, sub_finish as estado from mdl_product, mdl_subasta, mdl_pro_category, mdl_bid WHERE sub_uid=pro_sub_uid and bid_sub_uid = sub_uid and bid_sub_uid='1' and bid_cli_uid!=0 and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' ";
 
 $maxLine2 = admin::toSql(admin::getParam("maxLineP"),"Number");
 if ($maxLine2) {$maxLine=$maxLine2; admin::setSession("maxLineP",$maxLine2);}
@@ -100,10 +101,9 @@ if ($nroReg>0)
   <table width="100%" border="0">
 	<tr>
 		<td width="10%"><a href="reporteList2.php?order=<?=$uidOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$uidClass;?>"><?=admin::labels('code');?>:</a></td>
-        <td width="30%" ><a href="reporteList2.php?order=<?=$nameOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$nameClass;?>"><?=admin::labels('name');?>:</a></td>
-        <td width="15%" ><a href="reporteList2.php?order=<?=$linOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$linClass;?>"><?=admin::labels('category');?>:</a></td>
-        <td width="15%" ><span class="txt11 color2">Reporte XLS:</span></td>
-		<td align="center" width="15%" height="5"><span class="txt11 color2">Reporte XLSX:</span></td>
+        <td width="25%" ><a href="reporteList2.php?order=<?=$nameOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$nameClass;?>"><?=admin::labels('name');?>:</a></td>
+        <td width="25%" ><a href="reporteList2.php?order=<?=$linOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$linClass;?>"><?=admin::labels('category');?>:</a></td>
+        <td width="25%" ><span class="txt11 color2">Reporte XLS:</span></td>
         <td width="15%" align="center"><span class="txt11 color2">Reporte PDF:</span></td>		
 	</tr>
 	</table>
@@ -141,13 +141,11 @@ while ($subasta_list = $pagDb->next_record())
     <table class="list" width="100%" style="">
 	<tr>
 		<td width="10%" ><span <?=$dest?>><?=admin::toHtml($sub_uid)?></span></td>
-        <td width="30%" ><span <?=$dest?>><?=ucfirst(strtolower(trim(admin::toHtml($pro_name))))?></span></td>
-        <td width="15%" ><span <?=$dest?>><?=ucwords(strtolower(trim(admin::toHtml($pca_name))))?></span></td>
-        <td width="15%" ><a href="code/execute/reporteTpl2XlsPdf.php?token=<?=admin::getParam("token")?>&pro=<?=$sub_uid?>&type=xls"> XLS </a></td>
-        <td align="center" width="15%" height="5">
-        <a href="code/execute/reporteTpl2XlsPdf.php?token=<?=admin::getParam("token")?>&pro=<?=$sub_uid?>&type=xlsx"> XLSX </a> 
-        </td>
-	<td align="center" width="15%" height="5"> <a href="code/execute/reporteTpl2XlsPdf.php?token=<?=admin::getParam("token")?>&pro=<?=$sub_uid?>&type=pdf"> PDF </a>
+        <td width="25%" ><span <?=$dest?>><?=ucfirst(strtolower(trim(admin::toHtml($pro_name))))?></span></td>
+        <td width="25%" ><span <?=$dest?>><?=ucwords(strtolower(trim(admin::toHtml($pca_name))))?></span></td>
+        <td width="25%" ><a href="code/execute/reporteTpl2XlsPdf.php?token=<?=admin::getParam("token")?>&pro=<?=$sub_uid?>&type=xls">
+        <img src="lib/ext/excel.png" border="0" alt="Excel" title="Excel" /></a></td>
+	<td align="center" width="15%" height="5"> <a href="code/execute/reporteTpl2XlsPdf.php?token=<?=admin::getParam("token")?>&pro=<?=$sub_uid?>&type=pdf"><img src="lib/ext/acrobat.png" border="0" alt="Excel" title="Excel" /></a>
     
 	</td>
 		</tr>

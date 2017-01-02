@@ -1,7 +1,7 @@
 <?php
-include_once("../../core/simple99.php");
-SIMPLE99::initialize('dpf','dpfList',false); 
-$itemList=SIMPLE99::getParam("itemList");
+include_once("../../core/admin.php");
+admin::initialize('dpf','dpfList',false); 
+$itemList=admin::getParam("itemList");
 if ($itemList!='')
     {
 	for ($i=0;$i<count($itemList);$i++)

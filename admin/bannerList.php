@@ -1,6 +1,6 @@
 <?php 
-include_once ("core/admin.php");
-admin::initialize('autorizacion','autorizacionList'); 
+include ("core/admin.php"); 
+admin::initialize('banners','bannerList'); 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">    
 <html>
@@ -16,18 +16,20 @@ admin::initialize('autorizacion','autorizacionList');
 <meta name="reply-to" content="info@devzone.xyz">
 <meta name="copyright" content="Software propietario de DEVZONE">
 <meta name="rating" content="General">
-<meta http-equiv="Content-Type" content="text/html; ISO-8859-1">
+<META HTTP-EQUIV="Content-Type" content="text/html; ISO-8859-1">
+<!--BEGINDRAG&DROP-->
 <script type="text/javascript" src="js/jquery.js"></script>
 <script language="javascript" type="text/javascript" src="js/ajaxlib.js"></script>
 <script type="text/javascript" src="js/interface.js"></script>
+<!--ENDDRAG&DROP-->
 <!--BEGINIMPROMTU-->
 <link rel="stylesheet" type="text/css" href="css/impromptu.css">
 <script type="text/javascript" src="js/jquery.Impromptu.js"></script>
 <!--ENDIMPROMTU--> 
-<script type="text/javascript">      
-// ELIMINA LOS REGISTROS DE LA CATEGORIA PRINCIPAL
-function removeListCat(id){
-	var txt = '<?=admin::labels('delete','sure')?><br><input type="hidden" id="list" name="list" value="'+ id +'" />';
+
+<script type="text/javascript">        
+function removeList(id){
+	var txt = 'Está seguro de eliminar el registro?<br><input type="hidden" id="list" name="list" value="'+ id +'" />';
 	$.prompt(txt,{
 		show:'fadeIn' ,
 		opacity:0,
@@ -36,14 +38,15 @@ function removeListCat(id){
 										   
 			if(v){
 				var uid = m.find('#list').val();
-				  $('#'+id).fadeOut(500, function(){ $(this).remove(); });
+
+				  $('#'+uid).fadeOut(500, function(){ $(this).remove(); });
 					  $.ajax({
-						url: 'code/execute/autorizacionCatDel.php',
+						url: 'code/execute/bannerDel.php?token=<?=admin::getParam("token");?>',
 						type: 'POST',
-						data: 'uid='+id
+						data: 'uid='+uid
 					});
 				 /********BeginResetColorDelete*************/  
-				  resetOrderRemove(id);  
+				  resetOrderRemove(uid);  
 				 /********EndResetColorDelete*************/ 
 		 
 			}
@@ -52,40 +55,15 @@ function removeListCat(id){
 		}
 	});
 }
-// ELIMINA LOS REGISTROS DE LA CATEGORIA PRINCIPAL
-function removeList(id){
-	var txt = '<?=admin::labels('delete','sure')?>?<br><input type="hidden" id="list" name="list" value="'+ id +'" />';
-	$.prompt(txt,{
-		show:'fadeIn' ,
-		opacity:0,
-		buttons:{Eliminar:true, Cancelar:false},
-		callback: function(v,m){
-										   
-			if(v){
-				var uid = m.find('#list').val();
-				  $('#sub_'+id).fadeOut(500, function(){ $(this).remove(); });
-					  $.ajax({
-						url: 'code/execute/autorizacionDel.php',
-						type: 'POST',
-						data: 'uid='+id
-					});
-				/********BeginResetColorDelete*************/  
-				//	  resetOrderRemove(id);  
-				/********EndResetColorDelete*************/ 
-				}
-			else {}
-		$("#list_"+id).hide();	
-		}
-	});
-}
-</script>
+            
+</script>    
 </head>
 <body>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr><td valign="top"><? include_once("skin/header.php");?>
 </td></tr>
   <tr>
-    <td valign="top" id="content"><? include_once("code/template/autorizacionListTpl.php"); ?></td>
+    <td valign="top" id="content"><? include_once("code/template/bannerListTpl.php"); ?></td>
   </tr>
 <tr><td>
   <? include("skin/footer.php"); ?>

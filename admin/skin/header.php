@@ -5,9 +5,9 @@
 <tr><td valign="top">    
     <table width="100%" border="0" cellpadding="0" cellspacing="0" id="header">
       <tr>
-        <td width="22%" rowspan="2" align="center"><img src="lib/logo.png" width="50" h alt="bnb logo"></td>
-        <td width="52%" height="36">&nbsp;</td>
-		<td width="26%" rowspan="2">
+        <td width="15%" rowspan="2" align="center"><img src="lib/logo.png" width="50" h alt="bnb logo"></td>
+        <td width="60%" height="36">&nbsp;</td>
+		<td width="25%" rowspan="2">
 		<div id="changeDiv" style="display:none;">
 		<form id="change_language" method="post" action="code/execute/langChange.php<?=$conParent;?>?token=<?=admin::getParam('token')?>" > 
 		<?php	if ($_REQUEST["con_uid"]!="")

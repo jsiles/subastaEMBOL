@@ -19,7 +19,7 @@
 						$urlSubTitle = $arrayURL[$urlPositionSubtitle];
                         if(($urlSubTitle)&&($urlSubTitle==1))
 						{					
-                            ?><p>Error en la contrase&ntilde;a o usuario no activo</p>
+                            ?><p style="color: red">Error en la contrase&ntilde;a o usuario no activo</p>
                         <?php
 						}
 						else if(($urlSubTitle)&&($urlSubTitle==2))

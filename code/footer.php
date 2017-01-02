@@ -1,5 +1,6 @@
 <div id="footer-wrapper">
 	<div id="footer">
+    <br />
 		<div id="footer-menu" class="container">
 			<?php
 if($uidClient) $sWhere= " and con_uid not in (2,3) ";
@@ -52,7 +53,7 @@ while($con_category = $db3->next_record())
  ?>	
 	<li class="<?=$aClass?>">
     	<a href="<?=$domain?>/<?=$urlLangAux?><?=$con_category["col_url"]?>/<?=$firstSublvl?>"  accesskey="<?=$i?>" title="<?=$con_category["col_title"];?>">
-      <span><?=strtolower($con_category["col_title"])?></span></a>
+      <span><?=$con_category["col_title"]?></span></a>
     </li > 
 <? 
 $i++;

@@ -8,7 +8,7 @@ if ($message>3) {
 <script language="javascript" type="text/javascript">
 document.location.href='../';
 </script>
-<? } ?>
+<?php } ?>
 <br />
 <br />
 <br />
@@ -49,7 +49,7 @@ document.location.href='../';
     </tr>
 </table>
 </form><br />
-<? 
+<?php 
 if ($message!=0) 
 	{ 
 	?>
@@ -60,7 +60,7 @@ if ($message!=0)
 	</td>
     </tr>
 </table>
-<? } ?>
+<?php } ?>
 <br />
 <br />
 <br />

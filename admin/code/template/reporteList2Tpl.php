@@ -12,10 +12,10 @@ $timeNow= date("Y-m-d H:i:s");//sub_finish<>0
 //echo $timeNow;
 if ($queryFilter==1)
 {
-	if ($search2) $qsearch="select pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif('$timeNow'>sub_deadtime,'concluida','subastandose') as deadtime, sub_finish as estado from mdl_product, mdl_subasta, mdl_pro_category , mdl_bid WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and bid_sub_uid = sub_uid and bid_sub_uid='1' and bid_cli_uid!=0 and (pro_name like '%" .$search2. "%' or pro_uid like '%" .$search2. "%') and sub_delete=0 ";
-	else $qsearch="select pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif(sub_finish<>0,'concluida','subastandose') as deadtime, sub_finish as estado from mdl_product, mdl_subasta, mdl_pro_category, mdl_bid WHERE sub_uid=pro_sub_uid and bid_sub_uid = sub_uid and bid_sub_uid='1' and bid_cli_uid!=0 and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' ";
+	if ($search2) $qsearch="select pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif('$timeNow'>sub_deadtime,'concluida','subastandose') as deadtime, sub_finish as estado from mdl_product, mdl_subasta, mdl_pro_category , mdl_bid WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and bid_sub_uid = sub_uid and bid_cli_uid!=0 and (pro_name like '%" .$search2. "%' or pro_uid like '%" .$search2. "%') and sub_delete=0 ";
+	else $qsearch="select pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif(sub_finish<>0,'concluida','subastandose') as deadtime, sub_finish as estado from mdl_product, mdl_subasta, mdl_pro_category, mdl_bid WHERE sub_uid=pro_sub_uid and bid_sub_uid = sub_uid  and bid_cli_uid!=0 and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' ";
 }
-else $qsearch="select distinct pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif('$timeNow'>sub_deadtime,'concluida','subastandose') as deadtime, sub_finish as estado from mdl_product, mdl_subasta, mdl_pro_category, mdl_bid WHERE sub_uid=pro_sub_uid and bid_sub_uid = sub_uid and bid_sub_uid='1' and bid_cli_uid!=0 and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' ";
+else $qsearch="select distinct pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif('$timeNow'>sub_deadtime,'concluida','subastandose') as deadtime, sub_finish as estado from mdl_product, mdl_subasta, mdl_pro_category, mdl_bid WHERE sub_uid=pro_sub_uid and bid_sub_uid = sub_uid and bid_cli_uid!=0 and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' ";
 
 $maxLine2 = admin::toSql(admin::getParam("maxLineP"),"Number");
 if ($maxLine2) {$maxLine=$maxLine2; admin::setSession("maxLineP",$maxLine2);}

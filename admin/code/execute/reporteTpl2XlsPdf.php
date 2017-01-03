@@ -6,7 +6,7 @@ $formato =admin::toSql(admin::getParam("type"),"String");
 
 $sql ="SELECT pro_name,pca_name,pro_description,pro_quantity,pro_unidad,sub_status, sub_modalidad, sub_type, sub_hour_end, sub_mount_base, sub_mount_unidad, sub_tiempo, sub_uid 
 FROM mdl_subasta, mdl_product,mdl_pro_category
-WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_status='ACTIVE' and pro_uid='$pro_uid'";
+WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_status='ACTIVE' and sub_uid='$pro_uid'";
 $db->query($sql);
 while ($firstPart = $db->next_record())
 { 
@@ -38,17 +38,17 @@ $html= '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://w
 <tr><td><br /><br /></td><td><br /><br /></td></tr>
 <tr><td colspan="5"><h2>1: Datos generales de la subasta</h2></td></tr>
 <tr><td><br /></td><td><br /></td></tr>
-<tr><td width="21%">Nombre:</td><td width="21%">'.$pro_name.'</td><td width="6%"></td><td width="21%">Cantidad:</td><td width="21%">'.$pro_quantity.'</td></tr>
-<tr><td width="21%">Categoria:</td><td width="21%">'.$pca_name.'</td><td width="6%"></td><td width="21%">Unidades:</td><td width="21%">'.$pro_unidad.'</td></tr>
+<tr><td width="21%">Nombre:</td><td width="21%" align="left">'.$pro_name.'</td><td width="6%"></td><td width="21%">Cantidad:</td><td width="21%" align="left">'.$pro_quantity.'</td></tr>
+<tr><td width="21%">Categoria:</td><td width="21%" align="left">'.$pca_name.'</td><td width="6%"></td><td width="21%">Unidades:</td><td width="21%" align="left">'.$pro_unidad.'</td></tr>
 <tr><td width="21%">Descripcion:</td><td width="21%"></td><td width="6%"></td><td width="21%"></td><td width="21%"></td></tr>
-<tr><td colspan="5">'.$pro_description.'</td></tr>
+<tr><td colspan="5" align="left">'.$pro_description.'</td></tr>
 <tr><td><br /><br /></td><td><br /><br /></td></tr>
 <tr><td colspan="5"><h2>2: Datos particulares de la subasta</h2></td></tr>
 <tr><td><br /></td><td><br /></td></tr>
-<tr><td width="26%">Modalidad de subasta:</td><td width="21%">'.$sub_modalidad.'</td><td width="6%"></td><td width="26%">Fecha de subasta:</td><td width="21%">'.$sub_hour_end[0].'</td></tr>
-<tr><td width="21%">Tipo de subasta:</td><td width="21%">'.$sub_type.'</td><td width="6%"></td><td width="21%">Hora de subasta:</td><td width="21%">'.$sub_hour_end[1].'</td></tr>
-<tr><td width="21%">Monto base:</td><td width="21%">'.$sub_mount_base.'</td><td width="6%"></td><td width="21%">Tiempo límite de mejora en min.:</td><td width="21%">'.$sub_tiempo.'</td></tr>
-<tr><td width="21%">Unidad de mejorar:</td><td width="21%">'.$sub_mount_unidad.'</td><td width="6%"></td><td width="21%"></td><td width="21%"></td></tr>
+<tr><td width="26%">Modalidad de subasta:</td><td width="21%" align="left">'.$sub_modalidad.'</td><td width="6%"></td><td width="26%">Fecha de subasta:</td><td width="21%" align="left">'.$sub_hour_end[0].'</td></tr>
+<tr><td width="21%">Tipo de subasta:</td><td width="21%" align="left">'.$sub_type.'</td><td width="6%"></td><td width="21%">Hora de subasta:</td><td width="21%" align="left">'.$sub_hour_end[1].'</td></tr>
+<tr><td width="21%">Monto base:</td><td width="21%" align="left">'.$sub_mount_base.'</td><td width="6%"></td><td width="21%">Tiempo límite de mejora en min.:</td><td width="21%" align="left">'.$sub_tiempo.'</td></tr>
+<tr><td width="21%">Unidad de mejorar:</td><td width="21%" align="left">'.$sub_mount_unidad.'</td><td width="6%"></td><td width="21%"></td><td width="21%"></td></tr>
 <tr><td><br /><br /></td><td><br /><br a/></td></tr>
 <tr><td colspan="5"><h2>3: Listado de pujas</h2></td></tr>
 <tr><td><br /></td><td><br /></td></tr>
@@ -61,8 +61,8 @@ $db2->query($sql);
 $i = 26;
 while ($secPart = $db2->next_record())
 {		
-     $clientName=admin::getDBvalue("SELECT concat(cli_firstname,' ',cli_lastname) FROM mdl_client where cli_uid='".$content["bid_cli_uid"]."'");
-	 $html.= '<tr><td width="33%">'.$clientName.'</td><td width="33%">'.$secPart['bid_date'].'</td><td width="33%">'.$secPart['bid_mount'].'</td></tr>';
+     $clientName=admin::getDBvalue("SELECT concat(cli_firstname,' ',cli_lastname) FROM mdl_client where cli_uid='".$secPart["bid_cli_uid"]."'");
+	 $html.= '<tr><td width="33%" align="center">'.$clientName.'</td><td width="33%" align="center">'.$secPart['bid_date'].'</td><td width="33%" align="center">'.$secPart['bid_mount'].'</td></tr>';
  }   
 $html.=	'</table>
 </td></tr>

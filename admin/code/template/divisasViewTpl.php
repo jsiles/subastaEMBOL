@@ -51,8 +51,8 @@ $prod = $db->next_record();
          <tr>
 				<td width="29%">Modalidad:</td>
 				<td width="64%">
-				<? if ('MONTO'==$prod["sub_modalidad"]) echo "Por monto"; else echo "";?>
-				<? if ('TC'==$prod["sub_modalidad"]) echo "Por tipo de cambio"; else echo "";?>
+				<?php if ('MONTO'==$prod["sub_modalidad"]) echo "Por monto"; else echo "";?>
+				<?php if ('TC'==$prod["sub_modalidad"]) echo "Por tipo de cambio"; else echo "";?>
 
 				</td>
 			</tr>         
@@ -61,7 +61,7 @@ $prod = $db->next_record();
                 <tr>
 				<td width="29%">Tipo de subasta:</td>
 				<td width="64%">
-				<? if ('COMPRA'==$prod["sub_type"]) echo "Compra"; else echo "Venta";?></td>
+				<?php if ('COMPRA'==$prod["sub_type"]) echo "Compra"; else echo "Venta";?></td>
 			</tr>
             
        
@@ -147,7 +147,7 @@ $prod = $db->next_record();
                 <td width="30%" class="txt11 color2">Monto:</td>
 			</tr>         
                
-                 <?
+                 <?php
 				$sql2 = "SELECT * FROM mdl_bid where bid_sub_uid='".$prod["sub_uid"]."'";
 				$db2->query($sql2);
 				while ($content=$db2->next_record())
@@ -157,11 +157,11 @@ $prod = $db->next_record();
 				<td width="40%"><?=$clientName?></td>
 				<td width="30%"><?=$content["bid_date"]?></td>
                 <td width="30%"><?=$content["bid_mount"]?></td></tr>
-             	<?
+             	<?php
 				 }
 				 ?>    
         </table>
-         <?
+         <?php
 		 }
 		 ?>
         </td></tr>	
@@ -210,7 +210,7 @@ if ($nroReg>0)
 	</table>
     </div>
 <div class="itemList" id="itemList" style="width:99%">  
-	<?
+	<?php
 $i=1;
 while ($list = $db2->next_record())
 	{
@@ -262,28 +262,28 @@ while ($list = $db2->next_record())
     <td width="12%"><input name="inc_lugar_entrega" id="inc_lugar_entrega" type="text"  size="15" value="<?=utf8_decode($inc_lugar_entrega)?>" /></td>
     <td width="12%">
     				<select name="inc_tra_uid<?=$tra_uid?>" id="inc_tra_uid<?=$tra_uid?>" class="input"  >
-                	<?
+                	<?php
                     $sql3 = "select tra_uid, tra_name from mdl_transporte where tra_delete=0";
 					$db3->query($sql3);
 					while ($content=$db3->next_record())
 					{	
 					?>
 					<option <? if($content["tra_name"]==$tra_name) echo 'selected="selected"';?> value="<?=$content["tra_uid"]?>"><?=utf8_decode($content["tra_name"])?></option>					
-					<?
+					<?php
 					}
                     ?>
 				</select>
                 </td>
     <td width="12%">
 				<select name="inc_inl_uid" id="inc_inl_uid" class="input"  >
-                	<?
+                	<?php
                     $sql3 = "select inl_uid, inl_name from mdl_incoterm_language where inl_delete=0";
 					$db3->query($sql3);
 					while ($content=$db3->next_record())
 					{	
 					?>
 					<option <? if($content["inl_name"]==$inl_name) echo 'selected="selected"';?> value="<?=$content["inl_uid"]?>"><?=$content["inl_name"]?></option>					
-					<?
+					<?php
 					}
                     ?>
 				</select>
@@ -305,14 +305,14 @@ while ($list = $db2->next_record())
      <input name="inc_uid" id="inc_uid" value="<?=$inc_uid?>" type="hidden" />
     </form>
      </div>
-	<?
+	<?php
 	$i++;
 	} 
  ?>
 </div> 
     </td>
     </tr>
-    <? 	} 
+    <?php 	} 
 else
 	{ ?>
     <tr>
@@ -333,7 +333,7 @@ else
 </td></tr></table>
 </td>
 </tr>
-<? 	} ?>
+<?php 	} ?>
 <tr>
 <td colspan="2">
 <br />

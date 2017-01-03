@@ -49,7 +49,7 @@ $UrlProduct=admin::getDBvalue("select col_url FROM mdl_contents_languages where 
 $contentURL = admin::getContentUrl($con_uid,SYS_LANG);
 ?>
 <div id="DIV_WAIT1" style="display:none;"><img border="0" src="lib/loading.gif"></div>
-<?
+<?php
 /********EndResetColorDelete*************/
 $_pagi_sql=$qsearch.$orderCode;
 //echo $_pagi_sql;
@@ -116,11 +116,11 @@ if ($nroReg>0)
   </tr>
   <tr>
     <td id="contentListing" colspan="2">
- 	<?
+ 	<?php
 $i=1;
 ?>
 <div class="itemList" id="itemList" style="width:99%"> 
-<?
+<?php
 $j=0;
 while ($subasta_list = $pagDb->next_record())
 	{
@@ -144,21 +144,21 @@ while ($subasta_list = $pagDb->next_record())
     
     <div id="list_<?=$pro_uid?>" class="<?=$class?>" style="width:100%" >
     
-    <table class="list" width="100%" style="display:;">
+    <table class="list" width="100%" style="">
 	<tr>
 		<td width="5%" ><span <?=$dest?>><?=admin::toHtml($pro_uid)?></span></td>
         <td width="15%" ><span <?=$dest?>><?=ucfirst(strtolower(trim(admin::toHtml($pro_name))))?></span></td>
         <td width="10%" ><span <?=$dest?>><?=ucwords(strtolower(trim(admin::toHtml($pca_name))))?></span></td>
         <td width="15%" ><span><?=$deadtime?></span></td>
 		<td align="left" width="10%" height="5">
-         <?
+         <?php
 		 $countBids=admin::getDBvalue("SELECT count(*) FROM mdl_bid where bid_sub_uid='".$sub_uid."' and bid_cli_uid!=0");
 		 if ($countBids>0){
 		 ?>
         <a href="excel" onclick="document.location.href='ficheroExcel.php?subasta=<?=$sub_uid?>'; return false;" class="xls">
 				<img src="lib/ext/excel.png" border="0" alt="Excel" title="Excel" />
 					</a>
-		<? }?>	
+		<?php }?>	
 		</td>
         <td align="center" width="5%" height="5">
         <a href="divisasView.php?pro_uid=<?=$pro_uid?>&token=<?=admin::getParam("token");?>"><img src="lib/view_es.gif" border="0" title="<?=admin::labels('view')?>" alt="<?=admin::labels('view')?>">
@@ -183,12 +183,12 @@ while ($subasta_list = $pagDb->next_record())
     </td>
 		</tr>
 	</table>
-<?
+<?php
 $i++; 
 $j++; ?>
 </div>
 </div>
-<? } 
+<?php } 
 ?>
 </div>
     </td>
@@ -238,7 +238,7 @@ $j++; ?>
 </table><br />
 <br />
 <br />
-<? 	} 
+<?php 	} 
 else
 	{ ?>
 	<br />
@@ -263,5 +263,5 @@ else
 </table>
 </form>
 
-<? 	} 
+<?php 	} 
 ?>

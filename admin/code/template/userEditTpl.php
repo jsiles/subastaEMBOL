@@ -63,7 +63,7 @@ $regusers = $db->next_record();
 		  <tr>
             <td width="16%"><?=admin::labels('photo');?>:</td>
             <td width="84%">
-			<?
+			<?php
 			$imgSavedroot1 = PATH_ADMIN . "/upload/profile/thumb_" . $regusers["usr_photo"];
 			$imgSaveddomain1 = PATH_DOMAIN . "/admin/upload/profile/thumb_" . $regusers["usr_photo"];
 			$imgSaveddomain2 = PATH_DOMAIN . "/admin/upload/profile/" . $regusers["usr_photo"];
@@ -91,11 +91,11 @@ $regusers = $db->next_record();
 			</table>
 			</div>
 			<div id="image_add_<?=$regusers["usr_uid"]?>" style="display:none;">			</div>
-			<?	}
+			<?php	}
 			else
 				{ ?>
 				<input type="file" name="usr_photo" id="usr_photo" size="32" class="input">
-			<?	} ?>
+			<?php	} ?>
 			</td>
           </tr>
           
@@ -122,7 +122,7 @@ $regusers = $db->next_record();
 			{
             ?>
             	<option <? if($rolLogged==$row["rol_uid"]) echo 'selected="selected"';?> value="<?=$row["rol_uid"]?>"><?=$row["rol_description"]?></option>
-            <?
+            <?php
 			}
             ?>
 			</select>

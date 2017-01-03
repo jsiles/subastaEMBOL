@@ -13,7 +13,7 @@ if ($nroReg>0)
   </tr>
   <tr>
     <td colspan="2" id="contentListing">
-	<?
+	<?php
 $i=1;
 while ($user_list = $db->next_record())
 	{
@@ -47,7 +47,7 @@ while ($user_list = $db->next_record())
 		</tr>
 	</table>
 	</div>
-	<?
+	<?php
 	$i++;
 	}  ?>
     </td>
@@ -55,7 +55,7 @@ while ($user_list = $db->next_record())
 </table><br />
 <br />
 <br />
-<? 	} 
+<?php 	} 
 else
 	{ ?>
 	<br />
@@ -76,4 +76,4 @@ else
 </div>
 </td></tr></table>
 
-<? 	} ?>
+<?php 	} ?>

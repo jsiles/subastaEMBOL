@@ -92,7 +92,7 @@ if ($check==4) $check='checked="checked"';
 			</td>
             <td><?=$row["col_title"]?>:</td>
           </tr>
-<? }?>
+<?php }?>
         </table><span id="div_con_uid" style="display:none;" class="error">Seleccione al menos un Contenido</span>
         </td>
           </tr>

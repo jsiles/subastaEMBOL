@@ -59,7 +59,7 @@
 					{	
 					?>
 					<option value="<?=$content["inl_uid"]?>"><?=$content["inl_name"]?></option>					
-					<?
+					<?php
 					}
                     ?>
 				</select>
@@ -87,7 +87,7 @@
     
     </td>
     </tr>
-   <? 
+   <?php 
    $sSQL= "select * from mdl_incoterm, mdl_incoterm_language, mdl_transporte, mdl_client where inc_inl_uid=inl_uid and inc_tra_uid=tra_uid and inc_cli_uid=cli_uid and inc_delete=0 and inc_sub_uid='".$sub_uid."' order by inc_uid desc";
 $db2->query($sSQL);
 $nroReg = $db2->numrows();
@@ -113,7 +113,7 @@ if ($nroReg>0)
 	</table>
     </div>
 <div class="itemList" id="itemList" style="width:99%">  
-	<?
+	<?php
 $i=1;
 while ($list = $db2->next_record())
 	{
@@ -167,28 +167,28 @@ while ($list = $db2->next_record())
     <td width="12%"><input name="inc_lugar_entrega" id="inc_lugar_entrega" type="text"  size="15" value="<?=utf8_decode($inc_lugar_entrega)?>" /></td>
     <td width="12%">
     				<select name="inc_tra_uid<?=$tra_uid?>" id="inc_tra_uid<?=$tra_uid?>" class="input"  >
-                	<?
+                	<?php
                     $sql3 = "select tra_uid, tra_name from mdl_transporte where tra_delete=0";
 					$db3->query($sql3);
 					while ($content=$db3->next_record())
 					{	
 					?>
 					<option <? if($content["tra_name"]==$tra_name) echo 'selected="selected"';?> value="<?=$content["tra_uid"]?>"><?=utf8_decode($content["tra_name"])?></option>					
-					<?
+					<?php
 					}
                     ?>
 				</select>
                 </td>
     <td width="12%">
 				<select name="inc_inl_uid" id="inc_inl_uid" class="input"  >
-                	<?
+                	<?php
                     $sql3 = "select inl_uid, inl_name from mdl_incoterm_language where inl_delete=0";
 					$db3->query($sql3);
 					while ($content=$db3->next_record())
 					{	
 					?>
 					<option <? if($content["inl_name"]==$inl_name) echo 'selected="selected"';?> value="<?=$content["inl_uid"]?>"><?=$content["inl_name"]?></option>					
-					<?
+					<?php
 					}
                     ?>
 				</select>
@@ -210,14 +210,14 @@ while ($list = $db2->next_record())
      <input name="inc_uid" id="inc_uid" value="<?=$inc_uid?>" type="hidden" />
     </form>
      </div>
-	<?
+	<?php
 	$i++;
 	} 
  ?>
 </div> 
     </td>
     </tr>
-    <? 	} 
+    <?php 	} 
 else
 	{ ?>
     <tr>
@@ -238,7 +238,7 @@ else
 </td></tr></table>
 </td>
 </tr>
-<? 	} ?>
+<?php 	} ?>
 </table>
 <br />
 <div id="contentButton">

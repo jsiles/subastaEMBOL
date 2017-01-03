@@ -15,7 +15,7 @@ if ($nroReg>0)
   </tr>
   <tr>
     <td colspan="2" id="contentListing">
-	<?
+	<?php
 $i=1;
 while ($user_list = $db->next_record())
 	{
@@ -33,34 +33,34 @@ while ($user_list = $db->next_record())
 <table class="list" width="100%">
 	<tr><td width="50%"><?=$rol_description?></td>
 	<td align="center" width="12%" height="5">
-    <? 
+    <?php 
 	$valuePermit=admin::getDBvalue("select mop_status from sys_modules_options where mop_rol_uid=".$_SESSION['usr_rol']." and mop_mod_uid=44 and mop_lab_category='Ver'");
 	if($valuePermit=='ACTIVE'){?>
 		 <!--  <a href="../userView.php?usr_uid=<?=$usr_uid?>">-->
 		<img src="lib/view_off_es.gif" border="0" title="<?=admin::labels('view')?>" alt="<?=admin::labels('view')?>">
 		<!--</a>-->
-         <? }?>
+         <?php }?>
 	</td>
 	<td align="center" width="12%" height="5">
-    <? 
+    <?php 
 	$valuePermit=admin::getDBvalue("select mop_status from sys_modules_options where mop_rol_uid=".$_SESSION['usr_rol']." and mop_mod_uid=44 and mop_lab_category='Editar'");
 	if($valuePermit=='ACTIVE'){?>
 		<a href="rolesEdit.php?rol_uid=<?=$rol_uid?>&token=<?=admin::getParam("token");?>">
 		<img src="lib/edit_es.gif" border="0" title="<?=admin::labels('edit')?>" alt="<?=admin::labels('edit')?>">
 		</a>
-        <? }?>
+        <?php }?>
 	</td>
 	<td align="center" width="12%" height="5">
-    <? 
+    <?php 
 	$valuePermit=admin::getDBvalue("select mop_status from sys_modules_options where mop_rol_uid=".$_SESSION['usr_rol']." and mop_mod_uid=44 and mop_lab_category='Eliminar'");
 	if($valuePermit=='ACTIVE'){?>
 		<a href="#" onclick="removeList(<?=$rol_uid?>);return false;">
 		<img src="lib/delete_es.gif" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
 		</a>
-        <? }?>
+        <?php }?>
 	</td>
 	<td align="center" width="14%" height="5">
-    <? 
+    <?php 
 	$valuePermit=admin::getDBvalue("select mop_status from sys_modules_options where mop_rol_uid=".$_SESSION['usr_rol']." and mop_mod_uid=44 and mop_lab_category='Estado'");
 	if($valuePermit=='ACTIVE'){?>
 	<div id="status_<?=$rol_uid?>">
@@ -68,12 +68,12 @@ while ($user_list = $db->next_record())
 		<img src="<?=admin::labels($labels_content,'linkImage')?>" border="0" title="<?=admin::labels($labels_content)?>" alt="<?=admin::labels($labels_content)?>">
 		</a>
 	</div>
-    <? }?>
+    <?php }?>
 	</td>
 		</tr>
 	</table>
 	</div>
-	<?
+	<?php
 	$i++;
 	}  ?>
     </td>
@@ -81,7 +81,7 @@ while ($user_list = $db->next_record())
 </table><br />
 <br />
 <br />
-<? 	} 
+<?php 	} 
 else
 	{ ?>
 	<br />
@@ -98,4 +98,4 @@ else
 </div>
 </td></tr></table>
 
-<? 	} ?>
+<?php 	} ?>

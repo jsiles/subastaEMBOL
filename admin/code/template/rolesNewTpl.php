@@ -65,7 +65,7 @@ while($row3 = $db3->next_record()){
             <td width="10"><input name="mod_uid[<?=$row3["mod_uid"]?>][]" type="checkbox"  value="<?=$row2["mod_uid"]?>" onclick="checkedVerify('mod_uid[<?=$row3["mod_uid"]?>]')" />
 			</td>
             <td ><?=$row2["mod_name"]?> </td>
-            <?
+            <?php
             if($row2["mod_uid"]==26 || $row2["mod_uid"]==44 || $row2["mod_uid"]==57 || $row2["mod_uid"]==61){
 			?>
             <td>
@@ -87,7 +87,7 @@ while($row3 = $db3->next_record()){
                     </table>-->
             	</td>
              </tr></table></td>
-            <?
+            <?php
 			}
             ?>
         	</tr>
@@ -161,7 +161,7 @@ while($row = $db->next_record()){
 			</td>
             <td><?=$row["col_title"]?>:</td>
           </tr>
-<?
+<?php
 		$sql2="select * 
 				from mdl_contents
 				left join mdl_contents_languages on (con_uid=col_con_uid)
@@ -188,7 +188,7 @@ while($row = $db->next_record()){
         
           </tr>
 
-<?
+<?php
 		}
 }?>
 

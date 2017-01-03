@@ -81,7 +81,7 @@ $prod = $db->next_record();
 			<td valign="top">
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr><td width="28%" valign="middle"> 
-                <?
+                <?php
                 $date_end1=admin::changeFormatDate(substr($prod["sub_hour_end"],0,10),2);
 				$hour_end1=substr($prod["sub_hour_end"],11,5);
 				?>
@@ -147,7 +147,7 @@ $prod = $db->next_record();
 				foreach($arrayMoneda as $key=>$value)
 				{                
 				?>
-                	<option <? if ($key==$prod["sub_moneda"]) echo 'selected="selected"';?> value="<?=$key?>"><?=$value?></option>
+                	<option <?php if ($key==$prod["sub_moneda"]) echo 'selected="selected"';?> value="<?=$key?>"><?=$value?></option>
 				<?php
 				}
 				?>
@@ -186,8 +186,8 @@ $prod = $db->next_record();
             <tr>
             <td valign="top"><?=admin::labels('status');?></td>
             <td><select name="sub_status" class="listMenu" id="sub_status">
-            	<option <? if ('ACTIVE'==$prod["sub_status"]) echo 'selected="selected"';?> value="ACTIVE"><?=admin::labels('active');?></option>
-              	<option  <? if ('INACTIVE'==$prod["sub_status"]) echo 'selected="selected"';?> value="INACTIVE"><?=admin::labels('inactive');?></option>
+            	<option <?php if ('ACTIVE'==$prod["sub_status"]) echo 'selected="selected"';?> value="ACTIVE"><?=admin::labels('active');?></option>
+              	<option  <?php if ('INACTIVE'==$prod["sub_status"]) echo 'selected="selected"';?> value="INACTIVE"><?=admin::labels('inactive');?></option>
 			</select>
 			<span id="div_sub_status" style="display:none;" class="error"></span></td>
           </tr>
@@ -232,11 +232,11 @@ if($countBids>0) $style=""; else $style="none"
 				<td width="40%"><?=$clientName?></td>
 				<td width="30%"><?=$content["bid_date"]?></td>
                 <td width="30%"><?=$content["bid_mount"]?></td></tr>
-             	<?
+             	<?php
 				 }
 				 ?>    
         </table>
-         <?
+         <?php
 		 }
 		 ?>
         </td></tr>	
@@ -332,7 +332,7 @@ if($countBids>0) $style=""; else $style="none"
 					{	
 					?>
 					<option value="<?=$content["inl_uid"]?>"><?=$content["inl_name"]?></option>					
-					<?
+					<?php
 					}
                     ?>
 				</select>
@@ -360,7 +360,7 @@ if($countBids>0) $style=""; else $style="none"
     
     </td>
     </tr>
-   <? 
+   <?php 
    $sSQL= "select * from mdl_incoterm, mdl_incoterm_language, mdl_transporte, mdl_client where inc_inl_uid=inl_uid and inc_tra_uid=tra_uid and inc_cli_uid=cli_uid and inc_delete=0 and inc_sub_uid='".$sub_uid."' order by inc_uid desc";
    $nroReg = $db2->numrows($sSQL);
    $db2->query($sSQL);
@@ -387,7 +387,7 @@ if ($nroReg>0)
 	</table>
     </div>
 <div class="itemList" id="itemList" style="width:99%">  
-	<?
+	<?php
 $i=1;
 while ($list = $db2->next_record())
 	{
@@ -441,28 +441,28 @@ while ($list = $db2->next_record())
     <td width="12%"><input name="inc_lugar_entrega" id="inc_lugar_entrega" type="text"  size="15" value="<?=utf8_decode($inc_lugar_entrega)?>" /></td>
     <td width="12%">
     				<select name="inc_tra_uid<?=$tra_uid?>" id="inc_tra_uid<?=$tra_uid?>" class="input"  >
-                	<?
+                	<?php
                     $sql3 = "select tra_uid, tra_name from mdl_transporte where tra_delete=0";
 					$db3->query($sql3);
 					while ($content=$db3->next_record())
 					{	
 					?>
 					<option <? if($content["tra_name"]==$tra_name) echo 'selected="selected"';?> value="<?=$content["tra_uid"]?>"><?=utf8_decode($content["tra_name"])?></option>					
-					<?
+					<?php
 					}
                     ?>
 				</select>
                 </td>
     <td width="12%">
 				<select name="inc_inl_uid" id="inc_inl_uid" class="input"  >
-                	<?
+                	<?php
                     $sql3 = "select inl_uid, inl_name from mdl_incoterm_language where inl_delete=0";
 					$db3->query($sql3);
 					while ($content=$db3->next_record())
 					{	
 					?>
 					<option <? if($content["inl_name"]==$inl_name) echo 'selected="selected"';?> value="<?=$content["inl_uid"]?>"><?=$content["inl_name"]?></option>					
-					<?
+					<?php
 					}
                     ?>
 				</select>
@@ -484,14 +484,14 @@ while ($list = $db2->next_record())
      <input name="inc_uid" id="inc_uid" value="<?=$inc_uid?>" type="hidden" />
     </form>
      </div>
-	<?
+	<?php
 	$i++;
 	} 
  ?>
 </div> 
     </td>
     </tr>
-    <? 	} 
+    <?php 	} 
 else
 	{ ?>
     <tr>
@@ -512,7 +512,7 @@ else
 </td></tr></table>
 </td>
 </tr>
-<? 	} ?>
+<?php 	} ?>
 <tr>
 <td colspan="2">
 <br />

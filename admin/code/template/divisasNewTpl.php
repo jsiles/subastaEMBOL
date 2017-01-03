@@ -58,7 +58,7 @@
 					{	
 					?>
 					<option value="<?=$content["pca_uid"]?>"><?=$content["pca_name"]?></option>					
-					<?
+					<?php
 					}
                     ?>
 				</select>
@@ -143,7 +143,7 @@
 				foreach($arrayMoneda as $key=>$value)
 				{                
 				?>
-                	<option <? if ($key==$prod["sub_moneda1"]) echo 'selected="selected"';?> value="<?=$key?>"><?=$value?></option>
+                	<option <?php if ($key==$prod["sub_moneda1"]) echo 'selected="selected"';?> value="<?=$key?>"><?=$value?></option>
 				<?php
 				}
 				?>

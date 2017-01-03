@@ -14,7 +14,7 @@ if ($nroReg>0){
   <tr>
     <td colspan="2" id="contentListing">
 <div class="itemList1" id="itemList" style="width:99%"> 
-<?
+<?php
 $i=1;
 while ($docs_list = $db->next_record()){
 	$label_uid = $docs_list["label_uid"];
@@ -49,14 +49,14 @@ if ($nrmreg>0) {
 		<img src="lib/buttons/minus.gif" border="0" alt="<?=admin::labels('minus_on')?>" title="<?=admin::labels('minus_on')?>">		</a>	</span>
 	 <span id="div_more_off_<?=$label_uid?>" style="display:none;">
 		<img src="lib/buttons/more_off.gif" title="<?=admin::labels('more_off')?>" alt="<?=admin::labels('more_off')?>">	</span>&nbsp;
-	<?
+	<?php
 	/**************End 1er NIVEL****************************/
 	/**************Begin 2do NIVEL****************************/
 	$swSubmenu=true;                              
 	}
 else { ?>
 	<span><img src="lib/buttons/more_off.gif" title="<?=admin::labels('more_off')?>" alt="<?=admin::labels('more_off')?>"></span>&nbsp;
-	<?
+	<?php
 	$swSubmenu=false;
 	} 
 /**************End 2do NIVEL****************************/
@@ -64,7 +64,7 @@ else { ?>
     ?>
            <?=$label_description?></td>
 	<td align="center" width="12%" height="5" style="display:none">
-	<? 
+	<?php
 	if ($nrmreg>0){ 
 		$stylebuttonOn = "none";
 		$stylebuttonOff = "";
@@ -83,7 +83,7 @@ else { ?>
 		</td>
 		</tr>
 	</table>
-<?
+<?php
 //CREACION DE SUB MENU
 //echo "-->" . $swSubmenu;die;
 /**************End 1er NIVEL****************************/
@@ -92,7 +92,7 @@ if ($swSubmenu){
 	echo "\n";
     ?>
 	<div class="subList_<?=$label_uid?>" id="subList_<?=$label_uid?>" style="display:none;width:100%">
-	<?
+	<?php
 	}   
 if ($nrmreg>0) $arrayscript .="
  SubList[$label_uid]=$nrmreg;
@@ -137,13 +137,13 @@ while ($regSubContent=$db2->next_record()){
                         <img src="lib/buttons/more_off.gif" title="<?=admin::labels('more_off')?>" alt="<?=admin::labels('more_off')?>">
                         </span>&nbsp;         
                     
-        <?
+        <?php
         $swSubmenu1=true;                              
         }
     else {
         ?>
                     <span><img src="lib/buttons/more_off.gif" title="<?=admin::labels('more_off')?>" alt="<?=admin::labels('more_off')?>"></span>&nbsp;
-        <?
+        <?php
         $swSubmenu1=false;
         } 
 /**************End 3er NIVEL****************************/
@@ -151,7 +151,7 @@ while ($regSubContent=$db2->next_record()){
     ?>    
             <?=admin::toHtml($title1)?></li></td>
             <td align="center" width="12%" height="5" style="display:none">
-    <? 
+    <?php 
     if ($nrmreg1>0) 
         { 
         $stylebuttonOn = "none";
@@ -175,7 +175,7 @@ while ($regSubContent=$db2->next_record()){
 </tr>
             </table>
 
-<?
+<?php
 /**************End 2do NIVEL****************************/
 /**************Begin 3er NIVEL****************************/ 
 //echo "-->" . $swSubmenu;die;
@@ -186,7 +186,7 @@ if ($swSubmenu1)
     ?>
     <div class="treeList_<?=$lab_category?>" id="treeList_<?=$lab_category?>" style="display:none;width:100%">
                                         
-    <?
+    <?php
 }   
 if ($nrmreg1>0) $arrayscript .="
  subSubList[$lab_category]=$nrmreg1;";
@@ -227,7 +227,7 @@ while ($regSubContent3=$db3->next_record()){
 	</td></tr>
 	</table>
 	</div>                                        
-<?
+<?php
 
 $k++;
 }
@@ -236,12 +236,12 @@ if ($swSubmenu1)
 ?>
                                      </div>
                                      </div>
-<?
+<?php
 } else 
 {
 ?> 
                                   </div>
-<?
+<?php
 }
 /**************End 3er NIVEL****************************/
 
@@ -252,13 +252,13 @@ if ($swSubmenu)
 	{
 	?>
 	</div>
-	<?
+	<?php
 	}
 $i++;
 ?>
 	</div>
 </div>
-<?
+<?php
 }  
 /**************End 2do NIVEL****************************/
 /**************Begin 1er NIVEL****************************/
@@ -269,7 +269,7 @@ $i++;
 </table><br />
 <br />
 <br />
-<?     } 
+<?php     } 
 else
 	{ ?>
 	<br />
@@ -287,7 +287,7 @@ else
  </table>
 </div>
 </td></tr></table>
-<? 	
+<?php 	
 } 
 /**************End 1er NIVEL****************************/ 
 ?>

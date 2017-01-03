@@ -81,14 +81,14 @@ $OnOff3 =admin::getDBvalue("select count(mus_uid) from sys_modules_users where m
             <td width="10"><input name="mod_uid[<?=$row["mod_uid"]?>][]" type="checkbox"  <?=$OnOff4?> value="<?=$row2["mod_uid"]?>" onclick="checkedVerify('mod_uid[<?=$row["mod_uid"]?>]')" />
 			</td>
             <td ><?=$row2["mod_name"]?></td>
-            <?
+            <?php
             if($row2["mod_uid"]==26 || $row2["mod_uid"]==44 || $row2["mod_uid"]==57 || $row2["mod_uid"]==61){
 			?>
             <td>
             <table>
                 <tr>
             	<td>&nbsp;</td>
-                <?
+                <?php
 				$countOpt=admin::getDBvalue("select distinct count(mop_uid) from sys_modules_options where mop_mod_uid='".$row2["mod_uid"]."' and mop_rol_uid='".$rol_uid."' order by mop_uid");
              	if($countOpt>0){   
 				?>
@@ -110,7 +110,7 @@ $OnOff3 =admin::getDBvalue("select count(mus_uid) from sys_modules_users where m
              </tr>
                     </table>
             	</td>
-               <?
+               <?php
 			}
 			else
 			{
@@ -129,11 +129,11 @@ $OnOff3 =admin::getDBvalue("select count(mus_uid) from sys_modules_users where m
              </tr>
                     </table>-->
             	</td>
-                <?
+                <?php
 			}
 				?> 
              </tr></table></td>
-               <?
+               <?php
 			}
             ?>
         	</tr>
@@ -242,7 +242,7 @@ while($row = $db->next_record()){
         </td>
         
           </tr>
-<?
+<?php
 		}
 
 

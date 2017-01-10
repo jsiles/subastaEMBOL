@@ -105,7 +105,7 @@ $regusers = $db->next_record();
 			</table>
 			</div>
 			<div id="image_add_<?=$regusers["cli_uid"]?>" style="display:none;"></div>
-			<?	}
+			<?php	}
 		 ?>			</td>
           </tr>
           <tr>

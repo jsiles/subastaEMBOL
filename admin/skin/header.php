@@ -25,7 +25,7 @@
 			if ($lang==$languages["lan_code"]) $language_name=$languages["lan_language"];
 			?>
 			<option value="<?=$languages["lan_code"]?>" <? if ($lang==$languages["lan_code"]) echo "selected"; ?>><?=$languages["lan_language"]?></option>
-		<?	} ?>
+		<?php	} ?>
 		</select>
 		<a href="javascript:changeLanguageHeader('off');"  class='small'><img border="0" src="lib/close.gif" alt="cerrar" title="cerrar"/></a>	
 		</form>		
@@ -36,13 +36,13 @@
 		</div>			
 		<div id="userDat">
 		<a href="userEdit.php?usr_uidA=<?=$_SESSION['usr_uid']?>&amp;token=<?=admin::getParam('token')?>" class="small" title="<?=admin::labelsSystem('myProfile');?>"><?=$_SESSION["usr_firstname"] . " ". $_SESSION["usr_lastname"];?></a> <a href="userEdit.php?usr_uidA=<?=$_SESSION['usr_uid']?>&amp;token=<?=admin::getParam('token')?>" class="link3" title="<?=admin::labelsSystem('myProfile');?>"><?=admin::labelsSystem('change');?></a><br />
-		<? if ($numlanguages>1) { ?>
+		<?php if ($numlanguages>1) { ?>
 		<a href="javascript:changeLanguageHeader('on')" class="small"><?=$language_name?></a> <a href="javascript:changeLanguageHeader('on')" class="link3"><?=admin::labelsSystem('change');?></a><br />
-		<? } ?>
-		<? if ($numsites>1) { ?><!--
+		<?php } ?>
+		<?php if ($numsites>1) { ?><!--
 		<a href="javascript:changeSiteHeader('on');"  class='small'><?=$site_name;?></a> <a href="javascript:changeSiteHeader('on');" class="link3"><?=admin::labelsSystem('change');?></a>
 		-->
-		<? } ?>
+		<?php } ?>
 		</div>
 		<div id="userImg">
 		<?php
@@ -52,7 +52,7 @@
 		<a href="userEdit.php?usr_uidA=<?=$_SESSION['usr_uid']?>&amp;token=<?=admin::getParam('token')?>" title="<?=admin::labelsSystem('myProfile');?>">
 			<img border="0" src="<?=$imgProfile?>?<?=time()?>" title="<?=admin::labelsSystem('myProfile');?>" alt="<?=admin::labelsSystem('myProfile');?>"/>
 			</a>
-		<? } ?>		
+		<?php } ?>		
 		</div>
 		<!--Definir tamaño de imagen ALTO POR ANCHO -->
 			

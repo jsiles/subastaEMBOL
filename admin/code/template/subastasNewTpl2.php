@@ -1,6 +1,6 @@
 <?php
 $pro_uid = admin::toSql($_GET["pro_uid"],"String");
-$sub_uid=admin::getParam("pro_uid");
+$sub_uid=admin::getParam("sub_uid");
 if (!$pro_uid) header('Location: ../../subastasList.php?token='.$token);
 $sql = "SELECT * FROM mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_status='ACTIVE' and pro_uid='".$pro_uid."'";
 $db->query($sql);

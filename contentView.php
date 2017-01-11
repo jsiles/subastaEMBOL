@@ -9,7 +9,7 @@ $Category=admin::getDBvalue("select col_title from mdl_contents_languages where 
 $CategoryUrl=admin::getDBvalue("select col_url from mdl_contents_languages where col_uid=2");
 
 $urlARRAY = admin::urlArray();
-print_r($urlARRAY);//die;
+//print_r($urlARRAY);//die;
 
 if (!isset($langSession)) $langUrl=admin::getDBvalue("select lan_code FROM sys_language where lan_code='".admin::toSql($urlARRAY[$urlPositionTitle],'String')."'");
 else $langUrl=$langSession;

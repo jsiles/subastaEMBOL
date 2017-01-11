@@ -1,7 +1,7 @@
 <?php
-$pro_uid = admin::toSql($_GET["pro_uid"],"String");
+$pro_uid = admin::getParam("pro_uid");
 $sub_uid=admin::getParam("sub_uid");
-if (!$pro_uid) header('Location: ../../subastasList.php?token='.$token);
+//if (!$pro_uid) header('Location: ../../subastasList.php?token='.$token);
 $sql = "SELECT * FROM mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_status='ACTIVE' and pro_uid='".$pro_uid."'";
 $db->query($sql);
 $prod = $db->next_record();
@@ -48,7 +48,7 @@ $prod = $db->next_record();
 	    <?php
 					}
                     ?>
-	    </select>	  <input name="sub_uid" id="sub_uid" value="<?=$sub_uid?>" type="hidden" /></td>
+	    </select>	  <input name="sub_uid" id="sub_uid" value="<?=$sub_uid?>" type="hidden" /><input name="pro_uid" id="pro_uid" value="<?=$pro_uid?>" type="hidden" /></td>
     <td width="12%"><input name="inc_lugar_entrega" id="inc_lugar_entrega" type="text"  size="15" autocomplete='off'/></td>
     <td width="12%">
     <div id="div_inc_tra_uid_select">
@@ -94,7 +94,7 @@ $prod = $db->next_record();
 				<br /><span id="div_other_incoterm_error" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>
                 </div>
                 </td>
-    <td width="12%"><input name="inc_ajuste" id="inc_ajuste" type="text" size="9" onfocus="document.getElementById('div_inc_ajuste_error').style.display='none';" onblur="document.getElementById('div_inc_ajuste_error').style.display='none';" onclick="document.getElementById('div_inc_ajuste_error').style.display='none';" />
+    <td width="12%"><input name="inc_ajuste" id="inc_ajuste" type="text" size="9" value="0" onfocus="document.getElementById('div_inc_ajuste_error').style.display='none';" onblur="document.getElementById('div_inc_ajuste_error').style.display='none';" onclick="document.getElementById('div_inc_ajuste_error').style.display='none';" />
     %<br /><span id="div_inc_ajuste_error" style="display:none;" class="error">Escriba un monto.</span></td>
 	<td align="center" width="12%" height="5">
 		<a href="guardar" onclick="verifyIncoterm(); return false;">
@@ -256,8 +256,8 @@ else
     <td colspan="2" id="contentListing">
 <div  style="background-color: #f7f8f8;">
 <table class="list"  width="100%">
-	<tr><td height="30px" align="center" class="bold">
-	<?=admin::labels('subastas','noIncoterm')?>
+	<tr><td height="30px" align="left" class="bold">
+	No existen registros
 	</td></tr>	
  </table>
 </div>

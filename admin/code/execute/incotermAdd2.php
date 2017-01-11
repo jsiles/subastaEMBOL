@@ -2,6 +2,7 @@
 include_once("../../core/admin.php");
 admin::initialize('subastas','docsCatAdd2',false); 
 $cli_uid=admin::getParam("cli_uid");
+$pro_uid=admin::getParam("pro_uid");
 $sub_uid=admin::getParam("sub_uid");
 $inc_lugar_entrega=admin::getParam("inc_lugar_entrega");
 $inc_tra_uid=admin::getParam("inc_tra_uid");
@@ -36,5 +37,5 @@ $db->query($sql);
 // CONSTRUIMOS EL NUEVO SELECT	
 $token=admin::getParam("token");
 unset($_POST);
-header('Location: ../../subastasNew2.php?token='.$token.'&pro_uid='.$sub_uid);
+header('Location: ../../subastasNew2.php?token='.$token.'&pro_uid='.$pro_uid.'&sub_uid='.$sub_uid);
 ?>

@@ -12,4 +12,6 @@
     <div  style="float:right; margin-right:50px">
     <img  src="lib/scle.png" alt="scle">
     </div>
+    <div class="clear"></div>
+    <div style="float:right;margin-right:50px"><b><?=date("d/m/Y H:i:s")?></b></div>
 </div>

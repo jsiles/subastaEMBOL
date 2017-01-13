@@ -31,7 +31,7 @@ if ($bannerexist==0) echo '<script language="javascript" type="text/javascript">
           </tr>
                            
          <tr>
-            <td valign="top"><?=admin::labels('banner','label');?>:</td>
+            <td valign="top"><?=admin::labels('banner','label');?> (770 x 100):</td>
             <td>
 			<?
 			$imgSavedroot1 = PATH_ROOT."/img/banner/".$banner["ban_file"];

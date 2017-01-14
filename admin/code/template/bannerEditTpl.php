@@ -26,7 +26,9 @@ if ($bannerexist==0) echo '<script language="javascript" type="text/javascript">
             <td width="29%"><?=admin::labels('banner','title');?>:</td>
             <td width="64%">
 <input name="ban_title" type="text" class="input" id="ban_title" size="50" onfocus="setClassInput(this,'ON');document.getElementById('div_ban_title').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_ban_title').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_ban_title').style.display='none';" value="<?=$banner["ban_title"]?>" />
-<br /><span id="div_ban_title" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('banner','titleerror');?></span>
+<br /><span id="div_ban_title" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('banner','titleerror');?></span><?php 
+			    if($_REQUEST["error"]=='ok') {?><br /><span class="error">Imagen no permitida</span> <?php }
+			?>
 			</td>
           </tr>
                            

@@ -23,6 +23,9 @@
             <td><?=admin::labels('banner','label');?> (770 x 100): </td>
             <td><input type="file" name="ban_adjunt" id="ban_adjunt" size="31" onclick="setClassInput(this,'ON');document.getElementById('div_ban_adjunt').style.display='none';" class="input">
             <br /><span id="div_ban_adjunt" style="display:none;" class="error">Solo extenciones bmp, jpg, jpeg, gif, png, swf</span>
+            <?php 
+			    if($_REQUEST["error"]=='ok') {?><br /><span class="error">Imagen no permitida</span> <?php }
+			?>
 			</td>
           </tr>
         

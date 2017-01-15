@@ -32,26 +32,26 @@ $html= '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://w
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Documento sin título</title>
+<title>Reporte de Subasta</title>
 </head>
 
 <body>
 <table width="100%">
-<tr><td ><img src="'.$domain.'/lib/logo.png" width="100" /></td><td colspan="4"><h1>Parametrizacion</h1><br /><span>Fecha: '.date("d/m/Y").'</span></td></tr>
+<tr><td ><img src="'.$domain.'/lib/logo.png" width="100" /></td><td colspan="4"><h1>Parametrización de subastas</h1><br /><span>Fecha: '.date("d/m/Y").'</span></td></tr>
 <tr><td><br /><br /></td><td><br /><br /></td></tr>
 <tr><td colspan="5"><h2>1: Datos generales de la subasta</h2></td></tr>
 <tr><td><br /></td><td><br /></td></tr>
-<tr><th width="21%">Nombre:</th><td width="21%" align="left">'.$pro_name.'</td><td width="6%"></td><th width="21%">Cantidad:</th><td width="21%" align="left">'.$pro_quantity.'</td></tr>
-<tr><th width="21%">Categoria:</th><td width="21%" align="left">'.$pca_name.'</td><td width="6%"></td><th width="21%">Unidades:</th><td width="21%" align="left">'.$pro_unidad.'</td></tr>
-<tr><th width="21%">Descripcion:</th><td width="21%"></td><td width="6%"></td><td width="21%"></td><td width="21%"></td></tr>
+<tr><td width="21%">Nombre:</td><td width="21%" align="left">'.$pro_name.'</td><td width="6%"></td><td width="21%">Cantidad:</td><td width="21%" align="left">'.$pro_quantity.'</td></tr>
+<tr><td width="21%">Categoria:</td><td width="21%" align="left">'.$pca_name.'</td><td width="6%"></td><td width="21%">Unidades:</td><td width="21%" align="left">'.$pro_unidad.'</td></tr>
+<tr><td width="21%">Descripcion:</td><td width="21%"></td><td width="6%"></td><td width="21%"></td><td width="21%"></td></tr>
 <tr><td colspan="5" align="left">'.$pro_description.'</td></tr>
 <tr><td><br /><br /></td><td><br /><br /></td></tr>
 <tr><td colspan="5"><h2>2: Datos particulares de la subasta</h2></td></tr>
 <tr><td><br /></td><td><br /></td></tr>
-<tr><th width="26%">Modalidad de subasta:</th><td width="21%" align="left">'.$sub_modalidad.'</td><td width="6%"></td><th width="26%">Fecha de subasta:</th><td width="21%" align="left">'.$sub_hour_end[0].'</td></tr>
-<tr><th width="21%">Tipo de subasta:</th><td width="21%" align="left">'.$sub_type.'</td><td width="6%"></td><th width="21%">Hora de subasta:</th><td width="21%" align="left">'.$sub_hour_end[1].'</td></tr>
-<tr><th width="21%">Monto base:</th><td width="21%" align="left">'.$sub_mount_base.'</td><td width="6%"></td><th width="21%">Tiempo límite de mejora en min.:</th><td width="21%" align="left">'.$sub_tiempo.'</td></tr>
-<tr><th width="21%">Unidad de mejorar:</th><td width="21%" align="left">'.$sub_mount_unidad.'</td><td width="6%"></td><td width="21%"></td><td width="21%"></td></tr>
+<tr><td width="26%">Modalidad de subasta:</td><td width="21%" align="left">'.$sub_modalidad.'</td><td width="6%"></td><td width="26%">Fecha de subasta:</td><td width="21%" align="left">'.$sub_hour_end[0].'</td></tr>
+<tr><td width="21%">Tipo de subasta:</td><td width="21%" align="left">'.$sub_type.'</td><td width="6%"></td><td width="21%">Hora de subasta:</td><td width="21%" align="left">'.$sub_hour_end[1].'</td></tr>
+<tr><td width="21%">Monto base:</td><td width="21%" align="left">'.$sub_mount_base.'</td><td width="6%"></td><td width="21%">Tiempo límite de mejora en min.:</td><td width="21%" align="left">'.$sub_tiempo.'</td></tr>
+<tr><td width="21%">Unidad de mejorar:</td><td width="21%" align="left">'.$sub_mount_unidad.'</td><td width="6%"></td><td width="21%"></td><td width="21%"></td></tr>
 <tr><td><br /><br /></td><td><br /><br a/></td></tr>
 <tr><td colspan="5"><h2>3: Proveedores habilitados</h2></td></tr>
 <tr><td><br /></td><td><br /></td></tr>
@@ -75,11 +75,7 @@ $html.=	'</table>
 <tr><th colspan="5" align="left">Observaciones:</th></tr>
 <tr><td colspan="5" align="left">'.$obs.'</td></tr>
 <tr><td><br /><br /><br /><br /></td><td><br /><br /><br /><br /></td></tr>
-<tr><td colspan="5">
-	<table width="100%">
-    	<tr><th width="33%" align="center">Elaborado</th><th width="33%" align="center">Revisado</th><th width="33%" align="center">'.$tipoFirma.'</th></tr>
-    </table>
-</td></tr>
+<tr><th align="center" width="33%">Elaborado</th><th align="center" width="33%">Revisado</th><th align="center" width="33%">'.$tipoFirma.'</th>
 </table>
 </body>
 </html>

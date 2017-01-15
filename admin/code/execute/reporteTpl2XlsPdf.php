@@ -29,12 +29,12 @@ $html= '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://w
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Documento sin título</title>
+<title>Reporte de Pujas</title>
 </head>
 
 <body>
 <table width="100%">
-<tr><td ><img src="'.$domain.'/lib/logo.png" width="100" /></td><td colspan="4"><h1>Parametrizacion</h1><br /><span>Fecha: '.date("d/m/Y").'</span></td></tr>
+<tr><td ><img src="'.$domain.'/lib/logo.png" width="100" /></td><td colspan="4"><h1>Informe de ejecucion de subastas</h1><br /><span>Fecha: '.date("d/m/Y").'</span></td></tr>
 <tr><td><br /><br /></td><td><br /><br /></td></tr>
 <tr><td colspan="5"><h2>1: Datos generales de la subasta</h2></td></tr>
 <tr><td><br /></td><td><br /></td></tr>
@@ -76,12 +76,12 @@ if ($formato=="pdf") {
 	 $mpdf -> useOnlyCoreFonts = true;
 	 $mpdf -> SetDisplayMode('fullpage');
 	 $mpdf -> WriteHTML($html);
-	 $mpdf-> Output('Reportedesubastas-'.date("YmdHis").'.pdf','D');
+	 $mpdf-> Output('Reportedepujas-'.date("YmdHis").'.pdf','D');
 	 exit;
 }
 else {
 	header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-	header('Content-Disposition: attachment;filename="Reportedesubastas-'.date("YmdHis").'.xls"');
+	header('Content-Disposition: attachment;filename="Reportedepujas-'.date("YmdHis").'.xls"');
 	header('Cache-Control: max-age=0');
 	echo $html;
 }

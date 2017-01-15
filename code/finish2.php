@@ -142,7 +142,7 @@ $regBidsWin = admin::getDbValue("select max(bid_uid) from mdl_bid where bid_sub_
                     </div>
 <?php
 }
-$sql = "update mdl_subasta set sub_finish=1 WHERE sub_finish=0 and sub_delete=0 and sub_deadTime='".$deadTime."' and sub_uid=".$sub_uid;
+$sql = "update mdl_subasta set sub_finish=3 WHERE sub_finish=1 and sub_delete=0 and sub_deadTime='".$deadTime."' and sub_uid=".$sub_uid;
 $db->query($sql);
 ?>            
         

@@ -14,14 +14,16 @@ else {
 
 if ($lang=='es') $urlFrontLang='';
 else $urlFrontLang=$lang.'/';
-
+ 
 $UrlProduct=admin::getDBvalue("select col_url FROM mdl_contents_languages where col_con_uid=3 and col_language='".$lang."'");
 
 $contentURL = admin::getContentUrl($con_uid,SYS_LANG);
-$qsearch="select * from mdl_rav where rav_tipologia=1 order by rav_uid asc";
+$qsearch="select * from mdl_rav where rav_tipologia=2 order by rav_uid asc";
 ?>
 <div id="DIV_WAIT1" style="display:none;"><img border="0" src="lib/loading.gif"></div>
-<?php
+<form name="frmsubastaRav" method="post" action="code/execute/subastasRavUpd.php?token=<?=admin::getParam("token")?>" enctype="multipart/form-data" >
+
+    <?php
 /********EndResetColorDelete*************/
 $_pagi_sql=$qsearch.$orderCode;
 //echo $_pagi_sql;
@@ -43,8 +45,8 @@ if ($nroReg>0)
 <br>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
    <tr>
-      <td width="77%" height="40"><span class="title">Listado RAV Parametrizaci&oacute;n</span></td>
-    <td width="23%" height="40" align="right"><a href="subastasRavEdit.php?token=<?=admin::getParam("token")?>">Editar RAV Parametrizaci&oacute;n</a></td>
+      <td width="77%" height="40"><span class="title">Editar RAV Informe</span></td>
+    <td width="23%" height="40" align="right"></td>
   </tr>
   <tr>
 	<td width="90%" height="40"></td>
@@ -76,9 +78,9 @@ $j=0;
 while ($subasta_list = $pagDb->next_record())
 	{
 	$rav_uid = trim($subasta_list["rav_uid"]);		
-        $rav_rol = admin::getDbValue("select rol_description from mdl_roles where rol_uid=". $subasta_list["rav_rol_uid"]);
+        $rav_rol = $subasta_list["rav_rol_uid"];//admin::getDbValue("select rol_description from mdl_roles where rol_uid=". $subasta_list["rav_rol_uid"]);
 	$rav_monto = trim($subasta_list["rav_monto_inf"]);
-	$rav_monto1 = ($subasta_list["rav_monto_sup"]!=0)?$subasta_list["rav_monto_sup"]:"Sin l&iacute;mite";
+	$rav_monto1 = $subasta_list["rav_monto_sup"];
 	$rav_tipo =  ($subasta_list["rav_tipologia"]==1)?"Aprobaci&oacute;n":"Informe";
         $dest="";
 		?> 
@@ -88,11 +90,22 @@ while ($subasta_list = $pagDb->next_record())
     
     <table class="list" width="100%" style="">
 	<tr>
-		<td width="5%" ><span <?=$dest?>><?=admin::toHtml($rav_uid)?></span></td>
-        <td width="25%" ><span <?=$dest?>><?=ucfirst(strtolower(trim(admin::toHtml($rav_rol))))?></span></td>
-        <td width="20%" ><span <?=$dest?>><?=strtolower(trim(admin::toHtml($rav_monto)))?></span></td>
-        <td width="20%" ><span><?=$rav_monto1?></span></td>
-        <td width="10%" ><span><?=$rav_tipo?></span>
+            <td width="5%" ><?=admin::toHtml($rav_uid)?><input name="rav_uid[]" type="hidden" value="<?=$rav_uid?>"></td>
+        <td width="25%" ><select name="rav_rol[]" class="input"  >
+                	<?php
+                    $sql3 = "select rol_uid, rol_description from mdl_roles";
+					$db3->query($sql3);
+					while ($content=$db3->next_record())
+					{	
+					?>
+					<option <?php if($content["rol_uid"]==$rav_rol) echo 'selected="selected"';?> value="<?=$content["rol_uid"]?>"><?=$content["rol_description"]?></option>					
+					<?php
+					}
+                    ?>
+				</select></td>
+        <td width="20%" ><input name="rav_monto[]" value="<?=strtolower(trim(admin::toHtml($rav_monto)))?>"></td>
+        <td width="20%" ><input name="rav_monto1[]" value="<?=$rav_monto1?>"></td>
+        <td width="10%" ><?=$rav_tipo?>
         	</td>
                 <td width="20%" >
         	</td>
@@ -114,10 +127,35 @@ $j++;
     </td>
     </tr>
     <tr>
-    <td colspan="2">
-    
-    </td>
-	</tr>
+<td colspan="2">
+<br />
+<div id="contentButton">
+	
+      
+      <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subasta" style="display:">
+			<tr>
+				<td width="79%" align="center">
+                                    
+                                            <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                                <tr>
+                                                    <td width="49%" align="center">
+                                                        <a href="guardar" onclick="document.frmsubastaRav.submit();return false;" class="button">
+                                                    <?=admin::labels('save');?>
+                                                    </a> 
+                                                    </td>
+                                                    <td width="51%" style="font-size:11px;">
+                                                    <?=admin::labels('or');?> <a href="subastasRavList.php?token=<?=admin::getParam("token")?>" ><?=admin::labels('cancel');?></a> 
+                                                    </td>
+                                                    </tr>
+                                         </table>
+                                                                </td>
+          
+        </tr>
+      </table>
+      
+      </div>
+<br /><br /><br /><br /><br />
+</td></tr>
 </table><br />
 <br />
 <br />
@@ -144,7 +182,7 @@ else
 </div>
 </td></tr>
 </table>
-</form>
 
 <?php 	} 
 ?>
+</form>

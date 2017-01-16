@@ -1,12 +1,6 @@
 <?php 
 include_once ("core/admin.php");
-admin::initialize('aprobacion','aprobacionList'); 
-$rol = $_SESSION["usr_rol"];
-if(($rol>3)&&($rol<5))
-{
-	$rolMax = admin::getDbValue("SELECT adj_monto FROM mdl_adjudicar WHERE adj_rol_uid=".$rol);
-	$valAdj = admin::getDbValue("SELECT adj_validacion FROM mdl_adjudicar WHERE adj_rol_uid=".$rol);
-}
+admin::initialize('aprobacion','subastasRavInfList'); 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">    
 <html>
@@ -44,7 +38,7 @@ function removeListCat(id){
 				var uid = m.find('#list').val();
 				  $('#'+id).fadeOut(500, function(){ $(this).remove(); });
 					  $.ajax({
-						url: 'code/execute/autorizacionCatDel.php',
+						url: 'code/execute/subastaCatDel.php',
 						type: 'POST',
 						data: 'uid='+id
 					});
@@ -71,9 +65,9 @@ function removeList(id){
 				var uid = m.find('#list').val();
 				  $('#sub_'+id).fadeOut(500, function(){ $(this).remove(); });
 					  $.ajax({
-						url: 'code/execute/autorizacionDel.php',
+						url: 'code/execute/subastasDel.php',
 						type: 'POST',
-						data: 'uid='+id
+						data: 'sub_uid='+id
 					});
 				/********BeginResetColorDelete*************/  
 				//	  resetOrderRemove(id);  
@@ -84,87 +78,6 @@ function removeList(id){
 		}
 	});
 }
-
-
-function aprobarSubasta(id){
-	var txt = 'Esta seguro de Aprobar esta Solicitud?<br><input type="hidden" id="list" name="list" value="'+ id +'" />';
-	$.prompt(txt,{
-		show:'fadeIn' ,
-		opacity:0,
-		buttons:{Aprobar:true, Cancelar:false},
-		callback: function(v,m){
-										   
-			if(v){
-				var uid = m.find('#list').val();
-				  $('#sub_'+id).fadeOut(500, function(){ $(this).remove(); });
-					  $.ajax({
-						url: 'code/execute/autorizacionApr.php',
-						type: 'POST',
-						data: 'uid='+id,
-						 success: function() { 
-								window.location.href='./autorizacionList.php?token=<?=admin::getParam("token")?>';
-							}
-					});
-					 
-				}
-			else {}
-		//$("#list_"+id).hide();	
-		}
-	});
-}
-
-function rechazarSubasta(id){
-	var txt = 'Esta seguro de Rechazar esta Solicitud?<br><input type="hidden" id="list" name="list" value="'+ id +'" />';
-	$.prompt(txt,{
-		show:'fadeIn' ,
-		opacity:0,
-		buttons:{Rechazar:true, Cancelar:false},
-		callback: function(v,m){
-										   
-			if(v){
-				var uid = m.find('#list').val();
-				  $('#sub_'+id).fadeOut(500, function(){ $(this).remove(); });
-					  $.ajax({
-						url: 'code/execute/autorizacionRechazar.php',
-						type: 'POST',
-						data: 'uid='+id,
-						 success: function() { 
-								window.location.href='./autorizacionList.php?token=<?=admin::getParam("token")?>';
-							}
-					});
-					 
-				}
-			else {}
-		//$("#list_"+id).hide();	
-		}
-	});
-}
-function adjudicarSubasta(id){
-	var txt = '<span style="align="left">Orden de compra <input type="file" id="adjuntarID" name="adjuntarID" value="" /></span><br>(Pdf,Excel, Word)<br><br><br><br> * Sólo para compras con montos <?=$valAdj.$rolMax?> ';
-	$.prompt(txt,{
-		show:'fadeIn' ,
-		opacity:0,
-		buttons:{Adjuidcar:true, Cancelar:false},
-		callback: function(v,m){
-										   
-			if(v){
-				var uid = m.find('#list').val();
-				  $('#sub_'+id).fadeOut(500, function(){ $(this).remove(); });
-					  $.ajax({
-						url: 'code/execute/adjudicarSubasta.php',
-						type: 'POST',
-						data: 'uid='+id,
-						 success: function() { 
-								window.location.href='./autorizacionList.php?token=<?=admin::getParam("token")?>';
-							}
-					});
-					 
-				}
-			else {}
-		//$("#list_"+id).hide();	
-		}
-	});
-}
 </script>
 </head>
 <body>
@@ -172,7 +85,7 @@ function adjudicarSubasta(id){
 <tr><td valign="top"><? include_once("skin/header.php");?>
 </td></tr>
   <tr>
-    <td valign="top" id="content"><? include_once("code/template/autorizacionListTpl.php"); ?></td>
+    <td valign="top" id="content"><? include_once("code/template/subastasRavInfListTpl.php"); ?></td>
   </tr>
 <tr><td>
   <? include("skin/footer.php"); ?>

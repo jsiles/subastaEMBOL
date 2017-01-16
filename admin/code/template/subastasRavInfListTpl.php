@@ -18,7 +18,7 @@ else $urlFrontLang=$lang.'/';
 $UrlProduct=admin::getDBvalue("select col_url FROM mdl_contents_languages where col_con_uid=3 and col_language='".$lang."'");
 
 $contentURL = admin::getContentUrl($con_uid,SYS_LANG);
-$qsearch="select * from mdl_rav where rav_tipologia=1 order by rav_uid asc";
+$qsearch="select * from mdl_rav where rav_tipologia=2 order by rav_uid asc";
 ?>
 <div id="DIV_WAIT1" style="display:none;"><img border="0" src="lib/loading.gif"></div>
 <?php
@@ -43,8 +43,8 @@ if ($nroReg>0)
 <br>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
    <tr>
-      <td width="77%" height="40"><span class="title">Listado RAV Parametrizaci&oacute;n</span></td>
-    <td width="23%" height="40" align="right"><a href="subastasRavEdit.php?token=<?=admin::getParam("token")?>">Editar RAV Parametrizaci&oacute;n</a></td>
+      <td width="77%" height="40"><span class="title">Listado RAV Informe</span></td>
+    <td width="23%" height="40" align="right"><a href="subastasRavInfEdit.php?token=<?=admin::getParam("token")?>">Editar RAV Informe</a></td>
   </tr>
   <tr>
 	<td width="90%" height="40"></td>

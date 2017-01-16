@@ -18,7 +18,7 @@ else $urlFrontLang=$lang.'/';
 $UrlProduct=admin::getDBvalue("select col_url FROM mdl_contents_languages where col_con_uid=3 and col_language='".$lang."'");
 
 $contentURL = admin::getContentUrl($con_uid,SYS_LANG);
-$qsearch="select * from mdl_rav order by rav_uid asc";
+$qsearch="select * from mdl_rav where rav_tipologia=1 order by rav_uid asc";
 ?>
 <div id="DIV_WAIT1" style="display:none;"><img border="0" src="lib/loading.gif"></div>
 <form name="frmsubastaRav" method="post" action="code/execute/subastasRavUpd.php?token=<?=admin::getParam("token")?>" enctype="multipart/form-data" >
@@ -45,7 +45,7 @@ if ($nroReg>0)
 <br>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
    <tr>
-      <td width="77%" height="40"><span class="title">Editar RAV</span></td>
+      <td width="77%" height="40"><span class="title">Editar RAV Parametrizaci&oacute;n</span></td>
     <td width="23%" height="40" align="right"></td>
   </tr>
   <tr>
@@ -81,7 +81,7 @@ while ($subasta_list = $pagDb->next_record())
         $rav_rol = $subasta_list["rav_rol_uid"];//admin::getDbValue("select rol_description from mdl_roles where rol_uid=". $subasta_list["rav_rol_uid"]);
 	$rav_monto = trim($subasta_list["rav_monto_inf"]);
 	$rav_monto1 = $subasta_list["rav_monto_sup"];
-	$rav_tipo =  $subasta_list["rav_tipologia"];
+	$rav_tipo =  ($subasta_list["rav_tipologia"]==1)?"Aprobaci&oacute;n":"Informe";
         $dest="";
 		?> 
 	<div class="groupItem" id="<?=$pro_uid?>">
@@ -105,11 +105,7 @@ while ($subasta_list = $pagDb->next_record())
 				</select></td>
         <td width="20%" ><input name="rav_monto[]" value="<?=strtolower(trim(admin::toHtml($rav_monto)))?>"></td>
         <td width="20%" ><input name="rav_monto1[]" value="<?=$rav_monto1?>"></td>
-        <td width="10%" ><select name="rav_tipo[]" class="input"  >
-		 <option <?php if($rav_tipo==1) echo 'selected="selected"';?> value="1">Aprobaci&oacute;n</option>					
-        	<option <?php if($rav_tipo==2) echo 'selected="selected"';?> value="2">Informe</option>					
-			
-            </select>
+        <td width="10%" ><?=$rav_tipo?>
         	</td>
                 <td width="20%" >
         	</td>

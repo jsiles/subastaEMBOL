@@ -43,8 +43,8 @@ if ($nroReg>0)
 <br>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
    <tr>
-      <td width="77%" height="40"><span class="title">Listado RAV Parametrizaci&oacute;n</span></td>
-    <td width="23%" height="40" align="right"><a href="subastasRavEdit.php?token=<?=admin::getParam("token")?>">Editar RAV Parametrizaci&oacute;n</a></td>
+      <td width="77%" height="40"><span class="title">Listado RAV Par&aacute;metros</span></td>
+      <td width="23%" height="40" align="right"><a href="subastasRavEdit.php?token=<?=admin::getParam("token")?>">Editar RAV Par&aacute;metros</a></td>
   </tr>
   <tr>
 	<td width="90%" height="40"></td>

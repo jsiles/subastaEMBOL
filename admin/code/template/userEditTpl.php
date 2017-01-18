@@ -100,7 +100,7 @@ $regusers = $db->next_record();
           </tr>
           
           <tr>
-            <td><?=admin::labels('roles','name');?>:</td>
+            <td><?=admin::labels('user','userrol');?>:</td>
             <td>
             <select name="usr_rol" class="txt10" id="usr_rol">
             <?php

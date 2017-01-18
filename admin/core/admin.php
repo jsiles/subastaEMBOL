@@ -1397,13 +1397,13 @@ public static function verifyModulePermission($id){
 public static function getFirstModule($uid)
 	{
 	/* AUMENTADO PARA EL CONTROL DE PERMISOS POR USUARIO */
-	$sql = "select * 
+	$sql = "select top * 
 			from sys_modules_users 
 			left join sys_modules on (mus_mod_uid=mod_uid) 
 			where mus_rol_uid='".$uid."' and mus_place='MODULE' and mus_delete=0 
 			and mod_language='es' 
-			order by mus_uid asc 
-			limit 1";
+			order by mod_position asc 
+			";
 
 	$dbLink=new DBmysql;
 	//$dbLink->connect("$basedatos", "$host", "$user", "$pass");		

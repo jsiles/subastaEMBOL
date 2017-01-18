@@ -108,6 +108,10 @@ while ($subasta_list = $pagDb->next_record())
         <td width="10%" ><?=$rav_tipo?>
         	</td>
                 <td width="20%" >
+                    <a href="eliminar" onclick="document.frmsubastaRav.eliminaRav.value=<?=$rav_uid?>;document.frmsubastaRav.submit();return false;">
+		<img src="lib/delete_es.gif" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
+		</a>
+                    
         	</td>
     </table>
 <?php
@@ -122,7 +126,7 @@ $j++;
     </td>
     </tr>
 	<tr>
-    <td colspan="2">
+    <td colspan="2"><td colspan="2"><input name="eliminaRav" type="hidden" value=""><input name="rav_tipo" type="hidden" value="2">
     <br />
     </td>
     </tr>
@@ -154,11 +158,9 @@ $j++;
       </table>
       
       </div>
-<br /><br /><br /><br /><br />
+
 </td></tr>
-</table><br />
-<br />
-<br />
+</table>
 <?php 	} 
 else
 	{ ?>
@@ -186,3 +188,49 @@ else
 <?php 	} 
 ?>
 </form>
+
+	
+<div id="itemList"> 
+</div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+            <td width="77%" height="40"><span class="title" style="color: orange">+ Adicionar RAV Informe</span></td>
+    <td width="23%" height="40" align="right"></td>
+  </tr>
+  <tr>
+    <td colspan="2" id="contentListing">
+<div  style="background-color: #f7f8f8;">
+    <form name="addRav" method="post" action="code/execute/subastasRavAdd.php?token=<?=admin::getParam("token")?>" enctype="multipart/form-data">
+<table class="list" width="100%" style="">
+	<tr>
+            <td width="5%" ></td>
+        <td width="25%" ><select name="rav_rol" class="input"  >
+                <option selected="selected" value="">Seleccionar Rol</option>
+                	<?php
+                    $sql3 = "select rol_uid, rol_description from mdl_roles";
+					$db3->query($sql3);
+					while ($content=$db3->next_record())
+					{	
+					?>
+					<option value="<?=$content["rol_uid"]?>"><?=$content["rol_description"]?></option>					
+					<?php
+					}
+                    ?>
+				</select></td>
+        <td width="20%" ><input name="rav_monto" value=""></td>
+        <td width="20%" ><input name="rav_monto1" value=""></td>
+        <td width="10%" ><input name="rav_tipo" type="hidden" value="2">
+        	</td>
+                <td width="20%" >
+                    <a href="guardar" onclick="document.addRav.submit(); return false;">
+		<img src="lib/save_es.gif" border="0" title="<?=admin::labels('save')?>" alt="<?=admin::labels('save')?>">
+		</a>
+                    
+        	</td>
+    </table>
+    </form>
+</div>
+</td></tr>
+</table>
+	<br />
+<br />

@@ -57,8 +57,8 @@ else
 		$db->query($sSQL);  
 		$rolDesc=admin::getDBvalue("SELECT rol_description FROM mdl_roles where rol_uid=".$rol);
 
-		$modAccess = admin::getDBvalue("select top 1 a.mus_mod_uid from sys_modules_users a, sys_modules b where a.mus_rol_uid=".$rol." and a.mus_mod_uid=b.mod_uid and b.mod_status='ACTIVE'");
-		if($rolDesc=='ROOT')
+		$modAccess = admin::getDBvalue("select top 1 a.mus_mod_uid from sys_modules_users a, sys_modules b where a.mus_rol_uid=".$rol." and a.mus_mod_uid=b.mod_uid and b.mod_status='ACTIVE' and b.mod_parent=0 order by b.mod_position");
+                if($rolDesc=='ROOT')
 			$urlSite = admin::getDBValue("select mod_index from sys_modules where mod_uid=1 and mod_status='ACTIVE'");
 		else
 			$urlSite = admin::getDBValue("select mod_index from sys_modules where mod_uid=". $modAccess ." and mod_status='ACTIVE'");

@@ -1,4 +1,4 @@
-<?
+<?php
 $use_uid=admin::toSql($_REQUEST["use_uid"],"String");
 $sql = "select *,DATE_FORMAT(use_datenac,'%d/%m/%Y') as use_fecha from mdl_users where use_uid=" . $use_uid;
 //echo $sql;die;
@@ -109,7 +109,7 @@ $regusers = $db->next_record();
 		  <tr>
             <td width="16%"><?=admin::labels('photo');?>:</td>
             <td width="84%">
-			<?
+			<?php
 			$imgSavedroot1 = PATH_ROOT . "/admin/upload/users/thumb_" . $regusers["use_image"];
 			$imgSaveddomain1 = PATH_DOMAIN . "/admin/upload/users/thumb_" . $regusers["use_image"];
 			$imgSaveddomain2 = PATH_DOMAIN . "/admin/upload/users/" . $regusers["use_image"];
@@ -137,11 +137,11 @@ $regusers = $db->next_record();
 			</table>
 			</div>
 			<div id="image_add_<?=$regusers["use_uid"]?>" style="display:none;">			</div>
-			<?	}
+			<?php	}
 			else
 				{ ?>
 				<input type="file" name="use_image" id="use_image" size="32" class="input">
-			<?	} ?>
+			<?php	} ?>
 			</td>
           </tr>
           <tr>

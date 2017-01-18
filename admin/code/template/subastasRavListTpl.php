@@ -79,7 +79,7 @@ while ($subasta_list = $pagDb->next_record())
         $rav_rol = admin::getDbValue("select rol_description from mdl_roles where rol_uid=". $subasta_list["rav_rol_uid"]);
 	$rav_monto = trim($subasta_list["rav_monto_inf"]);
 	$rav_monto1 = ($subasta_list["rav_monto_sup"]!=0)?$subasta_list["rav_monto_sup"]:"Sin l&iacute;mite";
-	$rav_tipo =  ($subasta_list["rav_tipologia"]==1)?"Aprobaci&oacute;n":"Informe";
+	$rav_tipo =  ($subasta_list["rav_tipologia"]==1)?"Par&aacute;metros":"Informe";
         $dest="";
 		?> 
 	<div class="groupItem" id="<?=$pro_uid?>">

@@ -1,7 +1,6 @@
-
-<? include_once("database/connection.php"); ?>
-<? include ("core/admin.php"); ?>
-<? admin::initialize('users','usersEdit'); ?>
+<?php include ("core/admin.php");
+admin::initialize('users','usersEdit'); 
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">    
 <html>
 <head>
@@ -69,10 +68,10 @@ function removeImg(id){
 <tr><td valign="top"><? include_once("skin/header.php");?>
 </td></tr>
   <tr>
-    <td valign="top" id="content"><? include_once("code/template/usersEditTpl.php"); ?></td>
+    <td valign="top" id="content"><?php include_once("code/template/usersEditTpl.php"); ?></td>
   </tr>
 <tr><td>
-  <? include("skin/footer.php"); ?>
+  <?php include("skin/footer.php"); ?>
   </td></tr>
 </table>
 </body>

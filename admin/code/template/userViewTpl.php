@@ -70,9 +70,9 @@ $regusers = $db->next_record();
           </tr>
           
           <tr>
-            <td><?=admin::labels('roles','label');?>:</td>
+            <td><?=admin::labels('user','userrol');?>:</td>
             <td>
-            <?
+            <?php
 			$UserRol=admin::getDBvalue("select rol_description from mdl_roles, mdl_roles_users where rus_rol_uid=rol_uid and rus_usr_uid=".$regusers["usr_uid"]);
 			echo $UserRol;
             ?>

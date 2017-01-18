@@ -3,6 +3,8 @@
 #################
 path.php
 admin/core/path.php
+Thumbs.db
+image/
 #################
 ## Eclipse
 #################

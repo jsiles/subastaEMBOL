@@ -163,7 +163,7 @@ function subastaOff()
 									<p class="left">Precio: <?=$moneda?> <?=$montoGlobal?>.<sup><?=$centavos?></sup></p>
                                     <div class="clear"></div>
                                     <?php
-                                    if($factor)
+                                    if(isset($factor))
 									{
 									?>
                                      <p class="left"> Factor de ajuste:<?=$factor?>%
@@ -219,7 +219,7 @@ function subastaOff()
 										<form name="frmContact" id="formA" action="" method="post">
 		<p id="subastaP" style="width:500px;display:none;">
 			<label class="bold">Oferta:</label>
-			<input name="ct_value" id="ct_value" type="text" size="15" onKeyUp="valOfert();" class="inputB"/> <a href="<?=$domain?>/code/bids.php?uid=<?=$details["sub_uid"]?>" id="planCuentas" rel="facebox" class="addcart">Ofertar</a>
+			<input name="ct_value" id="ct_value" type="text" size="15" onKeyUp="valOfert();" class="inputB"/> <a href="<?=$domain?>/code/bids.php?uid=<?=$details["sub_uid"]?>" id="planCuentas" style="color: green" rel="facebox" class="addcart">Ofertar</a>
         (Ingrese <?php 
 		if($bidsCompra=='COMPRA')
 		{

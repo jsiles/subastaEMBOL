@@ -23,7 +23,7 @@
 									else
 									$valBids=admin::getDBvalue("SELECT max(bid_mount) FROM mdl_bid where bid_pro_uid='".$details["pro_uid"]."'");
 									$factor = admin::getDbValue("select inc_ajuste from mdl_incoterm where inc_delete=0 and inc_cli_uid=".admin::getSession("uidClient")." and inc_sub_uid=".$details["sub_uid"]);
-									$regBids = admin::getDbValue("select count(*) from mdl_bid where bid_sub_uid = ".$details["sub_uid"]);
+                        						$regBids = admin::getDbValue("select count(*) from mdl_bid where bid_sub_uid = ".$details["sub_uid"]);
 									
 									if(!$valBids) 
 								    {
@@ -41,8 +41,9 @@
 								?>
 									<p class="left">Precio: <?=$moneda?>	<?=$montoGlobal?>.<sup><?=$centavos?></sup></p> <div class="clear"></div>
                                    <?php
-                                   if($factor)
+                                   if(isset($factor))
 								   {
+                                       
 								   ?>
                                     <p class="left"> Factor de ajuste:<?=$factor?>%
                                     <div class="clear"></div>

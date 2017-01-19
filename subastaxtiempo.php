@@ -51,7 +51,7 @@ $timeInicio = 2;
 	$timetobe=0;
 	$timeInicio = 3;
 	}
-        //echo "@@".$timeInicio."@@";
+//        echo "@@".$timeInicio."@@"."select max(bid_uid) from mdl_bid where bid_sub_uid = ".$details["sub_uid"]." and bid_cli_uid=".admin::getSession("uidClient");
 $regBidsWin = admin::getDbValue("select max(bid_uid) from mdl_bid where bid_sub_uid = ".$details["sub_uid"]." and bid_cli_uid=".admin::getSession("uidClient"));
 									if(isset($regBidsWin))
 									{

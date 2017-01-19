@@ -19,6 +19,7 @@ $sql = "SELECT * FROM sys_users " .
 $numfiles = $db->numrows($sql); 
 $db->query($sql);
 
+
 //echo " numfiles ". $numfiles ." ". $sql;die;
 
 if($numfiles==0) {	

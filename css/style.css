@@ -265,6 +265,7 @@ span, label, p, td, h2 {
 	float: left;
 	width: 80%;
 	height: 55px;
+	
 }
 
 #menu ul {
@@ -272,10 +273,14 @@ span, label, p, td, h2 {
 	padding: 17px 40px 0px 25px;
 	list-style: none;
 	line-height: normal;
+	
 }
 
 #menu li {
 	float: left;
+	border-radius:5px;
+	background-color:#aaa;
+	
 }
 
 #menu span {
@@ -283,6 +288,7 @@ span, label, p, td, h2 {
 	display: block;
 	height: 25px;
 	padding-top: 6px;
+	color: #fff;
 }
 
 #menu a {
@@ -292,7 +298,6 @@ span, label, p, td, h2 {
 	text-decoration: none;
 	font-size: 13px;
 	font-weight: bold;
-	color: #000;
 }
 
 #menu a:hover {
@@ -301,14 +306,14 @@ span, label, p, td, h2 {
 
 #menu li.active {
 	background-color:#eee;
+	border-radius:5px;
 }
 
 #menu li.active a {
-	background-color:#ddd;
 }
 
 #menu li.active span {
-	background-color:#ddd;
+	color: #000;
 }
 
 /** SEARCH */
@@ -389,19 +394,21 @@ span, label, p, td, h2 {
 #footer {
 	width: 95%;
 	margin: 0px auto;
-	font-size: 15px;
+	font-size: 12px;
 	border-top:double;
+
 }
 
 #footer-menu {
 	height: 20px;
+	
 }
 
 #footer p {
 	margin: 0px;
 	padding: 2px 0px 0px 0px;
 	text-align: center;
-	color: #000;
+	
 }
 
 #footer ul {
@@ -413,12 +420,13 @@ span, label, p, td, h2 {
 
 #footer li {
 	display: inline;
-	padding: 0px 15px;
-	/*background: url(images/homepage14.jpg) no-repeat left 2px;*/
+	padding: 7px 7px 7px 7px;
+	border-radius:5px;
+	background-color:#aaa;
 }
 
 #footer li a {
-	color: #888888;
+	color: #fff;
 }
 
 #footer .first {

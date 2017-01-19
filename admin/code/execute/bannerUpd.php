@@ -41,7 +41,7 @@ if ($FILES["name"] != '')
 	
 	
 	// Subimos el archivo con el nombre original
-    redimImgWidth($image1t, PATH_ROOT."/img/banner/".$fileName,770,100);
+        redimImgWidth($image1t, PATH_ROOT."/img/banner/".$fileName,770,100);
 	redimImgWidth($image1t, PATH_ROOT."/img/banner/thumb_".$fileName,60,100);
 	unlink($image1t);
 	$sql = "UPDATE mdl_banners SET ban_content='".$fileName."' WHERE ban_uid=".$ban_uid;

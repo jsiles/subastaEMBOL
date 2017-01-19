@@ -280,7 +280,7 @@ span, label, p, td, h2 {
 	float: left;
 	border-radius:5px;
 	background-color:#aaa;
-	
+	margin: 0px 1px 0px 1px;
 }
 
 #menu span {
@@ -421,6 +421,7 @@ span, label, p, td, h2 {
 #footer li {
 	display: inline;
 	padding: 7px 7px 7px 7px;
+	margin: 0px 1px 0px 1px;
 	border-radius:5px;
 	background-color:#aaa;
 }

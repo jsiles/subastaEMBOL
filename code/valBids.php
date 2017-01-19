@@ -43,10 +43,10 @@ $timeInicio = 2;
 	
 $regBids = admin::getDbValue("select count(*) from mdl_bid where bid_sub_uid = ".$details["sub_uid"]);
 									$regBidsWin = admin::getDbValue("select max(bid_uid) from mdl_bid where bid_sub_uid = ".$details["sub_uid"]." and bid_cli_uid=".admin::getSession("uidClient"));
-									if(isset($regBidsWin))
+                                                                        if(isset($regBidsWin))
 									{
 									$regBidsWinMax = admin::getDbValue("select max(bid_uid) from mdl_bid where bid_sub_uid = ".$details["sub_uid"]);
-									}	
+                                                                        }	
 ?>
 <script type="text/javascript">
 $(function () {
@@ -178,7 +178,7 @@ function subastaOff()
                                    <?php
 								   if(isset($regBidsWin))
 								   {
-									if(($regBidsWin==$regBidsWinMax)&&($details["sub_finish"]==0))
+									if(($regBidsWin==$regBidsWinMax)&&($details["sub_finish"]==1))
 									{   
 								   ?>
                                    		<p class="left" style="color:#00F">
@@ -186,7 +186,7 @@ function subastaOff()
                                     felicidades su oferta ganan&oacute;</p>
                                     <div class="clear"></div>
                                     <?php
-									}elseif(($regBidsWin!=$regBidsWinMax)&&($details["sub_finish"]==0))
+									}elseif(($regBidsWin!=$regBidsWinMax)&&($details["sub_finish"]==1))
 									{
 									?>
                                    		<p class="left" style="color:#00F">
@@ -219,7 +219,7 @@ function subastaOff()
 										<form name="frmContact" id="formA" action="" method="post">
 		<p id="subastaP" style="width:500px;display:none;">
 			<label class="bold">Oferta:</label>
-			<input name="ct_value" id="ct_value" type="text" size="15" onKeyUp="valOfert();" class="inputB"/> <a href="<?=$domain?>/code/bids.php?uid=<?=$details["sub_uid"]?>" id="planCuentas" style="color: green" rel="facebox" class="addcart">Ofertar</a>
+			<input name="ct_value" id="ct_value" type="text" size="15" onKeyUp="valOfert();" class="inputB"/> <a href="<?=$domain?>/code/bids.php?uid=<?=$details["sub_uid"]?>" id="planCuentas" rel="facebox" class="addcart">Ofertar</a>
         (Ingrese <?php 
 		if($bidsCompra=='COMPRA')
 		{

@@ -257,7 +257,6 @@ function redimImgWH($origen,$destino,$dimension,$calidad)
 function resizeThumbnailImage($thumb_image_name, $image, $width, $height, $start_width, $start_height, $scale){
 	list($imagewidth, $imageheight, $imageType) = getimagesize($image);
 	$imageType = image_type_to_mime_type($imageType);
-	
 	$newImageWidth = ceil($width * $scale);
 	$newImageHeight = ceil($height * $scale);
 	$newImage = imagecreatetruecolor($newImageWidth,$newImageHeight);

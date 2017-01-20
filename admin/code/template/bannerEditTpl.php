@@ -36,9 +36,9 @@ if ($bannerexist==0) echo '<script language="javascript" type="text/javascript">
             <td valign="top"><?=admin::labels('banner','label');?> (770 x 100):</td>
             <td>
 			<?
-			$imgSavedroot1 = PATH_ROOT."/img/banner/".$banner["ban_file"];
+			$imgSavedroot1 = PATH_ROOT."/img/banner/thumb_".$banner["ban_file"];
 			$imgSaveddomain1 = PATH_DOMAIN."/img/banner/thumb_".$banner["ban_file"];
-			$imgSaveddomain2 = PATH_DOMAIN."/img/banner/".$banner["ban_file"];
+			$imgSaveddomain2 = PATH_DOMAIN."/img/banner/thumb_".$banner["ban_file"];
 			if (file_exists($imgSavedroot1) && $banner["ban_file"]!="")
 				{
 				$extensionFile = admin::getExtension($banner["ban_file"]);

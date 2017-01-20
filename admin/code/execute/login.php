@@ -10,12 +10,15 @@ if ($usuario=="" || $contrasena==""){
 	header('Location: ../../index.php');	
 	die;
 	}
-$sql = "SELECT * FROM sys_users 
-		WHERE usr_login='".admin::toSql($usuario,'text')."' and 
-			  usr_pass=LOWER(CONVERT(VARCHAR(32),HashBytes('MD5','".admin::toSql($contrasena,'text')."'),2))";
+$sql = "SELECT * FROM sys_users " .
+        "		WHERE usr_login='".admin::toSql($usuario,'text')."' and ".
+        " usr_pass ='".md5($contrasena)."' ";
+        
+			  //usr_pass=LOWER(CONVERT(VARCHAR(32),HashBytes('MD5','".admin::toSql($contrasena,'text')."'),2))";
 
 $numfiles = $db->numrows($sql); 
 $db->query($sql);
+
 
 //echo " numfiles ". $numfiles ." ". $sql;die;
 

@@ -7,7 +7,7 @@ admin::initialize('users','usersEdit',false);
 //print_r('<br />'.$_POST);
 $use_uidA = $_POST["use_uidA"];
 $usr_loginA = admin::toSql(safeHtml($_POST["usr_login"]),"String");
-$usr_passA = admin::toSql(safeHtml($_POST["usr_pass"]),"String");
+$usr_passA = $_POST["usr_pass"];
 $usr_firstnameA = admin::toSql(safeHtml($_POST["usr_firstname"]),"String");
 $usr_lastnameA = admin::toSql(safeHtml($_POST["usr_lastname"]),"String");
 $usr_emailA = admin::toSql(safeHtml($_POST["usr_email"]),"String");
@@ -16,8 +16,8 @@ $usr_photoA = admin::toSql(safeHtml($_POST["usr_photo"]),"String");
 $usr_statusA = admin::toSql(safeHtml($_POST["usr_status"]),"String");
 
 $usr_rolA = admin::toSql(safeHtml($_POST["usr_rol"]),"Number");
-
-if ($usr_passA!="") $changepass = "usr_pass='" . md5($usr_passA) . "',";
+//echo $usr_passA;
+if ($usr_passA!="") $changepassA = "usr_pass='" . md5($usr_passA) . "',";
 
 $sql = "update sys_users set
 			usr_login='".$usr_loginA."',
@@ -28,6 +28,7 @@ if($usr_statusA!='') $sql .= "			usr_status='".$usr_statusA."', ";
 $sql .= "			".$changepassA."
 			usr_email='".$usr_emailA."'
 		where usr_uid=".$use_uidA;
+//echo $sql;die;
 $db->query($sql);
 
 // SUBIENDO LA IMAGEN NOTICIAS

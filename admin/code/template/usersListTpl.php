@@ -4,7 +4,7 @@ $arrayscript = "<script>
 var items =new Array();
 ";
 
-if ($_SESSION["usr_uid"]!=1 && $_SESSION["usr_uid"]!=2)	$filtro_usr_uid = " and use_usr_uid=" . $_SESSION["usr_uid"];
+if ($_SESSION["usr_uid"]!=1 && $_SESSION["usr_uid"]!=2)	$filtro_usr_uid = " and use_usr_uid>2";
 else $filtro_usr_uid="";
 
 /********EndResetColorDelete*************/

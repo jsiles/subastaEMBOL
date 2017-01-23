@@ -4,7 +4,7 @@ if($uidClient){
 $name = admin::getDbValue("select concat(cli_firstname,' ',cli_lastname) from mdl_client where cli_uid=".$uidClient);
 $foto = admin::getDbValue("select cli_photo from mdl_client where cli_uid=".$uidClient);
 }
-$imgs = admin::getDbValue("select top 1 ban_content from mdl_banners_contents, mdl_banners where mbc_delete<>1  and mbc_ban_uid=ban_uid order by mbc_position ,mbc_ban_uid");
+$imgs = admin::getDbValue("select top 1 ban_file from mdl_banners_contents, mdl_banners where mbc_delete<>1  and mbc_ban_uid=ban_uid order by mbc_position ,mbc_ban_uid");
 ?>
 <div id="top-header" class="container">
 			<div id="logo">
@@ -14,7 +14,7 @@ $imgs = admin::getDbValue("select top 1 ban_content from mdl_banners_contents, m
 				
 			<div id="top-banner">
 				<div id="colA">
-					<?=$imgs?>
+					<img src="<?=$domain?>/img/banner/img_<?=$imgs?>?<?=time()?>" alt="<?=$name?>" title="<?=$name?>" border="0"/>
 				</div>
 				<?php if($uidClient){?>
                 <div id="colB">
@@ -23,11 +23,11 @@ $imgs = admin::getDbValue("select top 1 ban_content from mdl_banners_contents, m
                     <p style="text-align:left;padding-left:10px;vertical-align:top;"><?php
                     if(file_exists($rootsystem."/img/client/thumb_".$foto))
 					{
-					?><img src="<?=$domain."/img/client/thumb_".$foto?>" alt="<?=$name?>" title="<?=$name?>" border="0"/>
+					?><img src="<?=$domain."/img/client/thumb_".$foto?>?<?=time()?>" alt="<?=$name?>" title="<?=$name?>" border="0"/>
                     <?php
 					}else{
 					?>
-                    <img src="<?=$domain."/img/user.gif"?>" alt="<?=$name?>" title="<?=$name?>" border="0"/>
+                    <img src="<?=$domain."/img/user.gif"?>?<?=time()?>" alt="<?=$name?>" title="<?=$name?>" border="0"/>
                     <?php
 					}
 					?>

@@ -6,7 +6,7 @@
                     
 					$sSQL ="select xit_uid, xit_sub_uid, xit_product, xit_description, xit_image, xit_price, xit_unity from mdl_xitem, mdl_clixitem where clx_xit_uid=xit_uid and xit_sub_uid= ".$details["sub_uid"]." and xit_delete=0 and clx_delete=0 and clx_cli_uid=".admin::getSession("uidClient");
 					$db2->query($sSQL);
-					//echo $sSQL;
+					echo $sSQL;
 					while($xitem=$db2->next_record())
 					{
 					?> 

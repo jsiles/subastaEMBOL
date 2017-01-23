@@ -36,7 +36,7 @@ echo "noow:".date("Y/m/d H:i:s");
 echo "<br>";
 echo "timedead:".$timedead."<br>"."sub_deadtime:".$details["sub_deadtime"]."<br>".$sw;*/
 
-if (($timetobe>0)&&($finish==0)){
+if (($timetobe>0)&&($finish==1)){
 $daystobe=intval($timetobe/86400);
 $timetobe=$timetobe-($daystobe*86400);
 $hourstobe=intval($timetobe/3600);
@@ -47,7 +47,7 @@ $faltante =$daystobe.'d '.$hourstobe.'h '.$minutetobe.'m '.$timetobe.'s ';
 $timeInicio = 1;
 $m=1;
 }
-elseif(($timedead>0)&&($finish==0))
+elseif(($timedead>0)&&($finish==1))
 {
 $faltante='Iniciada';
 //echo $faltante;

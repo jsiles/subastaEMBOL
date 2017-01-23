@@ -140,6 +140,7 @@
                                     <p class="left">Tiempo restante: <?=$faltante?></p><div class="clear"></div>
 									<p class="left">Precio: <?=$moneda." ".$montoGlobal?>.<sup><?=$centavos?></sup></p>
 									<?php
+                                                                        //echo $urlLink;
 									if($faltante!='Concluido')
 									{
                                     ?><p class="right"><a href="<?=$urlLink?>" class="addcart">Ir a la puja</a></p>

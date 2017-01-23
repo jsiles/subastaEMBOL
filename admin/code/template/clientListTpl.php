@@ -90,7 +90,7 @@ if ($nroReg>0)
             </a>
         </td>
 		<td width="15%" style="color:#16652f">Usuario</td>
-        <td width="8%" style="color:#16652f">Contrase&ntilde;a</td>
+        <!--<td width="8%" style="color:#16652f">Contrase&ntilde;a</td>-->
         <td align="center" width="11%" height="5"></td>
    		<td align="center" width="12%" height="5"></td>
 		<td align="center" width="12%" height="5"></td>
@@ -124,7 +124,7 @@ while ($user_list = $pagDb->next_record())
 	<tr><td width="14%"><?=$mcl_firstname;?></td>
     <td width="14%"><?=$mcl_lastname;?></td>
     <td width="15%"><?=$mcl_user;?></td>
-    <td width="8%"><?=trim(SymmetricCrypt::decrypt($mcl_pass));?></td>
+   <!-- <td width="8%"><?=trim(SymmetricCrypt::decrypt($mcl_pass));?></td>-->
 	<td align="center" width="11%" height="5">
     	<a href="clientView.php?mcl_uid=<?=$mcl_uid?>&token=<?=admin::getParam("token");?>"><img src="lib/view_es.gif" border="0" title="<?=admin::labels('view')?>" alt="<?=admin::labels('view')?>">
 	</a>

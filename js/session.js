@@ -22,18 +22,31 @@ user = $("#user").val();
 email= $("#email").val();
 firstnameClient = $("#firstnameClient").val();
 lastnameClient = $("#lastnameClient").val();
-if((user.length>0)&&((email.length>0)))
+pass = $("#pass").val();
+idUser = $("#idUser").val();
+if((user.length>0)&&(pass.length>0)&&((email.length>0)))
 {
+
+ $("#companyName").val('');
+ $("#reasonSocial").val('');
+ $("#user").val('');
+ $("#email").val('');
+ $("#firstnameClient").val('');
+ $("#lastnameClient").val('');
+ $("#pass").val('');
+ 
+ 
 $.ajax({
    type: "POST",
    url: SERVER+"/code/userAdd.php",
-   data: "companyName="+companyName+"&reasonSocial="+reasonSocial+"&user="+user+"&email="+email+"&firstnameClient="+firstnameClient+"&lastnameClient="+lastnameClient,
+   data: "companyName="+companyName+"&reasonSocial="+reasonSocial+"&user="+user+"&email="+email+"&firstnameClient="+firstnameClient+"&lastnameClient="+lastnameClient+"&pass="+pass+"&idUser="+idUser,
    success: function(msg){
-     document.location.href=msg;
+     //document.location.href=msg;
+     $("#message").html(msg);
    }
  });
 }else{
-	$("#message").html('Usuario y Correo electr&oacute;nico requeridos.');
+	$("#message").html('Usuario, contrase&ntilde;a y/o correo electr&oacute;nico requeridos.');
 	}
 	return false;
 }

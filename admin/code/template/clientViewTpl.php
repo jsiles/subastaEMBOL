@@ -58,7 +58,7 @@ $regusers = $db->next_record();
           
 		   <tr>
             <td width="29%"><?=admin::labels('login','password');?>:</td>
-            <td width="64%"><span id="deltag"><?=trim(SymmetricCrypt::decrypt($regusers["cli_pass"]))?>&nbsp;</td>
+            <td width="64%"><span id="deltag">************</td>
             <td width="7%"><a href="pass" id="linkpass" style="display:none;" onClick="return generarPassword(this.form,'cli_pass',5);">Generar</a>&nbsp;</td>
           </tr>
 		  <tr>

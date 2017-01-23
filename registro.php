@@ -19,11 +19,11 @@
 	    <?php include("code/header.php");?>
         <?php include("code/menu_header.php");?>
 		<div id="page" class="container">
-        <? include("code/registro.php");?>
-		<? include("code/column.php");?>
+        <?php include("code/registro.php");?>
+		<?php include("code/column.php");?>
 		</div>	
 	</div>
 </div>
-<? include("code/footer.php");?>
+<?php include("code/footer.php");?>
 </body>
 </html>

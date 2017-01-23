@@ -34,11 +34,11 @@ switch($rolLogged){
 $search = admin::toSql(admin::getParam("search"),"String");
 
 if (!$search || $search==''){
-	$_pagi_sql= "select usr_uid,usr_lastname,usr_firstname,usr_status, rol_description from sys_users,mdl_roles, mdl_roles_users where rus_rol_uid=rol_uid and usr_delete=0 and rus_usr_uid=usr_uid ".$noRoot.$orderCode;
+	$_pagi_sql= "select usr_uid,usr_lastname,usr_firstname,usr_status, rol_description, usr_login, usr_pass from sys_users,mdl_roles, mdl_roles_users where rus_rol_uid=rol_uid and usr_delete=0 and rus_usr_uid=usr_uid ".$noRoot.$orderCode;
 	$nroReg=admin::getDBvalue("select count(usr_uid) from sys_users,mdl_roles, mdl_roles_users where rus_rol_uid=rol_uid and usr_delete=0 and rus_usr_uid=usr_uid ".$noRoot);
 }
 else{
-	$_pagi_sql= "select usr_uid,usr_lastname,usr_firstname,usr_status, rol_description, rol_description from sys_users,mdl_roles, mdl_roles_users where rus_rol_uid=rol_uid and usr_delete=0 and rus_usr_uid=usr_uid and (MATCH(usr_login, usr_firstname, usr_lastname, usr_email, usr_phone, usr_cellular, rol_description) AGAINST('+".$search."%' IN BOOLEAN MODE) or usr_login like '%".$search."%' or usr_firstname like '%".$search."%' or usr_lastname like '%".$search."%' or usr_email like '%".$search."%' or usr_phone like '%".$search."%' or usr_cellular like '%".$search."%' or rol_description like '%".$search."%') ".$noRoot.$orderCode;
+	$_pagi_sql= "select usr_uid,usr_lastname,usr_firstname,usr_status, rol_description, rol_description, usr_login, usr_pass from sys_users,mdl_roles, mdl_roles_users where rus_rol_uid=rol_uid and usr_delete=0 and rus_usr_uid=usr_uid and (MATCH(usr_login, usr_firstname, usr_lastname, usr_email, usr_phone, usr_cellular, rol_description) AGAINST('+".$search."%' IN BOOLEAN MODE) or usr_login like '%".$search."%' or usr_firstname like '%".$search."%' or usr_lastname like '%".$search."%' or usr_email like '%".$search."%' or usr_phone like '%".$search."%' or usr_cellular like '%".$search."%' or rol_description like '%".$search."%') ".$noRoot.$orderCode;
 	$nroReg=admin::getDBvalue("select count(usr_uid) from sys_users,mdl_roles, mdl_roles_users where rus_rol_uid=rol_uid and usr_delete=0 and rus_usr_uid=usr_uid and usr_login like '%".$search."%' or usr_firstname like '%".$search."%' or usr_lastname like '%".$search."%' or usr_email like '%".$search."%' or usr_phone like '%".$search."%' or usr_cellular like '%".$search."%' or rol_description like '%".$search."%') ".$noRoot);
 }	
 //echo $_pagi_sql;
@@ -93,11 +93,17 @@ if ($nroReg>0){
 				<?=admin::labels('lastname');?>:
             </a>
         </td>
-		<td width="15%">
+		<td width="14%">
         	<a href="userList.php?order=<?=$dateOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$dateClass;?>">
 				<?=admin::labels('user','userrol');?>:
             </a>
         </td>
+        
+        <td width="10%">
+        			Usuario:
+            
+        </td>
+        
         <td width="8%" ></td>
         <td align="center" width="11%" height="5"></td>
    		<td align="center" width="12%" height="5"></td>
@@ -116,6 +122,8 @@ if ($nroReg>0){
 		$UserRol=$user_list["rol_description"];
 		$usr_lastnameA = $user_list["usr_lastname"];
 		$usr_firstnameA = $user_list["usr_firstname"];
+                $usr_loginA = $user_list["usr_login"];
+                $usr_passA = $user_list["usr_pass"];
 		$usr_status = $user_list["usr_status"];
 		if ($usr_status=='ACTIVE') $labels_content='status_on';
 		else $labels_content='status_off';
@@ -127,7 +135,9 @@ if ($nroReg>0){
 <table class="list" width="100%">
 	<tr><td width="14%"><?=$usr_firstnameA;?></td>
     <td width="14%"><?=$usr_lastnameA;?></td>
-    <td width="15%"><?=$UserRol;?></td>
+    <td width="14%"><?=$UserRol;?></td>
+    <td width="10%"><?=$usr_loginA;?></td>
+    
     <td width="8%"></td>
 	<td align="center" width="11%" height="5">
 		   <a href="userView.php?usr_uidA=<?=$usr_uidA?>&token=<?=admin::getParam("token");?>">

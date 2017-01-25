@@ -159,8 +159,8 @@
 				<td width="64%">
 				<select name="sub_modalidad" id="sub_modalidad" class="input" onchange="subastaOpcion();" >
                 	<option value="TIEMPO">Por tiempo</option>
-                    <option value="HOLANDESA">Inversa Holandesa</option>
-                    <option value="JAPONESA">Inversa Japonesa</option>
+                   <!-- <option value="HOLANDESA">Inversa Holandesa</option>
+                    <option value="JAPONESA">Inversa Japonesa</option>-->
                     <option value="ITEM">Por Item</option>
 				</select>
 				<br /><span id="div_sub_modalidad" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>	

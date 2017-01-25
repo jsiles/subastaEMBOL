@@ -4,11 +4,13 @@
 path.php
 admin/core/path.php
 Thumbs.db
-img/
+img/client/
 nbproject/private/private.xml
 admin/upload/users/
 admin/upload/sites/
 admin/upload/profile/
+docs/subasta/
+
 #################
 ## Eclipse
 #################

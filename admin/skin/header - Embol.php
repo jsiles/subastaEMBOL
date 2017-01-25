@@ -1,5 +1,5 @@
 <?php
-		$conParent = isset($_GET["con_parent"]) ? '?con_parent='.$_GET["con_parent"].'&token='.$_GET['token'] : '?token='.$_GET['token'];
+	$conParent = isset($_GET["con_parent"]) ? '?con_parent='.$_GET["con_parent"].'&token='.$_GET['token'] : '?token='.$_GET['token'];
 ?>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr><td valign="top">    

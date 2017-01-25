@@ -1,5 +1,6 @@
 <?php
 $sub_uid=admin::getParam("sub_uid");
+$pro_uid=admin::getParam("pro_uid");
 if (!$sub_uid) header('Location: ../../subastasList.php?token='.$token);
 $sql = "SELECT * FROM mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_status='ACTIVE' and sub_uid='".$sub_uid."'";
 $db->query($sql);
@@ -36,6 +37,7 @@ $prod = $db->next_record();
 	<tr><td width="15%">
 	  <input name="pro_product" id="pro_product" type="text"  size="15" autocomplete='off'/>	 
       <input name="sub_uid" id="sub_uid" value="<?=$sub_uid?>" type="hidden" />
+      <input name="pro_uid" id="sub_uid" value="<?=$pro_uid?>" type="hidden" />
       </td>
     <td width="15%"><input name="pro_description" id="pro_description" type="text"  size="15" autocomplete='off'/></td>
     <td width="20%">
@@ -72,9 +74,11 @@ $prod = $db->next_record();
     </td>
     </tr>
    <?php
-   $sSQL= "select * from mdl_xitem where xit_delete=0 and xit_sub_uid='".$sub_uid."' order by xit_uid asc";
+   $sSQL= "SELECT * FROM mdl_xitem WHERE xit_delete=0 and xit_sub_uid='".$sub_uid."' order by xit_uid asc";
+$nroReg = admin::getDbValue("SELECT count(*) FROM mdl_xitem WHERE xit_delete=0 and xit_sub_uid='".$sub_uid."'");
+//echo $nroReg."ssss";  
 $db2->query($sSQL);
-$nroReg = $db2->numrows();
+
 if ($nroReg>0)
 	{
 	?> 
@@ -225,7 +229,7 @@ else
 <div  style="background-color: #f7f8f8;">
 <table class="list"  width="100%">
 	<tr><td height="30px" align="center" class="bold">
-	<?=admin::labels('subastas','noIncoterm')?>
+	No hay registros
 	</td></tr>	
  </table>
 </div>
@@ -240,7 +244,7 @@ else
 	  	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 			<tr>
 				<td width="59%" align="center">
-				<a href="subastasList.php?token=<?=admin::getParam("token")?>" class="button" >Volver</a></td>
+				<a href="subastasList.php?token=<?=admin::getParam("token")?>" class="button" >Finalizar</a></td>
 		<td width="41%" style="font-size:11px;">&nbsp;
 		</td>
           

@@ -153,6 +153,10 @@ while ($subasta_list = $pagDb->next_record())
 //	echo $pro_status;
 	$deadtime = $subasta_list["deadtime"];
 	$sub_finish = $subasta_list["estado"];
+        
+        if(($deadtime=='subastandose')&&($sub_finish==1)) $sub_finish=2;
+         $countBids=admin::getDBvalue("SELECT count(*) FROM mdl_bid where bid_sub_uid='".$sub_uid."' and bid_cli_uid!=0");
+        if(($countBids==0)&&($sub_finish==3)) $sub_finish=7;
     /*
     
     ESTADOS DE UNA SUBASTA
@@ -160,14 +164,13 @@ while ($subasta_list = $pagDb->next_record())
     0 SOLICITUD
     1 APROBADA
     2 SUBASTANDOSE
-    3 CONCLUIDA
+    3 INFORME
     4 ADJUDICADA
     5 ANULADA
     6 RECHAZADA
     7 DESIERTA
 
      */
-//echo $sub_finish;
 
     switch ($sub_finish) {
     	case  0:
@@ -180,7 +183,7 @@ while ($subasta_list = $pagDb->next_record())
     		$sub_estado  ='SUBASTANDOSE';
     		break;
     	case  3:
-    		$sub_estado  ='CONCLUIDA';
+    		$sub_estado  ='INFORME';
     		break;
     	case  4:
     		$sub_estado  ='ADJUDICADA';
@@ -188,7 +191,12 @@ while ($subasta_list = $pagDb->next_record())
     	case  5:
     		$sub_estado  ='ANULADA';
     		break;
-    	
+    	case  6:
+    		$sub_estado  ='RECHAZADA';
+    		break;
+        case  7:
+    		$sub_estado  ='DESIERTA';
+    		break;   
     	default:
     		$sub_estado  ='SOLICITUD';
     		break;
@@ -216,7 +224,6 @@ while ($subasta_list = $pagDb->next_record())
         <td width="10%" ><span><?=$sub_estado?></span></td>
 		<td align="left" width="10%" height="5">
          <?php
-		 $countBids=admin::getDBvalue("SELECT count(*) FROM mdl_bid WHERE bid_sub_uid='".$sub_uid."' and bid_cli_uid!=0");
 		 if ($countBids>0){
 		 ?>
         <a href="excel" onclick="document.location.href='ficheroExcel.php?subasta=<?=$sub_uid?>'; return false;" class="xls">
@@ -227,24 +234,43 @@ while ($subasta_list = $pagDb->next_record())
                 ?>	
 		</td>
         <td align="center" width="5%" height="5">
-    		
-        <a href="autorizacionView.php?pro_uid=<?=$pro_uid?>&token=<?=admin::getParam("token");?>"><img src="lib/view_es.gif" border="0" title="<?=admin::labels('view')?>" alt="<?=admin::labels('view')?>">
+    		 <?php
+                $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=67 and mop_lab_category='Ver' and moa_rol_uid=".$_SESSION['usr_rol']."");
+                if($valuePermit=='ACTIVE'){
+            ?>
+        <a href="autorizacionView.php?pro_uid=<?=$pro_uid?>&token=<?=admin::getParam("token");?>">
+            <img src="lib/view_es.gif" border="0" title="<?=admin::labels('view')?>" alt="<?=admin::labels('view')?>">
 	</a>
+            <?php
+                }else{
+            ?>
+            <img src="lib/view_off_es.gif" border="0" title="<?=admin::labels('view')?>" alt="<?=admin::labels('view')?>">
+            <?php
+                }
+            ?>
         </td>
 	<td align="center" width="5%" height="5">
     <?php 
 	if($sub_finish!=0)
 		{
 	?>
-		<img src="lib/edit_off_es.gif" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
+		<img src="lib/edit_off_es.gif" border="0" title="<?=admin::labels('edit')?>" alt="<?=admin::labels('edit')?>">
 	<?php
 		}else{
 	?>
-
+            <?php
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=67 and mop_lab_category='Editar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+            if($valuePermit=='ACTIVE'){
+            ?>
 		<a href="autorizacionEdit.php?token=<?=admin::getParam("token")?>&pro_uid=<?=$pro_uid?>">
 		<img src="<?=admin::labels('edit','linkImage')?>" border="0" title="<?=admin::labels('edit')?>" alt="<?=admin::labels('edit')?>">
 		</a>
+                <?php
+            }else{
+                ?>
+               <img src="lib/edit_off_es.gif" border="0" title="<?=admin::labels('edit')?>" alt="<?=admin::labels('edit')?>">
         <?php
+            }
         }
         ?>
 	</td>
@@ -257,10 +283,21 @@ while ($subasta_list = $pagDb->next_record())
 	<?php
 		}else{
 	?>
+                
+            <?php
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=67 and mop_lab_category='Eliminar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+            if($valuePermit=='ACTIVE'){
+            ?>
 		<a href="removeList" onclick="removeList('<?=$pro_uid?>');return false;">
 		<img src="<?=admin::labels('delete','linkImage')?>" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
 		</a>
+                <?php
+            }else{
+                ?>
+                <img src="lib/delete_off_es.gif" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
+            
         <?php
+            }
          }
         ?>
 	</td>
@@ -291,10 +328,19 @@ while ($subasta_list = $pagDb->next_record())
             if($rolAplica)
             {
             ?>
-	   <a href="aprobarSubasta" onclick="aprobarSubasta('<?=$sub_uid?>');return false;">
-		<img src="lib/aprobar_on.png" border="0" title="APROBAR" alt="APROBAR">
-		</a>
-		<?php
+                <?php
+                $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=67 and mop_lab_category='Aprobar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+                if($valuePermit=='ACTIVE'){
+                ?>
+                    <a href="aprobarSubasta" onclick="aprobarSubasta('<?=$sub_uid?>');return false;">
+                        <img src="lib/aprobar_on.png" border="0" title="APROBAR" alt="APROBAR">
+                    </a>
+                <?php
+                }else{
+                ?>
+                    <img src="lib/aprobar_off.png" border="0" title="APROBAR" alt="APROBAR">
+	    <?php
+                }
             }else{
                 ?>
 		<img src="lib/aprobar_off.png" border="0" title="APROBAR" alt="APROBAR">
@@ -334,10 +380,20 @@ while ($subasta_list = $pagDb->next_record())
             if($rolAplica)
             {
             ?>
-	   <a href="rechazarSubasta" onclick="rechazarSubasta('<?=$sub_uid?>');return false;">
-		<img src="lib/rechazar_on.png" border="0" title="RECHAZAR" alt="RECHAZAR">
-		</a>
+                <?php
+                $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=67 and mop_lab_category='Rechazar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+                if($valuePermit=='ACTIVE'){
+                ?>
+
+         	    <a href="rechazarSubasta" onclick="rechazarSubasta('<?=$sub_uid?>');return false;">
+                	<img src="lib/rechazar_on.png" border="0" title="RECHAZAR" alt="RECHAZAR">
+                    </a>
+                <?php
+                    }else{
+                ?>
+                	<img src="lib/rechazar_off.png" border="0" title="RECHAZAR" alt="RECHAZAR">
 		<?php
+                    }
             }else{
                 ?>
 		<img src="lib/rechazar_off.png" border="0" title="RECHAZAR" alt="RECHAZAR">
@@ -382,13 +438,22 @@ while ($subasta_list = $pagDb->next_record())
                 if($adjudicaFlag)
                 {
             ?>
-                <a href="adjudicarSubasta.php?token=<?=admin::getParam("token")?>&pro_uid=<?=$pro_uid?>">
-		<img src="lib/adjudicar_on.png" border="0" title="ADJUDICAR" alt="ADJUDICAR">
-		</a>
+                <?php
+                $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=67 and mop_lab_category='Adjudicar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+                if($valuePermit=='ACTIVE'){
+                ?>
+                    <a href="adjudicarSubasta.php?token=<?=admin::getParam("token")?>&pro_uid=<?=$pro_uid?>">
+                        <img src="lib/adjudicar_on.png" border="0" title="ADJUDICAR" alt="ADJUDICAR">
+                    </a>
+                <?php
+                }else{
+                ?>
+                    <img src="lib/adjudicar_off.png" border="0" title="ADJUDICAR" alt="ADJUDICAR">
 		<?php
+                }
                 }else{
                     ?>
-		<img src="lib/adjudicar_off.png" border="0" title="ADJUDICAR" alt="ADJUDICAR">
+                    <img src="lib/adjudicar_off.png" border="0" title="ADJUDICAR" alt="ADJUDICAR">
                 <?php
                 }
             }

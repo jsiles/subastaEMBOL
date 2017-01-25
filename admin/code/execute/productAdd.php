@@ -5,6 +5,7 @@ include_once("../../core/images.php");
 include_once("../../core/thumb.php");
 admin::initialize('subastas','docsCatAdd2',false); 
 $sub_uid=admin::getParam("sub_uid");
+$pro_uid=admin::getParam("pro_uid");
 $fldpro_product=admin::getParam("pro_product");
 $fldpro_description=admin::getParam("pro_description");
 $fldpro_precio=admin::getParam("pro_precio");
@@ -35,9 +36,10 @@ $sSQL = "insert into mdl_xitem(
 						".$fldpro_unidad.", 
 						0
 					)";
-//echo $sSQL; die;
+
 $db->query($sSQL);
 
+//die;
 /*********************************************/
 /*			BEGIN IMAGE						 */
 /*********************************************/
@@ -89,21 +91,19 @@ if ($FILES["name"] != '')
 foreach($fldpro_cli_id as $fldvalue)
 {
 $sql = "insert into mdl_clixitem(
-					clx_uid,
 					clx_cli_uid,
 					clx_xit_uid,
 					clx_delete
 					)
 				values
 					(
-						null, 
 						".$fldvalue.",
 						".$fldxitem.", 
 						0
 					)";
-
+echo $sql;
 $db->query($sql);
 }
 $token=admin::getParam("token");
-header('Location: ../../subastasEdit2.php?token='.$token.'&pro_uid='.$sub_uid);
+header('Location: ../../subastasEdit2.php?token='.$token.'&pro_uid='.$pro_uid.'&sub_uid='.$sub_uid);
 ?>

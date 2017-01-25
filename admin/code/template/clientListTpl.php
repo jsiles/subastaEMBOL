@@ -27,16 +27,18 @@ else $dateOrder=5;
 $search = admin::toSql(admin::getParam("search"),"String");
 if (!$search || $search=='')
 {
-$_pagi_sql= "select cli_uid, cli_user, cli_pass, cli_lastname, cli_firstname, cli_status from mdl_client where 1=1 ".$categoria.$orderCode;
+$_pagi_sql= "select cli_uid, cli_user, cli_pass, cli_lastname, cli_firstname, cli_status,cli_companyname,cli_socialreason,cli_email,cli_photo from mdl_client where 1=1 ".$categoria.$orderCode;
 $nroReg=admin::getDBvalue("select count(cli_uid) from mdl_client where cli_delete=0");
 }
 else
 {
-$_pagi_sql= "select cli_uid, cli_user, cli_pass, cli_lastname, cli_firstname, cli_status from mdl_client where (cli_user like '%".$search."%' or cli_firstname like '%".$search."%' or cli_lastname like '%".$search."%' or cli_email like '%".$search."%') ".$noRoot.$categoria.$orderCode;
+$_pagi_sql= "select cli_uid, cli_user, cli_pass, cli_lastname, cli_firstname, cli_status,cli_companyname,cli_socialreason,cli_email,cli_photo from mdl_client where (cli_user like '%".$search."%' or cli_firstname like '%".$search."%' or cli_lastname like '%".$search."%' or cli_email like '%".$search."%') ".$noRoot.$categoria.$orderCode;
 
 $nroReg=admin::getDBvalue("select count(cli_uid) from mdl_client where (cli_user like '%".$search."%' or cli_firstname like '%".$search."%' or cli_lastname like '%".$search."%' or cli_email like '%".$search."%') ".$categoria.$noRoot);
 }
 
+
+//,cli_companyname,cli_socialreason,cli_email
 //echo $_pagi_sql;	
 $_pagi_cuantos = 20;//Elegí un número pequeño para que se generen varias páginas
 //cantidad de enlaces que se mostrarán como máximo en la barra de navegación
@@ -80,17 +82,15 @@ if ($nroReg>0)
   <table width="100%" >
 	<tr>
     	<td width="14%" class="list1a" style="color:#16652f">
-         	<a href="clientList.php?order=<?=$titOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$titClass;?>">
-		 		<?=admin::labels('firstname');?>:
-            </a>
+            C&oacute;digo de la Empresa:
         </td>
-		<td width="14%" class="list1a" style="color:#16652f">
-        	<a href="clientList.php?order=<?=$nameOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$nameClass;?>">
-				<?=admin::labels('lastname');?>:
-            </a>
+	<td width="14%" class="list1a" style="color:#16652f">
+                    Raz&oacute;n social:
         </td>
-		<td width="15%" style="color:#16652f">Usuario</td>
-        <!--<td width="8%" style="color:#16652f">Contrase&ntilde;a</td>-->
+	<td width="15%" style="color:#16652f">
+                    Correo electr&oacute;nico:
+        </td>
+        <td width="8%" style="color:#16652f">Imagen</td>
         <td align="center" width="11%" height="5"></td>
    		<td align="center" width="12%" height="5"></td>
 		<td align="center" width="12%" height="5"></td>
@@ -110,7 +110,10 @@ while ($user_list = $pagDb->next_record())
 	$mcl_lastname = $user_list["cli_lastname"];
 	$mcl_firstname = $user_list["cli_firstname"];
 	$mcl_user = $user_list["cli_user"];
-	$mcl_pass = $user_list["cli_pass"];
+	$mcl_codigo = $user_list["cli_companyname"];
+	$mcl_razon = $user_list["cli_socialreason"];
+	$mcl_email = $user_list["cli_email"];
+	$mcl_photo = $user_list["cli_photo"];
 	
 	$mcl_status = $user_list["cli_status"];
 	if ($mcl_status=='ACTIVE') $labels_content='status_on';
@@ -121,29 +124,87 @@ while ($user_list = $pagDb->next_record())
   	?> 
   	<div id="sub_<?=$mcl_uid?>" class="<?=$class?>">
 <table class="list" width="100%">
-	<tr><td width="14%"><?=$mcl_firstname;?></td>
-    <td width="14%"><?=$mcl_lastname;?></td>
-    <td width="15%"><?=$mcl_user;?></td>
-   <!-- <td width="8%"><?=trim(SymmetricCrypt::decrypt($mcl_pass));?></td>-->
-	<td align="center" width="11%" height="5">
-    	<a href="clientView.php?mcl_uid=<?=$mcl_uid?>&token=<?=admin::getParam("token");?>"><img src="lib/view_es.gif" border="0" title="<?=admin::labels('view')?>" alt="<?=admin::labels('view')?>">
+	<tr><td width="14%"><?=$mcl_codigo;?></td>
+    <td width="14%"><?=$mcl_razon;?></td>
+    <td width="15%"><?=$mcl_email;?></td>
+    <td width="8%">
+        <?php if(strlen($mcl_photo)>0)
+        {
+            ?>
+        
+        <img src="<?=PATH_DOMAIN."/img/client/thumb_".utf8_decode($mcl_photo)?>"  border="0">
+<?php
+        }
+?>
+        </td>
+    <td align="center" width="11%" height="5">
+            <?php
+                $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=57 and mop_lab_category='Ver' and moa_rol_uid=".$_SESSION['usr_rol']."");
+                if($valuePermit=='ACTIVE'){
+            ?>
+    	<a href="clientView.php?mcl_uid=<?=$mcl_uid?>&token=<?=admin::getParam("token");?>">
+            <img src="lib/view_es.gif" border="0" title="<?=admin::labels('view')?>" alt="<?=admin::labels('view')?>">
 	</a>
+            <?php
+        }else{
+            ?>
+            <img src="lib/view_off_es.gif" border="0" title="<?=admin::labels('view')?>" alt="<?=admin::labels('view')?>">
+        <?php
+        
+        }
+        ?>
     </td>
 	<td align="center" width="12%" height="5">
+            <?php
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=57 and mop_lab_category='Editar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+            if($valuePermit=='ACTIVE'){
+            ?>
     	<a href="clientEdit.php?mcl_uid=<?=$mcl_uid?>&token=<?=admin::getParam("token");?>">
 		<img src="lib/edit_es.gif" border="0" title="<?=admin::labels('edit')?>" alt="<?=admin::labels('edit')?>">
-		</a>
+	</a>
+            <?php
+        }else{
+            ?>
+		<img src="lib/edit_off_es.gif" border="0" title="<?=admin::labels('edit')?>" alt="<?=admin::labels('edit')?>">
+
+            <?php
+            }
+            ?>
     </td>
 	<td align="center" width="12%" height="5">
-    	<a href="" onclick="removeList(<?=$mcl_uid?>); return false;">
+            <?php
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=57 and mop_lab_category='Eliminar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+            if($valuePermit=='ACTIVE'){
+            ?>
+                <a href="" onclick="removeList(<?=$mcl_uid?>); return false;">
 		<img src="lib/delete_es.gif" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
 		</a>
+            <?php
+            }else{
+            ?>
+            <img src="lib/delete_off_es.gif" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
+	    <?php
+            }
+            ?>
+            
     </td>
 	<td align="center" width="14%" height="5">
     <div id="status_<?=$mcl_uid?>">
+        <?php
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=57 and mop_lab_category='Estado' and moa_rol_uid=".$_SESSION['usr_rol']."");
+            if($valuePermit=='ACTIVE'){
+            ?>
 	   <a href=""  onclick="clientCS('<?=$mcl_uid?>','<?=$mcl_status?>'); return false;">
 		<img src="<?=admin::labels($labels_content,'linkImage')?>" border="0" title="<?=admin::labels($labels_content)?>" alt="<?=admin::labels($labels_content)?>">
-		</a>
+	   </a>
+        <?php
+            }else{
+                $status = ($mcl_status=='ACTIVE') ? 'active_off_es.gif':'inactive_off_es.gif';
+        ?>
+        <img src="lib/<?=$status?>" border="0" title="<?=admin::labels($labels_content)?>" alt="<?=admin::labels($labels_content)?>">
+        <?php
+            }
+        ?>
 	</div>
     </td>
 		</tr>

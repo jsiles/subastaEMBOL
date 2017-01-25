@@ -62,29 +62,35 @@ while($row3 = $db3->next_record()){
 		while($row2 = $db2->next_record()){		
 ?>
             <tr>       
-            <td width="10"><input name="mod_uid[<?=$row3["mod_uid"]?>][]" type="checkbox"  value="<?=$row2["mod_uid"]?>" onclick="checkedVerify('mod_uid[<?=$row3["mod_uid"]?>]')" />
+            <td width="10"><input name="mod_uid[<?=$row3["mod_uid"]?>][]" id="mod_uid[<?=$row3["mod_uid"]?>][]" type="checkbox"  value="<?=$row2["mod_uid"]?>" />
 			</td>
             <td ><?=$row2["mod_name"]?> </td>
             <?php
-            if($row2["mod_uid"]==26 || $row2["mod_uid"]==44 || $row2["mod_uid"]==57 || $row2["mod_uid"]==61){
+                        $sSQL = "select mop_uid, mop_lab_category from sys_modules_options where mop_mod_uid=".$row2["mod_uid"]." and mop_status='ACTIVE'";
+                        $cantidadOp=$db->numrows($sSQL);
+                        //echo $sSQL;
+                        //echo $cantidadOp;
+                        if($cantidadOp>0){                                                
 			?>
             <td>
             <table>
                 <tr>
             	<td>&nbsp;</td>
             	<td>
-                	<!--<table border="0" width="100%" class="box">
+                	<table border="0" width="100%" class="box">
 	                    <tr>
-                           	<td width="13"><input name="ver<?=$row2["mod_uid"]?>" id="ver<?=$row2["mod_uid"]?>" type="checkbox" /></td>
-                        	<td>Ver</td>
-                            <td width="13"><input name="editar<?=$row2["mod_uid"]?>" id="editar<?=$row2["mod_uid"]?>" type="checkbox" /></td>
-                        	<td>Editar</td>
-                            <td width="13"><input name="eliminar<?=$row2["mod_uid"]?>" id="eliminar<?=$row2["mod_uid"]?>" type="checkbox" /></td>
-                        	<td>Eliminar</td>
-                            <td width="13"><input name="estado<?=$row2["mod_uid"]?>" id="estado<?=$row2["mod_uid"]?>" type="checkbox" /></td>
-                        	<td>Estado</td>
-             </tr>
-                    </table>-->
+                                <?php
+                                $db->query($sSQL);
+                                while($options=$db->next_record())
+                                {
+                                ?>
+                                <td width="13"><input name="mod_uid[<?=$row3["mod_uid"]?>][<?=$row2["mod_uid"]?>][]"  type="checkbox" value="<?=$options["mop_uid"]?>" /></td>
+                        	<td><?=$options["mop_lab_category"]?></td>
+                                <?php
+                                }
+                                ?>
+                            </tr>
+                    </table>
             	</td>
              </tr></table></td>
             <?php

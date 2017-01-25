@@ -17,9 +17,11 @@ $sub_type = admin::toSql($_POST["sub_type"],"String");
 $sub_modalidad = admin::toSql($_POST["sub_modalidad"],"String");
 $sub_date = date("Y-m-d"); //admin::changeFormatDate(admin::toSql($_POST["sub_date"],"String"),1);
 $sub_hour = date("h:i:s");//admin::toSql($_POST["sub_hour"],"String");
-$sub_mount_base = admin::toSql($_POST["sub_mount_base"],"String");
+$sub_mount_base = $_POST["sub_mount_base"];
+if($sub_modalidad=='ITEM') $sub_mount_base=0;
 $sub_moneda = admin::toSql($_POST["sub_moneda"],"String");
-$sub_mount_unidad = admin::toSql($_POST["sub_mount_unidad"],"String");
+$sub_mount_unidad = $_POST["sub_mount_unidad"];
+if($sub_modalidad=='ITEM') $sub_mount_unidad=0;
 $sub_hour_end0 = admin::changeFormatDate(admin::toSql($_POST["sub_hour_end0"],"String"),1);
 $sub_hour_end1 = admin::toSql($_POST["sub_hour_end1"],"String");
 $sub_hour_end=$sub_hour_end0.' '.$sub_hour_end1;
@@ -96,6 +98,7 @@ $sql = "insert into mdl_subasta
 					'".$dead_time."',
 					0,
 					'SUBASTA')";
+//echo $sql;die;
 	$db->query($sql);
 
 // ingresamos producto

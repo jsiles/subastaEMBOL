@@ -267,12 +267,14 @@ else
 <?php 	} ?>
 <tr>
 <td colspan="2">
-<br />
+    <br>
+    <input name="sub_modalidad" id="sub_modalidad" type="hidden" value="<?=$prod["sub_modalidad"]?>">
 <div id="contentButton">
-	  	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subastaxitem" style="display:">
+	
+    <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subastaxitem" >
 			<tr>
 				<td width="59%" align="center">
-				<a href="subastasEdit2.php?token=<?=admin::getParam("token")?>&pro_uid=<?=admin::getParam("pro_uid")?>" class="button" >Paso 1 de 2</a></td>
+				<a href="subastasEdit2.php?token=<?=admin::getParam("token")?>&pro_uid=<?=admin::getParam("pro_uid")?>&sub_uid=<?=admin::getParam("sub_uid")?>" class="button" >Siguiente</a></td>
 		<td width="41%" style="font-size:11px;">
 		<?=admin::labels('or');?> <a href="subastasList.php?token=<?=admin::getParam("token")?>" ><?=admin::labels('cancel');?></a> 
 		</td>
@@ -280,7 +282,7 @@ else
         </tr>
       </table>
       
-      <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subasta" style="display:">
+      <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subasta" style="display:none">
 			<tr>
 				<td width="59%" align="center">
 				<a href="subastasList.php?token=<?=admin::getParam("token")?>" class="button">Finalizar</a></td>

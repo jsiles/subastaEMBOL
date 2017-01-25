@@ -7,7 +7,7 @@ $titleRol=admin::getDBvalue("SELECT rol_description FROM mdl_roles where rol_uid
 <input name="rol_uid" type="hidden" value="<?=$rol_uid?>" />
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="77%" height="40"><span class="title"><?=admin::labels('roles','edit');?></span></td>
+    <td width="77%" height="40"><span class="title">Ver Rol</span></td>
     <td width="23%" height="40">&nbsp;</td>
   </tr>
   
@@ -22,7 +22,7 @@ $titleRol=admin::getDBvalue("SELECT rol_description FROM mdl_roles where rol_uid
           <tr>
             <td width="15%"><?=admin::labels('user','nameRol');?>:</td>
             <td >
-			<input name="rol_name" type="text" class="input" id="rol_name" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_rol_name').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_rol_name').style.display='none';" value="<?=$titleRol?>" />
+			<?=$titleRol?>
             <br /><span id="div_rol_name" style="display:none;" class="error">Campo Requerido</span>			
             </td>
            </tr>
@@ -56,7 +56,7 @@ $OnOff3 =admin::getDBvalue("select count(mus_uid) from sys_modules_users where m
 ?>
           <tr <?=$displaynone;?> >
             <td width="10">
-            <input name="mod_uid[<?=$row["mod_uid"]?>]" type="checkbox" id="mod_uid[<?=$row["mod_uid"]?>]" <?=$OnOff3?> value="<?=$row["mod_uid"]?>" onclick="checkAll('mod_uid[<?=$row["mod_uid"]?>]')" />
+                <input name="mod_uid[<?=$row["mod_uid"]?>]" disabled type="checkbox" id="mod_uid[<?=$row["mod_uid"]?>]" <?=$OnOff3?> value="<?=$row["mod_uid"]?>" onclick="checkAll('mod_uid[<?=$row["mod_uid"]?>]')" />
 			</td>
             <td><?=$row["mod_name"]?></td>
             
@@ -78,7 +78,7 @@ $OnOff3 =admin::getDBvalue("select count(mus_uid) from sys_modules_users where m
                     	else $OnOff4='';		
             ?>
             <tr>       
-            <td width="10"><input name="mod_uid[<?=$row["mod_uid"]?>][]" type="checkbox"  <?=$OnOff4?> value="<?=$row2["mod_uid"]?>"  />
+            <td width="10"><input disabled name="mod_uid[<?=$row["mod_uid"]?>][]" type="checkbox"  <?=$OnOff4?> value="<?=$row2["mod_uid"]?>"  />
 			</td>
             <td ><?=$row2["mod_name"]?></td>
              <?php
@@ -104,7 +104,7 @@ $OnOff3 =admin::getDBvalue("select count(mus_uid) from sys_modules_users where m
                                     if($active=='ACTIVE') $checked='checked';
                                     else $checked='';
                                 ?>
-                                <td width="13"><input name="mod_uid[<?=$row["mod_uid"]?>][<?=$row2["mod_uid"]?>][]" <?=$checked?> type="checkbox" value="<?=$options["mop_uid"]?>" /></td>
+                                <td width="13"><input disabled name="mod_uid[<?=$row["mod_uid"]?>][<?=$row2["mod_uid"]?>][]" <?=$checked?> type="checkbox" value="<?=$options["mop_uid"]?>" /></td>
                         	<td><?=$options["mop_lab_category"]?></td>
                                 <?php
                                 }
@@ -138,7 +138,7 @@ $OnOff3 =admin::getDBvalue("select count(mus_uid) from sys_modules_users where m
             	<td>
                 	<table border="0" width="100%" class="box">
 	                    <tr>
-                        	<td width="10"><input name="mod_uid[<?=$row["mod_uid"]?>][interior][]" type="checkbox"  <?=$checked?> value="<?=$row3["mof_mfl_uid"]?>" onclick="checkedVerify('mod_uid[<?=$row["mod_uid"]?>]')" /></td>
+                        	<td width="10"><input disabled name="mod_uid[<?=$row["mod_uid"]?>][interior][]" type="checkbox"  <?=$checked?> value="<?=$row3["mof_mfl_uid"]?>" onclick="checkedVerify('mod_uid[<?=$row["mod_uid"]?>]')" /></td>
                         	<td><?=$row3["lab_label"]?></td>
                         </tr>
                     </table>
@@ -245,12 +245,7 @@ while($row = $db->next_record()){
 	  	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 			<tr>
 				<td width="59%" align="center">
-				<a href="#" onclick="verifyRoles();" class="button">
-				<?=admin::labels('register');?>
-				</a> 
+                                    <a href="rolesList.php?token=<?=admin::getParam("token")?>" class="button" >Volver</a> 
 				</td>
-          <td width="41%" style="font-size:11px;">
-		  		<?=admin::labels('or');?> <a href="rolesList.php?token=<?=admin::getParam("token")?>" ><?=admin::labels('cancel');?></a> 
-		  </td>
         </tr>
       </table></div>

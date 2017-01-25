@@ -1,4 +1,4 @@
-<?
+<?php
 $con_uid = admin::toSql(admin::getParam("con_uid"),"Number");
 $sql =  "select * from mdl_contents 
             left join mdl_contents_languages on (con_uid=col_con_uid) 
@@ -38,7 +38,7 @@ $nivel=admin::getDbValue("select con_level from mdl_contents where con_uid=".adm
           <tr style="display:<?=$_GET["wys"]=="off" ? "none":""?>">
             <td><?=admin::labels('contents','in');?>: </td>
             <td>
-			<?
+			<?php
             if ($nivel==2)
             {
             $sql= "select * from mdl_contents where con_uid=".$content["con_parent"];

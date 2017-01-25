@@ -15,6 +15,11 @@ function checkedVerify(parent){
 				if(interiores.item(i).checked==true)
 					sw=true
 	}
+        var opt = document.getElementsByName(parent+'[options][]');
+	for(i=0 ; i<opt.length;i++){
+				if(opt.item(i).checked==true)
+					sw=true
+	}
 
 	if(sw)	
 		document.getElementById( parent ).checked=true;
@@ -28,16 +33,34 @@ function checkAll(parent){
 		new_status = true;
 	else 
 		new_status= false;
-		
-	var collection = document.getElementsByName(parent+'[]');
-	for(i=0 ; i<collection.length;i++){
-			collection.item(i).checked=new_status;
-	}
 	
+	var collection = document.getElementsByName(parent+'[]');
+       for(i=0 ; i<collection.length;i++){
+			collection.item(i).checked=new_status;
+                        var options = document.getElementsByName(parent+'['+collection.item(i).value+'][]');
+                        for(j=0 ; j<options.length;j++){
+                            options.item(j).checked=new_status;
+                            var detalle = document.getElementsByName(parent+'['+collection.item(i).value+']['+options.item(j).value+'][]');
+                            for(k=0 ; k<detalle.length;k++){
+                                detalle.item(k).checked=new_status;
+                            
+                            } 
+                        }
+                        
+	}
+        
+	/*
+         
+         var opt = document.getElementsByName(parent+'[options][]');
+        
+	for(i=0 ; i<opt.length;i++){
+				opt.item(i).checked=new_status;
+	}
+        
 	var interiores = document.getElementsByName(parent+'[interior][]');
 	for(i=0 ; i<interiores.length;i++){
 				interiores.item(i).checked=new_status;
-	}
+	}*/
 }
 
 function verifyRoles(){

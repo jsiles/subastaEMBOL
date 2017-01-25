@@ -37,7 +37,7 @@ $regusers = $db->next_record();
             </tr>
             
             <tr>
-            <td width="29%">Nombre de la empresa:</td>
+            <td width="29%">C&oacute;digo de la empresa:</td>
             <td width="64%">
 <input name="cli_companyname" type="text" class="input" id="cli_companyname" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_companyname').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_companyname').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_companyname').style.display='none';" value="<?=$regusers["cli_companyname"]?>" /><br /><span id="div_cli_companyname" style="display:none;" class="error">Nombre de la empresa es necesario</span>			</td>
             <td width="7%">&nbsp;</td>

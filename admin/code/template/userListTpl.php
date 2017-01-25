@@ -34,11 +34,11 @@ switch($rolLogged){
 $search = admin::toSql(admin::getParam("search"),"String");
 
 if (!$search || $search==''){
-	$_pagi_sql= "select usr_uid,usr_lastname,usr_firstname,usr_status, rol_description, usr_login, usr_pass from sys_users,mdl_roles, mdl_roles_users where rus_rol_uid=rol_uid and usr_delete=0 and rus_usr_uid=usr_uid ".$noRoot.$orderCode;
+	$_pagi_sql= "select usr_uid,usr_lastname,usr_firstname,usr_status, usr_email,rol_description, usr_login, usr_pass, usr_photo from sys_users,mdl_roles, mdl_roles_users where rus_rol_uid=rol_uid and usr_delete=0 and rus_usr_uid=usr_uid ".$noRoot.$orderCode;
 	$nroReg=admin::getDBvalue("select count(usr_uid) from sys_users,mdl_roles, mdl_roles_users where rus_rol_uid=rol_uid and usr_delete=0 and rus_usr_uid=usr_uid ".$noRoot);
 }
 else{
-	$_pagi_sql= "select usr_uid,usr_lastname,usr_firstname,usr_status, rol_description, rol_description, usr_login, usr_pass from sys_users,mdl_roles, mdl_roles_users where rus_rol_uid=rol_uid and usr_delete=0 and rus_usr_uid=usr_uid and (MATCH(usr_login, usr_firstname, usr_lastname, usr_email, usr_phone, usr_cellular, rol_description) AGAINST('+".$search."%' IN BOOLEAN MODE) or usr_login like '%".$search."%' or usr_firstname like '%".$search."%' or usr_lastname like '%".$search."%' or usr_email like '%".$search."%' or usr_phone like '%".$search."%' or usr_cellular like '%".$search."%' or rol_description like '%".$search."%') ".$noRoot.$orderCode;
+	$_pagi_sql= "select usr_uid,usr_lastname,usr_firstname,usr_status, usr_email, rol_description, rol_description, usr_login, usr_pass, usr_photo from sys_users,mdl_roles, mdl_roles_users where rus_rol_uid=rol_uid and usr_delete=0 and rus_usr_uid=usr_uid and (MATCH(usr_login, usr_firstname, usr_lastname, usr_email, usr_phone, usr_cellular, rol_description) AGAINST('+".$search."%' IN BOOLEAN MODE) or usr_login like '%".$search."%' or usr_firstname like '%".$search."%' or usr_lastname like '%".$search."%' or usr_email like '%".$search."%' or usr_phone like '%".$search."%' or usr_cellular like '%".$search."%' or rol_description like '%".$search."%') ".$noRoot.$orderCode;
 	$nroReg=admin::getDBvalue("select count(usr_uid) from sys_users,mdl_roles, mdl_roles_users where rus_rol_uid=rol_uid and usr_delete=0 and rus_usr_uid=usr_uid and usr_login like '%".$search."%' or usr_firstname like '%".$search."%' or usr_lastname like '%".$search."%' or usr_email like '%".$search."%' or usr_phone like '%".$search."%' or usr_cellular like '%".$search."%' or rol_description like '%".$search."%') ".$noRoot);
 }	
 //echo $_pagi_sql;
@@ -99,12 +99,13 @@ if ($nroReg>0){
             </a>
         </td>
         
-        <td width="10%">
-        			Usuario:
-            
+        <td width="12%" style="color:#16652f">
+        			
+                                Correo electr&oacute;nico:
         </td>
         
-        <td width="8%" ></td>
+        <td width="12%" style="color:#16652f">Usuario:</td>
+        <td width="8%" style="color:#16652f">Imagen:</td>
         <td align="center" width="11%" height="5"></td>
    		<td align="center" width="12%" height="5"></td>
 		<td align="center" width="12%" height="5"></td>
@@ -125,6 +126,8 @@ if ($nroReg>0){
                 $usr_loginA = $user_list["usr_login"];
                 $usr_passA = $user_list["usr_pass"];
 		$usr_status = $user_list["usr_status"];
+		$usr_email = $user_list["usr_email"];
+                $usr_photoA =$user_list["usr_photo"];
 		if ($usr_status=='ACTIVE') $labels_content='status_on';
 		else $labels_content='status_off';
 		if ($i%2==0) $class='row';
@@ -136,18 +139,52 @@ if ($nroReg>0){
 	<tr><td width="14%"><?=$usr_firstnameA;?></td>
     <td width="14%"><?=$usr_lastnameA;?></td>
     <td width="14%"><?=$UserRol;?></td>
-    <td width="10%"><?=$usr_loginA;?></td>
-    
-    <td width="8%"></td>
+    <td width="15%"><?=$usr_email;?></td>
+   
+    <td width="15%"><?=$usr_loginA;?></td>
+     <td width="8%">
+    <?php if(strlen($usr_photoA)>0)
+        {
+            ?>
+        
+        <img src="<?=PATH_DOMAIN."/admin/upload/profile/thumb_".utf8_decode($usr_photoA)?>"  border="0">
+<?php
+        }
+?>
+    </td>
 	<td align="center" width="11%" height="5">
+            <?php
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=26 and mop_lab_category='Ver' and moa_rol_uid=".$_SESSION['usr_rol']."");
+	if($valuePermit=='ACTIVE'){
+            ?>
 		   <a href="userView.php?usr_uidA=<?=$usr_uidA?>&token=<?=admin::getParam("token");?>">
 		<img src="lib/view_es.gif" border="0" title="<?=admin::labels('view')?>" alt="<?=admin::labels('view')?>">
 		</a>
+            <?php 
+        }else{
+        ?>
+    	<img src="lib/view_off_es.gif" border="0" title="<?=admin::labels('view')?>" alt="<?=admin::labels('view')?>">
+	     
+       <?php
+        }
+            ?>
 	</td>
 	<td align="center" width="12%" height="5">
+            <?php
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=26 and mop_lab_category='Editar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+	if($valuePermit=='ACTIVE'){
+            ?>
 		<a href="userEdit.php?usr_uidA=<?=$usr_uidA?>&token=<?=admin::getParam("token");?>">
 		<img src="lib/edit_es.gif" border="0" title="<?=admin::labels('edit')?>" alt="<?=admin::labels('edit')?>">
 		</a>
+            <?php 
+        }else{
+        ?>
+    	<img src="lib/edit_off_es.gif" border="0" title="<?=admin::labels('edit')?>" alt="<?=admin::labels('edit')?>">
+	     
+       <?php
+        }
+            ?>
 	</td>
 	<td align="center" width="12%" height="5">
           <?php 
@@ -156,9 +193,21 @@ if ($nroReg>0){
 		<img src="lib/delete_off_es.gif" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
     <?php }
 	else{?>
+                
+              <?php
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=26 and mop_lab_category='Eliminar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+	if($valuePermit=='ACTIVE'){
+            ?>  
 		<a href="" onclick="removeList(<?=$usr_uidA?>); return false;">
 		<img src="lib/delete_es.gif" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
 		</a>
+    <?php }
+	else{?>
+                <img src="lib/delete_off_es.gif" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
+              <?php
+        }
+    ?>            
+                
     <?php } ?>
 	</td>
 	<td align="center" width="14%" height="5">
@@ -170,9 +219,23 @@ if ($nroReg>0){
 		<img src="lib/<?=$status?>" border="0" title="<?=admin::labels($labels_content)?>" alt="<?=admin::labels($labels_content)?>">
     <?php }
 	else{?>
+                
+                  <?php
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=26 and mop_lab_category='Estado' and moa_rol_uid=".$_SESSION['usr_rol']."");
+	if($valuePermit=='ACTIVE'){
+            ?>
 	   <a href=""  onclick="userCS('<?=$usr_uidA?>','<?=$usr_status?>'); return false;">
 		<img src="<?=admin::labels($labels_content,'linkImage')?>" border="0" title="<?=admin::labels($labels_content)?>" alt="<?=admin::labels($labels_content)?>">
 		</a>
+              <?php }
+	else{
+            $status = ($usr_status=='ACTIVE') ? 'active_off_es.gif':'inactive_off_es.gif';
+            ?>
+             <img src="lib/<?=$status?>" border="0" title="<?=admin::labels($labels_content)?>" alt="<?=admin::labels($labels_content)?>">
+        <?php
+        
+        }
+        ?>
     <?php } ?>
 	</div>
 	</td>

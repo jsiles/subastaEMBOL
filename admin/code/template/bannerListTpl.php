@@ -49,22 +49,55 @@ while ($nroReg = $db->next_record())
 		   
 	</td>
 	<td align="center" width="12%" height="5">
+            <?php
+                $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=72 and mop_lab_category='Editar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+                if($valuePermit=='ACTIVE'){
+                ?>
 		<a href="bannerEdit.php?ban_uid=<?=$ban_uid?>&token=<?=admin::getParam("token")?>">
-		<img src="<?=admin::labels('edit','linkImage')?>" border="0" title="<?=admin::labels('edit')?>" alt="<?=admin::labels('edit')?>">
+                    <img src="<?=admin::labels('edit','linkImage')?>" border="0" title="<?=admin::labels('edit')?>" alt="<?=admin::labels('edit')?>">
 		</a>
+            <?php
+                }else{
+            ?>
+                    <img src="lib/edit_off_es.gif" border="0" title="<?=admin::labels('edit')?>" alt="<?=admin::labels('edit')?>">
+            <?php
+                }
+            ?>
 	</td>
-	<td align="center" width="12%" height="5">	
+	<td align="center" width="12%" height="5">
+            <?php
+                $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=72 and mop_lab_category='Eliminar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+                if($valuePermit=='ACTIVE'){
+                ?>
 		 <!--********BeginResetColorDelete*************-->
 		<a href="removeList" onclick="removeList(<?=$ban_uid?>);return false;">
 		<!--********EndResetColorDelete*************-->
-		<img src="<?=admin::labels('delete','linkImage')?>" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
-		</a>		
+                    <img src="<?=admin::labels('delete','linkImage')?>" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
+		</a>
+            <?php
+                }else{
+            ?>
+                 <img src="lib/delete_off_es.gif" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
+            <?php
+                }
+            ?>
 	</td>
 	<td align="center" width="14%" height="5">
 	<div id="status_<?=$ban_uid?>">
-	   <a href="javascript:void(0);" onclick="bannerCS('<?=$ban_uid?>','<?=$ban_status?>');">
-		<img src="<?=admin::labels($labels_content,'linkImage')?>" border="0" title="<?=admin::labels($labels_content)?>" alt="<?=admin::labels($labels_content)?>">
+            <?php
+                $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=72 and mop_lab_category='Estado' and moa_rol_uid=".$_SESSION['usr_rol']."");
+                if($valuePermit=='ACTIVE'){
+                ?>
+                <a href="javascript:void(0);" onclick="bannerCS('<?=$ban_uid?>','<?=$ban_status?>');">
+                    <img src="<?=admin::labels($labels_content,'linkImage')?>" border="0" title="<?=admin::labels($labels_content)?>" alt="<?=admin::labels($labels_content)?>">
 		</a>
+            <?php 
+                }else{
+                     $status = ($ban_status=='ACTIVE') ? 'active_off_es.gif':'inactive_off_es.gif';
+            ?>
+                    <img src="lib/<?=$status?>" border="0" title="<?=admin::labels($labels_content)?>" alt="<?=admin::labels($labels_content)?>">
+            <?php }
+            ?>
 	</div>
 	</td>
 		</tr>

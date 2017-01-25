@@ -6,6 +6,9 @@ admin/core/path.php
 Thumbs.db
 img/
 nbproject/private/private.xml
+admin/upload/users/
+admin/upload/sites/
+admin/upload/profile/
 #################
 ## Eclipse
 #################

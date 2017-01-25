@@ -13,7 +13,7 @@ function preview(img, selection) {
 	var imgwidth = document.getElementById('thumbnail').width;
 	var imgheight = document.getElementById('thumbnail').height;
 //	alert(imgwidth);
-	$('#thumbnail + div > img').css({ 
+	$('#subthumbnail').css({ 
 		width: Math.round(scaleX * imgwidth) + 'px', 
 		height: Math.round(scaleY * imgheight) + 'px',
 		marginLeft: '-' + Math.round(scaleX * selection.x1) + 'px', 
@@ -108,7 +108,7 @@ $(window).load(function () {
    <br /> <br /> <span class="title">Vista previa</span>   <br />
         	           
             <div style="margin-top:10px; background-color:#003399;float:left; position:relative; overflow:hidden; width:770px; height:100px;">
-			<img src="../img/banner/Original_<?=$news["ban_file"]?>?<?=time()?>" style="position: relative;" alt="Vista previa">
+			<img id="subthumbnail" src="../img/banner/Original_<?=$news["ban_file"]?>?<?=time()?>" style="position: relative;" alt="Vista previa">
 		
 		</div>
 			<br style="clear:both;"/>			
@@ -138,9 +138,6 @@ $(window).load(function () {
 <div id="contentButton" style="width:auto">
 	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 		<tr>
-
-
-		
         <td width="39%" align="center">
         <a href="#" class="button" id="save_thumb2">
 		<?=admin::labels('public')?>

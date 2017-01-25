@@ -80,7 +80,6 @@ echo $anchoNewTopL.' - '.$anchoNewTopR.' - '.$altoNewBottomL.' - '.$altoNewBotto
 <link rel="shortcut icon" href="lib/favicon.ico" />
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 <link rel="stylesheet" href="css/dhtml_horiz.css" type="text/css" />
-<link rel="stylesheet" href="css/jquery.Jcrop.css" type="text/css" />
 <!--[if gte IE 5.5]>
 <script language="JavaScript" src="css/dhtml.js" type="text/JavaScript"></script>
 <![endif]-->

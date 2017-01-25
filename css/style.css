@@ -62,12 +62,13 @@ strong {
 }
 
 a {
-	color: #FF0900;
+	color: #036;
 	text-decoration: none;
 }
 
 a:hover {
 	text-decoration: none;
+	color: #ddd;
 }
 
 a img {
@@ -105,7 +106,7 @@ ul.style1 li {
 }
 
 ul.style1 li a {
-	color: #FF0900;
+	color: #036;
 }
 
 ol.style2 {
@@ -223,9 +224,6 @@ span, label, p, td, h2 {
 	color: #696969;
 }
 
-#top-banner #colB a {
-	color: #FF0900;
-}
 
 #top-banner #colB p {
 	float: right;
@@ -244,12 +242,18 @@ span, label, p, td, h2 {
 	width: 118px;
 	height: 25px;
 	padding: 8px 0px 0px 10px;
-	/*background: url(images/homepage03.jpg) no-repeat left top;*/
-	background-color:#960;
+	background-color:#ddd;
 	text-align: center;
 	text-decoration: none;
 	font-weight: bold;
 	color: #FFFFFF;
+}
+
+#changes {
+	text-align: center;
+	text-decoration: none;
+	font-weight: bold;
+	color:#036;
 }
 
 /** HEADER */
@@ -310,6 +314,7 @@ span, label, p, td, h2 {
 }
 
 #menu li.active a {
+	color: #036;
 }
 
 #menu li.active span {
@@ -499,7 +504,7 @@ span, label, p, td, h2 {
 }
 
 .box-style h3 a {
-	color: #323232;
+	color: #036;
 }
 
 .box-style .content {
@@ -507,7 +512,7 @@ span, label, p, td, h2 {
 }
 
 .box-style a {
-	color: #696969;
+	color: #036;
 }
 
 .box-style li {
@@ -575,7 +580,7 @@ span, label, p, td, h2 {
 	text-align: center;
 	text-decoration: none;
 	font-weight: bold;
-	color: #00f;
+	color: #036;
 }
 
 .item-box .price {
@@ -594,7 +599,7 @@ span, label, p, td, h2 {
 }
 
 .item-box h2 a {
-	color: #323232;
+	color: #036;
 }
 
 .item-box .alignleft {
@@ -700,4 +705,8 @@ height:25px;
 font-size:12px;
 font-weight:bold;
 color:#dd2d26;	
+}
+
+#subastaP{
+width:650px;
 }

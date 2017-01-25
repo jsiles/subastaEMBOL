@@ -61,6 +61,10 @@ if ($FILES["name"] != '')
 		$mbc_position=admin::getDBvalue("select max(mbc_position) from mdl_banners_contents where mbc_place=2 and mbc_ban_uid=".$ban_uid);
 		$mbc_position++;
 		
+		if($_POST["ban_status"]=='ACTIVE') {
+		    $sql = "UPDATE mdl_banners_contents set mbc_status='INACTIVE'";
+		    $db2->query($sql);
+		}
 		$sql = "insert into mdl_banners_contents(
 										mbc_uid, 
 										mbc_con_uid, 
@@ -80,6 +84,7 @@ if ($FILES["name"] != '')
 									'".admin::toSql($_POST["ban_status"],"String")."' 
 									)";
 		$db2->query($sql);
+		
 unset($_POST);	
 header('Location: ../../bannerNew2.php?token='.admin::getParam("token").'&ban_uid='.$ban_uid);
 ?>

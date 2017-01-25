@@ -70,7 +70,7 @@
  </p>
 
 										<form name="frmContact" id="formA" action="" method="post">
-		<p id="subastaP" style="width:500px;display:none;">
+		<p id="subastaP" style="display:none;">
 			<label class="bold">Oferta:</label>
 			<input name="ct_value" id="ct_value" type="text" size="15" class="inputB" value="" onKeyUp="valOfertIt();"/> <a href="<?=$domain?>/code/bidsIt.php?uid=<?=$xitem["xit_sub_uid"]?>&ofert=<?=$valBids?>" id="planCuentas" rel="facebox" class="addcart">Aceptar</a> (Ingrese <?php 
 		if($bidsCompra=='COMPRA')

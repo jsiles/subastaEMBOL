@@ -10,6 +10,14 @@ $ban_uid=admin::toSql($_POST["uid"],"Number");
 $sql = "update mdl_banners set ban_title='".admin::toSql($_POST["ban_title"],"String")."' where ban_uid=".$ban_uid;
 $db->query($sql);
 
+if($_POST["ban_status"]=='ACTIVE') {
+		    $sql = "UPDATE mdl_banners_contents set mbc_status='INACTIVE'";
+		    $db2->query($sql);
+		}
+
+$sql = "update mdl_banners_contents set mbc_status='".admin::toSql($_POST["ban_status"],"String")."' where mbc_ban_uid=".$ban_uid;
+		$db->query($sql);
+
 // SUBIENDO LA IMAGEN DE PUBLICACIONES
 $FILES = $_FILES ['ban_adjunt'];
 if ($FILES["name"] != '')
@@ -33,10 +41,9 @@ if ($FILES["name"] != '')
 	$sql = "UPDATE mdl_banners SET ban_content='".$gifCode."' WHERE ban_uid=".$ban_uid;
 	$db->query($sql);
 	
+	header('Location: ../../bannerNew2.php?token='.admin::getParam("token").'&ban_uid='.$ban_uid);
 }
-
-$sql = "update mdl_banners_contents set mbc_status='".admin::toSql($_POST["ban_status"],"String")."' where mbc_ban_uid=".$ban_uid;
-		$db->query($sql);
-
-header('Location: ../../bannerNew2.php?token='.admin::getParam("token").'&ban_uid='.$ban_uid);
+else {
+	header('Location: ../../bannerList.php?token='.admin::getParam("token").'&ban_uid='.$ban_uid);
+	}
 ?>

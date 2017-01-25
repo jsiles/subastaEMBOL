@@ -330,7 +330,7 @@ function bannerCS(uid,status)
   									}  
   ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
   //enviando los valores
-  ajax.send("uid="+uid+"&status="+status+"&token="+token)
+  ajax.send("uid="+uid+"&status="+status+"&token="+token);
   }
 
 // FUNCIONES PARA EL MODULO DE NOTICIAS

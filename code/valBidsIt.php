@@ -258,7 +258,7 @@ function subastaOff()
  </p>
 
 										<form name="frmContact" id="formA" action="" method="post">
-		<p id="subastaP" style="width:500px;display:none;">
+		<p id="subastaP" style="display:none;">
 			<label class="bold">Oferta:</label>
 			<input name="ct_value" id="ct_value" type="text" size="15" onKeyUp="valOfertIt();" class="inputB"/> <a href="<?=$domain?>/code/bidsIt.php?uid=<?=$details["sub_uid"]?>" id="planCuentas" rel="facebox" class="addcart">Ofertar</a>
         (Ingrese <?php 

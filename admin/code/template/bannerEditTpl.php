@@ -1,3 +1,18 @@
+<script language="javascript" type="text/javascript">
+function verifyImageUpload(){
+	document.getElementById('div_ban_adjunt').style.display="none";
+	var cv = document.getElementById('ban_adjunt').value;
+	var filepart = cv.split(".");
+	var part = filepart.length-1;
+	var extension = filepart[part];
+	extension = extension.toLowerCase();
+	if (extension!='jpg' && extension!='jpeg' && extension!='bmp' && extension!='gif' && extension!='png'){
+		document.getElementById('ban_adjunt').value="";
+		$('#div_ban_adjunt').fadeIn(500);
+	}
+
+}
+</script>
 <? 
 $sql =  "select distinct mdl_banners.*, mbc_place, mbc_status from mdl_banners, mdl_banners_contents where mbc_ban_uid=ban_uid and ban_uid=".$_REQUEST["ban_uid"]." and mbc_delete=0";
 $bannerexist = $db->numrows($sql);  
@@ -33,7 +48,7 @@ if ($bannerexist==0) echo '<script language="javascript" type="text/javascript">
           </tr>
                            
          <tr>
-            <td valign="top"><?=admin::labels('banner','label');?> (770 x 100):</td>
+            <td valign="top"><?=admin::labels('banner','label');?> (bmp, jpg, jpeg, gif, png):</td>
             <td>
 			<?
 			$imgSavedroot1 = PATH_ROOT."/img/banner/thumb_".$banner["ban_file"];
@@ -56,9 +71,9 @@ if ($bannerexist==0) echo '<script language="javascript" type="text/javascript">
 			<tr>
 				<td height="24">
 				<div id="imageChange1" style="display:none">
-			<input type="file" name="ban_adjunt" id="new_image" size="14" style="font-size:11px;" />  <a href="javascript:viewInputFile('off')" onclick="document.getElementById('new_image').value='';document.getElementById('button_next').innerHTML='<?=admin::labels('public');?>';"><img border="0" src="lib/close.gif" align="top"/></a>
+			<input type="file" name="ban_adjunt" id="ban_adjunt" size="14" style="font-size:11px;" onchange="verifyImageUpload();" />  <a href="javascript:viewInputFile('off')" onclick="document.getElementById('new_image').value='';document.getElementById('button_next').innerHTML='<?=admin::labels('public');?>';"><img border="0" src="lib/close.gif" align="top"/></a>
 			
-			<span id="div_ban_adjunt" class="error" style="display:none">Solo extenciones bmp, jpg, jpeg, gif, png, swf</span>			</div></td>
+			<span id="div_ban_adjunt" class="error" style="display:none">Solo extenciones bmp, jpg, jpeg, gif, png</span>			</div></td>
 			</tr>
 			</table>
 			</div>
@@ -66,8 +81,8 @@ if ($bannerexist==0) echo '<script language="javascript" type="text/javascript">
 			<?	}
 			else
 				{ ?>
-				<input type="file" name="ban_adjunt" id="ban_adjunt" size="32" class="input" />
-				<span id="div_ban_adjunt" class="error" style="display:none">Solo extenciones bmp, jpg, jpeg, gif, png, swf</span>	
+				<input type="file" name="ban_adjunt" id="ban_adjunt" size="32" class="input" onchange="verifyImageUpload();" />
+				<span id="div_ban_adjunt" class="error" style="display:none">Solo extenciones bmp, jpg, jpeg, gif, png</span>	
 			<?	} ?>			</td>
           </tr>
         

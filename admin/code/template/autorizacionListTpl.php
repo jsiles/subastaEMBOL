@@ -30,7 +30,7 @@ if ($search2) $searchURL='&search2='.$search2.'&qfiltro=1';
 else $searchURL='';
 $timeNow= date("Y-m-d H:i:s");//sub_finish<>0
 //echo $timeNow;
-$qsearch="SELECT pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif('$timeNow'>sub_deadtime,'concluida','subastandose') as deadtime, sub_finish as estado, sub_mount_base FROM mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' and sub_finish in (0,3) ";
+$qsearch="SELECT pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif('$timeNow'>sub_deadtime,'concluida','subastandose') as deadtime, sub_finish as estado, sub_mount_base, sub_modalidad FROM mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' and sub_finish in (0,3) ";
 $maxLine2 = admin::toSql(admin::getParam("maxLineP"),"Number");
 if ($maxLine2) {$maxLine=$maxLine2; admin::setSession("maxLineP",$maxLine2);}
 else {
@@ -149,6 +149,12 @@ while ($subasta_list = $pagDb->next_record())
 	$sub_type = $subasta_list["sub_type"];
 	$pro_status = $subasta_list["sub_status"];
 	$sub_monto = $subasta_list["sub_mount_base"];
+        $sub_modalidad = $subasta_list["sub_modalidad"];
+        if($sub_modalidad=="ITEM")
+        {
+            //echo "SELECT SUM(xit_price) FROM mdl_xitem WHERE xit_sub_uid=$sub_uid and xit_delete=0 ";
+         $sub_monto = admin::getDbValue("SELECT SUM(xit_price) FROM mdl_xitem WHERE xit_sub_uid=$sub_uid and xit_delete=0 "); 
+        }
 
 //	echo $pro_status;
 	$deadtime = $subasta_list["deadtime"];

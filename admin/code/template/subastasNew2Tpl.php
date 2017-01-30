@@ -37,7 +37,7 @@ $prod = $db->next_record();
                         <input name="cli_uid" id="cli_uid" value="" type="hidden" />-->
 	  <select name="cli_uid" id="cli_uid" class="input"  >
 	    <?php
-                    $sql = "select cli_uid, concat(cli_firstname,' ',cli_lastname) as cli_name from mdl_client where cli_delete=0 order by cli_name";
+                    $sql = "select cli_uid, cli_socialreason as cli_name from mdl_client where cli_delete=0 order by cli_name";
 					$db2->query($sql);
 					while ($content=$db2->next_record())
 					{	

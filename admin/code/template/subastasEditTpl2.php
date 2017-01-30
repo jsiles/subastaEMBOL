@@ -50,7 +50,7 @@ $prod = $db->next_record();
                 </td>            
     <td width="15%">
     <?php
-    $arrayClient = admin::dbFillArray("select cli_uid, concat(cli_firstname,' ',cli_lastname) as name from mdl_client, mdl_incoterm where inc_cli_uid=cli_uid and inc_sub_uid=$sub_uid");
+    $arrayClient = admin::dbFillArray("select cli_uid, cli_socialreason as name from mdl_client, mdl_incoterm where inc_cli_uid=cli_uid and inc_sub_uid=$sub_uid");
 	foreach($arrayClient as $value=>$name)
 	{
 	?>

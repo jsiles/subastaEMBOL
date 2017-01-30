@@ -11,7 +11,9 @@ switch(valOpcion)
 {
 	case 'TIEMPO': 
 					$("#tr_numeroruedas").hide();
+                                        $("#tr_unidadmejora").show();
 					$("#tr_montodead").hide();
+                                        $("#tr_montobase").show();
 					$("#tbl_subastaxitem").hide();
 					break;
 	case 'HOLANDESA': 

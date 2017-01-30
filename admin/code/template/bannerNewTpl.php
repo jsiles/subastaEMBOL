@@ -1,3 +1,18 @@
+<script language="javascript" type="text/javascript">
+function verifyImageUpload(){
+	document.getElementById('div_ban_adjunt').style.display="none";
+	var cv = document.getElementById('ban_adjunt').value;
+	var filepart = cv.split(".");
+	var part = filepart.length-1;
+	var extension = filepart[part];
+	extension = extension.toLowerCase();
+	if (extension!='jpg' && extension!='jpeg' && extension!='bmp' && extension!='gif' && extension!='png'){
+		document.getElementById('ban_adjunt').value="";
+		$('#div_ban_adjunt').fadeIn(500);
+	}
+
+}
+</script>
 <form name="frmBanner" method="post" action="code/execute/bannerAdd.php?token=<?=admin::getParam("token");?>" onsubmit="return false;" enctype="multipart/form-data">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
@@ -20,9 +35,9 @@
           </tr>
 
 		   <tr>
-            <td><?=admin::labels('banner','label');?> (770 x 100): </td>
-            <td><input type="file" name="ban_adjunt" id="ban_adjunt" size="31" onclick="setClassInput(this,'ON');document.getElementById('div_ban_adjunt').style.display='none';" class="input">
-            <br /><span id="div_ban_adjunt" style="display:none;" class="error">Solo extenciones bmp, jpg, jpeg, gif, png, swf</span>
+            <td><?=admin::labels('banner','label');?> (bmp, jpg, jpeg, gif, png): </td>
+            <td><input type="file" name="ban_adjunt" id="ban_adjunt" size="31" onclick="setClassInput(this,'ON');document.getElementById('div_ban_adjunt').style.display='none';" class="input" onchange="verifyImageUpload();">
+            <br /><span id="div_ban_adjunt" style="display:none;" class="error">Solo extenciones bmp, jpg, jpeg, gif, png</span>
             <?php 
 			    if($_REQUEST["error"]=='ok') {?><br /><span class="error">Imagen no permitida</span> <?php }
 			?>

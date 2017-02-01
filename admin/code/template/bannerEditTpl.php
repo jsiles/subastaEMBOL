@@ -54,6 +54,7 @@ if ($bannerexist==0) echo '<script language="javascript" type="text/javascript">
 			$imgSavedroot1 = PATH_ROOT."/img/banner/thumb_".$banner["ban_file"];
 			$imgSaveddomain1 = PATH_DOMAIN."/img/banner/thumb_".$banner["ban_file"];
 			$imgSaveddomain2 = PATH_DOMAIN."/img/banner/thumb_".$banner["ban_file"];
+			$imgSaveddomain3 = PATH_DOMAIN."/img/banner/img_".$banner["ban_file"];
 			if (file_exists($imgSavedroot1) && $banner["ban_file"]!="")
 				{
 				$extensionFile = admin::getExtension($banner["ban_file"]);
@@ -103,8 +104,14 @@ if ($bannerexist==0) echo '<script language="javascript" type="text/javascript">
     </tr>
 </table>
 </form>
+
+<br />
       <br />
+      
+      <span class="title">Vista previa</span>
       <br />
+      <img src="<?=$imgSaveddomain3?>?<?=time()?>" border="0" />
+      <br /><br />
       <div id="contentButton">
 	  	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 			<tr>

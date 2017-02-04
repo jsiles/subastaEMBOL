@@ -1,4 +1,9 @@
+
+
 <?php
+
+$imgs = admin::getDbValue("select top 1 ban_file from mdl_banners_contents, mdl_banners where mbc_delete=0 and mbc_status='ACTIVE' and mbc_ban_uid=ban_uid order by mbc_position ,mbc_ban_uid");
+$ban_name = admin::getDbValue("select top 1 ban_title from mdl_banners_contents, mdl_banners where mbc_delete=0 and mbc_status='ACTIVE' and mbc_ban_uid=ban_uid order by mbc_position ,mbc_ban_uid");
 
 		$conParent = isset($_GET["con_parent"]) ? '?con_parent='.$_GET["con_parent"].'&token='.$_GET['token'] : '?token='.$_GET['token'];
 ?>
@@ -6,8 +11,10 @@
 <tr><td valign="top">    
     <table width="100%" border="0" cellpadding="0" cellspacing="0" id="header">
       <tr>
-        <td width="15%" rowspan="2" align="center"><img src="lib/logo.png" width="50" h alt="bnb logo"></td>
-        <td width="60%" height="36">&nbsp;</td>
+        <td width="15%" height="140px"  rowspan="2" align="center"><img style="margin: 5px 5px 5px 5px;" src="lib/logo.png" width="50" alt="bnb logo"></td>
+        <td width="60%" height="36"><? if($imgs){?>
+					<img src="<?=$domain?>/img/banner/img_<?=$imgs?>?<?=time()?>" alt="<?=$ban_name?>" title="<?=$ban_name?>" border="0"/>
+                    <? }?></td>
 		<td width="25%" rowspan="2">
 		<div id="changeDiv" style="display:none;">
 		<form id="change_language" method="post" action="code/execute/langChange.php<?=$conParent;?>?token=<?=admin::getParam('token')?>" > 

@@ -39,9 +39,11 @@ function checkAll(parent){
 			collection.item(i).checked=new_status;
                         var options = document.getElementsByName(parent+'['+collection.item(i).value+'][]');
                         for(j=0 ; j<options.length;j++){
+                            if(!options.item(j).getAttribute("disabled"))
                             options.item(j).checked=new_status;
                             var detalle = document.getElementsByName(parent+'['+collection.item(i).value+']['+options.item(j).value+'][]');
                             for(k=0 ; k<detalle.length;k++){
+                                if(!detalle.item(k).getAttribute("disabled"))
                                 detalle.item(k).checked=new_status;
                             
                             } 

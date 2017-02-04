@@ -42,12 +42,9 @@ $titleRol=admin::getDBvalue("SELECT rol_description FROM mdl_roles where rol_uid
           </tr>
           
 <?php 
-if ($_SESSION["usr_uid"]!=2) $sqldat="select * from sys_modules where mod_language='".$lang."' and 
-			  mod_parent=0 and mod_uid not in ('1','31','34') and
-			  mod_status='ACTIVE'";	
-else $sqldat="select * from sys_modules where mod_language='".$lang."' and 
-			  mod_parent=0  and
-			  mod_status='ACTIVE'";
+if ($_SESSION["usr_uid"]!=2) $sqldat="select * from sys_modules where mod_language='".$lang."' and mod_parent=0  and  mod_status='ACTIVE'"; //and mod_uid not in ('1','31','34')
+else $sqldat="select * from sys_modules where mod_language='".$lang."' and mod_parent=0  and  mod_status='ACTIVE'"; //and mod_uid!=1
+
 $db->query($sqldat);
 while($row = $db->next_record()){
 $OnOff3 =admin::getDBvalue("select count(mus_uid) from sys_modules_users where mus_rol_uid='".$rol_uid."' and mus_mod_uid=".$row["mod_uid"]." and mus_delete=0 and mus_place='MODULE'");

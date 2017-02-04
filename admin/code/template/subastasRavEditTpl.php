@@ -170,9 +170,25 @@ else
 </div>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
-      <td width="77%" height="40"><span class="title">Listado RAV</span></td>
-    <td width="23%" height="40" align="right"><a href="susbastaRavEditar.php">Editar RAV</a></td>
+        <td width="77%" height="40"><span class="title">Editar RAV Par&aacute;metros</span></td>
+        <td width="23%" height="40" align="right"></td>
   </tr>
+  
+   <tr>
+  <td>
+  <table width="100%" border="0">
+	<tr>
+            <td width="8%"><span class="txt11 color2"><?=admin::labels('code');?></span></td>
+            <td width="18%" ><span class="txt11 color2">Rol</span></td>
+            <td width="20%" ><span class="txt11 color2">Monto Inferior</span></td>
+            <td width="20%" ><span class="txt11 color2">Monto Superior</span></td>
+            <td width="10%"><span class="txt11 color2">Tipo</span></td>
+        <td width="10%"></td>		
+	</tr>
+	</table>
+  </td>
+  </tr>
+  
   <tr>
     <td colspan="2" id="contentListing">
 <div  style="background-color: #f7f8f8;">
@@ -195,6 +211,21 @@ else
 	<tr>
             <td width="77%" height="40"><span class="title" style="color: orange">+ Adicionar RAV Par&aacute;metros</span></td>
     <td width="23%" height="40" align="right"></td>
+  </tr>
+  
+  <tr>
+  <td>
+  <table width="100%" border="0">
+	<tr>
+            <td width="10%"><span class="txt11 color2"></span></td>
+            <td width="30%" ><span class="txt11 color2">Rol</span></td>
+            <td width="25%" ><span class="txt11 color2">Monto Inferior</span></td>
+            <td width="30%" ><span class="txt11 color2">Monto Superior</span></td>
+            <td width="10%"><span class="txt11 color2"></span></td>
+        <td width="20%"></td>		
+	</tr>
+	</table>
+  </td>
   </tr>
   <tr>
     <td colspan="2" id="contentListing">

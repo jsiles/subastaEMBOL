@@ -41,6 +41,7 @@ else{
 	$_pagi_sql= "select usr_uid,usr_lastname,usr_firstname,usr_status, usr_email, rol_description, rol_description, usr_login, usr_pass, usr_photo from sys_users,mdl_roles, mdl_roles_users where rus_rol_uid=rol_uid and usr_delete=0 and rus_usr_uid=usr_uid and (MATCH(usr_login, usr_firstname, usr_lastname, usr_email, usr_phone, usr_cellular, rol_description) AGAINST('+".$search."%' IN BOOLEAN MODE) or usr_login like '%".$search."%' or usr_firstname like '%".$search."%' or usr_lastname like '%".$search."%' or usr_email like '%".$search."%' or usr_phone like '%".$search."%' or usr_cellular like '%".$search."%' or rol_description like '%".$search."%') ".$noRoot.$orderCode;
 	$nroReg=admin::getDBvalue("select count(usr_uid) from sys_users,mdl_roles, mdl_roles_users where rus_rol_uid=rol_uid and usr_delete=0 and rus_usr_uid=usr_uid and usr_login like '%".$search."%' or usr_firstname like '%".$search."%' or usr_lastname like '%".$search."%' or usr_email like '%".$search."%' or usr_phone like '%".$search."%' or usr_cellular like '%".$search."%' or rol_description like '%".$search."%') ".$noRoot);
 }	
+
 //echo $_pagi_sql;
 //krumo($_SESSION);
 $_pagi_cuantos = 20;//Elegí un número pequeño para que se generen varias páginas
@@ -55,8 +56,8 @@ if ($nroReg>0){
 <br>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
    <tr>
-      <td width="77%" height="40"><span class="title"><?=admin::labels('user')?></span></td>
-    <td width="23%" height="40">&nbsp;</td>
+      <td width="85%" height="40"><span class="title"><?=admin::modulesLabels()?></span></td>
+      <td width="15%" height="40"><a href="<?=admin::modulesLink('usersNew')?>?token=<?=admin::getParam("token")?>"><?=admin::modulesLabels('usersNew')?></a>&nbsp;</td>
   </tr>
   <tr>
 	<td width="90%" height="40"></td>
@@ -154,7 +155,7 @@ if ($nroReg>0){
     </td>
 	<td align="center" width="11%" height="5">
             <?php
-            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=26 and mop_lab_category='Ver' and moa_rol_uid=".$_SESSION['usr_rol']."");
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=5 and mop_lab_category='Ver' and moa_rol_uid=".$_SESSION['usr_rol']."");
 	if($valuePermit=='ACTIVE'){
             ?>
 		   <a href="userView.php?usr_uidA=<?=$usr_uidA?>&token=<?=admin::getParam("token");?>">
@@ -171,7 +172,7 @@ if ($nroReg>0){
 	</td>
 	<td align="center" width="12%" height="5">
             <?php
-            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=26 and mop_lab_category='Editar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=5 and mop_lab_category='Editar' and moa_rol_uid=".$_SESSION['usr_rol']."");
 	if($valuePermit=='ACTIVE'){
             ?>
 		<a href="userEdit.php?usr_uidA=<?=$usr_uidA?>&token=<?=admin::getParam("token");?>">
@@ -195,7 +196,7 @@ if ($nroReg>0){
 	else{?>
                 
               <?php
-            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=26 and mop_lab_category='Eliminar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=5 and mop_lab_category='Eliminar' and moa_rol_uid=".$_SESSION['usr_rol']."");
 	if($valuePermit=='ACTIVE'){
             ?>  
 		<a href="" onclick="removeList(<?=$usr_uidA?>); return false;">
@@ -221,7 +222,7 @@ if ($nroReg>0){
 	else{?>
                 
                   <?php
-            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=26 and mop_lab_category='Estado' and moa_rol_uid=".$_SESSION['usr_rol']."");
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=5 and mop_lab_category='Estado' and moa_rol_uid=".$_SESSION['usr_rol']."");
 	if($valuePermit=='ACTIVE'){
             ?>
 	   <a href=""  onclick="userCS('<?=$usr_uidA?>','<?=$usr_status?>'); return false;">

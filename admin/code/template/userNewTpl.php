@@ -2,7 +2,7 @@
 <form name="frmUsers" method="post" action="code/execute/userAdd.php?token=<?=admin::getParam("token");?>" onsubmit="return false;" enctype="multipart/form-data">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="77%" height="40"><span class="title"><?=admin::labels('user','new');?></span></td>
+    <td width="77%" height="40"><span class="title"><?=admin::modulesLabels()?></span></td>
     <td width="23%" height="40">&nbsp;</td>
   </tr>
   <tr>

@@ -153,7 +153,7 @@ if ($nroReg>0){
         }
 ?>
     </td>
-	<td align="center" width="11%" height="5">
+	<td align="center" width="5%" height="5">
             <?php
             $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=5 and mop_lab_category='Ver' and moa_rol_uid=".$_SESSION['usr_rol']."");
 	if($valuePermit=='ACTIVE'){
@@ -170,7 +170,7 @@ if ($nroReg>0){
         }
             ?>
 	</td>
-	<td align="center" width="12%" height="5">
+	<td align="center" width="5%" height="5">
             <?php
             $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=5 and mop_lab_category='Editar' and moa_rol_uid=".$_SESSION['usr_rol']."");
 	if($valuePermit=='ACTIVE'){
@@ -187,7 +187,7 @@ if ($nroReg>0){
         }
             ?>
 	</td>
-	<td align="center" width="12%" height="5">
+	<td align="center" width="5%" height="5">
           <?php 
 	if($_SESSION['usr_uid']==$usr_uidA){
 	?>
@@ -211,7 +211,7 @@ if ($nroReg>0){
                 
     <?php } ?>
 	</td>
-	<td align="center" width="14%" height="5">
+	<td align="center" width="5%" height="5">
 	<div id="status_<?=$usr_uidA?>">
     <?php 
 	if($_SESSION['usr_uid']==$usr_uidA){

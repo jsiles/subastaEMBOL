@@ -90,8 +90,8 @@ if ($nroReg>0)
 <br>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
    <tr>
-      <td width="77%" height="40"><span class="title">Listado de Aprobaciones</span></td>
-    <td width="23%" height="40" align="right"></td>
+      <td width="77%" height="40"><span class="title"><?=admin::modulesLabels()?></span></td>
+      <td width="23%" height="40" align="right">&nbsp;</td>
   </tr>
   <tr>
 	<td width="90%" height="40"></td>
@@ -241,7 +241,7 @@ while ($subasta_list = $pagDb->next_record())
 		</td>
         <td align="center" width="5%" height="5">
     		 <?php
-                $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=67 and mop_lab_category='Ver' and moa_rol_uid=".$_SESSION['usr_rol']."");
+                $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=20 and mop_lab_category='Ver' and moa_rol_uid=".$_SESSION['usr_rol']."");
                 if($valuePermit=='ACTIVE'){
             ?>
         <a href="autorizacionView.php?pro_uid=<?=$pro_uid?>&token=<?=admin::getParam("token");?>">
@@ -265,7 +265,7 @@ while ($subasta_list = $pagDb->next_record())
 		}else{
 	?>
             <?php
-            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=67 and mop_lab_category='Editar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=20 and mop_lab_category='Editar' and moa_rol_uid=".$_SESSION['usr_rol']."");
             if($valuePermit=='ACTIVE'){
             ?>
 		<a href="autorizacionEdit.php?token=<?=admin::getParam("token")?>&pro_uid=<?=$pro_uid?>">
@@ -291,7 +291,7 @@ while ($subasta_list = $pagDb->next_record())
 	?>
                 
             <?php
-            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=67 and mop_lab_category='Eliminar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=20 and mop_lab_category='Eliminar' and moa_rol_uid=".$_SESSION['usr_rol']."");
             if($valuePermit=='ACTIVE'){
             ?>
 		<a href="removeList" onclick="removeList('<?=$pro_uid?>');return false;">
@@ -307,6 +307,27 @@ while ($subasta_list = $pagDb->next_record())
          }
         ?>
 	</td>
+        
+        <td align="center" width="5%" height="5">
+    <div id="status_<?=$mcl_uid?>">
+        <?php
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=20 and mop_lab_category='Estado' and moa_rol_uid=".$_SESSION['usr_rol']."");
+            if($valuePermit=='ACTIVE'){
+            ?>
+	   <a href=""  onclick="autorizacionCS('<?=$pro_uid?>','<?=$pro_status?>'); return false;">
+		<img src="<?=admin::labels($labels_content,'linkImage')?>" border="0" title="<?=admin::labels($labels_content)?>" alt="<?=admin::labels($labels_content)?>">
+	   </a>
+        <?php
+            }else{
+                $status = ($pro_status=='ACTIVE') ? 'active_off_es.gif':'inactive_off_es.gif';
+        ?>
+        <img src="lib/<?=$status?>" border="0" title="<?=admin::labels($labels_content)?>" alt="<?=admin::labels($labels_content)?>">
+        <?php
+            }
+        ?>
+	</div>
+    </td>
+        
 	<td align="center" width="5%" height="5">
 	<div id="status_<?=$sub_uid?>">
 	<?php
@@ -335,7 +356,7 @@ while ($subasta_list = $pagDb->next_record())
             {
             ?>
                 <?php
-                $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=67 and mop_lab_category='Aprobar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+                $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=20 and mop_lab_category='Aprobar' and moa_rol_uid=".$_SESSION['usr_rol']."");
                 if($valuePermit=='ACTIVE'){
                 ?>
                     <a href="aprobarSubasta" onclick="aprobarSubasta('<?=$sub_uid?>');return false;">
@@ -387,7 +408,7 @@ while ($subasta_list = $pagDb->next_record())
             {
             ?>
                 <?php
-                $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=67 and mop_lab_category='Rechazar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+                $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=20 and mop_lab_category='Rechazar' and moa_rol_uid=".$_SESSION['usr_rol']."");
                 if($valuePermit=='ACTIVE'){
                 ?>
 
@@ -537,9 +558,10 @@ else
 <div id="itemList"> 
 </div>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-      <td width="77%" height="40"><span class="title">Listado de autorizaciones</span></td>
-    <td width="23%" height="40" align="right"></td>
+   <tr>
+      <td width="77%" height="40"><span class="title"><?=admin::modulesLabels()?></span></td>
+      <td width="23%" height="40" align="right">&nbsp;</td>
+  </tr>
   <tr>
     <td colspan="2" id="contentListing">
 <div  style="background-color: #f7f8f8;">
@@ -549,7 +571,8 @@ else
 	</td></tr>	
  </table>
 </div>
-</td></tr>
+</td>
+  </tr>
 </table>
 
 <?php

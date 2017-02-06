@@ -37,9 +37,9 @@ $titleRol=admin::getDBvalue("SELECT rol_description FROM mdl_roles where rol_uid
             <td width="50%" valign="top">
             <table width="98%" border="0"  align="right" cellpadding="0" cellspacing="5" class="box">
 
-          <tr>
+          <!--<tr>
             <td colspan="2" class="titleBox"><?=admin::labels('users','rights');?></td>
-          </tr>
+          </tr>-->
           
 <?php 
 if ($_SESSION["usr_uid"]!=2) $sqldat="select * from sys_modules where mod_language='".$lang."' and mod_parent=0  and  mod_status='ACTIVE'"; //and mod_uid not in ('1','31','34')
@@ -52,18 +52,20 @@ $OnOff3 =admin::getDBvalue("select count(mus_uid) from sys_modules_users where m
 		else $OnOff3='';		
 ?>
           <tr <?=$displaynone;?> >
-            <td width="10">
+            <td width="1%">
             <input name="mod_uid[<?=$row["mod_uid"]?>]" type="checkbox" id="mod_uid[<?=$row["mod_uid"]?>]" <?=$OnOff3?> value="<?=$row["mod_uid"]?>" onclick="checkAll('mod_uid[<?=$row["mod_uid"]?>]')" />
 			</td>
-            <td><?=$row["mod_name"]?></td>
+                        <td colspan="15"><?=$row["mod_name"]?></td>
             
           </tr>
-		<tr>
-        <td>
+       <tr>
+                    
+        <td width="1%">
         </td>
-        <td>
- 			<table class="box" border="0" width="100%">
+        <!--<td>
+ 			<table class="box" border="0" width="100%">-->
 			 <?php
+                         $uidModuleAcces='';
              $sql2="select mod_uid,mod_name from sys_modules where mod_language='".$lang."' and 
                           mod_parent=".$row["mod_uid"]." and 
                           mod_status='ACTIVE' order by mod_uid asc";
@@ -72,85 +74,50 @@ $OnOff3 =admin::getDBvalue("select count(mus_uid) from sys_modules_users where m
                     while($row2 = $db2->next_record()){	
             			$OnOff4 =admin::getDBvalue("select count(mus_uid) from sys_modules_users where mus_rol_uid='".$rol_uid."' and mus_mod_uid=".$row2["mod_uid"]." and mus_delete=0 and mus_place='MODULE'");
                     	if ($OnOff4!=0) $OnOff4='checked="checked"';
-                    	else $OnOff4='';		
+                    	else $OnOff4='';
+                         if(strlen($uidModuleAcces)==0) $uidModuleAcces="(".$row2["mod_uid"];
+                    else $uidModuleAcces.= ",".$row2["mod_uid"];
+                   
             ?>
-            <tr>       
-            <td width="10"><input name="mod_uid[<?=$row["mod_uid"]?>][]" type="checkbox"  <?=$OnOff4?> value="<?=$row2["mod_uid"]?>"  />
-			</td>
-            <td ><?=$row2["mod_name"]?></td>
+             <div style="display:none">
+                <input name="mod_uid[<?=$row["mod_uid"]?>][]" id="mod_uid[<?=$row["mod_uid"]?>][]" type="checkbox"  <?=$OnOff4?> value="<?=$row2["mod_uid"]?>"  />
+		<?=$row2["mod_name"]?>
+            </div>
              <?php
-                        $sSQL = "select mop_uid, mop_lab_category from sys_modules_options where mop_mod_uid=".$row2["mod_uid"]." and mop_status='ACTIVE'";
+                    }
+                    if(strlen($uidModuleAcces)>0)
+                                {
+                        $uidModuleAcces.=")";
+                        $sSQL = "select mop_uid, mop_mod_uid, mop_lab_category, mop_status from sys_modules_options where mop_mod_uid in ".$uidModuleAcces." order by mop_uid";
                         $cantidadOp=$db4->numrows($sSQL);
-                        //echo $sSQL;
-                        //echo $cantidadOp;
+                        //echo $sSQL."<br>";
+                        //echo $cantidadOp."<br>";
                         if($cantidadOp>0){                          
                             
-			?>
-            <td>
-            <table>
-                <tr>
-            	<td>&nbsp;</td>
-            	<td>
-                	<table border="0" width="100%" class="box">
-	                    <tr>
-                                <?php
-                                $db4->query($sSQL);
+	                     $db4->query($sSQL);
                                 while($options=$db4->next_record())
                                 {
                                     $active = admin::getDbValue("select moa_status from sys_modules_access where moa_mop_uid=".$options["mop_uid"]." and moa_rol_uid=$rol_uid");
+                                    //echo "select moa_status from sys_modules_access where moa_mop_uid=".$options["mop_uid"]." and moa_rol_uid=$rol_uid"."<BR>";
                                     if($active=='ACTIVE') $checked='checked';
                                     else $checked='';
+                                    ($options["mop_status"]=="ACTIVE")?$lblStatus = "":$lblStatus = 'disabled="disabled"';
                                 ?>
-                                <td width="13"><input name="mod_uid[<?=$row["mod_uid"]?>][<?=$row2["mod_uid"]?>][]" <?=$checked?> type="checkbox" value="<?=$options["mop_uid"]?>" /></td>
-                        	<td><?=$options["mop_lab_category"]?></td>
+                                <td width="1%"><input name="mod_uid[<?=$row["mod_uid"]?>][<?=$options["mop_mod_uid"]?>][]" <?=$checked?> type="checkbox" value="<?=$options["mop_uid"]?>" <?=$lblStatus?> /></td>
+                        	<td  width="10%"><?=$options["mop_lab_category"]?></td>
                                 <?php
                                 }
-                                ?>
-                            </tr>
-                    </table>
-            	</td>
-             </tr></table></td>
-            <?php
-			}
+                              
+                                }
+                                
+                                }
             ?>
         	</tr>
             
 	<?php	} ?>            
-            <?php 
-             $sql3="select mof_mfl_uid,lab_label,mof_delete 
-			 		from sys_modules_fields 
-					left join sys_labels on lab_uid=mof_lab_uid and lab_category=mof_lab_category 
-					where mof_mod_uid=".$row["mod_uid"]." 
-					and mof_rol_uid='".$rol_uid."' 
-					and lab_language='".$lang."' 
-					order by mof_mfl_uid";
-					
-                    $db3->query($sql3);
-                    while($row3 = $db3->next_record()){	
-                    	$checked = $row3["mof_delete"] ? '':'checked="checked"' ;
-			
-			?>
-            <tr>
-            	<td>&nbsp;</td>
-            	<td>
-                	<table border="0" width="100%" class="box">
-	                    <tr>
-                        	<td width="10"><input name="mod_uid[<?=$row["mod_uid"]?>][interior][]" type="checkbox"  <?=$checked?> value="<?=$row3["mof_mfl_uid"]?>" onclick="checkedVerify('mod_uid[<?=$row["mod_uid"]?>]')" /></td>
-                        	<td><?=$row3["lab_label"]?></td>
-                        </tr>
-                    </table>
-            	</td>
-             </tr>
-             <?php } ?>
-	
-            </table>
             
-        </td>
-      </tr>
-
-<?php } ?>                    
-
-        </table>&nbsp;
+	
+       </table>&nbsp;
         </td>
           </tr>
 		  
@@ -243,7 +210,7 @@ while($row = $db->next_record()){
 			<tr>
 				<td width="59%" align="center">
 				<a href="#" onclick="verifyRoles();" class="button">
-				<?=admin::labels('register');?>
+				Actualizar
 				</a> 
 				</td>
           <td width="41%" style="font-size:11px;">

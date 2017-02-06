@@ -18,10 +18,7 @@ else $urlFrontLang=$lang.'/';
 $UrlProduct=admin::getDBvalue("select col_url FROM mdl_contents_languages where col_con_uid=3 and col_language='".$lang."'");
 
 $contentURL = admin::getContentUrl($con_uid,SYS_LANG);
-$qsearch="select * from mdl_rav where rav_tipologia=2 order by rav_uid asc";
-?>
-<div id="DIV_WAIT1" style="display:none;"><img border="0" src="lib/loading.gif"></div>
-<?php
+$qsearch="select * from mdl_rav where rav_tipologia=2 and rav_delete=0 order by rav_uid asc";
 /********EndResetColorDelete*************/
 $_pagi_sql=$qsearch.$orderCode;
 //echo $_pagi_sql;
@@ -39,12 +36,11 @@ include("core/paginator.inc.php");
 if ($nroReg>0)
 	{
 	?>
-   
 <br>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
    <tr>
-      <td width="77%" height="40"><span class="title">Listado RAV Informe</span></td>
-    <td width="23%" height="40" align="right"><a href="subastasRavInfEdit.php?token=<?=admin::getParam("token")?>">Editar RAV Informe</a></td>
+      <td width="77%" height="40"><span class="title"><?=admin::modulesLabels()?></span></td>
+      <td width="23%" height="40" align="right"><a href="<?=admin::modulesLink('subastasRavInfNew')?>?token=<?=admin::getParam("token")?>"><?=admin::modulesLabels('subastasRavInfNew')?></a>&nbsp;</td>
   </tr>
   <tr>
 	<td width="90%" height="40"></td>
@@ -55,12 +51,15 @@ if ($nroReg>0)
   <td>
   <table width="100%" border="0">
 	<tr>
-            <td width="8%"><span class="txt11 color2"><?=admin::labels('code');?></span></td>
-            <td width="18%" ><span class="txt11 color2">Rol</span></td>
-            <td width="20%" ><span class="txt11 color2">Monto Inferior</span></td>
-            <td width="20%" ><span class="txt11 color2">Monto Superior</span></td>
-            <td width="10%"><span class="txt11 color2">Tipo</span></td>
-        <td width="10%"></td>		
+            <td width="5%"><span class="txt11 color2"><?=admin::labels('code');?></span></td>
+            <td width="15%" ><span class="txt11 color2">Rol</span></td>
+            <td width="11%" ><span class="txt11 color2">Monto Inferior</span></td>
+            <td width="12%" ><span class="txt11 color2">Monto Superior</span></td>
+            <td width="11%"><span class="txt11 color2">Tipo</span></td>
+            <td align="center" width="5%" height="5"></td>
+            <td align="center" width="5%" height="5"></td>
+            <td align="center" width="5%" height="5"></td>
+            <td align="center" width="5%" height="5"></td>	
 	</tr>
 	</table>
   </td>
@@ -79,23 +78,95 @@ while ($subasta_list = $pagDb->next_record())
         $rav_rol = admin::getDbValue("select rol_description from mdl_roles where rol_uid=". $subasta_list["rav_rol_uid"]);
 	$rav_monto = trim($subasta_list["rav_monto_inf"]);
 	$rav_monto1 = ($subasta_list["rav_monto_sup"]!=0)?$subasta_list["rav_monto_sup"]:"Sin l&iacute;mite";
-	$rav_tipo =  ($subasta_list["rav_tipologia"]==1)?"Aprobaci&oacute;n":"Informe";
+	$rav_tipo =  ($subasta_list["rav_tipologia"]==1)?"Par&aacute;metros":"Informe";
+        $rav_status = $subasta_list["rav_status"];
+        $rav_delete = $subasta_list["rav_delete"];
         $dest="";
 		?> 
 	<div class="groupItem" id="<?=$pro_uid?>">
     
-    <div id="list_<?=$pro_uid?>" class="<?=$class?>" style="width:100%" >
+    <div id="list_<?=$rav_uid?>" class="<?=$class?>" style="width:100%" >
     
-    <table class="list" width="100%" style="">
+    <table class="list" width="100%" border='0' style="">
 	<tr>
-		<td width="5%" ><span <?=$dest?>><?=admin::toHtml($rav_uid)?></span></td>
-        <td width="25%" ><span <?=$dest?>><?=ucfirst(strtolower(trim(admin::toHtml($rav_rol))))?></span></td>
-        <td width="20%" ><span <?=$dest?>><?=strtolower(trim(admin::toHtml($rav_monto)))?></span></td>
-        <td width="20%" ><span><?=$rav_monto1?></span></td>
+		<td width="3%" ><span <?=$dest?>><?=admin::toHtml($rav_uid)?></span></td>
+        <td width="10%" ><span <?=$dest?>><?=ucfirst(strtolower(trim(admin::toHtml($rav_rol))))?></span></td>
+        <td width="10%" ><span ><?=$rav_monto?></span></td>
+        <td width="10%" ><span><?=$rav_monto1?></span></td>
         <td width="10%" ><span><?=$rav_tipo?></span>
         	</td>
-                <td width="20%" >
-        	</td>
+                <td align="center" width="5%" height="5">
+            <?php
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=11 and mop_lab_category='Ver' and moa_rol_uid=".$_SESSION['usr_rol']."");
+	if($valuePermit=='ACTIVE'){
+            ?>
+                    <a href="subastasRavInfView.php?rav_uid=<?=$rav_uid?>&token=<?=admin::getParam("token");?>">
+		<img src="lib/view_es.gif" border="0" title="<?=admin::labels('view')?>" alt="<?=admin::labels('view')?>">
+		</a>
+            <?php 
+        }else{
+        ?>
+    	<img src="lib/view_off_es.gif" border="0" title="<?=admin::labels('view')?>" alt="<?=admin::labels('view')?>">
+	     
+       <?php
+        }
+            ?>
+	</td>
+	<td align="center" width="5%" height="5">
+            <?php
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=11 and mop_lab_category='Editar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+	if($valuePermit=='ACTIVE'){
+            ?>
+		<a href="subastasRavInfEdit.php?rav_uid=<?=$rav_uid?>&token=<?=admin::getParam("token");?>">
+		<img src="lib/edit_es.gif" border="0" title="<?=admin::labels('edit')?>" alt="<?=admin::labels('edit')?>">
+		</a>
+            <?php 
+        }else{
+        ?>
+    	<img src="lib/edit_off_es.gif" border="0" title="<?=admin::labels('edit')?>" alt="<?=admin::labels('edit')?>">
+	     
+       <?php
+        }
+            ?>
+	</td>
+	<td align="center" width="5%" height="5">
+          <?php 
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=11 and mop_lab_category='Eliminar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+	if($valuePermit=='ACTIVE'){
+            ?>  
+		<a href="" onclick="removeList(<?=$rav_uid?>); return false;">
+		<img src="lib/delete_es.gif" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
+		</a>
+    <?php }
+	else{?>
+                <img src="lib/delete_off_es.gif" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
+              <?php
+        }
+    ?>            
+	</td>
+	<td align="center" width="5%" height="5">
+	<div id="status_<?=$rav_uid?>">
+        <?php
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=11 and mop_lab_category='Estado' and moa_rol_uid=".$_SESSION['usr_rol']."");
+	if($valuePermit=='ACTIVE'){
+            $status = ($rav_status=='ACTIVE') ? 'active_es.gif':'inactive_es.gif';
+            ?>            
+	   <a href=""  onclick="ravCS('<?=$rav_uid?>','<?=$rav_status?>'); return false;">
+		<img src="lib/<?=$status?>" border="0" title="<?=admin::labels($labels_content)?>" alt="<?=admin::labels($labels_content)?>">
+		</a>
+              <?php }
+	else{
+            $status = ($rav_status=='ACTIVE') ? 'active_off_es.gif':'inactive_off_es.gif';
+            ?>
+             <img src="lib/<?=$status?>" border="0" title="<?=admin::labels($labels_content)?>" alt="<?=admin::labels($labels_content)?>">
+        <?php
+        
+        }
+        ?>
+
+	</div>
+        </td>
+        </tr>
     </table>
 <?php
 $i++; 
@@ -128,10 +199,16 @@ else
 <br />
 <div id="itemList"> 
 </div>
+
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
-      <td width="77%" height="40"><span class="title">Listado RAV</span></td>
-    <td width="23%" height="40" align="right"><a href="susbastaRavEditar.php">Editar RAV</a></td>
+      <td width="77%" height="40"><span class="title"><?=admin::modulesLabels()?></span></td>
+    <td width="23%" height="40" align="right"><a href="<?=admin::modulesLink('subastasRavInfNew')?>?token=<?=admin::getParam("token")?>"><?=admin::modulesLabels('subastasRavInfNew')?></a>&nbsp;</td>
+  </tr>
+    <tr>
+	<td width="90%" height="40"></td>
+    <td>
+    </td>
   </tr>
   <tr>
     <td colspan="2" id="contentListing">

@@ -1692,6 +1692,26 @@ function userCS(uid,status)
   //enviando los valores
   ajax.send("uid="+uid+"&status="+status+"&token="+token)
   }
+function ravCS(uid,status)
+  {
+  token = $.getUrlVar('token');	 	  
+  divx = document.getElementById('status_' + uid);
+  divx.innerHTML = '<img border="0" src="lib/loading.gif">';
+  //instanciamos el objetoAjax
+  ajax=objectAjax();
+  //uso del medotod POST
+  ajax.open("POST", "code/execute/ravCS.php",true);
+  ajax.onreadystatechange=function() {
+									  if (ajax.readyState==4) 
+										{
+										//mostrar resultados en esta capa
+										divx.innerHTML=ajax.responseText;
+									  	}
+  									}  
+  ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+  //enviando los valores
+  ajax.send("uid="+uid+"&status="+status+"&token="+token)
+  }
 function clientCS(uid,status)
   {
   token = $.getUrlVar('token');	 	  

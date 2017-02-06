@@ -65,9 +65,9 @@ function removeList(id){
 				var uid = m.find('#list').val();
 				  $('#sub_'+id).fadeOut(500, function(){ $(this).remove(); });
 					  $.ajax({
-						url: 'code/execute/subastasDel.php',
+						url: 'code/execute/subastasRavDel.php',
 						type: 'POST',
-						data: 'sub_uid='+id
+						data: 'rav_uid='+id
 					});
 				/********BeginResetColorDelete*************/  
 				//	  resetOrderRemove(id);  
@@ -82,13 +82,13 @@ function removeList(id){
 </head>
 <body>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tr><td valign="top"><? include_once("skin/header.php");?>
+<tr><td valign="top"><?php include_once("skin/header.php");?>
 </td></tr>
   <tr>
-    <td valign="top" id="content"><? include_once("code/template/subastasRavListTpl.php"); ?></td>
+    <td valign="top" id="content"><?php include_once("code/template/subastasRavListTpl.php"); ?></td>
   </tr>
 <tr><td>
-  <? include("skin/footer.php"); ?>
+  <?php include("skin/footer.php"); ?>
   </td></tr>
 </table>
 </body>

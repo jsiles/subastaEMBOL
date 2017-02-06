@@ -1,6 +1,6 @@
 <?php 
 include_once ("core/admin.php");
-admin::initialize('subastas','subastasList'); 
+admin::initialize('subastaRavInforme','subastasRavInfNew'); 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">    
 <html>
@@ -85,7 +85,7 @@ function removeList(id){
 <tr><td valign="top"><?php include_once("skin/header.php");?>
 </td></tr>
   <tr>
-    <td valign="top" id="content"><?php include_once("code/template/subastasListTpl.php"); ?></td>
+    <td valign="top" id="content"><?php include_once("code/template/subastasRavInfNewTpl.php"); ?></td>
   </tr>
 <tr><td>
   <?php include("skin/footer.php"); ?>

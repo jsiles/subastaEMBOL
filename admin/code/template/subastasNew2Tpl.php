@@ -269,9 +269,18 @@ else
 <td colspan="2">
     <br>
     <input name="sub_modalidad" id="sub_modalidad" type="hidden" value="<?=$prod["sub_modalidad"]?>">
+    <?php
+    if($prod["sub_modalidad"]=="TIEMPO"){
+        $displayTiempo="";
+        $displayItem="none";
+    }else{
+        $displayTiempo="none";
+        $displayItem="";
+    }
+    ?>
 <div id="contentButton">
 	
-    <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subastaxitem" >
+    <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subastaxitem" style="display:<?=$displayItem?>" >
 			<tr>
 				<td width="59%" align="center">
 				<a href="subastasEdit2.php?token=<?=admin::getParam("token")?>&pro_uid=<?=admin::getParam("pro_uid")?>&sub_uid=<?=admin::getParam("sub_uid")?>" class="button" >Siguiente</a></td>
@@ -282,11 +291,11 @@ else
         </tr>
       </table>
       
-      <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subasta" style="display:none">
+      <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subasta" style="display:<?=$displayTeimpor?>">
 			<tr>
 				<td width="59%" align="center">
 				<a href="subastasList.php?token=<?=admin::getParam("token")?>" class="button">Finalizar</a></td>
-		<td width="41%" style="font-size:11px;">&nbsp;
+		
 		</td>
           
         </tr>

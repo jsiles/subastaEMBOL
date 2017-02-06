@@ -53,8 +53,8 @@ if ($nroReg>0)
 <br>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
    <tr>
-      <td width="77%" height="40"><span class="title">Listado de proveedores</span></td>
-    <td width="23%" height="40">&nbsp;</td>
+      <td width="77%" height="40"><span class="title"><?=admin::modulesLabels()?></span></td>
+    <td width="23%" height="40" align="right"><a href="<?=admin::modulesLink('clientNew')?>?token=<?=admin::getParam("token")?>"><?=admin::modulesLabels('clientNew')?></a>&nbsp;</td>
   </tr>
   <tr style="display:">
 	<td width="90%" height="40"></td>
@@ -139,7 +139,7 @@ while ($user_list = $pagDb->next_record())
         </td>
     <td align="center" width="11%" height="5">
             <?php
-                $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=57 and mop_lab_category='Ver' and moa_rol_uid=".$_SESSION['usr_rol']."");
+                $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=14 and mop_lab_category='Ver' and moa_rol_uid=".$_SESSION['usr_rol']."");
                 if($valuePermit=='ACTIVE'){
             ?>
     	<a href="clientView.php?mcl_uid=<?=$mcl_uid?>&token=<?=admin::getParam("token");?>">
@@ -156,7 +156,7 @@ while ($user_list = $pagDb->next_record())
     </td>
 	<td align="center" width="12%" height="5">
             <?php
-            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=57 and mop_lab_category='Editar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=14 and mop_lab_category='Editar' and moa_rol_uid=".$_SESSION['usr_rol']."");
             if($valuePermit=='ACTIVE'){
             ?>
     	<a href="clientEdit.php?mcl_uid=<?=$mcl_uid?>&token=<?=admin::getParam("token");?>">
@@ -173,7 +173,7 @@ while ($user_list = $pagDb->next_record())
     </td>
 	<td align="center" width="12%" height="5">
             <?php
-            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=57 and mop_lab_category='Eliminar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=14 and mop_lab_category='Eliminar' and moa_rol_uid=".$_SESSION['usr_rol']."");
             if($valuePermit=='ACTIVE'){
             ?>
                 <a href="" onclick="removeList(<?=$mcl_uid?>); return false;">
@@ -191,7 +191,7 @@ while ($user_list = $pagDb->next_record())
 	<td align="center" width="14%" height="5">
     <div id="status_<?=$mcl_uid?>">
         <?php
-            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=57 and mop_lab_category='Estado' and moa_rol_uid=".$_SESSION['usr_rol']."");
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=14 and mop_lab_category='Estado' and moa_rol_uid=".$_SESSION['usr_rol']."");
             if($valuePermit=='ACTIVE'){
             ?>
 	   <a href=""  onclick="clientCS('<?=$mcl_uid?>','<?=$mcl_status?>'); return false;">
@@ -248,8 +248,8 @@ else
 <br />
 <table width="100%" border="0" cellspacing="0" cellpadding="0"> 
 <tr>
-      <td width="77%" height="40"><span class="title"><?=admin::labels('user')?></span></td>
-    <td width="23%" height="40">&nbsp;</td>
+        <td width="77%" height="40"><span class="title"><?=admin::modulesLabels()?></span></td>
+    <td width="23%" height="40" align="right"><a href="<?=admin::modulesLink('clientNew')?>?token=<?=admin::getParam("token")?>"><?=admin::modulesLabels('clientNew')?></a>&nbsp;</td>
   </tr>
   <tr>
 	<td width="90%" height="40"></td>

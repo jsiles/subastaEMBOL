@@ -72,8 +72,8 @@ if ($nroReg>0)
 <br>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
    <tr>
-      <td width="77%" height="40"><span class="title"><?=admin::labels('subastas','list')?></span></td>
-    <td width="23%" height="40" align="right"><a href="subastasNew.php?token=<?=admin::getParam("token")?>"><?=admin::labels('subastas','create');?></a></td>
+      <td width="77%" height="40"><span class="title"><?=admin::modulesLabels()?></span></td>
+      <td width="23%" height="40" align="right"><a href="<?=admin::modulesLink('subastasNew')?>?token=<?=admin::getParam("token")?>"><?=admin::modulesLabels('subastasNew')?></a>&nbsp;</td>
   </tr>
   <tr>
 	<td width="90%" height="40"></td>
@@ -214,7 +214,7 @@ while ($subasta_list = $pagDb->next_record())
 		</td>
         <td align="center" width="5%" height="5">
             <?php
-                $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=60 and mop_lab_category='Ver' and moa_rol_uid=".$_SESSION['usr_rol']."");
+                $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=17 and mop_lab_category='Ver' and moa_rol_uid=".$_SESSION['usr_rol']."");
                 if($valuePermit=='ACTIVE'){
             ?>
         <a href="subastasView.php?pro_uid=<?=$pro_uid?>&token=<?=admin::getParam("token");?>&sub_uid=<?=$sub_uid?>">
@@ -238,7 +238,7 @@ while ($subasta_list = $pagDb->next_record())
 		}else{
 	?>
                 <?php
-            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=60 and mop_lab_category='Editar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=17 and mop_lab_category='Editar' and moa_rol_uid=".$_SESSION['usr_rol']."");
             if($valuePermit=='ACTIVE'){
             ?>
 		<a href="subastasEdit.php?token=<?=admin::getParam("token")?>&pro_uid=<?=$pro_uid?>&sub_uid=<?=$sub_uid?>">
@@ -263,7 +263,7 @@ while ($subasta_list = $pagDb->next_record())
 		}else{
 	?>
             <?php
-            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=60 and mop_lab_category='Eliminar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=17 and mop_lab_category='Eliminar' and moa_rol_uid=".$_SESSION['usr_rol']."");
             if($valuePermit=='ACTIVE'){
             ?>
 		<a href="removeList" onclick="removeList('<?=$sub_uid?>');return false;">
@@ -295,7 +295,7 @@ while ($subasta_list = $pagDb->next_record())
 	else{
             ?>
                 <?php
-            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=60 and mop_lab_category='Estado' and moa_rol_uid=".$_SESSION['usr_rol']."");
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=17 and mop_lab_category='Estado' and moa_rol_uid=".$_SESSION['usr_rol']."");
             if($valuePermit=='ACTIVE'){
             ?>
                  <a href="javascript:subastatatus('<?=$sub_uid?>','<?=$pro_status?>');">
@@ -348,8 +348,8 @@ else
 </div>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
-      <td width="77%" height="40"><span class="title"><?=admin::labels('subastas','list')?></span></td>
-    <td width="23%" height="40" align="right"><a href="newsNew.php"><?=admin::labels('subastas','create');?></a></td>
+      <td width="77%" height="40"><span class="title"><?=admin::modulesLabels()?></span></td>
+      <td width="23%" height="40" align="right"><a href="<?=admin::modulesLink('subastasNew')?>?token=<?=admin::getParam("token")?>"><?=admin::modulesLabels('subastasNew')?></a>&nbsp;</td>
   </tr>
   <tr>
     <td colspan="2" id="contentListing">
@@ -362,6 +362,8 @@ else
 </div>
 </td></tr>
 </table>
+<br>
+
 </form>
 
 <?php 	} 

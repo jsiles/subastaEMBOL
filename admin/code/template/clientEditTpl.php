@@ -144,7 +144,7 @@ $regusers = $db->next_record();
 			<tr>
 				<td width="59%" align="center">
 				<a href="#" onclick="verifyClient2();" class="button">
-				<?=admin::labels('register');?>
+				Actualizar
 				</a> 
 				</td>
           <td width="41%" style="font-size:11px;">

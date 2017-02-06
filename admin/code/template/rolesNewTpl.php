@@ -51,7 +51,7 @@ while($row3 = $db3->next_record()){
                         <td colspan="15"><?=$row3["mod_name"]?></td>
             
           </tr>
-		<tr>
+         <tr>
                     
         <td width="1%">
         </td>
@@ -68,9 +68,10 @@ while($row3 = $db3->next_record()){
                     else $uidModuleAcces.= ",".$row2["mod_uid"];
                             
 ?>
-                <div style="display:none"> <input name="mod_uid[<?=$row3["mod_uid"]?>][]" id="mod_uid[<?=$row3["mod_uid"]?>][]" type="checkbox"  value="<?=$row2["mod_uid"]?>" />
-		
-            <?=$row2["mod_name"]?> </div>
+                <div style="display:none">
+                    <input name="mod_uid[<?=$row3["mod_uid"]?>][]" id="mod_uid[<?=$row3["mod_uid"]?>][]" type="checkbox"  value="<?=$row2["mod_uid"]?>" />
+                    <?=$row2["mod_name"]?> 
+                </div>
            
                                 <?php	}  
                                 //echo $uidModuleAcces;
@@ -91,7 +92,7 @@ while($row3 = $db3->next_record()){
                                     ($options["mop_status"]=="ACTIVE")?$lblStatus = "":$lblStatus = 'disabled="disabled"';
                                     
                                 ?>
-                                <td width="1%"><input name="mod_uid[<?=$row3["mod_uid"]?>][<?=$options["mop_mod_uid"]?>][]" <?=$lblStatus?>  type="checkbox" value="<?=$options["mop_uid"]?>" /></td>
+                                <td width="1%"><input name="mod_uid[<?=$row3["mod_uid"]?>][<?=$options["mop_mod_uid"]?>][]" id="mod_uid[<?=$row3["mod_uid"]?>][<?=$options["mop_mod_uid"]?>][]" <?=$lblStatus?>  type="checkbox" value="<?=$options["mop_uid"]?>" /></td>
                         	<td width="10%"><?=$options["mop_lab_category"]?></td>
                                 <?php
                                 }

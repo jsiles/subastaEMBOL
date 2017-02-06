@@ -1,6 +1,6 @@
 <?php
  include ("core/admin.php"); 
- admin::initialize('aprobacion','aprobacionView'); 
+ admin::initialize('parametrizaciones','parametrizacionesView'); 
  ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">    
 <html>

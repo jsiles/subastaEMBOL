@@ -358,20 +358,7 @@ $prod = $db->next_record();
 <input id="pro_uid" name="pro_uid" value="<?=$prod["pro_uid"]?>" type="hidden" />
 <input id="sub_uid" name="sub_uid" value="<?=$prod["sub_uid"]?>" type="hidden" />
 
-<div id="contentButton">
-	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
-		<tr>
-		<td width="59%" align="center">
-		<a href="javascript:verifysubasta();" class="button">
-		<?=admin::labels('save');?>
-		</a> 
-		</td>
-		<td width="41%" style="font-size:11px;">
-		<?=admin::labels('or');?> <a href="subastasList.php?token=<?=admin::getParam("token")?>" ><?=admin::labels('cancel');?></a> 
-		</td>
-		</tr>
-     </table>
-</div>
+<!-------------->
 </td></tr>
 </table>
 </form>
@@ -649,8 +636,23 @@ else
           
         </tr>
       </table>
-      
-      <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subasta" style="display:">
+   
+    
+    <div id="contentButton">
+	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+		<tr>
+		<td width="59%" align="center">
+                    <a href="" onclick="document.frmsubasta.submit();return false;" class="button">
+		<?=admin::labels('save');?>
+		</a> 
+		</td>
+		<td width="41%" style="font-size:11px;">
+		<?=admin::labels('or');?> <a href="autorizacionList.php?token=<?=admin::getParam("token")?>" ><?=admin::labels('cancel');?></a> 
+		</td>
+		</tr>
+     </table>
+</div>
+   <!--   <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subasta" style="display:">
 			<tr>
 				<td width="59%" align="center">
 				<a href="subastasList.php?token=<?=admin::getParam("token")?>" class="button">Volver</a></td>
@@ -659,7 +661,7 @@ else
           
         </tr>
       </table>
-      
+      -->
       </div>
 <br /><br /><br /><br /><br />
 </td></tr>

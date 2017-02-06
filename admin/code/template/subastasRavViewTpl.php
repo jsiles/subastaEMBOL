@@ -19,7 +19,7 @@ $UrlProduct=admin::getDBvalue("select col_url FROM mdl_contents_languages where 
 
 $contentURL = admin::getContentUrl($con_uid,SYS_LANG);
 $rav_uid=  admin::getParam("rav_uid");
-$qsearch="select * from mdl_rav where rav_tipologia=2 and rav_uid=".$rav_uid;
+$qsearch="select * from mdl_rav where rav_tipologia=1 and rav_uid=".$rav_uid;
 $db->query($qsearch);
 $rav = $db->next_record();
 ?>
@@ -41,48 +41,36 @@ $rav = $db->next_record();
           
 	<tr>
             <td width="5%" >Rol:</td>
-        <td width="25%" ><select name="rav_rol" class="input"  >
-                <option selected="selected" value="" class="txt10">Seleccionar Rol</option>
+        <td width="25%" >
                 	<?php
-                    $sql3 = "select rol_uid, rol_description from mdl_roles";
-					$db3->query($sql3);
-					while ($content=$db3->next_record())
-					{	
-                                            ($rav["rav_rol_uid"]==$content["rol_uid"])?$select = 'selected="selected"':$select="";
-					?>
-					<option <?=$select?> value="<?=$content["rol_uid"]?>"><?=$content["rol_description"]?></option>					
-					<?php
-					}
+                    $sql3 = "select rol_description from mdl_roles where rol_uid=".$rav["rav_rol_uid"];
+                       $rol = admin::getDbValue($sql3);
                     ?>
-				</select></td>
+			<?=$rol?>	
+				
+        </td>
                                 <td width="7%">&nbsp;</td>
         </tr>
         <tr>
             <td width="5%" >Monto inferior:</td>    
-            <td width="20%" ><input name="rav_monto" value="<?=$rav["rav_monto_inf"]?>" class="input"></td>
+            <td width="20%" ><?=$rav["rav_monto_inf"]?></td>
             <td width="7%">&nbsp;</td>
         </tr>
         <tr>
             <td width="5%" >Monto superior:</td>
-            <td width="20%" ><input name="rav_monto1" value="<?=$rav["rav_monto_sup"]?>" class="input"></td>
+            <td width="20%" ><?=$rav["rav_monto_sup"]?></td>
             <td width="7%">&nbsp;</td>
         </tr>
         <tr>
             <td width="5%" >Estado:</td>
             <td width="10%">
                 <?php
-                $selectA = "";
-                $selectB = "";
-                
-                ($rav["rav_status"]=="ACTIVE")?$selectA = 'selected="selected"':$selectB = 'selected="selected"';
+                ($rav["rav_status"]=="ACTIVE")?$select = 'Activo':$select= 'Inactivo';
                         
                 ?>
-			<select name="rav_status" class="txt10" id="usr_status">
-            	<option <?=$selectA?> value="1"><?=admin::labels('active');?></option>
-              	<option <?=$selectB?> value="0"><?=admin::labels('inactive');?></option>
-			</select>
+			<?=$select?>
 			<span id="div_col_status" style="display:none;" class="error"></span>			</td>
-                        <input name="rav_tipo" type="hidden" value="2" />
+                        <input name="rav_tipo" type="hidden" value="1" />
                         <input name="rav_uid" type="hidden" value="<?=$rav_uid?>" />
                         </td>
                 <td width="7%">&nbsp;</td>
@@ -101,13 +89,9 @@ $rav = $db->next_record();
 	  	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 			<tr>
 				<td width="59%" align="center">
-				<a href="guardar" onclick="document.addRav.submit(); return false;" class="button">
-				<?=admin::labels('update');?>
-				</a> 
+				    <a href="subastasRavList.php?token=<?=admin::getParam("token")?>" class="button">Volver</a>
 				</td>
-          <td width="41%" style="font-size:11px;">
-		  		<?=admin::labels('or');?> <a href="subastasRavInfList.php?token=<?=admin::getParam("token")?>" ><?=admin::labels('cancel');?></a> 
-		  </td>
+         
         </tr>
       </table></div>
       <br /><br />

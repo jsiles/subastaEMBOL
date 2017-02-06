@@ -1,6 +1,6 @@
 <?php 
 include_once ("core/admin.php");
-admin::initialize('aprobacion','aprobacionList'); 
+admin::initialize('parametrizaciones','parametrizacionesList'); 
 $rol = $_SESSION["usr_rol"];
 if(($rol>3)&&($rol<5))
 {

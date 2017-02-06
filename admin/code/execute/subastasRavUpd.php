@@ -10,28 +10,18 @@ $rav_rol =admin::getParam("rav_rol");
 $rav_monto =admin::getParam("rav_monto"); 
 $rav_monto1 =admin::getParam("rav_monto1");
 $rav_tipo =admin::getParam("rav_tipo");
-$eliminaRav =admin::getParam("eliminaRav"); 
-$array=$rav_uid;
-//print_r($rav_uid);
-if(!isset($eliminaRav))
-{
-    foreach ($array as $key => $value) {
+$rav_status =(admin::getParam("rav_status")==1)?"ACTIVE":"INACTIVE";
     $sql="update mdl_rav set ".
-         "rav_rol_uid= ". $rav_rol[$key].
-         ",rav_monto_inf= ". $rav_monto[$key].
-         ",rav_monto_sup= ". $rav_monto1[$key].
-         " where ".   
-         " rav_uid=".$rav_uid[$key];
-    //echo $sql;
+         "rav_rol_uid= ". $rav_rol.
+         ",rav_monto_inf= ". $rav_monto.
+         ",rav_monto_sup= ". $rav_monto1.
+         ",rav_status= '". $rav_status.
+         "' where ".   
+         " rav_uid=".$rav_uid;
+    //echo $sql;die;
    $db->query($sql);
-}
-}else
-    {
-    
-    $sql="delete from mdl_rav where rav_uid=$eliminaRav";
-    $db->query($sql);
-    }
-unset($_POST);//die;
+
+   unset($_POST);//die;
 if($rav_tipo==1){
 header('Location: ../../subastasRavList.php?token='.$token);	
 }else{

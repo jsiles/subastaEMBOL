@@ -1,6 +1,6 @@
 <?php 
 include_once ("core/admin.php");
-admin::initialize('reportesInformes','reporteListInf'); 
+admin::initialize('reportesParametros','reporteView'); 
 $rol = $_SESSION["usr_rol"];
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">    
@@ -31,7 +31,7 @@ $rol = $_SESSION["usr_rol"];
 <tr><td valign="top"><?php include_once("skin/header.php");?>
 </td></tr>
   <tr>
-    <td valign="top" id="content"><?php include_once("code/template/reporteList2Tpl.php"); ?></td>
+    <td valign="top" id="content"><?php include_once("code/template/reporteViewTpl.php"); ?></td>
   </tr>
 <tr><td>
   <?php include("skin/footer.php"); ?>

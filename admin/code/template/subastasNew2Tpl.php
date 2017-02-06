@@ -278,9 +278,9 @@ else
         $displayItem="";
     }
     ?>
-<div id="contentButton">
+<div id="contentButton"  style="display:<?=$displayItem?>" >
 	
-    <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subastaxitem" style="display:<?=$displayItem?>" >
+    <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subastaxitem">
 			<tr>
 				<td width="59%" align="center">
 				<a href="subastasEdit2.php?token=<?=admin::getParam("token")?>&pro_uid=<?=admin::getParam("pro_uid")?>&sub_uid=<?=admin::getParam("sub_uid")?>" class="button" >Siguiente</a></td>
@@ -290,8 +290,9 @@ else
           
         </tr>
       </table>
-      
-      <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subasta" style="display:<?=$displayTeimpor?>">
+</div>
+<div id="contentButton"  style="display:<?=$displayTiempo?>">
+      <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subasta" >
 			<tr>
 				<td width="59%" align="center">
 				<a href="subastasList.php?token=<?=admin::getParam("token")?>" class="button">Finalizar</a></td>

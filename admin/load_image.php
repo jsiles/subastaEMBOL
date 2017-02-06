@@ -52,11 +52,11 @@ $displayImage = $_REQUEST["wys"]=="off" ? "none" : "";
 			</table>
 			</div>
 			<div id="image_add_<?=$con_uid?>" style="display:none;"></div>
-			<?	}
+			<?php	}
 			else
 				{ ?>
 				<input type="file" name="con_image" id="con_image" size="32" class="input" onchange="verifyImageUpload();">
 				<span id="div_con_image" class="error" style="display:none">Solo archivos jpg gif png </span>	
-			<?	} ?>	</td>
+			<?php	} ?>	</td>
 			
           </tr>

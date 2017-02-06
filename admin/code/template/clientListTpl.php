@@ -54,7 +54,7 @@ if ($nroReg>0)
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
    <tr>
       <td width="77%" height="40"><span class="title"><?=admin::modulesLabels()?></span></td>
-    <td width="23%" height="40" align="right"><a href="<?=admin::modulesLink('clientNew')?>?token=<?=admin::getParam("token")?>"><?=admin::modulesLabels('clientNew')?></a>&nbsp;</td>
+      <td width="23%" height="40" align="right"><a href="<?=admin::modulesLink('clientNew')?>?token=<?=admin::getParam("token")?>"><?=admin::modulesLabels('clientNew')?></a>&nbsp;</td>
   </tr>
   <tr style="display:">
 	<td width="90%" height="40"></td>

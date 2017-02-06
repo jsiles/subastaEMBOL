@@ -9,11 +9,11 @@ $prod = $db->next_record();
 ?>
 <br />
 <div id="div_wait" style="display:none;"><img border="0" src="lib/loading.gif"></div>
-<form name="frmsubasta" method="post" action="code/execute/subastasUpd.php?token=<?=admin::getParam("token")?>" enctype="multipart/form-data" >
+<form name="frmsubasta" method="post" action="code/execute/autorizacionUpd.php?token=<?=admin::getParam("token")?>" enctype="multipart/form-data" >
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 		<td width="77%" height="40">
-		<span class="title"><?=admin::labels('subastas','create');?></span>
+		<span class="title"><?=admin::modulesLabels()?></span>
 		</td>
 		<td width="23%" height="40">&nbsp;</td>
 	</tr>
@@ -625,20 +625,30 @@ else
 <tr>
 <td colspan="2">
 <br />
-<div id="contentButton">
+<?php
+    if($prod["sub_modalidad"]=="TIEMPO"){
+        $displayTiempo="";
+        $displayItem="none";
+    }else{
+        $displayTiempo="none";
+        $displayItem="";
+    }
+    ?>
+<div id="contentButton" style="display:<?=$displayItem?>">
 	  	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subastaxitem" style="display:">
 			<tr>
 				<td width="59%" align="center">
-				<a href="subastasEdit2.php?token=<?=admin::getParam("token")?>&pro_uid=<?=admin::getParam("pro_uid")?>" class="button" >Paso 1 de 2</a></td>
+				<a href="autorizacionEdit2.php?token=<?=admin::getParam("token")?>&pro_uid=<?=admin::getParam("pro_uid")?>" class="button" >Paso 1 de 2</a></td>
 		<td width="41%" style="font-size:11px;">
-		<?=admin::labels('or');?> <a href="subastasList.php?token=<?=admin::getParam("token")?>" ><?=admin::labels('cancel');?></a> 
+		<?=admin::labels('or');?> <a href="autorizacionList.php?token=<?=admin::getParam("token")?>" ><?=admin::labels('cancel');?></a> 
 		</td>
           
         </tr>
       </table>
-   
+  
+</div>  
     
-    <div id="contentButton">
+    <div id="contentButton" style="display:<?=$displayTiempo?>">
 	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 		<tr>
 		<td width="59%" align="center">
@@ -662,7 +672,7 @@ else
         </tr>
       </table>
       -->
-      </div>
+
 <br /><br /><br /><br /><br />
 </td></tr>
 </table>

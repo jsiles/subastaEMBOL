@@ -40,10 +40,7 @@ if ($bannerexist==0) echo '<script language="javascript" type="text/javascript">
           <tr>
             <td width="29%"><?=admin::labels('banner','title');?>:</td>
             <td width="64%">
-<input name="ban_title" type="text" class="input" id="ban_title" size="50" onfocus="setClassInput(this,'ON');document.getElementById('div_ban_title').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_ban_title').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_ban_title').style.display='none';" value="<?=$banner["ban_title"]?>" />
-<br /><span id="div_ban_title" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('banner','titleerror');?></span><?php 
-			    if($_REQUEST["error"]=='ok') {?><br /><span class="error">Imagen no permitida</span> <?php }
-			?>
+<?=$banner["ban_title"]?>
 			</td>
           </tr>
                            
@@ -66,13 +63,14 @@ if ($bannerexist==0) echo '<script language="javascript" type="text/javascript">
 				<a href="<?=$imgSaveddomain2?>" target="_blank"><img src="<?=$imgSaveddomain1?>?<?=time()?>" border="0" /></a>				</td>
 				<td width="75%" style="font-size:11px;">
 				<?=$banner["ban_title"];?><br />
-				<a href="javascript:viewInputFile('on')" title="<?=admin::labels('change');?>" class="small2"><?=admin::labels('change');?></a>
-				<span class="pipe">|</span> <a href="#" onclick="removeImg(<?=$banner["ban_uid"]?>);return false;" title="<?=admin::labels('del')?>" class="small3"><?=admin::labels('del')?></a></td>
+				</td>
 			</tr>
 			<tr>
 				<td height="24">
 				<div id="imageChange1" style="display:none">
-			<input type="file" name="ban_adjunt" id="ban_adjunt" size="14" style="font-size:11px;" onchange="verifyImageUpload();" />  <a href="javascript:viewInputFile('off')" onclick="document.getElementById('new_image').value='';document.getElementById('button_next').innerHTML='<?=admin::labels('public');?>';"><img border="0" src="lib/close.gif" align="top"/></a>
+			<input type="file" name="ban_adjunt" id="ban_adjunt" size="14" style="font-size:11px;" onchange="verifyImageUpload();" /> 
+                        
+                            <img border="0" src="lib/close.gif" align="top"/>
 			
 			<span id="div_ban_adjunt" class="error" style="display:none">Solo extenciones bmp, jpg, jpeg, gif, png</span>			</div></td>
 			</tr>
@@ -90,10 +88,8 @@ if ($bannerexist==0) echo '<script language="javascript" type="text/javascript">
           <tr>
             <td><?=admin::labels('status');?>:</td>
             <td>
-			<select name="ban_status" class="listMenu" id="ban_status">
-            	<option <?php if ($banner["mbc_status"]=="ACTIVE") echo "selected"; ?> value="ACTIVE"><?=admin::labels('active');?></option>
-              	<option <?php if ($banner["mbc_status"]=="INACTIVE") echo "selected"; ?> value="INACTIVE"><?=admin::labels('inactive');?></option>
-			</select>
+			
+            	<?php if ($banner["mbc_status"]=="ACTIVE") echo admin::labels('active'); else admin::labels('inactive');?>
 			<span id="div_ban_status" style="display:none;" class="error"></span>			
 			</td>
           </tr>
@@ -131,14 +127,10 @@ if ($bannerexist==0) echo '<script language="javascript" type="text/javascript">
       <div id="contentButton">
 	  	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 			<tr>
-				<td width="59%" align="center">
-				<a href="#" onclick="verifyBanner2();" class="button">
-				<?=admin::labels('public');?>
-				</a> 
+                            <td width="59%" align="center" >
+				<a href="bannerList.php?token=<?=admin::getParam("token");?>" class="button">Volver</a>  
 				</td>
-          <td width="41%" style="font-size:11px;">
-		  		o <a href="bannerList.php?token=<?=admin::getParam("token");?>"><?=admin::labels('cancel');?></a> 
-		  </td>
+          
         </tr>
       </table></div>
       <br /><br />

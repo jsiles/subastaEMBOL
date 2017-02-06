@@ -136,4 +136,4 @@ else
 			</tr>
          </table>
           <input id="maxVal" name="maxVal" value="1" type="hidden" /> 
- <?	} ?>
+ <?php	} ?>

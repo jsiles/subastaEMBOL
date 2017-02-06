@@ -625,9 +625,19 @@ else
 <?php 	} ?>
 <tr>
 <td colspan="2">
+    
+     <?php
+    if($prod["sub_modalidad"]=="TIEMPO"){
+        $displayTiempo="";
+        $displayItem="none";
+    }else{
+        $displayTiempo="none";
+        $displayItem="";
+    }
+    ?>
 <br />
-<div id="contentButton">
-	  	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subastaxitem" style="display:">
+<div id="contentButton" style="display:<?=$displayItem?>">
+	  	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subastaxitem" >
 			<tr>
 				<td width="59%" align="center">
 				<a href="subastasEdit2.php?token=<?=admin::getParam("token")?>&pro_uid=<?=admin::getParam("pro_uid")?>&sub_uid=<?=admin::getParam("sub_uid")?>" class="button" >Paso 1 de 2</a></td>
@@ -637,33 +647,22 @@ else
           
         </tr>
       </table>
-      
+      </div>      
+<div id="contentButton" style="display:<?=$displayTiempo?>">
       <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subasta" style="display:">
-			<tr>
-				<td width="59%" align="center">
-                                    
-                                    <div id="contentButton">
-                                            <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
-                                                    <tr>
-                                                    <td width="59%" align="center">
-                                                    <a href="javascript:verifysubasta();" class="button">
+	<tr>
+            <td width="59%" align="center">
+            <a href="javascript:verifysubasta();" class="button">
                                                     <?=admin::labels('save');?>
                                                     </a> 
                                                     </td>
                                                     <td width="41%" style="font-size:11px;">
                                                     <?=admin::labels('or');?> <a href="subastasList.php?token=<?=admin::getParam("token")?>" ><?=admin::labels('cancel');?></a> 
                                                     </td>
-                                                    </tr>
-                                         </table>
-                                    </div>
-                                </td>
-		<td width="41%" style="font-size:11px;">&nbsp;
-		</td>
-          
         </tr>
-      </table>
-      
-      </div>
+     </table>
+</div>      
+
 <br /><br /><br /><br /><br />
 </td></tr>
 </table>

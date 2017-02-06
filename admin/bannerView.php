@@ -1,6 +1,6 @@
 <?php 
 include ("core/admin.php");
-admin::initialize('banners','bannerEdit');
+admin::initialize('banners','bannerView');
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">    
 <html>
@@ -61,7 +61,7 @@ function removeImg(id){
 <tr><td valign="top"><?php include_once("skin/header.php");?>
 </td></tr>
   <tr>
-    <td valign="top" id="content"><?php include_once("code/template/bannerEditTpl.php"); ?></td>
+    <td valign="top" id="content"><?php include_once("code/template/bannerViewTpl.php"); ?></td>
   </tr>
 <tr><td>
   <?php include("skin/footer.php"); ?>

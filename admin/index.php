@@ -28,9 +28,10 @@
     <td valign="top"><table width="100%"  border="0" align="center" cellpadding="0" cellspacing="0">
       <tr>
         <td valign="top"><table width="100%" border="0" cellpadding="0" cellspacing="0" id="header">
+                <tr><td height="10px" colspan="3"></td></tr>
           <tr>
-            <td width="21%" rowspan="2"></td>
-            <td width="66%" height="36"><img src="lib/logo.png" width="70" alt="bnb logo"></td>
+            <td width="21%" rowspan="3"></td>
+            <td width="66%" height="36"><img  src="lib/logo.png" width="70" alt="bnb logo"></td>
             <td width="13%" align="center"><table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td align="center"></td>
@@ -44,7 +45,7 @@
         </table>
               <table  width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                  <td><? include_once('code/template/loginTpl.php'); ?></td>
+                  <td><?php include_once('code/template/loginTpl.php'); ?></td>
                 </tr>
             </table></td>
       </tr>

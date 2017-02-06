@@ -150,6 +150,7 @@ while ($subasta_list = $pagDb->next_record())
 	$pro_status = $subasta_list["sub_status"];
 	$sub_monto = $subasta_list["sub_mount_base"];
         $sub_modalidad = $subasta_list["sub_modalidad"];
+        $sub_status = $subasta_list["sub_status"];
         if($sub_modalidad=="ITEM")
         {
             //echo "SELECT SUM(xit_price) FROM mdl_xitem WHERE xit_sub_uid=$sub_uid and xit_delete=0 ";
@@ -219,7 +220,7 @@ while ($subasta_list = $pagDb->next_record())
   	?> 
 	<div class="groupItem" id="<?=$pro_uid?>">
     
-    <div id="list_<?=$pro_uid?>" class="<?=$class?>" style="width:100%" >
+    <div id="list_<?=$sub_uid?>" class="<?=$class?>" style="width:100%" >
     
     <table class="list" border="0" width="100%" style="">
 	<tr>
@@ -294,7 +295,7 @@ while ($subasta_list = $pagDb->next_record())
             $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=20 and mop_lab_category='Eliminar' and moa_rol_uid=".$_SESSION['usr_rol']."");
             if($valuePermit=='ACTIVE'){
             ?>
-		<a href="removeList" onclick="removeList('<?=$pro_uid?>');return false;">
+		<a href="removeList" onclick="removeList('<?=$sub_uid?>');return false;">
 		<img src="<?=admin::labels('delete','linkImage')?>" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
 		</a>
                 <?php
@@ -309,17 +310,17 @@ while ($subasta_list = $pagDb->next_record())
 	</td>
         
         <td align="center" width="5%" height="5">
-    <div id="status_<?=$mcl_uid?>">
+    <div id="status_<?=$sub_uid?>">
         <?php
             $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=20 and mop_lab_category='Estado' and moa_rol_uid=".$_SESSION['usr_rol']."");
             if($valuePermit=='ACTIVE'){
             ?>
-	   <a href=""  onclick="autorizacionCS('<?=$pro_uid?>','<?=$pro_status?>'); return false;">
+	   <a href=""  onclick="autorizacionCS('<?=$sub_uid?>','<?=$sub_status?>'); return false;">
 		<img src="<?=admin::labels($labels_content,'linkImage')?>" border="0" title="<?=admin::labels($labels_content)?>" alt="<?=admin::labels($labels_content)?>">
 	   </a>
         <?php
             }else{
-                $status = ($pro_status=='ACTIVE') ? 'active_off_es.gif':'inactive_off_es.gif';
+                $status = ($sub_status=='ACTIVE') ? 'active_off_es.gif':'inactive_off_es.gif';
         ?>
         <img src="lib/<?=$status?>" border="0" title="<?=admin::labels($labels_content)?>" alt="<?=admin::labels($labels_content)?>">
         <?php
@@ -329,7 +330,6 @@ while ($subasta_list = $pagDb->next_record())
     </td>
         
 	<td align="center" width="5%" height="5">
-	<div id="status_<?=$sub_uid?>">
 	<?php
 		if($sub_finish!=0)
 		{
@@ -376,12 +376,10 @@ while ($subasta_list = $pagDb->next_record())
             }
 	}
 		?>
-	</div>
 
 	</td>
         
         <td align="center" width="5%" height="5">
-	<div id="status_<?=$sub_uid?>">
 	<?php
 		if($sub_finish!=0)
 		{
@@ -429,12 +427,11 @@ while ($subasta_list = $pagDb->next_record())
             }
 	}
 		?>
-	</div>
 
 	</td>
         
         
-	<td align="center" width="5%" height="5">
+<!--	<td align="center" width="5%" height="5">
 	<div id="status_<?=$sub_uid?>">
 	<?php
             //echo "Estado:" .$sub_finish;
@@ -489,7 +486,7 @@ while ($subasta_list = $pagDb->next_record())
 		?>
 	</div>
 
-	</td>
+	</td>-->
 		</tr>
 	</table>
 <?php

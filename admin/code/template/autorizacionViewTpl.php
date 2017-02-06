@@ -13,10 +13,11 @@ $prod = $db->next_record();
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 		<td width="77%" height="40">
-		<span class="title">Ver subasta</span>
+		<span class="title"><?=admin::modulesLabels()?></span>
 		</td>
 		<td width="23%" height="40">&nbsp;</td>
 	</tr>
+        <tr><td>&nbsp;</td></tr>
   	<tr>
 	<td colspan="2" id="contentListing">
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">

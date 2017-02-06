@@ -53,8 +53,8 @@ if(is_array($modId)){
         //echo $sql."<br>";
         if (is_array($value)){
             foreach ($value as $key1 => $value1) {
-               // echo "submodulo:" . $key1." - " . $value1."<br>";
-                $sql = "insert into sys_modules_users (mus_rol_uid,mus_mod_uid,mus_place,mus_delete) values (".$rol_uid.", ".$key1.", 'MODULE', 0)";
+                //echo "submodulo:" . $key1." - " . $value1."<br>";
+               $sql = "insert into sys_modules_users (mus_rol_uid,mus_mod_uid,mus_place,mus_delete) values (".$rol_uid.", ".$key1.", 'MODULE', 0)";
                $db->query($sql);
                 //echo $sql."<br>";
                 if (is_array($value1)){
@@ -69,6 +69,7 @@ if(is_array($modId)){
         }       
     }
 }
+
 $token=admin::getParam("token");
 unset($_POST);
 header('Location: ../../rolesList.php?token='.$token);

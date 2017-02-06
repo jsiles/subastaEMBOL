@@ -1,6 +1,6 @@
 <?php 
 include_once ("core/admin.php");
-admin::initialize('parametrizaciones','parametrizacionesList'); 
+admin::initialize('informes','informesList'); 
 $rol = $_SESSION["usr_rol"];
 if(($rol>3)&&($rol<5))
 {
@@ -86,8 +86,8 @@ function removeList(id){
 }
 
 
-function aprobarSubasta(id){
-	var txt = 'Esta seguro de Aprobar esta Solicitud?<br><input type="hidden" id="list" name="list" value="'+ id +'" />';
+function aprobarInf(id){
+	var txt = 'Esta seguro de Aprobar este Informe?<br><input type="hidden" id="list" name="list" value="'+ id +'" />';
 	$.prompt(txt,{
 		show:'fadeIn' ,
 		opacity:0,
@@ -98,11 +98,11 @@ function aprobarSubasta(id){
 				var uid = m.find('#list').val();
 				  $('#sub_'+id).fadeOut(500, function(){ $(this).remove(); });
 					  $.ajax({
-						url: 'code/execute/autorizacionApr.php',
+						url: 'code/execute/informeApr.php',
 						type: 'POST',
 						data: 'uid='+id,
 						 success: function() { 
-								window.location.href='./autorizacionList.php?token=<?=admin::getParam("token")?>';
+								window.location.href='./informeList.php?token=<?=admin::getParam("token")?>';
 							}
 					});
 					 
@@ -113,8 +113,8 @@ function aprobarSubasta(id){
 	});
 }
 
-function rechazarSubasta(id){
-	var txt = 'Esta seguro de Rechazar esta Solicitud?<br><input type="hidden" id="list" name="list" value="'+ id +'" />';
+function rechazarInf(id){
+	var txt = 'Esta seguro de Rechazar este Informe?<br><input type="hidden" id="list" name="list" value="'+ id +'" />';
 	$.prompt(txt,{
 		show:'fadeIn' ,
 		opacity:0,
@@ -125,11 +125,11 @@ function rechazarSubasta(id){
 				var uid = m.find('#list').val();
 				  $('#sub_'+id).fadeOut(500, function(){ $(this).remove(); });
 					  $.ajax({
-						url: 'code/execute/autorizacionRechazar.php',
+						url: 'code/execute/informeRechazar.php',
 						type: 'POST',
 						data: 'uid='+id,
 						 success: function() { 
-								window.location.href='./autorizacionList.php?token=<?=admin::getParam("token")?>';
+								window.location.href='./informeList.php?token=<?=admin::getParam("token")?>';
 							}
 					});
 					 
@@ -155,7 +155,7 @@ function adjudicarSubasta(id){
 						type: 'POST',
 						data: 'uid='+id,
 						 success: function() { 
-								window.location.href='./autorizacionList.php?token=<?=admin::getParam("token")?>';
+								window.location.href='./informeList.php?token=<?=admin::getParam("token")?>';
 							}
 					});
 					 
@@ -172,7 +172,7 @@ function adjudicarSubasta(id){
 <tr><td valign="top"><?php include_once("skin/header.php");?>
 </td></tr>
   <tr>
-    <td valign="top" id="content"><?php include_once("code/template/autorizacionListTpl.php"); ?></td>
+    <td valign="top" id="content"><?php include_once("code/template/informeListTpl.php"); ?></td>
   </tr>
 <tr><td>
   <?php include("skin/footer.php"); ?>

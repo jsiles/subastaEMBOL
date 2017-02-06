@@ -129,7 +129,7 @@ function removeList(id){
 <tr><td valign="top"><?php include_once("skin/header.php");?>
 </td></tr>
   <tr>
-    <td valign="top" id="content"><?php include_once("code/template/adjudicarSubastaTpl.php"); ?></td>
+    <td valign="top" id="content"><?php include_once("code/template/adjudicarSubastaViewTpl.php"); ?></td>
   </tr>
 <tr><td>
   <?php include("skin/footer.php"); ?>

@@ -1670,11 +1670,11 @@ public static function getFullnameUser($use_uid)
 public static function modulesLabels($subMenuId=''){
 	global $indexMenu, $indexSubMenu,$lang;
 	if($subMenuId==''){
-		$menuLabel = admin::getDBValue("select mod_name from sys_modules where mod_uid='".$indexSubMenu."' and mod_delete=0 and mod_status='ACTIVE' and mod_language='".$lang."'");	
+		$menuLabel = admin::getDBValue("select mod_name from sys_modules where mod_uid='".$indexSubMenu."' and mod_delete=0 and mod_language='".$lang."'");	
 	}
 	else{
 		$sSubMenu=admin::getDbValue("select mod_uid from sys_modules where mod_alias='".$subMenuId."'");
-		$menuLabel = admin::getDBValue("select mod_name from sys_modules where mod_uid='".$sSubMenu."' and mod_delete=0 and mod_status='ACTIVE' and mod_language='".$lang."'");	
+		$menuLabel = admin::getDBValue("select mod_name from sys_modules where mod_uid='".$sSubMenu."' and mod_delete=0 and mod_language='".$lang."'");	
 	}
 	return($menuLabel);
 }

@@ -1,9 +1,7 @@
 <?php
-$pro_uid = admin::toSql(admin::getParam("pro_uid"),"String");
+$pro_uid = admin::toSql($_GET["pro_uid"],"String");
 $sub_uid=admin::getParam("pro_uid");
-if (!$pro_uid) {
-    header('Location: ../../subastasList.php?token='.$token);
-}
+if (!$pro_uid) header('Location: ../../subastasList.php?token='.$token);
 $sql = "SELECT * FROM mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_status='ACTIVE' and pro_uid='".$pro_uid."'";
 $db->query($sql);
 $prod = $db->next_record();
@@ -11,14 +9,15 @@ $prod = $db->next_record();
 ?>
 <br />
 <div id="div_wait" style="display:none;"><img border="0" src="lib/loading.gif"></div>
-<form name="frmsubasta" method="post" action="code/execute/adjudicarSubasta.php?token=<?=admin::getParam("token")?>&sub_uid=<?=$prod["sub_uid"]?>" enctype="multipart/form-data" >
+<form name="frmsubasta" method="post" action="code/execute/subastasUpd.php?token=<?=admin::getParam("token")?>" enctype="multipart/form-data" >
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 		<td width="77%" height="40">
-		<span class="title"><?=admin::modulesLabels('informesNew')?></span>
+		<span class="title"><?=admin::modulesLabels()?></span>
 		</td>
 		<td width="23%" height="40">&nbsp;</td>
 	</tr>
+        <tr><td>&nbsp;</td></tr>
   	<tr>
 	<td colspan="2" id="contentListing">
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -260,30 +259,37 @@ $prod = $db->next_record();
     </tr>
 
 </table>
+</form>
 <div id="DIV_WAIT1" style="display:none;"><img border="0" src="lib/loading.gif"></div>
 <br />
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
-     <td width="77%" height="40"><span class="title">Lista de la Puja</span></td>
-     <td width="23%" height="40">&nbsp;</td>
-    </tr>
+      <td width="77%" height="40"><span class="title">Usuarios habilitados</span></td>
+    <td width="23%" height="40">&nbsp;</td>
+  </tr>
+    
    <?php 
-   $sSQL= "select * from mdl_bid where bid_sub_uid='".$sub_uid."' order by bid_uid desc ";
+   $sSQL= "select * from mdl_incoterm, mdl_incoterm_language, mdl_transporte, mdl_client where inc_inl_uid=inl_uid and inc_tra_uid=tra_uid and inc_cli_uid=cli_uid and inc_delete=0 and inc_sub_uid='".$sub_uid."' order by inc_uid desc";
    $nroReg = $db2->numrows($sSQL);
    $db2->query($sSQL);
 
 if ($nroReg>0)
 	{
 	?> 
-     <tr>
+   <tr>
+      <td width="77%" height="40"><span class="title"><?=admin::labels('list','dpflist')?></span></td>
+    <td width="23%" height="40">&nbsp;</td>
+  </tr>
+  <tr>
     <td colspan="2" id="contentListing">
     <div class="row0">
     <table class="list" width="100%">
-	<tr>
-            <td width="12%" style="color:#16652f">Fecha y Hora</td>
-            <td width="12%" style="color:#16652f">Oferente</td>
-    <td width="12%" style="color:#16652f">Monto</td>
-    	<td align="center" width="12%" height="5">&nbsp;</td>
+	<tr><td width="12%" style="color:#16652f">Oferente</td>
+    <td width="12%" style="color:#16652f">Lugar de entrega</td>
+    <td width="12%" style="color:#16652f">Medio de transporte</td>
+    <td width="12%" style="color:#16652f">Incoterm</td>
+    <td width="12%" style="color:#16652f">Factor de ajuste</td>
+	<td align="center" width="12%" height="5">&nbsp;</td>
     <td align="center" width="12%" height="5">&nbsp;</td>
 	</tr>
 	</table>
@@ -293,10 +299,17 @@ if ($nroReg>0)
 $i=1;
 while ($list = $db2->next_record())
 	{
-	$cli_uid = $list["bid_cli_uid"];
+
+	$inc_uid = $list["inc_uid"];
+	$cli_uid = $list["inc_cli_uid"];
 	$cli_name = admin::getDBvalue("select concat(cli_firstname,' ',cli_lastname) as nombre from mdl_client WHERE cli_uid='".$cli_uid."'");
-	$bid_monto = $list["bid_mount"];
-        $bid_fecha = $list["bid_date"];
+	$inc_lugar_entrega = $list["inc_lugar_entrega"];
+	$tra_uid = $list["inc_tra_uid"];
+	$tra_name = admin::getDBvalue("select tra_name from mdl_transporte WHERE tra_uid='".$tra_uid."'");
+	$inl_uid = $list["inc_inl_uid"];
+	$inl_name = admin::getDBvalue("select inl_name from mdl_incoterm_language WHERE inl_uid='".$inl_uid."'");
+	$inc_ajuste = $list["inc_ajuste"];
+
 	if ($i%2==0) $class='row0';
 	else  $class='row';
 	if ($i%2==0) $class2='row';
@@ -306,21 +319,78 @@ while ($list = $db2->next_record())
   	<div id="list_<?=$inc_uid?>" class="<?=$class?>" style="width:100%" >
 <table class="list" width="100%">
 	<tr>
-            <td width="12%"><?=$bid_fecha?></td>
-            <td width="12%"><?=$cli_name?></td>
-            <td width="12%"><?=$bid_monto?></td>
-   	<td align="center" width="12%" height="5">
+    <td width="12%"><?=$cli_name?></td>
+    <td width="12%"><?=utf8_decode($inc_lugar_entrega)?></td>
+    <td width="12%"><?=utf8_decode($tra_name)?></td>
+    <td width="12%"><?=utf8_decode($inl_name)?></td>
+    <td width="12%"><?=round($inc_ajuste,2)?>%</td>
+	<td align="center" width="12%" height="5">
 		<!--<a href="#" onclick="showTab('list_<?=$inc_uid?>');showTab('Add_<?=$inc_uid?>'); return false;">
 		<img src="lib/edit_es.gif" border="0" title="<?=admin::labels('edit')?>" alt="<?=admin::labels('edit')?>">
 		</a>-->
 	</td>
 	<td align="center" width="12%" height="5">
+		<img src="lib/delete_off_es.gif" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
 			</td>
 	</tr>
 	</table>
 	</div>
     </div>
-    	<?php
+    <div id="Add_<?=$inc_uid?>" class="<?=$class2?>" style="display:none">
+    <form name="frmIncotermUpd<?=$inc_uid?>" id="frmIncotermUpd<?=$inc_uid?>" action="code/execute/IncotermUpd.php"  enctype="multipart/form-data" >
+<table class="list" width="100%">
+	<tr><td width="12%">
+    			<input name="cli_name<?=$cli_uid?>" id="cli_name<?=$cli_uid?>" onkeyup="lookup(this.value,<?=$cli_uid?>);" type="text" size="15" value="<?=$cli_name?>" />
+    			<div id='autocomplete<?=$cli_uid?>' style="display:none"></div>
+                <input name="cli_uid<?=$cli_uid?>" id="cli_uid<?=$cli_uid?>" value="<?=$cli_uid?>" type="hidden" />
+                <input name="sub_uid2" id="sub_uid2" value="<?=$sub_uid?>" type="hidden" /></td>
+    <td width="12%"><input name="inc_lugar_entrega" id="inc_lugar_entrega" type="text"  size="15" value="<?=utf8_decode($inc_lugar_entrega)?>" /></td>
+    <td width="12%">
+    				<select name="inc_tra_uid<?=$tra_uid?>" id="inc_tra_uid<?=$tra_uid?>" class="input"  >
+                	<?php
+                    $sql3 = "select tra_uid, tra_name from mdl_transporte where tra_delete=0";
+					$db3->query($sql3);
+					while ($content=$db3->next_record())
+					{	
+					?>
+					<option <? if($content["tra_name"]==$tra_name) echo 'selected="selected"';?> value="<?=$content["tra_uid"]?>"><?=utf8_decode($content["tra_name"])?></option>					
+					<?php
+					}
+                    ?>
+				</select>
+                </td>
+    <td width="12%">
+				<select name="inc_inl_uid" id="inc_inl_uid" class="input"  >
+                	<?php
+                    $sql3 = "select inl_uid, inl_name from mdl_incoterm_language where inl_delete=0";
+					$db3->query($sql3);
+					while ($content=$db3->next_record())
+					{	
+					?>
+					<option <? if($content["inl_name"]==$inl_name) echo 'selected="selected"';?> value="<?=$content["inl_uid"]?>"><?=$content["inl_name"]?></option>					
+					<?php
+					}
+                    ?>
+				</select>
+                </td>
+    <td width="12%"><input name="inc_ajuste2" id="inc_ajuste2" type="text" size="9" value="<?=round($inc_ajuste,2)?>"/></td>
+	<td align="center" width="12%" height="5">
+		<a href="#" onclick="editListDpf('<?=$inc_uid?>');return false;">
+		<img src="lib/save_es.gif" border="0" title="<?=admin::labels('edit')?>" alt="<?=admin::labels('edit')?>">
+		</a>
+	</td>
+	<td align="center" width="12%" height="5">
+		<a href="#" onclick="showTab('list_<?=$inc_uid?>');showTab('Add_<?=$inc_uid?>'); return false;">
+		<img src="lib/cancel_es.gif" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
+		</a>
+	</td>
+	</tr>
+	</table>
+     <input name="token" id="token" value="<?=admin::getParam("token")?>" type="hidden" />
+     <input name="inc_uid" id="inc_uid" value="<?=$inc_uid?>" type="hidden" />
+    </form>
+     </div>
+	<?php
 	$i++;
 	} 
  ?>
@@ -346,48 +416,10 @@ else
 	</td></tr>	
  </table>
 </div>
-</td></tr>
-</table>
+</td></tr></table>
 </td>
 </tr>
 <?php 	} ?>
-<tr><td><br /></td></tr>
-<tr>
-     <td width="77%" height="40"><span class="title">Informe Subasta</span></td>
-     <td width="23%" height="40">&nbsp;</td>
-</tr>
-<tr>
-    <td colspan="2" id="contentListing">
-    <div class="row0">
-    <table class="list" width="100%">
-	<tr>
-            <td width="12%" style="color:#16652f">Elaborado por:</td>
-            <td><input id="elaborado" name="elaborado" value="<?=$_SESSION["usr_firstname"] ." ".$_SESSION["usr_lastname"]?>">
-            <br /><span id="div_elaborado" style="display:none; padding-left:5px; padding-right:5px;" class="error">* Campo requerido</span>
-            </td>
-        </tr>
-        <tr>
-            <td width="12%" style="color:#16652f">Aprobado por:</td>
-            <td><input id="aprobado" name="aprobado">
-            <br /><span id="div_aprobado" style="display:none; padding-left:5px; padding-right:5px;" class="error">* Campo requerido</span>
-            </td>
-        </tr>
-        <tr>
-            <td width="12%" style="color:#16652f">Ahorro econ&oacute;mico:</td>
-            <td><input id="ahorro" name="ahorro">
-            <br /><span id="div_ahorro" style="display:none; padding-left:5px; padding-right:5px;" class="error">* Campo requerido</span>
-            </td>
-        </tr>
-        <tr>
-            <td width="12%" style="color:#16652f">Observaciones:</td>
-            <td><textarea id="observaciones" rows="4" cols="45" name="observaciones"></textarea>
-            <br /><span id="div_observaciones" style="display:none; padding-left:5px; padding-right:5px;" class="error">* Campo requerido</span>
-            </td>
-        </tr>
-    </table>
-    </div>
-    </td>
-</tr>
 <tr>
 <td colspan="2">
 <br />
@@ -395,15 +427,11 @@ else
 	  	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 			<tr>
 				<td width="59%" align="center">
-                                    <a href="#" class="button" onclick="verifyadjudicar();" >Informe</a>
+				<a href="autorizacionList.php?token=<?=admin::getParam("token")?>" class="button" >Volver</a>
 				</td>
-                                <td width="41%" style="font-size:11px;">
-                                    o <a href="informeList.php?token=<?=admin::getParam("token")?>" >Cancelar</a> 
-                                </td>
+          
         </tr>
-      </table>
-</div>
+      </table></div>
 <br /><br /><br /><br /><br />
 </td></tr>
 </table>
-</form>

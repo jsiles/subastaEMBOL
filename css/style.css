@@ -173,7 +173,7 @@ span, label, p, td, h2 {
 	display: block;
 	position: absolute;
 	width: 100%;
-	height: 90px;
+	height: 150px;
 	background-image:url(../lib/logo.png);
     background-repeat: no-repeat;
     background-size: contain;
@@ -184,13 +184,13 @@ span, label, p, td, h2 {
 #top-banner {
 	float: left;
 	width: 80%;
-	height: 100px;
+	height: 150px;
 }
 
 #top-banner #colA {
 	float: left;
 	width: 75%;
-	height:100px;
+	height:150px;
 	alignment-adjust:central;
 	
 }

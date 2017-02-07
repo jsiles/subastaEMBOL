@@ -104,18 +104,7 @@ $regusers = $db->next_record();
             <td>
             <select name="usr_rol" class="txt10" id="usr_rol">
             <?php
-			
-			$rolLogged = admin::getDBValue('select rol_uid from mdl_roles_users left join mdl_roles on rus_rol_uid=rol_uid where rus_usr_uid='.$regusers["usr_uid"].' and rol_delete=0');
-			$rolLogged2 = admin::getDBValue('select rol_description from mdl_roles_users left join mdl_roles on rus_rol_uid=rol_uid where rus_usr_uid='.$_SESSION['usr_uid'].' and rol_delete=0');
-			switch($rolLogged2){
-				case 'ROOT' : $noRoot=''; break;
-				case 'ADMIN' :	$noRoot=" and rol_description<>'ROOT' "; break;
-				case 'EDITOR' :	$noRoot=" and rol_description<>'ROOT' AND rol_description<>'ADMIN' "; break;
-				//default : 
-				//$UserRol=admin::getDBvalue("select rus_rol_uid from mdl_roles_users where rus_usr_uid=".$regusers["usr_uid"]);
-				//$noRoot=" and rol_uid=".$rolLogged; //break;
-			}
-			$sql2="select rol_uid, rol_description from mdl_roles where rol_delete=0 and rol_status='ACTIVE' ".$noRoot;	
+			$sql2="select rol_uid, rol_description from mdl_roles where rol_delete=0 and rol_status='ACTIVE' ";	
 			//die($sql2);
 			$db2->query($sql2);
 			while($row = $db2->next_record())

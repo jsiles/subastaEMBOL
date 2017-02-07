@@ -60,8 +60,7 @@
             <td>
             <select name="usr_rol" class="txt10" id="usr_rol">
             <?php
-			if ($_SESSION["usr_uid"]!=2) $sql2="select rol_uid, rol_description from mdl_roles where rol_uid!=2 and rol_delete=0";	
-			else $sql2="select rol_uid, rol_description from mdl_roles where rol_delete=0";	
+			$sql2="select rol_uid, rol_description from mdl_roles where rol_delete=0";	
 			
 			$db2->query($sql2);
 			while($row = $db2->next_record())

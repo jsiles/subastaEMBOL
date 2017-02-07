@@ -59,34 +59,34 @@ if($cli_exist==0){
 	$mcl_uid = $content["UID"];	*/
 	
 	// SUBIENDO LA IMAGEN 		
-	$FILES=$_FILES['cli_photo'];
-    $allowedTypes=array("jpeg","jpg","gif","bmp");
-    $validFile=$FILES['name']!='' && in_array( strtolower(pathinfo($FILES["name"],PATHINFO_EXTENSION)) ,$allowedTypes) ? true : false;
-	
-		if ($validFile && $FILES['error']==0)	{
-			// DATOS DE ARCHIVO EN SU FORMATO ORIGINAL
-			$extensionFile=admin::getExtension($FILES["name"]);
-			$fileName=admin::imageName($cli_firstname)."_".$cli_uid.".".$extensionFile;
-			// DATOS DE REDIMENCION DE IMAGENES
-			$nomIMG=admin::imageName($cli_firstname)."_".$cli_uid.".jpg";
-			$nomIMG2="thumb_".$nomIMG;
-			// Subimos el archivo con el nombre original
-			classfile::uploadFile($FILES,PATH_ROOT.'/img/client/',$fileName);
-			// redimencionamos al mismo pero con extencion jpg en el mismo tamaño
-			redimImgPercent(PATH_ROOT."/img/client/".$fileName, PATH_ROOT."/img/client/".$nomIMG,100,100);
-			// Redimencionamos el nuevo jpg por el ancho definido
-			redimImgWH(PATH_ROOT."/img/client/".$nomIMG, PATH_ROOT."/img/client/".$nomIMG2,50,100);
-			// GUARDAMOS LA PRINCIPAL EN BASE DE DATOS
-			$sql = "UPDATE mdl_client SET cli_photo='".$nomIMG."' WHERE cli_uid=".$cli_uid;
-			$db->query($sql);
-			}
-}
- 
+        $FILES = $_FILES ['cli_photo'];
+		
+        $allowedTypes = array("jpeg","jpg","gif","bmp", "png");
+        $validFile = $FILES['name'] != '' && in_array( strtolower(pathinfo($FILES["name"],PATHINFO_EXTENSION)),$allowedTypes) ? true : false;		
+		
+        if ($validFile && $FILES['error']==0)
+	{
+	// DATOS DE ARCHIVO EN SU FORMATO ORIGINAL
+	$extensionFile = admin::getExtension($FILES["name"]);
+	$fileName=admin::imageName($cli_firstname)."_".$cli_uid.".".$extensionFile;
+	// DATOS DE REDIMENCION DE IMAGENES
+	$nomIMG= admin::imageName($cli_firstname)."_".$cli_uid.".jpg";
+	$nomIMG2="thumb_".$nomIMG;
+	// Subimos el archivo con el nombre original
+	classfile::uploadFile($FILES,PATH_ROOT.'/img/client/',$fileName);
+	// redimencionamos al mismo pero con extencion jpg en el mismo tamaño
+	redimImgPercent(PATH_ROOT."/img/client/".$fileName, PATH_ROOT."/img/client/".$nomIMG,100,100);
+	// Redimencionamos el nuevo jpg por el ancho definido
+	redimImgWH(PATH_ROOT."/img/client/".$nomIMG, PATH_ROOT."/img/client/".$nomIMG2,70,100);
+	// Redimencionamos el nuevo jpg por el ancho definido
+	$sql = "UPDATE mdl_client SET cli_photo='".$nomIMG."' WHERE cli_uid=".$cli_uid;
+	$db->query($sql);
+	} 
 //      ********************** correo **************************************************** 
-if ($ct_mail!="")
+     /*   if ($ct_mail!="")
 	{
 	$ct_nameto = "Subastas";
-	$ct_mailto = "jorge.siles@dev-zone.info";
+	$ct_mailto = "jorge.siles@gmail.com";
 	//$ct_mailto = "contactos@inti.com";
 	include_once("../phpmailer/class.phpmailer.php");
 	include_once("../phpmailer/config.php");		
@@ -158,8 +158,9 @@ else
 	$msg = "Todos los datos son requeridos.";
 	}
 //echo $msg
-
-$token=admin::getParam("token");		
+*/
+}
+        $token=admin::getParam("token");		
 unset($_POST);	
 header('Location: ../../clientList.php?token='.$token);
 ?>

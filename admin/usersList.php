@@ -1,7 +1,8 @@
-
-<? include_once("database/connection.php"); ?>
-<? include ("core/admin.php"); ?>
-<? admin::initialize('users','usersList'); ?>
+<?php 
+include_once("database/connection.php"); 
+include ("core/admin.php");
+admin::initialize('users','usersList'); 
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">    
 <html>
 <head>
@@ -57,13 +58,13 @@ function removeList(id){
 </head>
 <body>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tr><td valign="top"><? include_once("skin/header.php");?>
+<tr><td valign="top"><?php include_once("skin/header.php");?>
 </td></tr>
   <tr>
-    <td valign="top" id="content"><? include_once("code/template/usersListTpl.php"); ?></td>
+    <td valign="top" id="content"><?php include_once("code/template/usersListTpl.php"); ?></td>
   </tr>
 <tr><td>
-  <? include("skin/footer.php"); ?>
+  <?php include("skin/footer.php"); ?>
   </td></tr>
 </table>
 </body>

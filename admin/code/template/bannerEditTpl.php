@@ -13,7 +13,7 @@ function verifyImageUpload(){
 
 }
 </script>
-<? 
+<?php 
 $sql =  "select distinct mdl_banners.*, mbc_place, mbc_status from mdl_banners, mdl_banners_contents where mbc_ban_uid=ban_uid and ban_uid=".$_REQUEST["ban_uid"]." and mbc_delete=0";
 $bannerexist = $db->numrows($sql);  
 $db->query($sql);
@@ -50,7 +50,7 @@ if ($bannerexist==0) echo '<script language="javascript" type="text/javascript">
          <tr>
             <td valign="top"><?=admin::labels('banner','label');?> (bmp, jpg, jpeg, gif, png):</td>
             <td>
-			<?
+			<?php
 			$imgSavedroot1 = PATH_ROOT."/img/banner/thumb_".$banner["ban_file"];
 			$imgSaveddomain1 = PATH_DOMAIN."/img/banner/thumb_".$banner["ban_file"];
 			$imgSaveddomain2 = PATH_DOMAIN."/img/banner/thumb_".$banner["ban_file"];
@@ -79,20 +79,20 @@ if ($bannerexist==0) echo '<script language="javascript" type="text/javascript">
 			</table>
 			</div>
 			<div id="image_add_<?=$banner["ban_uid"]?>" style="display:none;"></div>
-			<?	}
+			<?php	}
 			else
 				{ ?>
 				<input type="file" name="ban_adjunt" id="ban_adjunt" size="32" class="input" onchange="verifyImageUpload();" />
 				<span id="div_ban_adjunt" class="error" style="display:none">Solo extenciones bmp, jpg, jpeg, gif, png</span>	
-			<?	} ?>			</td>
+			<?php	} ?>			</td>
           </tr>
         
           <tr>
             <td><?=admin::labels('status');?>:</td>
             <td>
 			<select name="ban_status" class="listMenu" id="ban_status">
-            	<option <? if ($banner["mbc_status"]=="ACTIVE") echo "selected"; ?> value="ACTIVE"><?=admin::labels('active');?></option>
-              	<option <? if ($banner["mbc_status"]=="INACTIVE") echo "selected"; ?> value="INACTIVE"><?=admin::labels('inactive');?></option>
+            	<option <?php if ($banner["mbc_status"]=="ACTIVE") echo "selected"; ?> value="ACTIVE"><?=admin::labels('active');?></option>
+              	<option <?php if ($banner["mbc_status"]=="INACTIVE") echo "selected"; ?> value="INACTIVE"><?=admin::labels('inactive');?></option>
 			</select>
 			<span id="div_ban_status" style="display:none;" class="error"></span>			
 			</td>
@@ -107,10 +107,26 @@ if ($bannerexist==0) echo '<script language="javascript" type="text/javascript">
 
 <br />
       <br />
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="77%" height="40"><span class="title">Vista previa</span></td>
+          <td width="23%" height="40">&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="2" id="contentListing"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="50%" valign="top">
+            <table width="50%" border="0" cellpadding="5" cellspacing="5" class="box">
+                <tr>
+                    <td>
+                        <img src="<?=$imgSaveddomain3?>?<?=time()?>" border="0" />
+                    </td>
+                </tr>
+
+            </table>
+              </td></tr></table>
+          </td></tr></table>
       
-      <span class="title">Vista previa</span>
-      <br />
-      <img src="<?=$imgSaveddomain3?>?<?=time()?>" border="0" />
       <br /><br />
       <div id="contentButton">
 	  	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">

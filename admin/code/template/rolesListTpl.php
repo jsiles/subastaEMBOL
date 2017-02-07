@@ -1,25 +1,18 @@
 <?php
-if ($_SESSION["usr_uid"]==2) {
-    $sSQL= "select rol_uid,rol_description,rol_delete,rol_status from mdl_roles where rol_delete=0 ";			
-}
-else{
-    $sSQL= "select rol_uid,rol_description,rol_delete,rol_status from mdl_roles where rol_uid!=2 and rol_delete=0 ";
-}
+$mod_uidParam = admin::getParam("mod_uid");
+$sSQL= "select rol_uid,rol_description,rol_delete,rol_status from mdl_roles where rol_delete=0 ";
 $nroReg = $db->numrows($sSQL);
 $db->query($sSQL);
-$nombreModulo = admin::getDbValue("select mod_name from sys_modules where mod_uid=44");
+//$nombreModulo = admin::getDbValue("select mod_name from sys_modules where mod_uid=$mod_uidParam ");
+
 if ($nroReg>0)
 	{
 	?>
 <br>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
    <tr>
-      <td width="77%" height="40"><span class="title"><?=$nombreModulo?></span></td>
-    <td width="23%" height="40">&nbsp;</td>
-  </tr>
-  <tr>
-      <td width="77%" height="40"></td>
-    <td width="23%" height="40">&nbsp;</td>
+      <td width="85%" height="40"><span class="title"><?=admin::modulesLabels()?></span></td>
+    <td width="15%" height="40"><a href="<?=admin::modulesLink('createRoles')?>?token=<?=admin::getParam("token")?>"><?=admin::modulesLabels('createRoles')?></a>&nbsp;</td>
   </tr>
   <tr>
     <td colspan="2" id="contentListing">
@@ -42,7 +35,7 @@ while ($user_list = $db->next_record())
 	<tr><td width="50%"><?=$rol_description?></td>
 	<td align="center" width="12%" height="5">
     <?php 
-	$valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=44 and mop_lab_category='Ver' and moa_rol_uid=".$_SESSION['usr_rol']."");
+	$valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=2 and mop_lab_category='Ver' and moa_rol_uid=".$_SESSION['usr_rol']."");
 	if($valuePermit=='ACTIVE'){?>
 		 <a href="rolesView.php?rol_uid=<?=$rol_uid?>&token=<?=admin::getParam("token");?>">
 		<img src="lib/view_es.gif" border="0" title="<?=admin::labels('view')?>" alt="<?=admin::labels('view')?>">
@@ -57,7 +50,7 @@ while ($user_list = $db->next_record())
 	</td>
 	<td align="center" width="12%" height="5">
     <?php 
-	$valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=44 and mop_lab_category='Editar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+	$valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=2 and mop_lab_category='Editar' and moa_rol_uid=".$_SESSION['usr_rol']."");
 	if($valuePermit=='ACTIVE'){?>
 		<a href="rolesEdit.php?rol_uid=<?=$rol_uid?>&token=<?=admin::getParam("token");?>">
 		<img src="lib/edit_es.gif" border="0" title="<?=admin::labels('edit')?>" alt="<?=admin::labels('edit')?>">
@@ -72,7 +65,7 @@ while ($user_list = $db->next_record())
 	</td>
 	<td align="center" width="12%" height="5">
     <?php 
-	$valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=44 and mop_lab_category='Eliminar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+	$valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=2 and mop_lab_category='Eliminar' and moa_rol_uid=".$_SESSION['usr_rol']."");
 	if($valuePermit=='ACTIVE'){?>
 		<a href="#" onclick="removeList(<?=$rol_uid?>);return false;">
 		<img src="lib/delete_es.gif" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
@@ -87,7 +80,7 @@ while ($user_list = $db->next_record())
 	</td>
 	<td align="center" width="14%" height="5">
     <?php 
-	$valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=44 and mop_lab_category='Estado' and moa_rol_uid=".$_SESSION['usr_rol']."");
+	$valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=2 and mop_lab_category='Estado' and moa_rol_uid=".$_SESSION['usr_rol']."");
 	if($valuePermit=='ACTIVE'){?>
 	<div id="status_<?=$rol_uid?>">
 	   <a href="javascript:rolesCS('<?=$rol_uid?>','<?=$rol_status?>');">

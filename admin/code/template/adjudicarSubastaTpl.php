@@ -15,7 +15,7 @@ $prod = $db->next_record();
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 		<td width="77%" height="40">
-		<span class="title">Adjudicar subasta</span>
+		<span class="title"><?=admin::modulesLabels('informesNew')?></span>
 		</td>
 		<td width="23%" height="40">&nbsp;</td>
 	</tr>
@@ -263,6 +263,10 @@ $prod = $db->next_record();
 <div id="DIV_WAIT1" style="display:none;"><img border="0" src="lib/loading.gif"></div>
 <br />
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td width="77%" height="40"><span class="title">Lista de la Puja</span></td>
+     <td width="23%" height="40">&nbsp;</td>
+    </tr>
    <?php 
    $sSQL= "select * from mdl_bid where bid_sub_uid='".$sub_uid."' order by bid_uid desc ";
    $nroReg = $db2->numrows($sSQL);
@@ -271,11 +275,7 @@ $prod = $db->next_record();
 if ($nroReg>0)
 	{
 	?> 
-   <tr>
-      <td width="77%" height="40"><span class="title">Lista de la Puja</span></td>
-    <td width="23%" height="40">&nbsp;</td>
-  </tr>
-  <tr>
+     <tr>
     <td colspan="2" id="contentListing">
     <div class="row0">
     <table class="list" width="100%">
@@ -373,6 +373,12 @@ else
             </td>
         </tr>
         <tr>
+            <td width="12%" style="color:#16652f">Ahorro econ&oacute;mico:</td>
+            <td><input id="ahorro" name="ahorro">
+            <br /><span id="div_ahorro" style="display:none; padding-left:5px; padding-right:5px;" class="error">* Campo requerido</span>
+            </td>
+        </tr>
+        <tr>
             <td width="12%" style="color:#16652f">Observaciones:</td>
             <td><textarea id="observaciones" rows="4" cols="45" name="observaciones"></textarea>
             <br /><span id="div_observaciones" style="display:none; padding-left:5px; padding-right:5px;" class="error">* Campo requerido</span>
@@ -389,10 +395,10 @@ else
 	  	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 			<tr>
 				<td width="59%" align="center">
-                                    <a href="#" class="button" onclick="verifyadjudicar();" >Adjudicar</a>
+                                    <a href="#" class="button" onclick="verifyadjudicar();" >Informe</a>
 				</td>
                                 <td width="41%" style="font-size:11px;">
-                                    o <a href="autorizacionList.php?token=<?=admin::getParam("token")?>" >Cancelar</a> 
+                                    o <a href="informeList.php?token=<?=admin::getParam("token")?>" >Cancelar</a> 
                                 </td>
         </tr>
       </table>

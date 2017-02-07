@@ -593,7 +593,7 @@ class admin
 		//print_r($systemLabelsMenu);
 		      $rs = new DBmysql();
         //$rs->connect("$basedatos", "$host", "$user", "$pass");
-		
+	//echo "INDEX: ".$indexMenu."##";	
         //$rs = new DBmysql($basedatos, $host, $user,$pass);
         $sqldat = "select * from sys_modules where mod_status='ACTIVE' and mod_parent=0 and mod_language='".$lang."' order by mod_position";
         $rs->query($sqldat);
@@ -602,11 +602,14 @@ class admin
 				if (admin::verifyModulePermission($row['mod_uid']))
 					{
 					 //echo "....".$row['mod_uid']."-";die;
-          
-					 if ($row['mod_uid']==$indexMenu) 
-					  	$labelsMenu .= '<li><a id="first" title="'.$row['mod_name'].'" href="'.$row['mod_index'].'?token='.$_GET["token"].'">'.$row['mod_name'].'</a></li>'; 
-					 else  
-					  	$labelsMenu .= '<li><a title="'.$row['mod_name'].'" href="'.$row['mod_index'].'?token='.$_GET["token"].'">'.$row['mod_name'].'</a></li>';						
+                                         $mod_uid = admin::getDbValue("select mod_uid from sys_modules where mod_parent=".$row['mod_uid']." and mod_index='".$row['mod_index']."'");
+					 if ($row['mod_uid']==$indexMenu) {
+					  	$labelsMenu .= '<li><a id="first" title="'.$row['mod_name'].'" href="'.$row['mod_index'].'?token='.$_GET["token"].'&mod_uid='.$mod_uid.'">'.$row['mod_name'].'</a></li>'; 
+                                         }
+                                         else
+                                         {
+					  	$labelsMenu .= '<li><a title="'.$row['mod_name'].'" href="'.$row['mod_index'].'?token='.$_GET["token"].'&mod_uid='.$mod_uid.'">'.$row['mod_name'].'</a></li>';						
+                                         }
 					}
         }
         //echo $labelsMenu;die;
@@ -636,9 +639,10 @@ class admin
           $rs = new DBmysql();
        if($indexMenu){
 	        $sqldat = "select mod_uid, mod_name, mod_index from sys_modules, sys_modules_users where mus_mod_uid=mod_uid and mod_status='ACTIVE' and mod_parent=".$indexMenu." and mod_language='".$lang."' and mus_rol_uid='".$_SESSION["usr_rol"]."' and mus_delete=0 and mus_place='MODULE' group by mod_uid, mod_name, mod_index order by mod_UID";
+               // echo $sqldat;
 	        $rs->query($sqldat);
 	        while ($row = $rs->next_record()){
-					$params = (isset($_GET["con_parent"]) ? "?con_parent=".admin::toSql(safeHtml($_GET["con_parent"]),"Number")."&token=".$_GET['token'] : "?token=".$_GET['token']);
+					$params = (isset($_GET["con_parent"]) ? "?con_parent=".admin::toSql(safeHtml($_GET["con_parent"]),"Number")."&token=".$_GET['token'] ."&mod_uid=".$row['mod_uid'] : "?token=".$_GET['token']."&mod_uid=".$row['mod_uid']);
 						if ($row['mod_uid']==$indexSubMenu) $labelsSubMenu .= $row['mod_name'];
 						else $labelsSubMenu .= "<a title=\"".$row['mod_name']."\" href=\"".$row['mod_index'].$params."\" class=\"submenu\">".$row['mod_name']."</a>";
 	        }
@@ -1666,11 +1670,24 @@ public static function getFullnameUser($use_uid)
 public static function modulesLabels($subMenuId=''){
 	global $indexMenu, $indexSubMenu,$lang;
 	if($subMenuId==''){
-		$menuLabel = admin::getDBValue("select mod_name from sys_modules where mod_uid='".$indexSubMenu."' and mod_delete=0 and mod_status='ACTIVE' and mod_language='".$lang."'");	
+		$menuLabel = admin::getDBValue("select mod_name from sys_modules where mod_uid='".$indexSubMenu."' and mod_delete=0 and mod_language='".$lang."'");	
 	}
 	else{
 		$sSubMenu=admin::getDbValue("select mod_uid from sys_modules where mod_alias='".$subMenuId."'");
-		$menuLabel = admin::getDBValue("select mod_name from sys_modules where mod_uid='".$sSubMenu."' and mod_delete=0 and mod_status='ACTIVE' and mod_language='".$lang."'");	
+		$menuLabel = admin::getDBValue("select mod_name from sys_modules where mod_uid='".$sSubMenu."' and mod_delete=0 and mod_language='".$lang."'");	
+	}
+	return($menuLabel);
+}
+
+
+public static function modulesLink($subMenuId=''){
+	global $indexMenu, $indexSubMenu,$lang;
+	if($subMenuId==''){
+		$menuLabel = admin::getDBValue("select mod_index from sys_modules where mod_uid='".$indexSubMenu."' and mod_delete=0 and mod_status='ACTIVE' and mod_language='".$lang."'");	
+	}
+	else{
+		$sSubMenu=admin::getDbValue("select mod_uid from sys_modules where mod_alias='".$subMenuId."'");
+		$menuLabel = admin::getDBValue("select mod_index from sys_modules where mod_uid='".$sSubMenu."' and mod_delete=0 and mod_status='ACTIVE' and mod_language='".$lang."'");	
 	}
 	return($menuLabel);
 }

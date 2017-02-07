@@ -1,6 +1,6 @@
 <?php 
 include_once ("core/admin.php");
-admin::initialize('aprobacion','subastasRavInfEdit'); 
+admin::initialize('subastaRavInforme','subastasRavInfEdit'); 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">    
 <html>

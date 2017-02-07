@@ -1,4 +1,4 @@
-<?
+<?php
 $i=0;
 $cantDocs=admin::getDbValue("select count(*) from tbl_publicaciones_docs where cdo_dol_uid='".$dol_uid."' and cdo_delete=0 and cdo_status='ACTIVE'");
 
@@ -36,7 +36,7 @@ if ($cantDocs>0)
 		  
                   	<tr>
             			<td colspan="2">
-							<? 
+							<?php 
                             $imgSavedroot2 = PATH_ROOT."/docs/publicaciones/".$content3["cdo_ruta"];
                             $imgSaveddomain2 = PATH_ROOT."/docs/publicaciones/".$content3["cdo_ruta"];
                             //echo $imgSaveddomain2;die;
@@ -76,16 +76,16 @@ if ($cantDocs>0)
                             </div>
                             </div>
                             <div id="document_add_<?=$content3["cdo_uid"]?>" style="display:none;"></div>
-                            <? } 
+                            <?php } 
                             else
                                 { ?>
                                 <input type="file" name="new_adjunt_<?=$i?>" id="new_adjunt_<?=$i?>" size="31" class="input">
-                            <?	} ?>
+                            <?php	} ?>
 			</td>
           			</tr>
                     </table>
                 	</div>
-             <?	
+             <?php	
 			} ?>        
          <!--   </ul>--> 
             </div>
@@ -94,7 +94,7 @@ if ($cantDocs>0)
             </td>
 			</tr>
          </table><input id="maxVal" name="maxVal" value="<?=$i?>" type="hidden" />
-<?	
+<?php	
 }
 else
 { ?>                 
@@ -135,4 +135,4 @@ else
 			</tr>
          </table>
           <input id="maxVal" name="maxVal" value="1" type="hidden" /> 
- <?	} ?>        
+ <?php	} ?>        

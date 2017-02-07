@@ -1,5 +1,3 @@
-
-
 <?php
 
 $imgs = admin::getDbValue("select top 1 ban_file from mdl_banners_contents, mdl_banners where mbc_delete=0 and mbc_status='ACTIVE' and mbc_ban_uid=ban_uid order by mbc_position ,mbc_ban_uid");
@@ -10,9 +8,15 @@ $ban_name = admin::getDbValue("select top 1 ban_title from mdl_banners_contents,
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr><td valign="top">    
     <table width="100%" border="0" cellpadding="0" cellspacing="0" id="header">
+        <tr><td height="10px" colspan="3"></td></tr>
       <tr>
+<<<<<<< HEAD
         <td width="15%" height="135px"  rowspan="2" align="center"><img style="margin: 5px 5px 5px 5px;" src="lib/logo.png" width="50" alt="bnb logo"></td>
         <td width="60%" height="36"><? if($imgs){?>
+=======
+          <td width="15%" height="140px"  rowspan="3" align="center"><div style="alignment-adjust: central"><img src="lib/logo.png" width="50" alt="bnb logo"></div></td>
+        <td width="60%" height="36" align="center"><? if($imgs){?>
+>>>>>>> 32f38dcb855a3cd15a4cf53ea9d395fc016e1ba2
 					<img src="<?=$domain?>/img/banner/img_<?=$imgs?>?<?=time()?>" alt="<?=$ban_name?>" title="<?=$ban_name?>" border="0"/>
                     <? }?></td>
 		<td width="25%" rowspan="2">
@@ -67,6 +71,7 @@ $ban_name = admin::getDbValue("select top 1 ban_title from mdl_banners_contents,
 			
 		  </td>       
       </tr>
+      <tr><td height="10px" colspan="3"></td></tr>
       <tr>
         <td height="31" valign="bottom">
 		<div id="nav">

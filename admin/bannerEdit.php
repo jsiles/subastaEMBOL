@@ -1,4 +1,4 @@
-<? 
+<?php 
 include ("core/admin.php");
 admin::initialize('banners','bannerEdit');
 ?>
@@ -58,13 +58,13 @@ function removeImg(id){
 </script>
 <body>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tr><td valign="top"><? include_once("skin/header.php");?>
+<tr><td valign="top"><?php include_once("skin/header.php");?>
 </td></tr>
   <tr>
-    <td valign="top" id="content"><? include_once("code/template/bannerEditTpl.php"); ?></td>
+    <td valign="top" id="content"><?php include_once("code/template/bannerEditTpl.php"); ?></td>
   </tr>
 <tr><td>
-  <? include("skin/footer.php"); ?>
+  <?php include("skin/footer.php"); ?>
   </td></tr>
 </table>
 </body>

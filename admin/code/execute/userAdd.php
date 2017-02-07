@@ -42,6 +42,7 @@ $usr_max++;
 								usr_email,
 								usr_status,
 								usr_delete,
+                                                                usr_date,
 								".$changepass1."
 								)
 						values	(
@@ -52,8 +53,10 @@ $usr_max++;
 								'".$usr_emailA."',							
 								'".$usr_statusA."',
 								0,
+                                                                GETDATE(),
 								".$changepass2."
 								)";
+        //echo $sql;die;
 	$db->query($sql);
 
 		// OBTENEMOS EL ULTIMO ID INTRODUCIDO POR EL USUARIO EN LA BASE DE DATOS

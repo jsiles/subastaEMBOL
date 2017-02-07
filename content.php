@@ -5,13 +5,13 @@ $uidClient = admin::getSession("uidClient");
 $Category=admin::getDBvalue("select col_title from mdl_contents_languages where col_uid=2");
 $CategoryUrl=admin::getDBvalue("select col_url from mdl_contents_languages where col_uid=2");
 
-$sql = "select * 
+$sql = "select top 1 * 
 		from mdl_contents 
 		left join mdl_contents_languages on (con_uid=col_con_uid) 
 		where 	con_delete<>1 and 
 				col_status='ACTIVE' and 
 				col_language='".$lang."' and 
-				con_uid=1 limit 1";
+				con_uid=1";
 $db->query($sql);
 $content_details = $db->next_record();
 

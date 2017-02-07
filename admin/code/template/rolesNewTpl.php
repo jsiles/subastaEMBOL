@@ -2,7 +2,7 @@
 <form name="frmRoles" id="frmRoles" method="post" action="code/execute/rolesAdd.php?token=<?=admin::getParam("token");?>" onsubmit="return false;" enctype="multipart/form-data">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="77%" height="40"><span class="title"><?=admin::labels('user','newRol');?></span></td>
+      <td width="77%" height="40"><span class="title"><?=admin::modulesLabels()?></span></td>
     <td width="23%" height="40">&nbsp;</td>
   </tr>
   
@@ -32,9 +32,9 @@
             <td width="50%" valign="top">
             <table width="98%" border="0" align="right" cellpadding="0" cellspacing="5" class="box">
 
-          <tr>
+         <!-- <tr>
             <td colspan="2" class="titleBox"><?=admin::labels('users','rights');?></td>
-          </tr>
+          </tr>-->
           
 <?php 
 if ($_SESSION["usr_uid"]!=2) $sqldat="select * from sys_modules where mod_language='".$lang."' and mod_parent=0  and  mod_status='ACTIVE'"; //and mod_uid not in ('1','31','34')
@@ -45,93 +45,74 @@ $db3->query($sqldat);
 while($row3 = $db3->next_record()){
 ?>
           <tr <?=$displaynone;?> >
-            <td width="10">
+            <td width="1%">
             <input name="mod_uid[<?=$row3["mod_uid"]?>]" type="checkbox" id="mod_uid[<?=$row3["mod_uid"]?>]" value="<?=$row3["mod_uid"]?>" onclick="checkAll('mod_uid[<?=$row3["mod_uid"]?>]')" />
 			</td>
-            <td><?=$row3["mod_name"]?></td>
+                        <td colspan="15"><?=$row3["mod_name"]?></td>
             
           </tr>
-		<tr>
-        <td>
+         <tr>
+                    
+        <td width="1%">
         </td>
-        <td>
- 			<table class="box" border="0" width="100%">
+        <!--<td width="99%">-->
+ 		<!--	<table class="box" border="0" width="100%">
+                            <tr>       -->
  <?php
+                $uidModuleAcces='';
 		$sql2="select * from sys_modules where mod_language='".$lang."' and mod_parent=".$row3["mod_uid"]." and mod_status='ACTIVE'";	
 		$db2->query($sql2);
-		while($row2 = $db2->next_record()){		
+		while($row2 = $db2->next_record()){
+                    
+                    if(strlen($uidModuleAcces)==0) $uidModuleAcces="(".$row2["mod_uid"];
+                    else $uidModuleAcces.= ",".$row2["mod_uid"];
+                            
 ?>
-            <tr>       
-            <td width="10"><input name="mod_uid[<?=$row3["mod_uid"]?>][]" id="mod_uid[<?=$row3["mod_uid"]?>][]" type="checkbox"  value="<?=$row2["mod_uid"]?>" />
-			</td>
-            <td ><?=$row2["mod_name"]?> </td>
-            <?php
-                        $sSQL = "select mop_uid, mop_lab_category from sys_modules_options where mop_mod_uid=".$row2["mod_uid"]." and mop_status='ACTIVE'";
+                <div style="display:none">
+                    <input name="mod_uid[<?=$row3["mod_uid"]?>][]" id="mod_uid[<?=$row3["mod_uid"]?>][]" type="checkbox"  value="<?=$row2["mod_uid"]?>" />
+                    <?=$row2["mod_name"]?> 
+                </div>
+           
+                                <?php	}  
+                                //echo $uidModuleAcces;
+                                if(strlen($uidModuleAcces)>0)
+                                {
+                                    $uidModuleAcces.=")";
+                        $sSQL = "select mop_uid, mop_mod_uid, mop_lab_category, mop_status from sys_modules_options where mop_mod_uid in ".$uidModuleAcces." order by mop_uid";
                         $cantidadOp=$db->numrows($sSQL);
                         //echo $sSQL;
                         //echo $cantidadOp;
                         if($cantidadOp>0){                                                
 			?>
-            <td>
-            <table>
-                <tr>
-            	<td>&nbsp;</td>
-            	<td>
-                	<table border="0" width="100%" class="box">
-	                    <tr>
-                                <?php
+            
+                	        <?php
                                 $db->query($sSQL);
                                 while($options=$db->next_record())
                                 {
+                                    ($options["mop_status"]=="ACTIVE")?$lblStatus = "":$lblStatus = 'disabled="disabled"';
+                                    
                                 ?>
-                                <td width="13"><input name="mod_uid[<?=$row3["mod_uid"]?>][<?=$row2["mod_uid"]?>][]"  type="checkbox" value="<?=$options["mop_uid"]?>" /></td>
-                        	<td><?=$options["mop_lab_category"]?></td>
+                                <td width="1%"><input name="mod_uid[<?=$row3["mod_uid"]?>][<?=$options["mop_mod_uid"]?>][]" id="mod_uid[<?=$row3["mod_uid"]?>][<?=$options["mop_mod_uid"]?>][]" <?=$lblStatus?>  type="checkbox" value="<?=$options["mop_uid"]?>" /></td>
+                        	<td width="10%"><?=$options["mop_lab_category"]?></td>
                                 <?php
                                 }
                                 ?>
-                            </tr>
-                    </table>
-            	</td>
-             </tr></table></td>
             <?php
 			}
+                                }
             ?>
-        	</tr>
-<?php	}  ?> 
+        	<!--</tr>-->
 
-             <?php 
-             $sql4="select distinct mof_mfl_uid,lab_label 
-			 		from sys_modules_fields 
-					left join sys_labels on lab_uid=mof_lab_uid and lab_category=mof_lab_category 
-					where mof_mod_uid=".$row3["mod_uid"]." 
-					and lab_language='".$lang."' order by mof_mfl_uid";
-                    $db4->query($sql4);
-                    while($row4 = $db4->next_record()){	
-                    	//$checked = $row4["mof_delete"] ? '':'checked="checked"' ;
-			
-			?>
-            <tr>
-            	<td>&nbsp;</td>
-            	<td>
-                	<table border="0" width="100%" class="box">
-	                    <tr>
-                        	<td width="10"><input name="mod_uid[<?=$row3["mod_uid"]?>][interior][]" type="checkbox"  <?=$checked?> value="<?=$row4["mof_mfl_uid"]?>" onclick="checkedVerify('mod_uid[<?=$row3["mod_uid"]?>]')" /></td>
-                        	<td><?=$row4["lab_label"]?></td>
-                        </tr>
-                    </table>
-            	</td>
-             </tr>
-             <?php } ?>
-             
-                        
-            </table>
+          <!--  </tr>
+            </table>-->
                
-        </td>
+       <!-- </td>-->
       </tr>
 
 <?php } ?>                    
 
-        </table>&nbsp;
+        </table>
+                
         </td>
           </tr>
 		  
@@ -198,18 +179,14 @@ while($row = $db->next_record()){
 		}
 }?>
 
-        </table><span id="div_con_uid" style="display:none;" class="error">Seleccione al menos un Contenido</span>
+        </table>
+                
+                
+                <span id="div_con_uid" style="display:none;" class="error">Seleccione al menos un Contenido</span>
         </td>
           </tr>
 		  
         </table>
-        
-        
-        
-        
-        
-        
-        
         
         </td>
     </tr>

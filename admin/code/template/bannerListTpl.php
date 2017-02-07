@@ -17,8 +17,8 @@ if ($nroReg>0)
 <br>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
    <tr>
-      <td width="77%" height="40"><span class="title"><?=admin::labels('banner','list')?></span></td>
-    <td width="23%" height="40">&nbsp;</td>
+      <td width="77%" height="40"><span class="title"><?=admin::modulesLabels()?></span></td>
+      <td width="23%" height="40" align="right"><a href="<?=admin::modulesLink('bannerNew')?>?token=<?=admin::getParam("token")?>"><?=admin::modulesLabels('bannerNew')?></a>&nbsp;</td>
   </tr>
   <tr>
     <td colspan="2" id="contentListing">
@@ -48,9 +48,25 @@ while ($nroReg = $db->next_record())
 	<td align="center" width="12%" height="5">
 		   
 	</td>
-	<td align="center" width="12%" height="5">
+        <td align="center" width="5%" height="5">
             <?php
-                $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=72 and mop_lab_category='Editar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+                $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=28 and mop_lab_category='Ver' and moa_rol_uid=".$_SESSION['usr_rol']."");
+                if($valuePermit=='ACTIVE'){
+                ?>
+		<a href="bannerView.php?ban_uid=<?=$ban_uid?>&token=<?=admin::getParam("token")?>">
+                    <img src="<?=admin::labels('view','linkImage')?>" border="0" title="<?=admin::labels('view')?>" alt="<?=admin::labels('view')?>">
+		</a>
+            <?php
+                }else{
+            ?>
+                    <img src="lib/view_off_es.gif" border="0" title="<?=admin::labels('view')?>" alt="<?=admin::labels('view')?>">
+            <?php
+                }
+            ?>
+	</td>
+	<td align="center" width="5%" height="5">
+            <?php
+                $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=28 and mop_lab_category='Editar' and moa_rol_uid=".$_SESSION['usr_rol']."");
                 if($valuePermit=='ACTIVE'){
                 ?>
 		<a href="bannerEdit.php?ban_uid=<?=$ban_uid?>&token=<?=admin::getParam("token")?>">
@@ -64,9 +80,9 @@ while ($nroReg = $db->next_record())
                 }
             ?>
 	</td>
-	<td align="center" width="12%" height="5">
+	<td align="center" width="5%" height="5">
             <?php
-                $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=72 and mop_lab_category='Eliminar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+                $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=28 and mop_lab_category='Eliminar' and moa_rol_uid=".$_SESSION['usr_rol']."");
                 if($valuePermit=='ACTIVE'){
                 ?>
 		 <!--********BeginResetColorDelete*************-->
@@ -82,10 +98,10 @@ while ($nroReg = $db->next_record())
                 }
             ?>
 	</td>
-	<td align="center" width="14%" height="5">
+	<td align="center" width="5%" height="5">
 	<div id="status_<?=$ban_uid?>">
             <?php
-                $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=72 and mop_lab_category='Estado' and moa_rol_uid=".$_SESSION['usr_rol']."");
+                $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=28 and mop_lab_category='Estado' and moa_rol_uid=".$_SESSION['usr_rol']."");
                 if($valuePermit=='ACTIVE'){
                 ?>
                 <a href="javascript:void(0);" onclick="bannerCS('<?=$ban_uid?>','<?=$ban_status?>');">
@@ -143,15 +159,20 @@ echo $arrayscript;
  	} 
 else
 	{ ?>
-	<br />
 <br />
 <table width="100%" border="0" cellspacing="0" cellpadding="0">   
+    <tr>
+      <td width="77%" height="40"><span class="title"><?=admin::modulesLabels()?></span></td>
+      <td width="23%" height="40" align="right"><a href="<?=admin::modulesLink('bannerNew')?>?token=<?=admin::getParam("token")?>"><?=admin::modulesLabels('bannerNew')?></a>&nbsp;</td>
+  </tr>
   <tr>
     <td colspan="2" id="contentListing">
 <div  style="background-color: #f7f8f8;">
 <table class="list"  width="100%">
+   
+    
 	<tr><td height="30px" align="center" class="bold">
-	En este momento el sitio no tiene banners.
+	No existen registros
 	</td></tr>	
  </table>
 </div>

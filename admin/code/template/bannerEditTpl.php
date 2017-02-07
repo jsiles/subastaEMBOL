@@ -133,7 +133,7 @@ if ($bannerexist==0) echo '<script language="javascript" type="text/javascript">
 			<tr>
 				<td width="59%" align="center">
 				<a href="#" onclick="verifyBanner2();" class="button">
-				<?=admin::labels('public');?>
+				Siguiente
 				</a> 
 				</td>
           <td width="41%" style="font-size:11px;">

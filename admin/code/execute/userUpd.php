@@ -34,7 +34,7 @@ $db->query($sql);
 // SUBIENDO LA IMAGEN NOTICIAS
 $FILES = $_FILES ['usr_photo'];
 		
-        $allowedTypes = array("jpeg","jpg","gif","bmp");
+        $allowedTypes = array("jpeg","jpg","gif","bmp", "png");
         $validFile = $FILES['name'] != '' && in_array( strtolower(pathinfo($FILES["name"],PATHINFO_EXTENSION)),$allowedTypes) ? true : false;		
 		
 if ($validFile && $FILES['error']==0)

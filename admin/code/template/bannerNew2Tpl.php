@@ -9,7 +9,7 @@ if(!$ban_uid) header('Location: bannerList.php?token='.admin::getParam("token"))
 <script type="text/javascript">
 function preview(img, selection) { 
 	var scaleX = 770 / selection.width; 
-	var scaleY = 100 / selection.height; 
+	var scaleY = 150 / selection.height; 
 	var imgwidth = document.getElementById('thumbnail').width;
 	var imgheight = document.getElementById('thumbnail').height;
 //	alert(imgwidth);
@@ -74,7 +74,7 @@ $(document).ready(function () {
 		
 	}); 
 $(window).load(function () { 	
-	$('#thumbnail').imgAreaSelect({ aspectRatio: '770:100', onSelectChange: preview }); 
+	$('#thumbnail').imgAreaSelect({ aspectRatio: '770:150', onSelectChange: preview }); 
 });
 </script>
 <br />
@@ -140,7 +140,7 @@ $(window).load(function () {
 		<tr>
         <td width="39%" align="center">
         <a href="#" class="button" id="save_thumb2">
-		<?=admin::labels('public')?>
+		<?=admin::labels('register');?>
 		</a> 
 		</td>
         

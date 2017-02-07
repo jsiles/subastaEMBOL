@@ -72,33 +72,36 @@ $usr_max++;
 
 	$db->query($sql);
 	// SUBIENDO LA IMAGEN 		
-	$FILES = $_FILES['usr_photo'];
-    $allowedTypes = array("jpeg","jpg","gif","bmp");
-    $validFile = $FILES['name'] != '' && in_array( strtolower(pathinfo($FILES["name"],PATHINFO_EXTENSION)) ,$allowedTypes) ? true : false;
-	
-		if ($validFile && $FILES['error']==0)	{
-			// DATOS DE ARCHIVO EN SU FORMATO ORIGINAL
-			$extensionFile = admin::getExtension($FILES["name"]);
-			$fileName = admin::imageName($usr_loginA)."_".$use_uidA.".".$extensionFile;
-			// DATOS DE REDIMENCION DE IMAGENES
-			$nomIMG = admin::imageName($usr_loginA)."_".$use_uidA.".jpg";
-			$nomIMG2 = "thumb_" . $nomIMG;
-			$nomIMG22 = "thumb2_" . $nomIMG;
-			$nomIMG3 = "img_" . $nomIMG;
-			// Subimos el archivo con el nombre original
-			classfile::uploadFile($FILES,PATH_ROOT . '/admin/upload/profile/',$fileName);
-			// redimencionamos al mismo pero con extencion jpg en el mismo tamaño
-			redimImgPercent(PATH_ROOT . "/admin/upload/profile/" . $fileName, PATH_ROOT . "/admin/upload/profile/". $nomIMG,100,100);
-			// Redimencionamos el nuevo jpg por el ancho definido
-			redimImgWH(PATH_ROOT . "/admin/upload/profile/" . $nomIMG, PATH_ROOT . "/admin/upload/profile/". $nomIMG2,50,100);
-			// Redimencionamos el nuevo jpg por el ancho definido
-			redimImgWidth(PATH_ROOT . "/admin/upload/profile/" . $nomIMG, PATH_ROOT . "/admin/upload/profile/". $nomIMG22,37,100);	
-			// Redimencionamos el nuevo jpg por el ancho definido
-			redimImgWidth(PATH_ROOT . "/admin/upload/profile/" . $nomIMG, PATH_ROOT . "/admin/upload/profile/". $nomIMG3,300,100);
-			// GUARDAMOS LA PRINCIPAL EN BASE DE DATOS
-			$sql = "UPDATE sys_users SET usr_photo='".$nomIMG."' WHERE usr_uid = ".$use_uidA;
-			$db->query($sql);
-			}
+	$FILES = $_FILES ['usr_photo'];
+		
+        $allowedTypes = array("jpeg","jpg","gif","bmp", "png");
+        $validFile = $FILES['name'] != '' && in_array( strtolower(pathinfo($FILES["name"],PATHINFO_EXTENSION)),$allowedTypes) ? true : false;		
+		
+if ($validFile && $FILES['error']==0)
+	{
+	// DATOS DE ARCHIVO EN SU FORMATO ORIGINAL
+	$extensionFile = admin::getExtension($FILES["name"]);
+	$fileName = admin::imageName($usr_loginA)."_".$use_uidA.".".$extensionFile;
+	// DATOS DE REDIMENCION DE IMAGENES
+	$nomIMG = admin::imageName($usr_loginA)."_".$use_uidA.".jpg";
+	$nomIMG2 = "thumb_".$nomIMG;
+	$nomIMG22 = "thumb2_".$nomIMG;
+	$nomIMG3 = "img_".$nomIMG;
+	// Subimos el archivo con el nombre original
+	classfile::uploadFile($FILES,PATH_ADMIN . '/upload/profile/',$fileName);
+	// redimencionamos al mismo pero con extencion jpg en el mismo tamaño
+	redimImgPercent(PATH_ADMIN . "/upload/profile/" . $fileName, PATH_ADMIN . "/upload/profile/". $nomIMG,100,100);
+	// Redimencionamos el nuevo jpg por el ancho definido
+	redimImgWH(PATH_ADMIN . "/upload/profile/" . $nomIMG, PATH_ADMIN . "/upload/profile/". $nomIMG2,60,100);
+	// Redimencionamos el nuevo jpg por el ancho definido
+	redimImgWidth(PATH_ADMIN . "/upload/profile/" . $nomIMG, PATH_ADMIN . "/upload/profile/". $nomIMG22,31,100);	
+	// Redimencionamos el nuevo jpg por el ancho definido
+	redimImgWidth(PATH_ADMIN . "/upload/profile/" . $nomIMG, PATH_ADMIN . "/upload/profile/". $nomIMG3,300,100);
+	// GUARDAMOS LA PRINCIPAL EN BASE DE DATOS
+	$sql = "UPDATE sys_users SET usr_photo='".$nomIMG."' WHERE usr_uid=".$use_uidA;
+	$db->query($sql);
+	}
+
 }
 $token=admin::getParam("token");		
 unset($_POST);	

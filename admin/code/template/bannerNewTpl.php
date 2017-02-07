@@ -68,7 +68,7 @@ function verifyImageUpload(){
 			<tr>
 				<td width="59%" align="center">
 				<a href="#" onclick="verifyBanner();" class="button">
-				<?=admin::labels('public');?>
+                                    Siguiente
 				</a> 
 				</td>
           <td width="41%" style="font-size:11px;">

@@ -67,10 +67,10 @@ $OnOff3 =admin::getDBvalue("select count(mus_uid) from sys_modules_users where m
 			 <?php
                          $uidModuleAcces='';
              $sql2="select mod_uid,mod_name from sys_modules where mod_language='".$lang."' and 
-                          mod_parent=".$row["mod_uid"]." and 
-                          mod_status='ACTIVE' order by mod_uid asc";
+                          mod_parent=".$row["mod_uid"]." order by mod_uid asc";
 					
                     $db2->query($sql2);
+                    //echo $sql2."<br>";
                     while($row2 = $db2->next_record()){	
             			$OnOff4 =admin::getDBvalue("select count(mus_uid) from sys_modules_users where mus_rol_uid='".$rol_uid."' and mus_mod_uid=".$row2["mod_uid"]." and mus_delete=0 and mus_place='MODULE'");
                     	if ($OnOff4!=0) $OnOff4='checked="checked"';

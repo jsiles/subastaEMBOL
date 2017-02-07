@@ -60,7 +60,7 @@ while($row3 = $db3->next_record()){
                             <tr>       -->
  <?php
                 $uidModuleAcces='';
-		$sql2="select * from sys_modules where mod_language='".$lang."' and mod_parent=".$row3["mod_uid"]." and mod_status='ACTIVE'";	
+		$sql2="select * from sys_modules where mod_language='".$lang."' and mod_parent=".$row3["mod_uid"]." order by mod_uid asc";	
 		$db2->query($sql2);
 		while($row2 = $db2->next_record()){
                     

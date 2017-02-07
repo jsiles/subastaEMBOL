@@ -65,9 +65,7 @@ $OnOff3 =admin::getDBvalue("select count(mus_uid) from sys_modules_users where m
  			<table class="box" border="0" width="100%">-->
 			 <?php
                          $uidModuleAcces='';
-             $sql2="select mod_uid,mod_name from sys_modules where mod_language='".$lang."' and 
-                          mod_parent=".$row["mod_uid"]." and 
-                          mod_status='ACTIVE' order by mod_uid asc";
+             $sql2="select mod_uid,mod_name from sys_modules where mod_language='".$lang."' and mod_parent=".$row["mod_uid"]." order by mod_uid asc";
 					
                     $db2->query($sql2);
                     while($row2 = $db2->next_record()){	

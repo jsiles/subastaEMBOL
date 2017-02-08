@@ -48,14 +48,15 @@ if ($nroReg>0)
     </td>
   </tr>
   <tr>
-  <td>
+      <td colspan="2" width="100%">
   <table width="100%" border="0">
 	<tr>
             <td width="5%"><span class="txt11 color2"><?=admin::labels('code');?></span></td>
             <td width="15%" ><span class="txt11 color2">Rol</span></td>
             <td width="11%" ><span class="txt11 color2">Monto Inferior</span></td>
-            <td width="12%" ><span class="txt11 color2">Monto Superior</span></td>
+            <td width="11%" ><span class="txt11 color2">Monto Superior</span></td>
             <td width="11%"><span class="txt11 color2">Tipo</span></td>
+            <td width="11%"><span class="txt11 color2">Moneda</span></td>
             <td align="center" width="5%" height="5"></td>
             <td align="center" width="5%" height="5"></td>
             <td align="center" width="5%" height="5"></td>
@@ -81,6 +82,7 @@ while ($subasta_list = $pagDb->next_record())
 	$rav_tipo =  ($subasta_list["rav_tipologia"]==1)?"Par&aacute;metros":"Informe";
         $rav_status = $subasta_list["rav_status"];
         $rav_delete = $subasta_list["rav_delete"];
+        $rav_moneda = admin::getDbValue("select cur_description from mdl_currency where cur_uid=".$subasta_list["rav_cur_uid"]);
         $dest="";
 		?> 
 	<div class="groupItem" id="<?=$pro_uid?>">
@@ -89,11 +91,12 @@ while ($subasta_list = $pagDb->next_record())
     
     <table class="list" width="100%" border='0' style="">
 	<tr>
-		<td width="3%" ><span <?=$dest?>><?=admin::toHtml($rav_uid)?></span></td>
-        <td width="10%" ><span <?=$dest?>><?=ucfirst(strtolower(trim(admin::toHtml($rav_rol))))?></span></td>
-        <td width="10%" ><span ><?=$rav_monto?></span></td>
-        <td width="10%" ><span><?=$rav_monto1?></span></td>
-        <td width="10%" ><span><?=$rav_tipo?></span>
+		<td width="5%" ><span <?=$dest?>><?=admin::toHtml($rav_uid)?></span></td>
+        <td width="15%" ><span <?=$dest?>><?=ucfirst(strtolower(trim(admin::toHtml($rav_rol))))?></span></td>
+        <td width="11%" ><span ><?=$rav_monto?></span></td>
+        <td width="11%" ><span><?=$rav_monto1?></span></td>
+        <td width="11%" ><span><?=$rav_tipo?></span>
+        <td width="11%" ><span><?=$rav_moneda?></span>
         	</td>
                 <td align="center" width="5%" height="5">
             <?php

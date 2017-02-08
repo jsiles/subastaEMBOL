@@ -30,7 +30,7 @@ if ($search2) $searchURL='&search2='.$search2.'&qfiltro=1';
 else $searchURL='';
 $timeNow= date("Y-m-d H:i:s");//sub_finish<>0
 //echo $timeNow;
-$qsearch="SELECT pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif('$timeNow'>sub_deadtime,'concluida','subastandose') as deadtime, sub_finish as estado, sub_mount_base, sub_modalidad FROM mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' and sub_finish =0 ";
+$qsearch="SELECT pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif('$timeNow'>sub_deadtime,'concluida','subastandose') as deadtime, sub_finish as estado, sub_mount_base, sub_modalidad, sub_moneda FROM mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' and sub_finish =0 ";
 $maxLine2 = admin::toSql(admin::getParam("maxLineP"),"Number");
 if ($maxLine2) {$maxLine=$maxLine2; admin::setSession("maxLineP",$maxLine2);}
 else {
@@ -95,7 +95,7 @@ if ($nroReg>0)
   </tr>
   <tr>
 	<td width="90%" height="40"></td>
-    <td>
+        <td>
         <div class="boxSearch">
         <form name="frmSubastasSearch" action="subastasList.php" >
         <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -115,19 +115,21 @@ if ($nroReg>0)
    </td>
   </tr>
   <tr>
-  <td>
+  <td colspan="2" width="100%" >
   <table width="100%" border="0">
 	<tr>
-		<td width="10%"><a href="subastasList.php?order=<?=$uidOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$uidClass;?>"><?=admin::labels('code');?>:</a></td>
+	<td width="10%"><a href="subastasList.php?order=<?=$uidOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$uidClass;?>"><?=admin::labels('code');?>:</a></td>
         <td width="10%" ><a href="subastasList.php?order=<?=$nameOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$nameClass;?>"><?=admin::labels('name');?>:</a></td>
         <td width="10%" ><a href="subastasList.php?order=<?=$linOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$linClass;?>"><?=admin::labels('category');?>:</a></td>
-        <td width="15%" ><span class="txt11 color2">Monto Base:</span></td>
+        <td width="10%" ><span class="txt11 color2">Monto Base:</span></td>
         <td width="10%" ><span class="txt11 color2">Estado:</span></td>
-		<td align="left" width="10%" height="5"><span class="txt11 color2">Lista de pujas</span></td>
-        <td width="10%"></td>		
-		<td align="center" width="5%" height="5"></td>
-		<td align="center" width="5%" height="5"></td>
-		<td align="center" width="5%" height="5"></td>
+	<td align="left" width="10%" height="5"><span class="txt11 color2">Lista de pujas</span></td>
+        <td width="5%">&nbsp;</td>		
+	<td align="center" width="5%" height="5">&nbsp;</td>
+	<td align="center" width="5%" height="5">&nbsp;</td>
+	<td align="center" width="5%" height="5">&nbsp;</td>
+	<td align="center" width="5%" height="5">&nbsp;</td>
+	<td align="center" width="5%" height="5">&nbsp;</td>
 	</tr>
 	</table>
   </td>
@@ -151,6 +153,7 @@ while ($subasta_list = $pagDb->next_record())
 	$sub_monto = $subasta_list["sub_mount_base"];
         $sub_modalidad = $subasta_list["sub_modalidad"];
         $sub_status = $subasta_list["sub_status"];
+        $sub_moneda = $subasta_list["sub_moneda"];
         if($sub_modalidad=="ITEM")
         {
             //echo "SELECT SUM(xit_price) FROM mdl_xitem WHERE xit_sub_uid=$sub_uid and xit_delete=0 ";
@@ -224,7 +227,7 @@ while ($subasta_list = $pagDb->next_record())
     
     <table class="list" border="0" width="100%" style="">
 	<tr>
-		<td width="5%" ><span <?=$dest?>><?=admin::toHtml($sub_uid)?></span></td>
+		<td width="10%" ><span <?=$dest?>><?=admin::toHtml($sub_uid)?></span></td>
         <td width="10%" ><span <?=$dest?>><?=ucfirst(strtolower(trim(admin::toHtml($pro_name))))?></span></td>
         <td width="10%" ><span <?=$dest?>><?=ucwords(strtolower(trim(admin::toHtml($pca_name))))?></span></td>
         <td width="10%" ><span><?=$sub_monto?></span></td>
@@ -337,14 +340,16 @@ while ($subasta_list = $pagDb->next_record())
 		<img src="lib/aprobar_off.png" border="0" title="APROBAR" alt="APROBAR">
     <?php }
 	else{
+            //echo "ACA";
             $rolAplica = false;
-            $sql =  "select count(*) from mdl_rav where rav_tipologia=1 and rav_rol_uid=$rol";
+            $sql =  "select count(*) from mdl_rav where rav_tipologia=1 and rav_rol_uid=$rol and rav_cur_uid=".$sub_moneda;
             $valida = admin::getDbValue($sql);
+            //echo $sql;
             if($valida>0)
             {   
                 $montoBase = $sub_monto;
-                $montoMenor = admin::getDbValue("SELECT rav_monto_inf FROM mdl_rav WHERE rav_tipologia=1 and rav_rol_uid=".$rol);
-                $montoMayor = admin::getDbValue("SELECT rav_monto_sup FROM mdl_rav WHERE rav_tipologia=1 and rav_rol_uid=".$rol);
+                $montoMenor = admin::getDbValue("SELECT rav_monto_inf FROM mdl_rav WHERE rav_tipologia=1 and rav_rol_uid=".$rol." and rav_cur_uid=".$sub_moneda);
+                $montoMayor = admin::getDbValue("SELECT rav_monto_sup FROM mdl_rav WHERE rav_tipologia=1 and rav_rol_uid=".$rol." and rav_cur_uid=".$sub_moneda);
                 if($montoMayor!=0){
             
                     if(($montoBase>=$montoMenor)&&($montoBase<=$montoMayor)) $rolAplica=true;

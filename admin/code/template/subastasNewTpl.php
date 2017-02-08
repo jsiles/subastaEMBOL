@@ -225,7 +225,7 @@
 				foreach($arrayMoneda as $key=>$value)
 				{                
 				?>
-                	<option <? if ($key==$prod["sub_moneda"]) echo 'selected="selected"';?> value="<?=$key?>"><?=$value?></option>
+                	<option <?php if ($key==$prod["sub_moneda"]) echo 'selected="selected"';?> value="<?=$key?>"><?=$value?></option>
 				<?php
 				}
 				?>

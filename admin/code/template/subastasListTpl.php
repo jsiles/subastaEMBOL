@@ -97,18 +97,18 @@ if ($nroReg>0)
    </td>
   </tr>
   <tr>
-  <td>
+      <td colspan="2" width="100%">
   <table width="100%" border="0">
 	<tr>
-		<td width="8%"><a href="subastasList.php?order=<?=$uidOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$uidClass;?>"><?=admin::labels('code');?>:</a></td>
-        <td width="18%" ><a href="subastasList.php?order=<?=$nameOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$nameClass;?>"><?=admin::labels('name');?>:</a></td>
-        <td width="13%" ><a href="subastasList.php?order=<?=$linOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$linClass;?>"><?=admin::labels('category');?>:</a></td>
-        <td width="15%" ><span class="txt11 color2">Estado:</span></td>
-		<td align="center" width="10%" height="5"><span class="txt11 color2">Lista de pujas</span></td>
-        <td width="11%"></td>		
-		<td align="center" width="12%" height="5"></td>
-		<td align="center" width="12%" height="5"></td>
-		<td align="center" width="14%" height="5"></td>
+	<td width="10%"><a href="subastasList.php?order=<?=$uidOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$uidClass;?>"><?=admin::labels('code');?>:</a></td>
+        <td width="10%" ><a href="subastasList.php?order=<?=$nameOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$nameClass;?>"><?=admin::labels('name');?>:</a></td>
+        <td width="10%" ><a href="subastasList.php?order=<?=$linOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$linClass;?>"><?=admin::labels('category');?>:</a></td>
+        <td width="10%" ><span class="txt11 color2">Estado:</span></td>
+        <td align="center" width="10%" height="5"><span class="txt11 color2">Lista de pujas</span></td>
+        <td width="5%">&nbsp;</td>		
+	<td align="center" width="5%" height="5">&nbsp;</td>
+	<td align="center" width="5%" height="5">&nbsp;</td>
+	<td align="center" width="5%" height="5">&nbsp;</td>
 	</tr>
 	</table>
   </td>
@@ -198,10 +198,10 @@ while ($subasta_list = $pagDb->next_record())
     
     <table class="list" width="100%" style="">
 	<tr>
-		<td width="5%" ><span <?=$dest?>><?=admin::toHtml($sub_uid)?></span></td>
-        <td width="15%" ><span <?=$dest?>><?=ucfirst(strtolower(trim(admin::toHtml($pro_name))))?></span></td>
+		<td width="10%" ><span <?=$dest?>><?=admin::toHtml($sub_uid)?></span></td>
+        <td width="10%" ><span <?=$dest?>><?=ucfirst(strtolower(trim(admin::toHtml($pro_name))))?></span></td>
         <td width="10%" ><span <?=$dest?>><?=ucwords(strtolower(trim(admin::toHtml($pca_name))))?></span></td>
-        <td width="15%" ><span><?=$sub_estado?></span></td>
+        <td width="10%" ><span><?=$sub_estado?></span></td>
 		<td align="left" width="10%" height="5">
          <?php
 		 
@@ -228,7 +228,7 @@ while ($subasta_list = $pagDb->next_record())
                 }
             ?>
         </td>
-	<td align="center" width="12%" height="5">
+	<td align="center" width="5%" height="5">
     <?php 
 	if($sub_finish!=0)
 		{
@@ -253,7 +253,7 @@ while ($subasta_list = $pagDb->next_record())
             }
         ?>
 	</td>
-	<td align="center" width="12%" height="5">
+	<td align="center" width="5%" height="5">
     <?php 
 		if($sub_finish!=0)
 		{
@@ -277,7 +277,7 @@ while ($subasta_list = $pagDb->next_record())
             }
         }?>
 	</td>
-	<td align="center" width="14%" height="5">
+	<td align="center" width="5%" height="5">
 	<div id="status_<?=$sub_uid?>">
 	<?php
 		if($sub_finish!=0)

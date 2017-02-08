@@ -11,12 +11,13 @@ $rav_monto =admin::getParam("rav_monto");
 $rav_monto1 =admin::getParam("rav_monto1");
 $rav_tipo =admin::getParam("rav_tipo");
 $rav_status =(admin::getParam("rav_status")==1)?'ACTIVE':'INACTIVE';
+$rav_moneda = admin::getParam("rav_moneda");
 $array=$rav_uid;
 //print_r($rav_uid);
 
-    $sql="insert into mdl_rav (rav_rol_uid, rav_monto_inf, rav_monto_sup, rav_tipologia, rav_delete, rav_status)"
-            . " values ($rav_rol,$rav_monto,$rav_monto1, $rav_tipo, 0, '$rav_status') ";
- //   echo $sql;die;
+    $sql="insert into mdl_rav (rav_rol_uid, rav_monto_inf, rav_monto_sup, rav_tipologia, rav_cur_uid, rav_delete, rav_status)"
+            . " values ($rav_rol,$rav_monto,$rav_monto1, $rav_tipo, $rav_moneda, 0, '$rav_status') ";
+    //echo $sql;die;
    $db->query($sql);
 unset($_POST);//die;
 if($rav_tipo==1){

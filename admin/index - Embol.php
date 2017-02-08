@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 <link rel="stylesheet" href="css/dhtml_horiz.css" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>admin</title>
+<title>Sistema de Subastas</title>
 <META NAME="author" CONTENT="DEVZONE">
 <META NAME="reply-to" CONTENT="info@devzone.xyz">
 <META NAME="copyright" CONTENT="Software propietario de DEVZONE">

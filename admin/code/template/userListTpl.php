@@ -81,8 +81,8 @@ if ($nroReg>0){
    </td>
   </tr>
   <tr>
-    <td colspan="2" width="98%">
-  <table width="100%" >
+    <td colspan="2" width="100%">
+  <table width="100%" border="0">
 	<tr>
     	<td width="14%" class="list1a" style="color:#16652f">
          	<a href="userList.php?order=<?=$titOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$titClass;?>">
@@ -107,10 +107,10 @@ if ($nroReg>0){
         
         <td width="12%" style="color:#16652f">Usuario:</td>
         <td width="8%" style="color:#16652f">Imagen:</td>
-        <td align="center" width="11%" height="5"></td>
-   		<td align="center" width="12%" height="5"></td>
-		<td align="center" width="12%" height="5"></td>
-		<td align="center" width="14%" height="5"></td>
+        <td align="center" width="5%" height="5"></td>
+   		<td align="center" width="5%" height="5"></td>
+		<td align="center" width="5%" height="5"></td>
+		<td align="center" width="5%" height="5"></td>
 	</tr>
 	</table>
 </td>
@@ -136,13 +136,13 @@ if ($nroReg>0){
 	
   	?> 
   	<div id="sub_<?=$usr_uidA?>" class="<?=$class?>">
-<table class="list" width="100%">
+<table class="list" width="100%" border="0">
 	<tr><td width="14%"><?=$usr_firstnameA;?></td>
     <td width="14%"><?=$usr_lastnameA;?></td>
     <td width="14%"><?=$UserRol;?></td>
-    <td width="15%"><?=$usr_email;?></td>
+    <td width="12%"><?=$usr_email;?></td>
    
-    <td width="15%"><?=$usr_loginA;?></td>
+    <td width="12%"><?=$usr_loginA;?></td>
      <td width="8%">
     <?php if(strlen($usr_photoA)>0)
         {

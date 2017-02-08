@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>admin > <?=admin::labels('htmltitlepage')?></title>
+<title>Sistema de Subastas > <?=admin::labels('htmltitlepage')?></title>
 <link rel="shortcut icon" href="lib/favicon.ico" />
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 <link rel="stylesheet" href="css/dhtml_horiz.css" type="text/css" />

@@ -64,6 +64,39 @@ $qsearch="select * from mdl_rav where rav_tipologia=1 order by rav_uid asc";
             <td width="7%">&nbsp;</td>
         </tr>
         <tr>
+            <td width="5%" >Moneda</td>
+        
+        <td>
+    <?php 
+				
+				$arrayMoneda = admin::dbFillArray("select cur_uid, cur_description from mdl_currency where cur_delete=0");
+				
+				//print_r($arrayMoneda); 
+				
+				?>
+                <span id="div_sub_moneda">
+                <select name="rav_moneda" id="sub_moneda" class="input" >
+                <?php
+				foreach($arrayMoneda as $key=>$value)
+				{                
+				?>
+                	<option value="<?=$key?>"><?=$value?></option>
+				<?php
+				}
+				?>
+                </select>
+                                &nbsp;<a href="javascript:addCurrency();" class="small2">agregar</a> | 
+                <a href="javascript:delCurrency();" class="small3"><?=admin::labels('del');?></a></span>
+
+                 <div id="div_add_currency" style="display:none;">
+		<input type="text" name="add_currency" id="add_currency" class="input3" onfocus="setClassInput3(this,'ON');document.getElementById('div_add_currency_error').style.display='none';" onblur="setClassInput3(this,'OFF');document.getElementById('div_add_currency_error').style.display='none';" onclick="setClassInput3(this,'ON');document.getElementById('div_add_currency_error').style.display='none';"/>		
+		<a href="javascript:addCurrencyOption()" class="button3"><?=admin::labels('add');?></a><a href="javascript:closeCurrency();" class="link2">Cerrar</a>		</div>
+				<br /><span id="div_add_currency_error" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>
+                </div>
+                <br /><span id="div_sub_mount_base" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('subastas','titleerror');?></span>
+				</td>
+        </tr>
+        <tr>
             <td width="5%" >Estado:</td>
             <td width="10%">
 			<select name="rav_status" class="txt10" id="usr_status">

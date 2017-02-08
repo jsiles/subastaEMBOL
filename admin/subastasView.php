@@ -5,7 +5,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">    
 <html>
 <head>
-<title>admin > <?=admin::labels('htmltitlepage')?></title>
+<title>Sistema de Subastas > <?=admin::labels('htmltitlepage')?></title>
 <link rel="shortcut icon" href="lib/favicon.ico" />
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 <link rel="stylesheet" href="css/dhtml_horiz.css" type="text/css" />
@@ -17,6 +17,7 @@
 <meta name="copyright" content="Software propietario de DEVZONE">
 <meta name="rating" content="General">
 <META HTTP-EQUIV="Content-Type" content="text/html; ISO-8859-1">
+<script type="text/javascript">var SERVER='<?=$domain?>'; </script>
 <script language="javascript" type="text/javascript" src="js/jquery-1.3.2.js"></script>
 <script language="javascript" type="text/javascript" src="js/ajaxlib.js"></script>
 <!-- PROMPT -->

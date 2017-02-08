@@ -11,12 +11,15 @@ $rav_monto =admin::getParam("rav_monto");
 $rav_monto1 =admin::getParam("rav_monto1");
 $rav_tipo =admin::getParam("rav_tipo");
 $rav_status =(admin::getParam("rav_status")==1)?"ACTIVE":"INACTIVE";
+$rav_moneda = admin::getParam("rav_moneda");
+
     $sql="update mdl_rav set ".
          "rav_rol_uid= ". $rav_rol.
          ",rav_monto_inf= ". $rav_monto.
          ",rav_monto_sup= ". $rav_monto1.
-         ",rav_status= '". $rav_status.
-         "' where ".   
+         ",rav_status= '". $rav_status."'".
+         ",rav_cur_uid= ". $rav_moneda.
+         " where ".   
          " rav_uid=".$rav_uid;
     //echo $sql;die;
    $db->query($sql);

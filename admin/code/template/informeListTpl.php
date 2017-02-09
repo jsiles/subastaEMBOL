@@ -284,15 +284,15 @@ while ($subasta_list = $pagDb->next_record())
 	<?php
             $adjudicaFlag=false;
                     
-            $sql =  "select count(*) from mdl_rav where rav_tipologia=2 and rav_rol_uid=$rol and rav_cur_uid=".$sub_moneda;
+            $sql =  "select count(*) from mdl_rav where rav_tipologia=2 and rav_delete=0 and rav_rol_uid=$rol and rav_cur_uid=".$sub_moneda;
             //echo $sql;
             $valida = admin::getDbValue($sql);
             if($valida>0)
             {
 
                     $montoBase = $sub_monto;
-                    $montoMenor = admin::getDbValue("SELECT rav_monto_inf FROM mdl_rav WHERE rav_tipologia=2 and rav_rol_uid=".$rol." and rav_cur_uid=".$sub_moneda);
-                    $montoMayor = admin::getDbValue("SELECT rav_monto_sup FROM mdl_rav WHERE rav_tipologia=2 and rav_rol_uid=".$rol." and rav_cur_uid=".$sub_moneda);
+                    $montoMenor = admin::getDbValue("SELECT rav_monto_inf FROM mdl_rav WHERE rav_tipologia=2 and rav_delete=0 and rav_rol_uid=".$rol." and rav_cur_uid=".$sub_moneda);
+                    $montoMayor = admin::getDbValue("SELECT rav_monto_sup FROM mdl_rav WHERE rav_tipologia=2 and rav_delete=0 and rav_rol_uid=".$rol." and rav_cur_uid=".$sub_moneda);
                     if($montoMayor!=0){
 
                         if(($montoBase>=$montoMenor)&&($montoBase<=$montoMayor)) $adjudicaFlag=true;

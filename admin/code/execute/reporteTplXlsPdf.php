@@ -57,9 +57,9 @@ $html= '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://w
 <tr><td><br /></td><td><br /></td></tr>
 <tr><td colspan="5">
 	<table width="100%">
-    	<tr><th width="20%">Oferente:</th><th width="20%">Lugar de entrega:</th><th width="20%">Medio de transporte:</th><th width="20%">Incoterm:</th><th width="20%">Factor de ajuste:</th></tr>';
+    	<tr><th width="20%">Proveedor:</th><th width="20%">Lugar de entrega:</th><th width="20%">Medio de transporte:</th><th width="20%">Incoterm:</th><th width="20%">Factor de ajuste:</th></tr>';
 
-$sql ="select concat(cli_firstname,' ',cli_lastname) as nombre, inc_lugar_entrega, tra_name, inl_name, inc_ajuste 
+$sql ="select concat(cli_companyname, ' ', cli_socialreason) as nombre, inc_lugar_entrega, tra_name, inl_name, inc_ajuste 
 from mdl_incoterm, mdl_incoterm_language, mdl_transporte, mdl_client 
 where inc_inl_uid=inl_uid and inc_tra_uid=tra_uid and inc_cli_uid=cli_uid and inc_delete=0 and inc_sub_uid='$sub_uid' 
 order by inc_uid desc";

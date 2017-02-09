@@ -238,7 +238,7 @@ $prod = $db->next_record();
 				$db2->query($sql2);
 				while ($content=$db2->next_record())
 				{
-				 $clientName=admin::getDBvalue("SELECT concat(cli_firstname,' ',cli_lastname) FROM mdl_client where cli_uid='".$content["bid_cli_uid"]."'");
+				 $clientName=admin::getDBvalue("SELECT concat(cli_companyname, ' ', cli_socialreason) FROM mdl_client where cli_uid='".$content["bid_cli_uid"]."'");
 				 ?><tr>
 				<td width="40%"><?=$clientName?></td>
 				<td width="30%"><?=$content["bid_date"]?></td>
@@ -281,7 +281,7 @@ if ($nroReg>0)
     <table class="list" width="100%">
 	<tr>
             <td width="12%" style="color:#16652f">Fecha y Hora</td>
-            <td width="12%" style="color:#16652f">Oferente</td>
+            <td width="12%" style="color:#16652f">Proveedor</td>
     <td width="12%" style="color:#16652f">Monto</td>
     	<td align="center" width="12%" height="5">&nbsp;</td>
     <td align="center" width="12%" height="5">&nbsp;</td>
@@ -294,7 +294,7 @@ $i=1;
 while ($list = $db2->next_record())
 	{
 	$cli_uid = $list["bid_cli_uid"];
-	$cli_name = admin::getDBvalue("select concat(cli_firstname,' ',cli_lastname) as nombre from mdl_client WHERE cli_uid='".$cli_uid."'");
+	$cli_name = admin::getDBvalue("select concat(cli_companyname, ' ', cli_socialreason) as nombre from mdl_client WHERE cli_uid='".$cli_uid."'");
 	$bid_monto = $list["bid_mount"];
         $bid_fecha = $list["bid_date"];
 	if ($i%2==0) $class='row0';

@@ -18,7 +18,7 @@ $prod = $db->next_record();
     <td colspan="2" id="contentListing0">
     <div class="row0">
     <table class="list" width="100%">
-	<tr><td width="12%" style="color:#16652f">Oferente</td>
+	<tr><td width="12%" style="color:#16652f">Proveedor</td>
     <td width="12%" style="color:#16652f">Lugar de entrega</td>
     <td width="12%" style="color:#16652f">Medio de transporte</td>
     <td width="12%" style="color:#16652f">Incoterm</td>
@@ -125,7 +125,7 @@ if ($nroReg>0)
     <td colspan="2" id="contentListing">
     <div class="row0">
     <table class="list" width="100%">
-	<tr><td width="12%" style="color:#16652f">Oferente</td>
+	<tr><td width="12%" style="color:#16652f">Proveedor</td>
     <td width="12%" style="color:#16652f">Lugar de entrega</td>
     <td width="12%" style="color:#16652f">Medio de transporte</td>
     <td width="12%" style="color:#16652f">Incoterm</td>
@@ -143,7 +143,7 @@ while ($list = $db2->next_record())
 
 	$inc_uid = $list["inc_uid"];
 	$cli_uid = $list["inc_cli_uid"];
-	$cli_name = admin::getDBvalue("select concat(cli_firstname,' ',cli_lastname) as nombre from mdl_client WHERE cli_uid='".$cli_uid."'");
+	$cli_name = admin::getDBvalue("select concat(cli_companyname, ' ', cli_socialreason) as nombre from mdl_client WHERE cli_uid='".$cli_uid."'");
 	$inc_lugar_entrega = $list["inc_lugar_entrega"];
 	$tra_uid = $list["inc_tra_uid"];
 	$tra_name = admin::getDBvalue("select tra_name from mdl_transporte WHERE tra_uid='".$tra_uid."'");

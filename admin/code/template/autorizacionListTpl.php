@@ -342,14 +342,14 @@ while ($subasta_list = $pagDb->next_record())
 	else{
             //echo "ACA";
             $rolAplica = false;
-            $sql =  "select count(*) from mdl_rav where rav_tipologia=1 and rav_rol_uid=$rol and rav_cur_uid=".$sub_moneda;
+            $sql =  "select count(*) from mdl_rav where rav_tipologia=1 and rav_delete=0 and rav_rol_uid=$rol and rav_cur_uid=".$sub_moneda;
             $valida = admin::getDbValue($sql);
             //echo $sql;
             if($valida>0)
             {   
                 $montoBase = $sub_monto;
-                $montoMenor = admin::getDbValue("SELECT rav_monto_inf FROM mdl_rav WHERE rav_tipologia=1 and rav_rol_uid=".$rol." and rav_cur_uid=".$sub_moneda);
-                $montoMayor = admin::getDbValue("SELECT rav_monto_sup FROM mdl_rav WHERE rav_tipologia=1 and rav_rol_uid=".$rol." and rav_cur_uid=".$sub_moneda);
+                $montoMenor = admin::getDbValue("SELECT rav_monto_inf FROM mdl_rav WHERE rav_tipologia=1 and rav_delete=0 and rav_rol_uid=".$rol." and rav_cur_uid=".$sub_moneda);
+                $montoMayor = admin::getDbValue("SELECT rav_monto_sup FROM mdl_rav WHERE rav_tipologia=1 and rav_delete=0 and rav_rol_uid=".$rol." and rav_cur_uid=".$sub_moneda);
                 if($montoMayor!=0){
             
                     if(($montoBase>=$montoMenor)&&($montoBase<=$montoMayor)) $rolAplica=true;

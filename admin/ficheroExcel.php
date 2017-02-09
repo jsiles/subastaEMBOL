@@ -20,7 +20,7 @@ $PrintTable='<table border="1" >
 				$db2->query($sql2);
 				while ($content=$db2->next_record())
 				{
-				 $clientName=admin::getDBvalue("SELECT concat(cli_firstname,' ',cli_lastname) FROM mdl_client where cli_uid='".$content["bid_cli_uid"]."'");
+				 $clientName=admin::getDBvalue("SELECT concat(cli_companyname, ' ', cli_socialreason) FROM mdl_client where cli_uid='".$content["bid_cli_uid"]."'");
 				$PrintTable.='
                 <tr>
 				<td >'.$clientName.'</td>

@@ -133,7 +133,7 @@ while ($list = $db2->next_record())
 	while ($user = $db3->next_record())
 	{
 		
-		$cli_name = admin::getDBvalue("select concat(cli_firstname,' ',cli_lastname) as nombre from mdl_client WHERE cli_uid=".$user["clx_cli_uid"]);
+		$cli_name = admin::getDBvalue("select concat(cli_companyname, ' ', cli_socialreason) as nombre from mdl_client WHERE cli_uid=".$user["clx_cli_uid"]);
 		echo $cli_name."<br>";
 	}
 	

@@ -1,11 +1,5 @@
 <?php
-$rolDesc = admin::getDBvalue("select rol_description from mdl_roles where rol_uid='".$_SESSION['usr_rol']."' and rol_delete<>1");
-$rolAccess  = ($rolDesc==='ADMIN' || $rolDesc==='ROOT') ? "" : " and new_usr_uid='".$_SESSION['usr_uid']."' ";
-
-$new_public =3; //isset($_GET['new_public']) ? $_GET['new_public'] : 0 ;
-if($new_public==0) $categoria = " and cli_status='ACTIVE' and cli_delete=0 ";
-elseif($new_public==1) $categoria = " and cli_status='INACTIVE' and cli_delete=0 ";
-elseif($new_public==3) $categoria = " and cli_delete=0 ";
+$categoria = " and cli_delete=0 ";
 if ($lang!='es') $urlLangAux=$lang.'/';
 else $urlLangAux='';
 
@@ -32,9 +26,9 @@ $nroReg=admin::getDBvalue("select count(cli_uid) from mdl_client where cli_delet
 }
 else
 {
-$_pagi_sql= "select cli_uid, cli_user, cli_pass, cli_lastname, cli_firstname, cli_status,cli_companyname,cli_socialreason,cli_email,cli_photo from mdl_client where (cli_user like '%".$search."%' or cli_firstname like '%".$search."%' or cli_lastname like '%".$search."%' or cli_email like '%".$search."%') ".$noRoot.$categoria.$orderCode;
+$_pagi_sql= "select cli_uid, cli_user, cli_pass, cli_lastname, cli_firstname, cli_status,cli_companyname,cli_socialreason,cli_email,cli_photo from mdl_client where (cli_user like '%".$search."%' or cli_firstname like '%".$search."%' or cli_lastname like '%".$search."%' or cli_email like '%".$search."%') ".$categoria.$orderCode;
 
-$nroReg=admin::getDBvalue("select count(cli_uid) from mdl_client where (cli_user like '%".$search."%' or cli_firstname like '%".$search."%' or cli_lastname like '%".$search."%' or cli_email like '%".$search."%') ".$categoria.$noRoot);
+$nroReg=admin::getDBvalue("select count(cli_uid) from mdl_client where (cli_user like '%".$search."%' or cli_firstname like '%".$search."%' or cli_lastname like '%".$search."%' or cli_email like '%".$search."%') ".$categoria);
 }
 
 

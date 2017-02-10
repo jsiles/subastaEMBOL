@@ -23,7 +23,6 @@ if ($dateClass=='up') $dateOrder=6;
 else $dateOrder=5;
 
 $noRoot=" ";
-
 $search = admin::toSql(admin::getParam("search"),"String");
 
 if (!$search || $search==''){

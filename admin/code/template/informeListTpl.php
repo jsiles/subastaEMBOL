@@ -281,30 +281,7 @@ while ($subasta_list = $pagDb->next_record())
         
         
 	<td align="center" width="5%" height="5">
-	<?php
-            $adjudicaFlag=false;
-                    
-            $sql =  "select count(*) from mdl_rav where rav_tipologia=2 and rav_delete=0 and rav_rol_uid=$rol and rav_cur_uid=".$sub_moneda;
-            //echo $sql;
-            $valida = admin::getDbValue($sql);
-            if($valida>0)
-            {
-
-                    $montoBase = $sub_monto;
-                    $montoMenor = admin::getDbValue("SELECT rav_monto_inf FROM mdl_rav WHERE rav_tipologia=2 and rav_delete=0 and rav_rol_uid=".$rol." and rav_cur_uid=".$sub_moneda);
-                    $montoMayor = admin::getDbValue("SELECT rav_monto_sup FROM mdl_rav WHERE rav_tipologia=2 and rav_delete=0 and rav_rol_uid=".$rol." and rav_cur_uid=".$sub_moneda);
-                    if($montoMayor!=0){
-
-                        if(($montoBase>=$montoMenor)&&($montoBase<=$montoMayor)) $adjudicaFlag=true;
-
-                    }else{if($montoBase>=$montoMenor) $adjudicaFlag=true;}
-                    
-                  // echo $montoBase. " MonM:". $montoMenor . " MonMayor:".$montoMayor. " Flag:".$adjudicaFlag;
-            }
-            
-                if($adjudicaFlag)
-                {
-            ?>
+	
                 <?php
                 $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=23 and mop_lab_category='Crear' and moa_rol_uid=".$_SESSION['usr_rol']."");
                 //echo "<br>"."select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=2 and mop_lab_category='Crear' and moa_rol_uid=".$_SESSION['usr_rol'];
@@ -319,14 +296,6 @@ while ($subasta_list = $pagDb->next_record())
                     <img src="lib/crear_off_es.png" border="0" title="Crear" alt="Crear">
 		<?php
                 }
-                }else{
-                    ?>
-                    <img src="lib/crear_off_es.png" border="0" title="Crear" alt="Crear">
-                <?php
-                }
-       
-        
-            
 		?>
 
 	</td>

@@ -22,15 +22,8 @@ else $nameOrder=3;
 if ($dateClass=='up') $dateOrder=6;
 else $dateOrder=5;
 
-$rolLogged = admin::getDBValue('select rol_description from mdl_roles_users left join mdl_roles on rus_rol_uid=rol_uid where rus_usr_uid='.$_SESSION["usr_uid"].' and rol_delete=0');
-switch($rolLogged){
-		case 'ROOT' : $noRoot=''; break;
-		case 'ADMIN' :	$noRoot=" and rol_description<>'ROOT' "; break;
-		case 'EDITOR' :	$noRoot=" and rol_description<>'ROOT' AND rol_description<>'ADMIN' "; break;
-		default : $noRoot=" and usr_uid=".$_SESSION["usr_uid"]; break;
-	
-	}
 
+$noRoot="";
 $search = admin::toSql(admin::getParam("search"),"String");
 
 if (!$search || $search==''){

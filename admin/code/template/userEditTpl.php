@@ -34,7 +34,9 @@ $regusers = $db->next_record();
 			xxxxxxxxxxxxx <a href="javascript:void(0);" onclick="document.getElementById('pass_view').style.display='none';$('#pass_edit').fadeIn(500);" title="<?=admin::labels('change');?>" class="small2"><?=admin::labels('change');?></a>
 			</div>
 			<div id="pass_edit" style="display:none;">
-<input name="usr_pass" type="password" class="input" id="usr_pass" onfocus="setClassInput(this,'ON');document.getElementById('div_usr_pass').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_usr_pass').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_usr_pass').style.display='none';" size="20" /> <a href="javascript:void(0);" onclick="document.getElementById('usr_pass').value='';document.getElementById('pass_edit').style.display='none';$('#pass_view').fadeIn(500);document.getElementById('div_usr_pass').style.display='none';"  class="small3"> cancelar</a>
+<input name="usr_pass" type="text" class="input" id="usr_pass" onfocus="setClassInput(this,'ON');document.getElementById('div_usr_pass').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_usr_pass').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_usr_pass').style.display='none';" size="20" />
+<!--<a href="javascript:void(0);" onclick="document.getElementById('usr_pass').value='';document.getElementById('pass_edit').style.display='none';$('#pass_view').fadeIn(500);document.getElementById('div_usr_pass').style.display='none';"  class="small3"> cancelar</a>-->
+<a href="pass" onClick="return generarPassword(this.form,'usr_pass',5);">Generar</a>                        
 			</div>
 <span id="div_usr_pass" style="display:none;" class="error"><?=admin::labels('users','passreq');?></span>
 			</td>

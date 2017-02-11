@@ -23,19 +23,20 @@ admin::initialize('users','usersNew');
 <script language="javascript" type="text/javascript" src="js/addEvent.js"></script>
 <script language="javascript" type="text/javascript" src="js/sweetTitles.js"></script>
 <script language="javascript" type="text/javascript" src="js/users.js"></script>
+<script language="javascript" type="text/javascript" src="js/pass.js"></script>
 <link rel="stylesheet" href="css/sweetTitles.css" type="text/css" />
 <!-- FIN -->
 
 </head>
 <body>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tr><td valign="top"><? include_once("skin/header.php");?>
+<tr><td valign="top"><?php include_once("skin/header.php");?>
 </td></tr>
   <tr>
-    <td valign="top" id="content"><? include_once("code/template/userNewTpl.php"); ?></td>
+    <td valign="top" id="content"><?php include_once("code/template/userNewTpl.php"); ?></td>
   </tr>
 <tr><td>
-  <? include("skin/footer.php"); ?>
+  <?php include("skin/footer.php"); ?>
   </td></tr>
 </table>
 </body>

@@ -40,7 +40,17 @@ if ($nroReg>0)
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
    <tr>
       <td width="77%" height="40"><span class="title"><?=admin::modulesLabels()?></span></td>
-      <td width="23%" height="40" align="right"><a href="<?=admin::modulesLink('subastasRavNew')?>?token=<?=admin::getParam("token")?>"><?=admin::modulesLabels('subastasRavNew')?></a>&nbsp;</td>
+      <td width="23%" height="40" align="right">
+        <?php
+        $moduleId=9;
+        $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=$moduleId and mop_lab_category='Crear' and moa_rol_uid=".$_SESSION['usr_rol']."");
+	if($valuePermit=='ACTIVE'){?>
+            <a href="<?=admin::modulesLink('subastasRavNew')?>?token=<?=admin::getParam("token")?>"><?=admin::modulesLabels('subastasRavNew')?></a>
+        <?php
+        }
+        ?>
+        &nbsp;
+      </td>
   </tr>
   <tr>
 	<td width="90%" height="40"></td>
@@ -205,7 +215,17 @@ else
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
       <td width="77%" height="40"><span class="title"><?=admin::modulesLabels()?></span></td>
-    <td width="23%" height="40" align="right"><a href="<?=admin::modulesLink('subastasRavNew')?>?token=<?=admin::getParam("token")?>"><?=admin::modulesLabels('subastasRavNew')?></a>&nbsp;</td>
+    <td width="23%" height="40" align="right">
+        <?php
+        $moduleId=9;
+        $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=$moduleId and mop_lab_category='Crear' and moa_rol_uid=".$_SESSION['usr_rol']."");
+	if($valuePermit=='ACTIVE'){?>
+            <a href="<?=admin::modulesLink('subastasRavNew')?>?token=<?=admin::getParam("token")?>"><?=admin::modulesLabels('subastasRavNew')?></a>
+        <?php
+        }
+        ?>
+        &nbsp;
+    </td>
   </tr>
     <tr>
 	<td width="90%" height="40"></td>

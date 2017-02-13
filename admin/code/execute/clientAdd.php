@@ -14,7 +14,7 @@ if(strlen($cli_pass)==0) $cli_pass=$mcl_pass;
 $cli_email = admin::toSql(safeHtml($_POST["cli_email"]),"String");
 $cli_firstname = admin::toSql(safeHtml($_POST["cli_firstname"]),"String");
 $cli_lastname = admin::toSql(safeHtml($_POST["cli_lastname"]),"String");
-$cli_status = admin::toSql(safeHtml($_POST["cli_status"]),"String");
+$cli_status = (admin::getParam("cli_status")==1)?'ACTIVE':'INACTIVE';
 $cli_exist = admin::getDBvalue("select count(cli_user) FROM mdl_client where cli_user='".$cli_user."' and cli_delete=0");
 
 if($cli_exist==0){
@@ -32,7 +32,8 @@ if($cli_exist==0){
 								cli_status,
 								cli_delete,
 								cli_date,
-								cli_photo
+								cli_photo,
+                                                                cli_status_main
 								)
 						values	(
 								'$cli_companyname',
@@ -45,7 +46,8 @@ if($cli_exist==0){
 								'".$cli_status."',
 								0,
 								GETDATE(),
-								''
+								'',
+                                                                0
 								)";
 								
 								//echo $sql;die;

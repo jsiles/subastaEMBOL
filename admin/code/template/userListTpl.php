@@ -49,7 +49,17 @@ if ($nroReg>0){
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
    <tr>
       <td width="85%" height="40"><span class="title"><?=admin::modulesLabels()?></span></td>
-      <td width="15%" height="40"><a href="<?=admin::modulesLink('usersNew')?>?token=<?=admin::getParam("token")?>"><?=admin::modulesLabels('usersNew')?></a>&nbsp;</td>
+      <td width="15%" height="40">
+        <?php
+        $moduleId=6;
+        $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=$moduleId and mop_lab_category='Crear' and moa_rol_uid=".$_SESSION['usr_rol']."");
+	if($valuePermit=='ACTIVE'){?>
+            <a href="<?=admin::modulesLink('usersNew')?>?token=<?=admin::getParam("token")?>"><?=admin::modulesLabels('usersNew')?></a>
+        <?php
+        }
+        ?>
+        &nbsp;     
+      </td>
   </tr>
   <tr>
 	<td width="90%" height="40"></td>

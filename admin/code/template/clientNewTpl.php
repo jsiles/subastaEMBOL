@@ -14,16 +14,97 @@
             </tr>
           
            <tr>
-               <td width="29%">C&oacute;digo de la empresa:</td>
+               <td width="29%">NIT o CI:</td>
             <td width="64%">
-<input name="cli_companyname" type="text" class="input" id="cli_companyname" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_companyname').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_companyname').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_companyname').style.display='none';" /><br /><span id="div_cli_companyname" style="display:none;" class="error">Nombre de la empresa es necesario</span>			</td>
+<input name="cli_nit_ci" type="text" class="input" id="cli_nit_ci" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_nit_ci').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_nit_ci').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_nit_ci').style.display='none';" /><br /><span id="div_cli_nit_ci" style="display:none;" class="error">NIT o CI es necesario</span>			</td>
             <td width="7%">&nbsp;</td>
           </tr>
           
           <tr>
-            <td width="29%">Raz&oacute;n social de la empresa:</td>
+            <td width="29%">Clasificacion juridica:</td>
             <td width="64%">
-<input name="cli_socialreason" type="text" class="input" id="cli_socialreason" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_socialreason').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_socialreason').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_socialreason').style.display='none';" /><br /><span id="div_cli_socialreason" style="display:none;" class="error">Raz&oacute;n social es necesario</span>			</td>
+            <select name="cli_lec_uid" class="txt10" id="cli_lec_uid">
+                <? 
+				$sql = "select lec_uid, lec_name from mdl_legalclassification where lec_delete=0";
+					$db2->query($sql);
+					while ($content=$db2->next_record())
+					{
+				?>
+            	    <option value="<?=$content["lec_uid"]?>"><?=$content["lec_name"]?></option>	
+              	<? 
+					}
+				?>
+			</select><br /><span id="div_cli_lec_uid" style="display:none;" class="error">Clasificacion juridica es necesaria</span>			</td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Razon social:</td>
+            <td width="64%">
+<input name="cli_socialreason" type="text" class="input" id="cli_socialreason" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_socialreason').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_socialreason').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_socialreason').style.display='none';" /><br /><span id="div_cli_socialreason" style="display:none;" class="error">Razon social es necesario</span>			</td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Direccion legal:</td>
+            <td width="64%">
+<input name="cli_legaldirection" type="text" class="input" id="cli_legaldirection" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_legaldirection').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_legaldirection').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_legaldirection').style.display='none';" /><br /><span id="div_cli_legaldirection" style="display:none;" class="error">Direccion legal es necesario</span>			</td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Telefono fijo:</td>
+            <td width="64%">
+<input name="cli_phone" type="text" class="input" id="cli_phone" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_phone').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_phone').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_phone').style.display='none';" /><br /><span id="div_cli_phone" style="display:none;" class="error">Telefono fijo es necesario</span>			</td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Email administrativo:</td>
+            <td width="64%">
+<input name="cli_mainemail" type="text" class="input" id="cli_mainemail" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_mainemail').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_mainemail').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_mainemail').style.display='none';" /><br /><span id="div_cli_mainemail" style="display:none;" class="error">Email administrativo es necesario</span>			</td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Email comercial:</td>
+            <td width="64%">
+<input name="cli_commercialemail" type="text" class="input" id="cli_commercialemail" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_commercialemail').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_commercialemail').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_commercialemail').style.display='none';" /><br /><span id="div_cli_commercialemail" style="display:none;" class="error">Email comercial es necesario</span>			</td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Nombre Adm/legal:</td>
+            <td width="64%">
+<input name="cli_legalname" type="text" class="input" id="cli_legalname" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_legalname').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_legalname').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_legalname').style.display='none';" /><br /><span id="div_cli_legalname" style="display:none;" class="error">Nombre Adm/legal es necesario</span>			</td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Apellido Adm/legal:</td>
+            <td width="64%">
+<input name="cli_legallastname" type="text" class="input" id="cli_legallastname" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_legallastname').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_legallastname').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_legallastname').style.display='none';" /><br /><span id="div_cli_legallastname" style="display:none;" class="error">Apellido Adm/legal es necesario</span>			</td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Nombre comercial:</td>
+            <td width="64%">
+<input name="cli_commercialname" type="text" class="input" id="cli_commercialname" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_commercialname').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_commercialname').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_commercialname').style.display='none';" /><br /><span id="div_cli_commercialname" style="display:none;" class="error">Nombre comercial es necesario</span>			</td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Nombre comercial:</td>
+            <td width="64%">
+<input name="cli_commercialname" type="text" class="input" id="cli_commercialname" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_commercialname').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_commercialname').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_commercialname').style.display='none';" /><br /><span id="div_cli_commercialname" style="display:none;" class="error">Nombre comercial es necesario</span>			</td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Apellido comercial:</td>
+            <td width="64%">
+<input name="cli_commerciallastname" type="text" class="input" id="cli_commerciallastname" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_commerciallastname').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_commerciallastname').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_commerciallastname').style.display='none';" /><br /><span id="div_cli_commerciallastname" style="display:none;" class="error">Apellido comercial es necesario</span>			</td>
             <td width="7%">&nbsp;</td>
           </tr>
           
@@ -41,40 +122,49 @@
             <td width="7%"><a href="pass" onClick="return generarPassword(this.form,'cli_pass',5);">Generar</a>&nbsp;</td>
           </tr>
           
+          <tr>
+            <td width="29%">Forma de pago al proveedor:</td>
+            <td width="64%">
+            <select name="cli_lec_uid" class="txt10" id="cli_lec_uid">
+                <? 
+				$sql = "select pts_uid, pts_type from mdl_paymenttosupplier where pts_delete=0";
+					$db2->query($sql);
+					while ($content=$db2->next_record())
+					{
+				?>
+            	    <option value="<?=$content["pts_uid"]?>"><?=$content["pts_type"]?></option>	
+              	<? 
+					}
+				?>
+			</select><br /><span id="div_cli_lec_uid" style="display:none;" class="error">Clasificacion juridica es necesaria</span>			</td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Datos adicionales del pago:</td>
+            <td width="64%">
+<input name="cli_pts_description" type="text" class="input" id="cli_pts_description" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_pts_description').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_pts_description').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_pts_description').style.display='none';" /><br /><span id="div_cli_pts_description" style="display:none;" class="error">Datos adicionales del pago es necesario</span>			</td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Documentacion:</td>
+            <td width="64%">
+                <? 
+				$sql = "select doc_uid, doc_name from mdl_documents where doc_delete=0";
+					$db2->query($sql);
+					while ($content=$db2->next_record())
+					{
+				?>
+            	    <input name="doc_uid[<?=$content["doc_uid"]?>]" type="checkbox" /><?=$content["doc_name"]?>	
+              	<? 
+					}
+				?>
+					</td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
 		  <tr>
-            <td width="29%"><?=admin::labels('firstname');?> (Representante):</td>
-            <td width="64%">
-<input name="cli_firstname" type="text" class="input" id="cli_firstname" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_firstname').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_firstname').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_firstname').style.display='none';" /><br /><span id="div_cli_firstname" style="display:none;" class="error">Nombre es necesario</span>			</td>
-            <td width="7%">&nbsp;</td>
-          </tr>
-		  
-          <tr>
-            <td width="29%"><?=admin::labels('lastname');?> (Representante):</td>
-            <td width="64%">
-<input name="cli_lastname" type="text" class="input" id="cli_lastname" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_lastname').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_lastname').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_lastname').style.display='none';" /><br /><span id="div_cli_lastname" style="display:none;" class="error">Apellido es necesario</span>			</td>
-            <td width="7%">&nbsp;</td>
-          </tr>
-          
-          
-          
-          
-          
-          <tr>
-            <td><?=admin::labels('email');?>: </td>
-            <td>			
-			<input name="cli_email" type="text" class="input" id="cli_email" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_email').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_email').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_email').style.display='none';" /><br /><span id="div_cli_email" style="display:none;" class="error">Email es necesario</span>
-			<span id="div_cli_email" style="display:none;" class="error"></span></td>
-            <td>&nbsp;</td>
-          </tr>
-          <tr>
-            <td width="29%"><?=admin::labels('photo');?>:</td>
-            <td width="64%">
-<input name="cli_photo" type="file" id="cli_photo" class="txt10" size="45" />
-<br /><span id="div_cli_photo" style="display:none;" class="error">Nombre del contenido es necesario</span>			</td>
-            <td width="7%">&nbsp;</td>
-          </tr>
-        
-          <tr>
             <td><?=admin::labels('status');?>:</td>
             <td>
 			<select name="cli_status" class="txt10" id="cli_status">

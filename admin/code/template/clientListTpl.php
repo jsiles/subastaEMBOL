@@ -9,7 +9,6 @@ elseif ($order==1) {$orderCode='  order by cli_firstname asc'; $titClass='up'; $
 elseif ($order==2) {$orderCode='  order by cli_firstname desc'; $titClass='down'; $nameClass='up'; $dateClass='up';}
 elseif ($order==3) {$orderCode='  order by cli_lastname asc'; $titClass='up'; $nameClass='up'; $dateClass='up';}
 elseif ($order==4) {$orderCode='  order by cli_lastname desc'; $titClass='up'; $nameClass='down'; $dateClass='up';}
-//elseif ($order==6) {$orderCode='  order by mcc_permit desc'; $titClass='up'; $nameClass='up'; $dateClass='down';}
 
 if ($titClass=='up') $titOrder=2;
 else $titOrder=1;
@@ -114,7 +113,6 @@ if ($nroReg>0)
 $i=1;
 while ($user_list = $pagDb->next_record())
 	{
-	//	print_r($user_list);die;
 	$mcl_uid = $user_list["cli_uid"];
 	$mcl_lastname = $user_list["cli_lastname"];
 	$mcl_firstname = $user_list["cli_firstname"];

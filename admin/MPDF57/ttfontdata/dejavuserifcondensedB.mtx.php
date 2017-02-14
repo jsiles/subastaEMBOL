@@ -13,7 +13,7 @@ $desc=array (
 );
 $up=-63;
 $ut=44;
-$ttffile='C:/xampp/htdocs/subastaEMBOL/admin/MPDF57/ttfonts/DejaVuSerifCondensed-Bold.ttf';
+$ttffile='C:/xampp/htdocs/subastaBNB/admin/MPDF57/ttfonts/DejaVuSerifCondensed-Bold.ttf';
 $TTCfontID='0';
 $originalsize=283140;
 $sip=false;

@@ -16,7 +16,7 @@ $sub_description = admin::toSql($_POST["sub_description"],"String");
 $sub_type = admin::toSql($_POST["sub_type"],"String");
 $sub_modalidad = admin::toSql($_POST["sub_modalidad"],"String");
 $sub_date = date("Y-m-d"); //admin::changeFormatDate(admin::toSql($_POST["sub_date"],"String"),1);
-$sub_hour = date("h:i:s");//admin::toSql($_POST["sub_hour"],"String");
+$sub_hour = date("H:i:s");//admin::toSql($_POST["sub_hour"],"String");
 $sub_mount_base = $_POST["sub_mount_base"];
 if($sub_modalidad=='ITEM') $sub_mount_base=0;
 $sub_moneda = admin::toSql($_POST["sub_moneda"],"String");

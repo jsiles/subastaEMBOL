@@ -14,7 +14,7 @@ if($arrayURL[$urlPositionTitle]!='divisas')
 						<ul>
                         <?php
 						$arrayURL = admin::urlArray();
-						$sql3 = "SELECT distinct a.pca_name, a.pca_url FROM mdl_pro_category a, mdl_subasta b where b.sub_pca_uid=a.pca_uid and b.sub_status='ACTIVE' and a.pca_uid!=6 and a.pca_delete=0 and b.sub_delete=0 order by pca_name ";
+						$sql3 = "SELECT distinct a.pca_name, a.pca_url FROM mdl_pro_category a, mdl_subasta b where b.sub_pca_uid=a.pca_uid and b.sub_status='ACTIVE' and a.pca_delete=0 and b.sub_delete=0 order by pca_name ";
 						$db3->query($sql3);
 						$k=0;
 						while($cate = $db3->next_record()) 
@@ -41,7 +41,7 @@ if($arrayURL[$urlPositionTitle]!='divisas')
 						<ul>
                         <?php
 						$arrayURL = admin::urlArray();
-						$sql3 = "SELECT distinct a.pca_name, a.pca_url FROM mdl_pro_category a, mdl_subasta b where b.sub_pca_uid=a.pca_uid and b.sub_status='ACTIVE' and a.pca_uid=6 and a.pca_delete=0 and b.sub_delete=0 order by pca_name ";
+						$sql3 = "SELECT distinct a.pca_name, a.pca_url FROM mdl_pro_category a, mdl_subasta b where b.sub_pca_uid=a.pca_uid and b.sub_status='ACTIVE' and a.pca_delete=0 and b.sub_delete=0 order by pca_name ";
 						$db3->query($sql3);
 						$k=0;
 						while($cate = $db3->next_record()) 

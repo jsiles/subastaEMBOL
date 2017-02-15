@@ -3,7 +3,9 @@ $uidClient = admin::getSession("uidClient");
 if($uidClient){
 $name = admin::getDbValue("select concat(cli_companyname, ' ', cli_socialreason) from mdl_client where cli_uid=".$uidClient);
 $foto = admin::getDbValue("select cli_photo from mdl_client where cli_uid=".$uidClient);
+admin::updateSubasta();
 }
+
 $imgs = admin::getDbValue("select top 1 ban_file from mdl_banners_contents, mdl_banners where mbc_delete=0 and mbc_status='ACTIVE' and mbc_ban_uid=ban_uid order by mbc_position ,mbc_ban_uid");
 $ban_name = admin::getDbValue("select top 1 ban_title from mdl_banners_contents, mdl_banners where mbc_delete=0 and mbc_status='ACTIVE' and mbc_ban_uid=ban_uid order by mbc_position ,mbc_ban_uid");
 

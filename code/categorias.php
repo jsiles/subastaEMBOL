@@ -8,6 +8,7 @@
 						<p>&nbsp;</p>
 					</div>
 <?php			
+
                                 $arrayURL = admin::urlArray();
                                 //print_r($arrayURL);
                                 //echo $urlPositionSubtitle;

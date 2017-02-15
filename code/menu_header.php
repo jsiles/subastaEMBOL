@@ -14,6 +14,7 @@ $sql3 = "select *
 			  and con_level=0
 			  and col_language='".$lang."' ".$sWhere."
 		order by con_position";
+//echo $sql3;
 $db3->query($sql3);
 $nroReg = $db3->numrows();
 $i=1;

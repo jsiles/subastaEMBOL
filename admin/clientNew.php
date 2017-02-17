@@ -23,7 +23,7 @@ admin::initialize('client','clientNew');
 <!-- TOOLTIPS DE ACRONYM -->
 <script language="javascript" type="text/javascript" src="js/addEvent.js"></script>
 <script language="javascript" type="text/javascript" src="js/sweetTitles.js"></script>
-<script language="javascript" type="text/javascript" src="js/users.js"></script>
+<script language="javascript" type="text/javascript" src="js/client.js"></script>
 <link rel="stylesheet" href="css/sweetTitles.css" type="text/css" />
 <!-- FIN -->
 

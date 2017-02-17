@@ -1,6 +1,5 @@
 <?php
  include_once("core/session.php"); 
- //include_once("database/connection.php"); 
  include ("core/admin.php"); 
  admin::initialize('client','clientList'); 
 ?>
@@ -127,7 +126,6 @@ function rechazarSubasta(id){
 					 
 				}
 			else {}
-		//$("#list_"+id).hide();	
 		}
 	});
 }

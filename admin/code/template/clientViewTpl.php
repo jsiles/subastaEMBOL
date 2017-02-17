@@ -1,21 +1,5 @@
-<script language="javascript" type="text/javascript">
-function verifyImageUpload()
-	{
-	document.getElementById('div_cli_photo').style.display="none";
-	var cv = document.getElementById('cli_photo').value;
-	var filepart = cv.split(".");
-	var part = filepart.length-1;
-	var extension = filepart[part];
-	extension = extension.toLowerCase();
-	if (extension!='jpg' && extension!='jpeg' && extension!='bmp' && extension!='gif' && extension!='png')	
-		{
-		document.getElementById('cli_photo').value="";
-		$('#div_cli_photo').fadeIn(500);
-		}
-	}
-</script>	
 <?php
-$cli_uid=admin::toSql($_REQUEST["mcl_uid"],"String");
+$cli_uid=admin::toSql($_REQUEST["cli_uid"],"String");
 $sql = "select * from mdl_client where cli_uid=".$cli_uid;
 $db->query($sql);
 $regusers = $db->next_record();
@@ -25,7 +9,7 @@ $regusers = $db->next_record();
 <input type="hidden" name="cli_uid" value="<?=$regusers["cli_uid"]?>" />
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="77%" height="40"><span class="title"><?=admin::labels('client','clientedit');?></span></td>
+    <td width="77%" height="40"><span class="title">Ver proveedor</span></td>
     <td width="23%" height="40">&nbsp;</td>
   </tr>
   <tr>
@@ -35,101 +19,190 @@ $regusers = $db->next_record();
           <tr>
             <td colspan="3" class="titleBox"><?=admin::labels('user','personaldata');?></td>
             </tr>
-            
-            <tr>
-            <td width="29%">C&oacute;digo de la empresa:</td>
-            <td width="64%"><?=$regusers["cli_companyname"]?>
-<br /><span id="div_cli_companyname" style="display:none;" class="error">Nombre de la empresa es necesario</span>			</td>
+          
+           <tr>
+               <td width="29%">NIT o CI:</td>
+            <td width="64%"><?=$regusers["cli_nit_ci"]?></td>
             <td width="7%">&nbsp;</td>
           </tr>
           
           <tr>
-            <td width="29%">Raz&oacute;n social de la empresa:</td>
-            <td width="64%"><?=$regusers["cli_socialreason"]?><br /><span id="div_cli_socialreason" style="display:none;" class="error">Raz&oacute;n social es necesario</span>			</td>
+            <td width="29%">Clasificacion juridica:</td>
+            <td width="64%">
+            	<? 
+				$sql = "select lec_name from mdl_legalclassification where lec_delete=0 and lec_uid='".$regusers["cli_lec_uid"]."'";
+					$db2->query($sql);
+					while ($content=$db2->next_record())
+					{
+				?>
+            	    <?=$content["lec_name"]?>	
+              	<? 
+					}
+				?>
+            </td>
             <td width="7%">&nbsp;</td>
           </tr>
           
+          <tr>
+            <td width="29%">Razon social:</td>
+            <td width="64%"><?=$regusers["cli_socialreason"]?></td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Direccion legal:</td>
+            <td width="64%"><?=$regusers["cli_legaldirection"]?></td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Telefono fijo:</td>
+            <td width="64%"><?=$regusers["cli_phone"]?></td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Email administrativo:</td>
+            <td width="64%"><?=$regusers["cli_mainemail"]?></td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Email comercial:</td>
+            <td width="64%"><?=$regusers["cli_commercialemail"]?></td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Nombre Adm/legal:</td>
+            <td width="64%"><?=$regusers["cli_legalname"]?></td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Apellido Adm/legal:</td>
+            <td width="64%"><?=$regusers["cli_legallastname"]?></td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Nombre comercial:</td>
+            <td width="64%"><?=$regusers["cli_commercialname"]?></td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Apellido comercial:</td>
+            <td width="64%"><?=$regusers["cli_commerciallastname"]?></td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          
+        </table></td>
+        <td width="50%" valign="top">
+        <table width="98%" border="0" cellpadding="5" cellspacing="5" class="box">
+                  
           <tr>
             <td width="29%">Usuario:</td>
-            <td width="64%"><?=$regusers["cli_user"]?><br /><span id="div_cli_user" style="display:none;" class="error">Usuario es necesario</span>			</td>
+            <td width="64%"><?=$regusers["cli_user"]?></td>
             <td width="7%">&nbsp;</td>
           </tr>
           
+          <tr>
+            <td width="29%">Contrase&ntilde;a:</td>
+            <td width="64%">***************</td>
+            <td width="7%">&nbsp;</td>
+          </tr>
           
-		   <tr>
-            <td width="29%"><?=admin::labels('login','password');?>:</td>
-            <td width="64%"><span id="deltag">************</td>
-            <td width="7%"><a href="pass" id="linkpass" style="display:none;" onClick="return generarPassword(this.form,'cli_pass',5);">Generar</a>&nbsp;</td>
-          </tr>
-		  <tr>
-            <td width="29%"><?=admin::labels('firstname');?>:</td>
-            <td width="64%"><?=$regusers["cli_firstname"]?><br /><span id="div_cli_firstname" style="display:none;" class="error">Nombre es necesario</span></td>
+          <tr>
+            <td width="29%">Forma de pago al proveedor:</td>
+            <td width="64%">
+                <? 
+				$sql = "select pts_type from mdl_paymenttosupplier where pts_delete=0 and pts_uid='".$regusers["cli_pts_uid"]."'";
+					$db2->query($sql);
+					while ($content=$db2->next_record())
+					{
+				?>
+            	    <?=$content["pts_type"]?>	
+              	<? 
+					}
+				?>
+			</td>
             <td width="7%">&nbsp;</td>
           </tr>
-		  <tr>
-            <td width="29%"><?=admin::labels('lastname');?>:</td>
-            <td width="64%"><?=$regusers["cli_lastname"]?><br /><span id="div_cli_lastname" style="display:none;" class="error">Apellido es necesario</span>			</td>
+          
+          <tr>
+            <td width="29%">Datos adicionales del pago:</td>
+            <td width="64%"><?=$regusers["cli_pts_description"]?></td>
             <td width="7%">&nbsp;</td>
           </tr>
+          
           <tr>
-            <td><?=admin::labels('email');?>: </td>
-            <td><?=$regusers["cli_email"]?><br /><span id="div_cli_email" style="display:none;" class="error">Email es necesario</span>
-			<span id="div_cli_email" style="display:none;" class="error"></span></td>
-            <td>&nbsp;</td>
+            <td width="29%">Documentacion:</td>
+            <td width="64%">
+                <? 
+				$sql = "select doc_uid, doc_name from mdl_documents where doc_delete=0 and doc_uid!=10";
+					$db2->query($sql);
+					$check = '';
+					while ($content=$db2->next_record())
+					{
+						$MaxUid = admin::getDbValue("SELECT count(dcl_uid) FROM mdl_documentsclient WHERE dcl_cli_uid='".$regusers["cli_uid"]."' and dcl_doc_uid='".$content["doc_uid"]."'");
+						if ($MaxUid==0){
+							$check = '';
+						}
+						else{
+							$check = 'checked="checked"';
+						}
+				?>
+            	    <input disabled="disabled" <?=$check?> id="cli_doc_uid[<?=$content["doc_uid"]?>]" name="cli_doc_uid[<?=$content["doc_uid"]?>]" type="checkbox" /><?=$content["doc_name"]?>	<br />
+              	<? 
+					}
+				?>
+					</td>
+            <td width="7%">&nbsp;</td>
           </tr>
+          
           <tr>
-            <td valign="top"><?=admin::labels('news','image');?>:</td>
-            <td>
-			<?php
-			$imgSavedroot1 = PATH_ROOT."/img/client/thumb_".$regusers["cli_photo"];
-			$imgSaveddomain1 = PATH_DOMAIN."/img/client/thumb_".$regusers["cli_photo"];
-			$imgSaveddomain2 = PATH_DOMAIN."/img/client/img_".$regusers["cli_photo"];
-			if (file_exists($imgSavedroot1) && $regusers["cli_photo"]!=""){
-			?>
-			<div id="image_edit_<?=$regusers["cli_uid"]?>">
-			<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tableUpload">
-			<tr>
-				<td width="25%" rowspan="2" align="center" valign="middle" style="padding:4px;">
-				<a href="<?=$imgSaveddomain2?>" target="_blank"><img src="<?=$imgSaveddomain1?>?<?=time();?>" border="0" /></a>				</td>
-				<td width="75%" style="font-size:11px;">
-				<?=$regusers["cli_firstname"];?><br />
-				</td>
-			</tr>
-			<tr>
-				<td height="24">
-				<div id="imageChange1" style="display:none">
-			<input type="file" name="cli_photo" id="cli_photo" size="14" onchange="verifyImageUpload();" style="font-size:11px;"  >  <a href="javascript:viewInputFile('off')" onclick="document.getElementById('cli_photo').value='';document.getElementById('button_next').innerHTML='<?=admin::labels('public');?>';"><img border="0" src="lib/close.gif" align="top"/></a>
-			
-			<span id="div_cli_photo" class="error" style="display:none">Solo archivos jpg bmp gif png</span></div></td>
-			</tr>
-			</table>
-			</div>
-			<div id="image_add_<?=$regusers["cli_uid"]?>" style="display:none;"></div>
-			<?php	}
-		 ?>			</td>
+            <td width="16%"><?=admin::labels('photo');?>:</td>
+            <td width="84%">
+            	<img src="<?=$domain?>/img/client/thumb_<?=$regusers["cli_logo"]?>?<?=time()?>" alt="<?=$regusers["cli_user"]?>" title="<?=$regusers["cli_user"]?>" border="0"/>
+			</td>
           </tr>
-          <tr>
+          
+		  <tr>
             <td><?=admin::labels('status');?>:</td>
-            <td><?php if($regusers["cli_status"]=='ACTIVE') echo "Activo"; else echo "Inactivo"; ?>
-			<span id="div_cli_status" style="display:none;" class="error"></span>			</td>
+            <td><?
+				switch ($cli_status)
+                      {  
+                            case 0: echo 'Solicitud';
+                                break;
+                            case 1: echo 'Aprobado';
+                                break;
+                            case 2: echo 'Rechazado';
+                                break;
+                          
+                        }
+			?></td>
             <td>&nbsp;</td>
           </tr>
-        </table></td>
-        <td width="50%" colspan="2" valign="top"><table width="98%" border="0" cellpadding="5" cellspacing="5" class="box">
-     </table></td></tr>
+        </table>
+        </td>
+      </tr>
+    </table></td>
+    </tr>
 </table>
-</td></tr></table>
 	  </form>
-<br />      
- <div id="contentButton">
-	  	<table width="60%" border="0" align="center" cellpadding="0" cellspacing="0">
+      <br />
+      <br />
+      <div id="contentButton">
+	  	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 			<tr>
-				<td width="100%" align="center">
-                <a href="clientList.php?token=<?=admin::getParam("token")?>"  class="button">Volver</a>
+				<td width="25%" align="center">
+				&nbsp;
 				</td>
-          
+          <td width="75%" style="font-size:11px;">
+		  		<a href="clientList.php?token=<?=admin::getParam("token")?>" class="button">Salir</a> 
+		  </td>
         </tr>
       </table></div>
 <br /><br /><br />
-<iframe width=174 height=189 name="gToday:normal:agenda.js" id="gToday:normal:agenda.js" src="calendario/ipopeng.htm" scrolling="no" frameborder="0" style="visibility:visible; z-index:999; position:absolute; top:-500px; left:-500px;">
-</iframe>

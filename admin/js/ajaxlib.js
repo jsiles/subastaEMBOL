@@ -2396,3 +2396,115 @@ function verifyadjudicar()
 		document.frmsubasta.submit();
 		}
 	}
+
+// Client category
+function changeClientCategory()
+{
+	$('#div_client_category').toggle();
+	$('#div_cli_lec_uid').hide();
+}
+function cagetogyClientAdd()
+	{
+	token = $.getUrlVar('token');
+	document.getElementById('div_cli_lec_uid').style.display='none';
+	var client_category = document.getElementById('client_category').value;
+	if (client_category=="")
+		{
+		$('#div_cli_lec_uid').fadeIn();
+		}
+	else
+		{
+		divx = document.getElementById('div_cli_lec_uid_select');
+		divx.innerHTML = '<img border="0" src="lib/loading.gif">';
+		//instanciamos el objetoAjax
+				$.ajax({
+				url: 'code/execute/clientCatAdd2.php',
+				data: "lec_uid="+client_category+"&token="+token,
+			 			error: function(objeto){
+            						alert("Pasó lo siguiente: "+objeto.responseText);
+        						},
+						success: function(datos){
+									divx.innerHTML=datos;
+        						 }	
+				});
+		}
+	}
+
+function deleteClientCategory()
+	{
+	token = $.getUrlVar('token');
+	var sub_lec_uid = document.getElementById('cli_lec_uid').value;
+	if (sub_lec_uid!="")
+		{
+		divx = document.getElementById('div_cli_lec_uid_select');
+		divx.innerHTML = '<img border="0" src="lib/loading.gif">';
+		
+			$.ajax({
+				url: 'code/execute/delCatClient.php',
+				data: "lec_uid="+sub_lec_uid+"&token="+token,
+			 			error: function(objeto){
+            						alert("Pasó lo siguiente: "+objeto.responseText);
+        						},
+						success: function(datos){
+									divx.innerHTML=datos;
+        						 }	
+				});
+		
+			}
+	}
+
+// Client type
+function changeClientType()
+{
+	$('#div_client_type').toggle();
+	$('#div_cli_pts_uid').hide();
+}
+function typeClientAdd()
+	{
+	token = $.getUrlVar('token');
+	document.getElementById('div_cli_pts_uid').style.display='none';
+	var client_type = document.getElementById('client_type').value;
+	if (client_type=="")
+		{
+		$('#div_cli_pts_uid').fadeIn();
+		}
+	else
+		{
+		divx = document.getElementById('div_cli_pts_uid_select');
+		divx.innerHTML = '<img border="0" src="lib/loading.gif">';
+		//instanciamos el objetoAjax
+				$.ajax({
+				url: 'code/execute/clientTypeAdd2.php',
+				data: "pts_uid="+client_type+"&token="+token,
+			 			error: function(objeto){
+            						alert("Pasó lo siguiente: "+objeto.responseText);
+        						},
+						success: function(datos){
+									divx.innerHTML=datos;
+        						 }	
+				});
+		}
+	}
+
+function deleteClientType()
+	{
+	token = $.getUrlVar('token');
+	var sub_pts_uid = document.getElementById('cli_pts_uid').value;
+	if (sub_pts_uid!="")
+		{
+		divx = document.getElementById('div_cli_pts_uid_select');
+		divx.innerHTML = '<img border="0" src="lib/loading.gif">';
+		
+			$.ajax({
+				url: 'code/execute/delTypeClient.php',
+				data: "pts_uid="+sub_pts_uid+"&token="+token,
+			 			error: function(objeto){
+            						alert("Pasó lo siguiente: "+objeto.responseText);
+        						},
+						success: function(datos){
+									divx.innerHTML=datos;
+        						 }	
+				});
+		
+			}
+	}

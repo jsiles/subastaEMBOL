@@ -19,7 +19,7 @@ admin::initialize('client','clientUpd',false);
 <META HTTP-EQUIV="Content-Type" content="text/html; ISO-8859-1">
 <script type="text/javascript" src="js/jquery2.js"></script>
 <script language="javascript" type="text/javascript" src="js/ajaxlib.js"></script>
-<script language="javascript" type="text/javascript" src="js/users.js"></script>
+<script language="javascript" type="text/javascript" src="js/client.js"></script>
 <link href="css/jquery-ui-1.8.2.custom.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/jquery-ui-1.8.custom.min_es.js"></script>
 <script type="text/javascript" src="js/pass.js"></script>
@@ -62,52 +62,6 @@ function removeImg(id){
 		}
 	});
 }
-function removeImg(id){
-	var txt = 'Está seguro de eliminar la imágen?<br><input type="hidden" id="list" name="list" value="'+id+'" />';
-	$.prompt(txt,{
-		show:'fadeIn' ,
-		opacity:0,
-		buttons:{Eliminar:true, Cancelar:false},
-		callback: function(v,m){
-			if(v){
-				var uid = id; /* m.find('#list').val(); */
-				  $('#image_edit_'+uid).fadeOut(1, function(){ $(this).remove(); });
-				  
-					  $.ajax({
-						url: 'code/execute/clientImageDel.php?token=<?=admin::getParam("token");?>',
-						type: 'POST',
-						data: 'uid='+uid
-					});
-					document.getElementById('image_add_'+uid).innerHTML = '<input type="file" name="mcl_photo" id="mcl_photo" onchange="verifyImageUpload();" size="32" class="input"><span id="div_mcl_photo" class="error" style="display:none">Solo archivos jpg bmp gif png </span>	';
-					$('#image_add_'+uid).fadeIn(700);
-			}
-			else{}
-		}
-	});
-}
-function removeList(id){
-	var txt = '¿<?=admin::labels('delete','sure')?>?<br><input type="hidden" id="list" name="list" value="'+ id +'" />';
-	$.prompt(txt,{
-		show:'fadeIn' ,
-		opacity:0,
-		buttons:{Eliminar:true, Cancelar:false},
-		callback: function(v,m){
-			if(v){
-				var uid = m.find('#list').val();
-				  $('#'+id).fadeOut(500, function(){ $(this).remove(); });
-					  $.ajax({
-						url: 'code/execute/clientDel.php?token=<?=admin::getParam("token");?>',
-						type: 'POST',
-						data: 'uid='+id
-					});
-				 /********BeginResetColorDelete*************/  
-				  resetOrderRemove(id);  
-				 /********EndResetColorDelete*************/ 
-				 }
-			else {}
-		}
-	});
-}
 
 function removePass(){
 	$('#deltag').hide();
@@ -117,12 +71,6 @@ function removePass(){
 }
 
 
-$(document).ready(function(){	
-	$('#mcp_type_date').datepicker({ dateFormat: 'dd/mm/yy' });
-	$('#mcp_type_date').change(function(){
-								 updateExpireDate();
-	});
-});	
 </script>
 </head>
 <body>

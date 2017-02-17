@@ -5,10 +5,10 @@ else $urlLangAux='';
 
 $order = admin::toSql(admin::getParam("order"),"Number");
 if ($order==0) {$orderCode=' order by cli_uid desc'; $titClass='up'; $nameClass='up'; $dateClass='up';}
-elseif ($order==1) {$orderCode='  order by cli_firstname asc'; $titClass='up'; $nameClass='up'; $dateClass='up';}
-elseif ($order==2) {$orderCode='  order by cli_firstname desc'; $titClass='down'; $nameClass='up'; $dateClass='up';}
-elseif ($order==3) {$orderCode='  order by cli_lastname asc'; $titClass='up'; $nameClass='up'; $dateClass='up';}
-elseif ($order==4) {$orderCode='  order by cli_lastname desc'; $titClass='up'; $nameClass='down'; $dateClass='up';}
+elseif ($order==1) {$orderCode='  order by cli_nit_ci asc'; $titClass='up'; $nameClass='up'; $dateClass='up';}
+elseif ($order==2) {$orderCode='  order by cli_nit_ci desc'; $titClass='down'; $nameClass='up'; $dateClass='up';}
+elseif ($order==3) {$orderCode='  order by cli_socialreason asc'; $titClass='up'; $nameClass='up'; $dateClass='up';}
+elseif ($order==4) {$orderCode='  order by cli_socialreason desc'; $titClass='up'; $nameClass='down'; $dateClass='up';}
 
 if ($titClass=='up') $titOrder=2;
 else $titOrder=1;
@@ -20,19 +20,16 @@ else $dateOrder=5;
 $search = admin::toSql(admin::getParam("search"),"String");
 if (!$search || $search=='')
 {
-$_pagi_sql= "select cli_uid, cli_user, cli_pass, cli_lastname, cli_firstname, cli_status,cli_companyname,cli_socialreason,cli_email,cli_photo, cli_status_main from mdl_client where 1=1 ".$categoria.$orderCode;
+$_pagi_sql= "select cli_uid, cli_nit_ci, cli_socialreason, cli_user, cli_mainemail, cli_status, cli_phone, cli_status_main from mdl_client where 1=1 ".$categoria.$orderCode;
 $nroReg=admin::getDBvalue("select count(cli_uid) from mdl_client where cli_delete=0");
 }
 else
 {
-$_pagi_sql= "select cli_uid, cli_user, cli_pass, cli_lastname, cli_firstname, cli_status,cli_companyname,cli_socialreason,cli_email,cli_photo, cli_status_main from mdl_client where (cli_user like '%".$search."%' or cli_firstname like '%".$search."%' or cli_lastname like '%".$search."%' or cli_email like '%".$search."%') ".$categoria.$orderCode;
+$_pagi_sql= "select cli_uid, cli_nit_ci, cli_socialreason, cli_user, cli_mainemail, cli_status, cli_phone, cli_status_main from mdl_client where (cli_socialreason like '%".$search."%' or cli_nit_ci like '%".$search."%' or cli_user like '%".$search."%' or cli_mainemail like '%".$search."%') ".$categoria.$orderCode;
 
-$nroReg=admin::getDBvalue("select count(cli_uid) from mdl_client where (cli_user like '%".$search."%' or cli_firstname like '%".$search."%' or cli_lastname like '%".$search."%' or cli_email like '%".$search."%') ".$categoria);
+$nroReg=admin::getDBvalue("select count(cli_uid) from mdl_client where (cli_socialreason like '%".$search."%' or cli_nit_ci like '%".$search."%' or cli_user like '%".$search."%' or cli_mainemail like '%".$search."%') ".$categoria);
 }
 
-
-//,cli_companyname,cli_socialreason,cli_email
-//echo $_pagi_sql;	
 $_pagi_cuantos = 20;//Elegí un número pequeño para que se generen varias páginas
 //cantidad de enlaces que se mostrarán como máximo en la barra de navegación
 $_pagi_nav_num_enlaces = 5;//Elegí un número pequeño para que se note el resultado
@@ -82,27 +79,19 @@ if ($nroReg>0)
   </tr>
   <tr>
     <td colspan="2" width="98%">
-  <table width="100%" border="0">
+  <table width="98%" border="0"  style="padding-left:17px;">
 	<tr>
-    	<td width="10%" class="list1a" style="color:#16652f">  
-            C&oacute;digo de la Empresa:
-            
-        </td>
-	<td width="10%" class="list1a" style="color:#16652f">
-                    Raz&oacute;n social:
-        </td>
-	<td width="10%" style="color:#16652f">
-                    Correo electr&oacute;nico:
-        </td>
-        <td width="5%" style="color:#16652f">Imagen</td>
-        <td width="5%" style="color:#16652f">Estado</td>
-        
-                <td align="center" width="2%" height="5"></td>
-   		<td align="center" width="2%" height="5"></td>
-		<td align="center" width="2%" height="5"></td>
-		<td align="center" width="2%" height="5"></td>
-		<td align="center" width="2%" height="5"></td>
-		<td align="center" width="2%" height="5"></td>
+    	<td width="15%" class="list1a" style="color:#16652f;">NIT o CI:</td>
+	    <td width="15%" class="list1a" style="color:#16652f;">Raz&oacute;n social:</td>
+	    <td width="15%" style="color:#16652f">Correo electr&oacute;nico:</td>
+        <td width="15%" style="color:#16652f">Usuario:</td>
+        <td width="10%" style="color:#16652f">Estado:</td>
+        <td align="center" width="5%" height="5"></td>
+   		<td align="center" width="5%" height="5"></td>
+		<td align="center" width="5%" height="5"></td>
+		<td align="center" width="5%" height="5"></td>
+		<td align="center" width="5%" height="5"></td>
+		<td align="center" width="5%" height="5"></td>
 	</tr>
 	</table>
 </td>
@@ -113,59 +102,45 @@ if ($nroReg>0)
 $i=1;
 while ($user_list = $pagDb->next_record())
 	{
-	$mcl_uid = $user_list["cli_uid"];
-	$mcl_lastname = $user_list["cli_lastname"];
-	$mcl_firstname = $user_list["cli_firstname"];
-	$mcl_user = $user_list["cli_user"];
-	$mcl_codigo = $user_list["cli_companyname"];
-	$mcl_razon = $user_list["cli_socialreason"];
-	$mcl_email = $user_list["cli_email"];
-	$mcl_photo = $user_list["cli_photo"];
-	$mcl_status_main = $user_list["cli_status_main"];
-	
-	$mcl_status = $user_list["cli_status"];
-	if ($mcl_status=='ACTIVE') $labels_content='status_on';
+	$cli_uid = $user_list["cli_uid"];
+	$cli_nit_ci = $user_list["cli_nit_ci"];
+	$cli_socialreason = $user_list["cli_socialreason"];
+	$cli_phone = $user_list["cli_phone"];
+	$cli_mainemail = $user_list["cli_mainemail"];
+	$cli_user= $user_list["cli_user"];
+	$cli_status = $user_list["cli_status"];
+	$cli_status_main = $user_list["cli_status_main"];
+
+	if ($cli_status==0) $labels_content='status_on';
 	else $labels_content='status_off';
+	
 	if ($i%2==0) $class='row';
 	else  $class='row0';
 	
-  	?> 
-  	<div id="sub_<?=$mcl_uid?>" class="<?=$class?>">
-<table class="list" width="100%" border="0">
-	<tr><td width="10%"><?=$mcl_codigo;?></td>
-    <td width="10%"><?=$mcl_razon;?></td>
-    <td width="10%"><?=$mcl_email;?></td>
-    <td width="5%">
-        <?php if(strlen($mcl_photo)>0)
-        {
-            ?>
-        
-        <img src="<?=PATH_DOMAIN."/img/client/thumb_".utf8_decode($mcl_photo)?>"  border="0">
-<?php
-        }
-?>
-        </td>
-        <td width="5%">
-            
-            <?php
-            switch ($mcl_status_main)
+	switch ($cli_status_main)
                       {  
-                            case 0: echo 'Solicitud';
+                            case 0: $cli_status_main = 'Solicitud';
                                 break;
-                            case 1: echo 'Aprobado';
+                            case 1: $cli_status_main = 'Aprobado';
                                 break;
-                            case 2: echo 'Rechazado';
+                            case 2: $cli_status_main = 'Rechazado';
                                 break;
-                          
                         }
-            ?>
-        </td>        
-    <td align="center" width="1%" height="5">
+  	?> 
+  	<div id="sub_<?=$cli_uid?>" class="<?=$class?>">
+<table class="list" width="100%" border="0">
+	<tr>
+    	<td width="15%"><?=$cli_nit_ci;?></td>
+    	<td width="15%"><?=$cli_socialreason;?></td>
+    	<td width="15%"><?=$cli_mainemail;?></td>
+    	<td width="15%"><?=$cli_user;?></td>
+        <td width="10%"><?=$cli_status_main;?></td>        
+        <td align="center" width="5%" height="5">
             <?php
                 $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=14 and mop_lab_category='Ver' and moa_rol_uid=".$_SESSION['usr_rol']."");
                 if($valuePermit=='ACTIVE'){
             ?>
-    	<a href="clientView.php?mcl_uid=<?=$mcl_uid?>&token=<?=admin::getParam("token");?>">
+    	<a href="clientView.php?cli_uid=<?=$cli_uid?>&token=<?=admin::getParam("token");?>">
             <img src="lib/view_es.gif" border="0" title="<?=admin::labels('view')?>" alt="<?=admin::labels('view')?>">
 	</a>
             <?php
@@ -177,12 +152,12 @@ while ($user_list = $pagDb->next_record())
         }
         ?>
     </td>
-	<td align="center" width="1%" height="5">
+	<td align="center" width="5%" height="5">
             <?php
             $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=14 and mop_lab_category='Editar' and moa_rol_uid=".$_SESSION['usr_rol']."");
             if($valuePermit=='ACTIVE'){
             ?>
-    	<a href="clientEdit.php?mcl_uid=<?=$mcl_uid?>&token=<?=admin::getParam("token");?>">
+    	<a href="clientEdit.php?cli_uid=<?=$cli_uid?>&token=<?=admin::getParam("token");?>">
 		<img src="lib/edit_es.gif" border="0" title="<?=admin::labels('edit')?>" alt="<?=admin::labels('edit')?>">
 	</a>
             <?php
@@ -194,12 +169,12 @@ while ($user_list = $pagDb->next_record())
             }
             ?>
     </td>
-	<td align="center" width="1%" height="5">
+	<td align="center" width="5%" height="5">
             <?php
             $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=14 and mop_lab_category='Eliminar' and moa_rol_uid=".$_SESSION['usr_rol']."");
             if($valuePermit=='ACTIVE'){
             ?>
-                <a href="" onclick="removeList(<?=$mcl_uid?>); return false;">
+                <a href="" onclick="removeList(<?=$cli_uid?>); return false;">
 		<img src="lib/delete_es.gif" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
 		</a>
             <?php
@@ -211,18 +186,18 @@ while ($user_list = $pagDb->next_record())
             ?>
             
     </td>
-	<td align="center" width="1%" height="5">
-    <div id="status_<?=$mcl_uid?>">
+	<td align="center" width="5%" height="5">
+    <div id="status_<?=$cli_uid?>">
         <?php
             $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=14 and mop_lab_category='Estado' and moa_rol_uid=".$_SESSION['usr_rol']."");
             if($valuePermit=='ACTIVE'){
             ?>
-	   <a href=""  onclick="clientCS('<?=$mcl_uid?>','<?=$mcl_status?>'); return false;">
+	   <a href=""  onclick="clientCS('<?=$cli_uid?>','<?=$cli_status?>'); return false;">
 		<img src="<?=admin::labels($labels_content,'linkImage')?>" border="0" title="<?=admin::labels($labels_content)?>" alt="<?=admin::labels($labels_content)?>">
 	   </a>
         <?php
             }else{
-                $status = ($mcl_status=='ACTIVE') ? 'active_off_es.gif':'inactive_off_es.gif';
+                $status = ($cli_status=='ACTIVE') ? 'active_off_es.gif':'inactive_off_es.gif';
         ?>
         <img src="lib/<?=$status?>" border="0" title="<?=admin::labels($labels_content)?>" alt="<?=admin::labels($labels_content)?>">
         <?php
@@ -230,14 +205,14 @@ while ($user_list = $pagDb->next_record())
         ?>
 	</div>
     </td>
-    <td align="center" width="1%" height="5">
+    <td align="center" width="5%" height="5">
 	
                 <?php
                 $moduleId=14;
                 $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=$moduleId and mop_lab_category='Aprobar' and moa_rol_uid=".$_SESSION['usr_rol']."");
-                if(($valuePermit=='ACTIVE')&&($mcl_status_main==0)){
+                if(($valuePermit=='ACTIVE')&&($cli_status_main==0)){
                 ?>
-                    <a href="aprobarSubasta" onclick="aprobarSubasta('<?=$mcl_uid?>');return false;">
+                    <a href="aprobarSubasta" onclick="aprobarSubasta('<?=$cli_uid?>');return false;">
                         <img src="lib/aprobar_on.png" border="0" title="Aprobar" alt="Aprobar">
                     </a>
                 <?php
@@ -250,15 +225,15 @@ while ($user_list = $pagDb->next_record())
 
 	</td>
         
-        <td align="center" width="1%" height="5">
+        <td align="center" width="5%" height="5">
 	
                 <?php
                 $moduleId=14;
                 $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=$moduleId and mop_lab_category='Rechazar' and moa_rol_uid=".$_SESSION['usr_rol']."");
-                if(($valuePermit=='ACTIVE')&&($mcl_status_main==0)){
+                if(($valuePermit=='ACTIVE')&&($cli_status_main==0)){
                 ?>
 
-         	    <a href="rechazarSubasta" onclick="rechazarSubasta('<?=$mcl_uid?>');return false;">
+         	    <a href="rechazarSubasta" onclick="rechazarSubasta('<?=$cli_uid?>');return false;">
                 	<img src="lib/rechazar_on.png" border="0" title="Rechazar" alt="Rechazar">
                     </a>
                 <?php
@@ -328,7 +303,7 @@ else
 	<td width="90%" height="40"></td>
     <td>
         <div class="boxSearch">
-        <form name="frmbuySearch" action="userList.php" >
+        <form name="frmbuySearch" action="clientList.php" >
         <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
          <tr>
           <td>

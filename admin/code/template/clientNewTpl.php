@@ -23,6 +23,7 @@
           <tr>
             <td width="29%">Clasificacion juridica:</td>
             <td width="64%">
+            <div id="div_cli_lec_uid_select">
             <select name="cli_lec_uid" class="txt10" id="cli_lec_uid">
                 <? 
 				$sql = "select lec_uid, lec_name from mdl_legalclassification where lec_delete=0";
@@ -34,7 +35,14 @@
               	<? 
 					}
 				?>
-			</select><br /><span id="div_cli_lec_uid" style="display:none;" class="error">Clasificacion juridica es necesaria</span>			</td>
+			</select>
+            <a href="javascript:changeClientCategory();" class="small2"><?=strtolower(admin::labels('add'));?></a> | 
+                <a href="javascript:deleteClientCategory();" class="small3"><?=admin::labels('del');?></a>
+                <div id="div_client_category" style="display:none;">
+		<input type="text" name="client_category" id="client_category" class="input3" onfocus="setClassInput3(this,'ON');document.getElementById('div_cli_lec_uid').style.display='none';" onblur="setClassInput3(this,'OFF');document.getElementById('div_cli_lec_uid').style.display='none';" onclick="setClassInput3(this,'ON');document.getElementById('div_cli_lec_uid').style.display='none';"/>		
+		<a href="javascript:cagetogyClientAdd()" class="button3"><?=admin::labels('add');?></a><a href="javascript:changeClientCategory();" class="link2">Cerrar</a>		</div>
+				<br /><span id="div_cli_lec_uid" style="display:none;" class="error">Clasificacion juridica es necesaria</span>	</div>
+                </td>
             <td width="7%">&nbsp;</td>
           </tr>
           
@@ -95,19 +103,17 @@
           </tr>
           
           <tr>
-            <td width="29%">Nombre comercial:</td>
-            <td width="64%">
-<input name="cli_commercialname" type="text" class="input" id="cli_commercialname" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_commercialname').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_commercialname').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_commercialname').style.display='none';" /><br /><span id="div_cli_commercialname" style="display:none;" class="error">Nombre comercial es necesario</span>			</td>
-            <td width="7%">&nbsp;</td>
-          </tr>
-          
-          <tr>
             <td width="29%">Apellido comercial:</td>
             <td width="64%">
 <input name="cli_commerciallastname" type="text" class="input" id="cli_commerciallastname" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_commerciallastname').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_commerciallastname').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_commerciallastname').style.display='none';" /><br /><span id="div_cli_commerciallastname" style="display:none;" class="error">Apellido comercial es necesario</span>			</td>
             <td width="7%">&nbsp;</td>
           </tr>
           
+          
+        </table></td>
+        <td width="50%" valign="top">
+        <table width="98%" border="0" cellpadding="5" cellspacing="5" class="box">
+                  
           <tr>
             <td width="29%">Usuario:</td>
             <td width="64%">
@@ -125,7 +131,8 @@
           <tr>
             <td width="29%">Forma de pago al proveedor:</td>
             <td width="64%">
-            <select name="cli_lec_uid" class="txt10" id="cli_lec_uid">
+            <div id="div_cli_pts_uid_select">
+            <select name="cli_pts_uid" class="txt10" id="cli_pts_uid">
                 <? 
 				$sql = "select pts_uid, pts_type from mdl_paymenttosupplier where pts_delete=0";
 					$db2->query($sql);
@@ -136,7 +143,14 @@
               	<? 
 					}
 				?>
-			</select><br /><span id="div_cli_lec_uid" style="display:none;" class="error">Clasificacion juridica es necesaria</span>			</td>
+			</select>
+            <a href="javascript:changeClientType();" class="small2"><?=strtolower(admin::labels('add'));?></a> | 
+                <a href="javascript:deleteClientType();" class="small3"><?=admin::labels('del');?></a>
+                <div id="div_client_type" style="display:none;">
+		<input type="text" name="client_type" id="client_type" class="input3" onfocus="setClassInput3(this,'ON');document.getElementById('div_cli_pts_uid').style.display='none';" onblur="setClassInput3(this,'OFF');document.getElementById('div_cli_pts_uid').style.display='none';" onclick="setClassInput3(this,'ON');document.getElementById('div_cli_pts_uid').style.display='none';"/>		
+		<a href="javascript:typeClientAdd()" class="button3"><?=admin::labels('add');?></a><a href="javascript:changeClientType();" class="link2">Cerrar</a>		</div>
+        <br /><span id="div_cli_pts_uid" style="display:none;" class="error">Forma de pago al proveedor es necesaria</span></div>
+             </td>
             <td width="7%">&nbsp;</td>
           </tr>
           
@@ -151,17 +165,26 @@
             <td width="29%">Documentacion:</td>
             <td width="64%">
                 <? 
-				$sql = "select doc_uid, doc_name from mdl_documents where doc_delete=0";
+				$sql = "select doc_uid, doc_name from mdl_documents where doc_delete=0 and doc_uid!=10";
 					$db2->query($sql);
 					while ($content=$db2->next_record())
 					{
 				?>
-            	    <input name="doc_uid[<?=$content["doc_uid"]?>]" type="checkbox" /><?=$content["doc_name"]?>	
+            	    <input id="cli_doc_uid[<?=$content["doc_uid"]?>]" name="cli_doc_uid[<?=$content["doc_uid"]?>]" type="checkbox" /><?=$content["doc_name"]?>	<br />
               	<? 
 					}
 				?>
 					</td>
             <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="16%"><?=admin::labels('photo');?>:</td>
+            <td width="84%">
+			<input name="cli_logo" type="file" id="cli_logo" class="txt10" size="31" />
+			<br />
+			<span id="div_cli_logo" style="display:none;" class="error">Nombre del contenido es necesario</span>
+			</td>
           </tr>
           
 		  <tr>
@@ -174,8 +197,7 @@
 			<span id="div_cli_status" style="display:none;" class="error"></span>			</td>
             <td>&nbsp;</td>
           </tr>
-        </table></td>
-        <td width="50%" valign="top">&nbsp;
+        </table>
         </td>
       </tr>
     </table></td>

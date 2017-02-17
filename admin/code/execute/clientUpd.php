@@ -5,35 +5,53 @@ include_once("../../core/images.php");
 include_once("../../../classes/class.SymmetricCrypt.inc.php");
 admin::initialize('client','clientEdit',false);
 
-$cli_uid = $_POST["cli_uid"];
-
-$cli_companyname = admin::toSql(safeHtml($_POST["cli_companyname"]),"String");
+$cli_uid = admin::toSql(safeHtml($_POST["cli_uid"]),"String");
+$cli_lec_uid = admin::toSql(safeHtml($_POST["cli_lec_uid"]),"String");
 $cli_socialreason = admin::toSql(safeHtml($_POST["cli_socialreason"]),"String");
+$cli_legaldirection = admin::toSql(safeHtml($_POST["cli_legaldirection"]),"String");
+$cli_phone = admin::toSql(safeHtml($_POST["cli_phone"]),"String");
+$cli_mainemail = admin::toSql(safeHtml($_POST["cli_mainemail"]),"String");
+$cli_commercialemail = admin::toSql(safeHtml($_POST["cli_commercialemail"]),"String");
+$cli_legalname = admin::toSql(safeHtml($_POST["cli_legalname"]),"String");
+$cli_legallastname = admin::toSql(safeHtml($_POST["cli_legallastname"]),"String");
+$cli_commercialname = admin::toSql(safeHtml($_POST["cli_commercialname"]),"String");
+$cli_commerciallastname = admin::toSql(safeHtml($_POST["cli_commerciallastname"]),"String");
 $cli_user = admin::toSql(safeHtml($_POST["cli_user"]),"String");
-$cli_pass = admin::toSql(safeHtml($_POST["cli_pass"]),"String");
-
-$cli_firstname = admin::toSql(safeHtml($_POST["cli_firstname"]),"String");
-$cli_lastname = admin::toSql(safeHtml($_POST["cli_lastname"]),"String");
-$cli_email = admin::toSql(safeHtml($_POST["cli_email"]),"String");
-$cli_status = admin::toSql(safeHtml($_POST["cli_status"]),"String");
-
-if ($cli_pass!="") $changepass = "cli_pass='".SymmetricCrypt::encrypt($cli_pass)."',";
-else $changepass =  "cli_pass='".SymmetricCrypt::encrypt('12345')."',";
-;
+$cli_pass = md5(admin::toSql(safeHtml($_POST["cli_pass"]),"String"));
+$cli_pts_uid = admin::toSql(safeHtml($_POST["cli_pts_uid"]),"String");
+$cli_pts_description = admin::toSql(safeHtml($_POST["cli_pts_description"]),"String");
+$cli_status = admin::toSql(safeHtml($_POST["cli_status"]),"String");	
+$cli_exist = admin::getDBvalue("select count(cli_user) FROM mdl_client where cli_nit_ci='".$cli_nit_ci."' and cli_delete=0");
 
 $sql = "update mdl_client set
-			cli_companyname='".$cli_companyname."',
+			cli_lec_uid='".$cli_lec_uid."',
 			cli_socialreason='".$cli_socialreason."',
+			cli_legaldirection='".$cli_legaldirection."',
+			cli_phone='".$cli_phone."',
+			cli_mainemail='".$cli_mainemail."', 
+			cli_commercialemail='".$cli_commercialemail."',
+			cli_legalname='".$cli_legalname."',
+			cli_legallastname='".$cli_legallastname."',
+			cli_commercialname='".$cli_commercialname."',
+			cli_commerciallastname='".$cli_commerciallastname."',
 			cli_user='".$cli_user."',
-			cli_email='".$cli_email."',
-			cli_firstname='".$cli_firstname."', 
-			cli_lastname='".$cli_lastname."',
+			cli_password='".$cli_pass."',
+			cli_pts_uid='".$cli_pts_uid."',
+			cli_pts_description='".$cli_pts_description."',
 			cli_status='".$cli_status."',
-			".$changepass."
 			cli_date=GETDATE()
 		where cli_uid=".$cli_uid;
-//echo $sql;//die; 
 $db->query($sql);
+
+	$cli_doc_uid = admin::getParam("cli_doc_uid");
+    $sql = "delete from mdl_documentsclient where dcl_cli_uid='".$cli_uid."'";
+    $db->query($sql);
+	if (is_array($cli_doc_uid)){
+         foreach (array_keys($cli_doc_uid) as $value) {
+              $sql = "insert into mdl_documentsclient (dcl_cli_uid, dcl_doc_uid) values (".$cli_uid.", ".$value.")";
+              $db->query($sql);
+		 }
+    }
 
 // SUBIENDO LA IMAGEN NOTICIAS
 $FILES = $_FILES ['cli_photo'];
@@ -45,9 +63,9 @@ if ($validFile && $FILES['error']==0)
 	{
 	// DATOS DE ARCHIVO EN SU FORMATO ORIGINAL
 	$extensionFile = admin::getExtension($FILES["name"]);
-	$fileName=admin::imageName($cli_firstname)."_".$cli_uid.".".$extensionFile;
+	$fileName=admin::imageName($cli_user)."_".$cli_uid.".".$extensionFile;
 	// DATOS DE REDIMENCION DE IMAGENES
-	$nomIMG= admin::imageName($cli_firstname)."_".$cli_uid.".jpg";
+	$nomIMG= admin::imageName($cli_user)."_".$cli_uid.".jpg";
 	$nomIMG2="thumb_".$nomIMG;
 	// Subimos el archivo con el nombre original
 	classfile::uploadFile($FILES,PATH_ROOT.'/img/client/',$fileName);
@@ -56,7 +74,7 @@ if ($validFile && $FILES['error']==0)
 	// Redimencionamos el nuevo jpg por el ancho definido
 	redimImgWH(PATH_ROOT."/img/client/".$nomIMG, PATH_ROOT."/img/client/".$nomIMG2,70,100);
 	// Redimencionamos el nuevo jpg por el ancho definido
-	$sql = "UPDATE mdl_client SET cli_photo='".$nomIMG."' WHERE cli_uid=".$cli_uid;
+	$sql = "UPDATE mdl_client SET cli_logo='".$nomIMG."' WHERE cli_uid=".$cli_uid;
 	$db->query($sql);
 	}
 $token=admin::getParam("token");		

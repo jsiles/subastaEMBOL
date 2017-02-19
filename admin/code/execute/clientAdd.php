@@ -6,6 +6,7 @@ include_once("../../core/safeHtml.php");
 include_once("../../../classes/class.SymmetricCrypt.inc.php");
 admin::initialize('client','clientNew',false);
 $cli_nit_ci = admin::toSql(safeHtml($_POST["cli_nit_ci"]),"String");
+$cli_interno = admin::toSql(safeHtml($_POST["cli_interno"]),"String");
 $cli_lec_uid = admin::toSql(safeHtml($_POST["cli_lec_uid"]),"String");
 $cli_socialreason = admin::toSql(safeHtml($_POST["cli_socialreason"]),"String");
 $cli_legaldirection = admin::toSql(safeHtml($_POST["cli_legaldirection"]),"String");
@@ -14,6 +15,10 @@ $cli_mainemail = admin::toSql(safeHtml($_POST["cli_mainemail"]),"String");
 $cli_commercialemail = admin::toSql(safeHtml($_POST["cli_commercialemail"]),"String");
 $cli_legalname = admin::toSql(safeHtml($_POST["cli_legalname"]),"String");
 $cli_legallastname = admin::toSql(safeHtml($_POST["cli_legallastname"]),"String");
+$cli_legalname2 = admin::toSql(safeHtml($_POST["cli_legalname2"]),"String");
+$cli_legallastname2 = admin::toSql(safeHtml($_POST["cli_legallastname2"]),"String");
+$cli_legalname3 = admin::toSql(safeHtml($_POST["cli_legalname3"]),"String");
+$cli_legallastname3 = admin::toSql(safeHtml($_POST["cli_legallastname3"]),"String");
 $cli_commercialname = admin::toSql(safeHtml($_POST["cli_commercialname"]),"String");
 $cli_commerciallastname = admin::toSql(safeHtml($_POST["cli_commerciallastname"]),"String");
 $cli_user = admin::toSql(safeHtml($_POST["cli_user"]),"String");
@@ -26,6 +31,7 @@ $cli_exist = admin::getDBvalue("select count(cli_user) FROM mdl_client where cli
 if($cli_exist==0){
 	$sql = "insert into mdl_client(							
 								cli_nit_ci,
+								cli_interno,
 								cli_lec_uid,
 								cli_socialreason,
 								cli_legaldirection,
@@ -34,6 +40,10 @@ if($cli_exist==0){
 								cli_commercialemail,
 								cli_legalname,
 								cli_legallastname,
+								cli_legalname2,
+								cli_legallastname2,
+								cli_legalname3,
+								cli_legallastname3,
 								cli_commercialname,
 								cli_commerciallastname,
 								cli_user,
@@ -48,6 +58,7 @@ if($cli_exist==0){
 								)
 						values	(
 								'$cli_nit_ci',
+								'$cli_interno',
 								'$cli_lec_uid',
 								'$cli_socialreason',
 								'$cli_legaldirection',
@@ -56,6 +67,10 @@ if($cli_exist==0){
 								'$cli_commercialemail',
 								'$cli_legalname',
 								'$cli_legallastname',
+								'$cli_legalname2',
+								'$cli_legallastname2',
+								'$cli_legalname3',
+								'$cli_legallastname3',
 								'$cli_commercialname',
 								'$cli_commerciallastname',
 								'$cli_user',
@@ -68,8 +83,9 @@ if($cli_exist==0){
 								0,
 								GETDATE()
 								)";
+
 	$db->query($sql);
-	
+
 	$cli_uid = admin::getDBvalue("select cli_uid FROM mdl_client where cli_nit_ci='".$cli_nit_ci."' and cli_delete=0");
 	
 	$cli_doc_uid = admin::getParam("cli_doc_uid");
@@ -97,7 +113,7 @@ if($cli_exist==0){
 	// redimencionamos al mismo pero con extencion jpg en el mismo tamaño
 	redimImgPercent(PATH_ROOT."/img/client/".$fileName, PATH_ROOT."/img/client/".$nomIMG,100,100);
 	// Redimencionamos el nuevo jpg por el ancho definido
-	redimImgWH(PATH_ROOT."/img/client/".$nomIMG, PATH_ROOT."/img/client/".$nomIMG2,70,100);
+	redimImgWH(PATH_ROOT."/img/client/".$nomIMG, PATH_ROOT."/img/client/".$nomIMG2,60,100);
 	// Redimencionamos el nuevo jpg por el ancho definido
 	$sql = "UPDATE mdl_client SET cli_logo='".$nomIMG."' WHERE cli_uid=".$cli_uid;
 	$db->query($sql);

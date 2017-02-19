@@ -1,8 +1,8 @@
 <?php
 $uidClient = admin::getSession("uidClient");
 if($uidClient){
-$name = admin::getDbValue("select concat(cli_companyname, ' ', cli_socialreason) from mdl_client where cli_uid=".$uidClient);
-$foto = admin::getDbValue("select cli_photo from mdl_client where cli_uid=".$uidClient);
+$name = admin::getDbValue("select concat(cli_socialreason, ' ', cli_legalname, ' ', cli_legallastname) from mdl_client where cli_uid=".$uidClient);
+$foto = admin::getDbValue("select cli_logo from mdl_client where cli_uid=".$uidClient);
 admin::updateSubasta();
 }
 

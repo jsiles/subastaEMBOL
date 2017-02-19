@@ -27,6 +27,12 @@ $regusers = $db->next_record();
           </tr>
           
           <tr>
+               <td >Codigo interno:</td>
+            <td><?=$regusers["cli_interno"]?></td>
+            <td>&nbsp;</td>
+          </tr>
+          
+          <tr>
             <td width="29%">Clasificacion juridica:</td>
             <td width="64%">
             	<? 
@@ -82,6 +88,30 @@ $regusers = $db->next_record();
           <tr>
             <td width="29%">Apellido Adm/legal:</td>
             <td width="64%"><?=$regusers["cli_legallastname"]?></td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Nombre Adm/legal (2):</td>
+            <td width="64%"><?=$regusers["cli_legalname2"]?></td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Apellido Adm/legal (2):</td>
+            <td width="64%"><?=$regusers["cli_legallastname2"]?></td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Nombre Adm/legal (3):</td>
+            <td width="64%"><?=$regusers["cli_legalname3"]?></td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Apellido Adm/legal (3):</td>
+            <td width="64%"><?=$regusers["cli_legallastname3"]?></td>
             <td width="7%">&nbsp;</td>
           </tr>
           
@@ -197,8 +227,8 @@ $regusers = $db->next_record();
       <div id="contentButton">
 	  	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 			<tr>
-				<td width="25%" align="center">
-				&nbsp;
+				<td width="25%" align="center">&nbsp;
+				
 				</td>
           <td width="75%" style="font-size:11px;">
 		  		<a href="clientList.php?token=<?=admin::getParam("token")?>" class="button">Salir</a> 

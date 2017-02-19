@@ -29,8 +29,8 @@ if (strlen($uidClient)>0)
 		//echo $sSQL;die;
         $db->query($sSQL);
 		if(admin::getSession("uidClient")) {
-			$uidClient = admin::getDBValue("SELECT cli_pass_change FROM mdl_client WHERE cli_uid='$uidClient'");
-		    if ($uidClient == 0) header("Location:".$domain."/registro/". $uidClient."/");	
+			$uidPass = admin::getDBValue("SELECT cli_pass_change FROM mdl_client WHERE cli_uid='$uidClient'");
+		    if ($uidPass == 0) header("Location:".$domain."/registro/". $uidClient."/");	
 			else header("Location:". $domain."/");
 			}
 		else {

@@ -56,11 +56,13 @@ function valOfert()
 
 }
 
-function valOfertIt()
+function valOfertIt(i)
 {
-		domain=document.getElementById('domain').value;
-		uid=document.getElementById('uid').value;
-		ofert=document.getElementById('ct_value').value;
-		$('#planCuentas').attr('href',domain+'/code/bidsIt.php?uid='+uid+'&ofert='+ofert);
+		domain=document.getElementById('domain_'+i).value;
+		uid=document.getElementById('uid_'+i).value;
+		ofert=document.getElementById('ct_value_'+i).value;
+		sub_uid=document.getElementById('sub_uid_'+i).value;
+                cli_uid=document.getElementById('cli_uid_'+i).value;
+		$('#planCuentas_'+i).attr('href',domain+'/code/bidsIt.php?cli_uid='+cli_uid+'&sub_uid='+sub_uid+'&uid='+uid+'&ofert='+ofert);
 
 }

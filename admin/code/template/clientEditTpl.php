@@ -49,6 +49,13 @@ $regusers = $db->next_record();
           </tr>
           
           <tr>
+               <td >Codigo interno:</td>
+            <td>
+<input name="cli_interno" type="text" class="input" id="cli_interno" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_interno').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_interno').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_interno').style.display='none';" value="<?=$regusers["cli_interno"]?>" /><br /><span id="div_cli_interno" style="display:none;" class="error">Codigo interno es necesario</span>			</td>
+            <td>&nbsp;</td>
+          </tr>
+          
+          <tr>
             <td width="29%">Clasificacion juridica:</td>
             <td width="64%">
             <select name="cli_lec_uid" class="txt10" id="cli_lec_uid">
@@ -123,6 +130,34 @@ $regusers = $db->next_record();
           </tr>
           
           <tr>
+            <td width="29%">Nombre Adm/legal (2):</td>
+            <td width="64%">
+<input name="cli_legalname2" type="text" class="input" id="cli_legalname2" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_legalname2').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_legalname2').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_legalname2').style.display='none';" value="<?=$regusers["cli_legalname2"]?>" /><br /><span id="div_cli_legalname2" style="display:none;" class="error">Nombre Adm/legal (2) es necesario</span>			</td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Apellido Adm/legal (2):</td>
+            <td width="64%">
+<input name="cli_legallastname2" type="text" class="input" id="cli_legallastname2" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_legallastname2').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_legallastname2').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_legallastname2').style.display='none';" value="<?=$regusers["cli_legallastname2"]?>" /><br /><span id="div_cli_legallastname2" style="display:none;" class="error">Apellido Adm/legal (2) es necesario</span>			</td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Nombre Adm/legal (3):</td>
+            <td width="64%">
+<input name="cli_legalname3" type="text" class="input" id="cli_legalname3" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_legalname3').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_legalname3').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_legalname3').style.display='none';" value="<?=$regusers["cli_legalname3"]?>" /><br /><span id="div_cli_legalname3" style="display:none;" class="error">Nombre Adm/legal (3) es necesario</span>			</td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
+            <td width="29%">Apellido Adm/legal (3):</td>
+            <td width="64%">
+<input name="cli_legallastname3" type="text" class="input" id="cli_legallastname3" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_legallastname3').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_legallastname3').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_legallastname3').style.display='none';" value="<?=$regusers["cli_legallastname3"]?>" /><br /><span id="div_cli_legallastname3" style="display:none;" class="error">Apellido Adm/legal (3) es necesario</span>			</td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
             <td width="29%">Nombre comercial:</td>
             <td width="64%">
 <input name="cli_commercialname" type="text" class="input" id="cli_commercialname" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_commercialname').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_commercialname').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_commercialname').style.display='none';" value="<?=$regusers["cli_commercialname"]?>" /><br /><span id="div_cli_commercialname" style="display:none;" class="error">Nombre comercial es necesario</span>			</td>
@@ -190,7 +225,26 @@ $regusers = $db->next_record();
           <tr>
             <td width="29%">Documentacion:</td>
             <td width="64%">
-                <? 
+            <div style="float: left; width:50%">
+            <? 
+				$sql = "select doc_uid, doc_name from mdl_documents where doc_delete=0 and doc_uid=10";
+					$db2->query($sql);
+					while ($content=$db2->next_record())
+					{
+						$MaxUid = admin::getDbValue("SELECT count(dcl_uid) FROM mdl_documentsclient WHERE dcl_cli_uid='".$regusers["cli_uid"]."' and dcl_doc_uid='".$content["doc_uid"]."'");
+						if ($MaxUid==0){
+							$check = '';
+						}
+						else{
+							$check = 'checked="checked"';
+						}
+				?><br /><br /><br /><br /><br />
+            	    <input id="cli_doc_uid[<?=$content["doc_uid"]?>]" name="cli_doc_uid[<?=$content["doc_uid"]?>]" type="checkbox" onclick="checkinOut();" <?=$check?> /><?=$content["doc_name"]?>	
+              	<? 
+					}
+				?>
+            </div>
+            <div style="float: left; width:50%"><? 
 				$sql = "select doc_uid, doc_name from mdl_documents where doc_delete=0 and doc_uid!=10";
 					$db2->query($sql);
 					while ($content=$db2->next_record())
@@ -203,10 +257,10 @@ $regusers = $db->next_record();
 							$check = 'checked="checked"';
 						}
 				?>
-            	    <input id="cli_doc_uid[<?=$content["doc_uid"]?>]" <?=$check?> name="cli_doc_uid[<?=$content["doc_uid"]?>]" type="checkbox" /><?=$content["doc_name"]?>	<br />
+            	    <input id="cli_doc_uid[<?=$content["doc_uid"]?>]" name="cli_doc_uid[<?=$content["doc_uid"]?>]" type="checkbox" class="subDocs" <?=$check?> /><?=$content["doc_name"]?>	<br />
               	<? 
 					}
-				?>
+				?></div>
 					</td>
             <td width="7%">&nbsp;</td>
           </tr>

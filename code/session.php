@@ -2,7 +2,8 @@
 include_once("../admin/core/admin.php");
 $usernameClient = $_REQUEST["usernameClient"];
 $passwordClient = $_REQUEST["passwordClient"];
-$uidClient = admin::getDBValue("SELECT cli_uid FROM mdl_client WHERE (cli_email='".admin::toSql($usernameClient,"Text")."' or cli_user='".admin::toSql($usernameClient,"Text")."') and cli_pass='".SymmetricCrypt::encrypt(admin::toSql($passwordClient,"Text"))."' and cli_delete=0 and cli_status='ACTIVE'");
+
+$uidClient = admin::getDBValue("SELECT cli_uid FROM mdl_client WHERE (cli_mainemail='".admin::toSql($usernameClient,"Text")."' or cli_user='".admin::toSql($usernameClient,"Text")."') and cli_password='".md5(admin::toSql($passwordClient,"Text"))."' and cli_delete=0 and cli_status=0");
 
 if (strlen($uidClient)>0)
 {
@@ -28,7 +29,9 @@ if (strlen($uidClient)>0)
 		//echo $sSQL;die;
         $db->query($sSQL);
 		if(admin::getSession("uidClient")) {
-			header("Location:". $domain."/");
+			$uidPass = admin::getDBValue("SELECT cli_pass_change FROM mdl_client WHERE cli_uid='$uidClient'");
+		    if ($uidPass == 0) header("Location:".$domain."/registro/". $uidClient."/");	
+			else header("Location:". $domain."/");
 			}
 		else {
                     header("Location:".$domain."/session/1/"); 
@@ -36,7 +39,6 @@ if (strlen($uidClient)>0)
 	}
 	else
 	{
-
 		header("Location:".$domain."/session/2/". $uidClient."/");	
 	}
 }else

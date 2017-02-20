@@ -4,7 +4,7 @@
 		<div id="footer-menu" class="container">
 			<?php
 if($uidClient) $sWhere= " and con_uid not in (2,3) ";
-else $sWhere= " and con_uid not in (2) ";
+else $sWhere= " and con_uid not in (2,3) ";
 
 $sql3 = "select * 
 		from mdl_contents 

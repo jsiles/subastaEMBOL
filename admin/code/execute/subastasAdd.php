@@ -40,7 +40,14 @@ $tmp_day = substr($sub_hour_end,8,2);
 $tmp_hour = substr($sub_hour_end,11,2);
 $tmp_min = substr($sub_hour_end,14,2);
 $tmp_sec = substr($sub_hour_end,17,2);
+if($sub_modalidad=="ITEM")
+{
+$dead_time = date("Y-m-d H:i:s",mktime($tmp_hour,$tmp_min+($sub_tiempo*$sub_wheels),$tmp_sec,$tmp_month,$tmp_day,$tmp_year));
+
+}else
+{
 $dead_time = date("Y-m-d H:i:s",mktime($tmp_hour,$tmp_min+$sub_tiempo,$tmp_sec,$tmp_month,$tmp_day,$tmp_year));
+} 
 $pro_uid = admin::getDBvalue("select max(pro_uid) FROM mdl_product");
 $pro_uid++;
 
@@ -101,6 +108,7 @@ $sql = "insert into mdl_subasta
 //echo $sql;die;
 	$db->query($sql);
 
+        
 // ingresamos producto
 
 $sql = "insert into mdl_product
@@ -127,9 +135,18 @@ $sql = "insert into mdl_product
 
 if($sub_modalidad=="ITEM")
 {
-	$sql="insert into sys_item (ite_sub_uid, ite_wheel, ite_flag) values($sub_uid,1,0)";
-	$db->query($sql);
-	}
+//	$sql="insert into sys_item (ite_sub_uid, ite_wheel, ite_flag) values($sub_uid,1,0)";
+//	$db->query($sql);
+        for($i=1; $i<=$sub_wheels;$i++)
+        {
+            if ($i==1) $flag0=0;
+            else $flag0=1;
+            $dead_time = date("Y-m-d H:i:s",mktime($tmp_hour,$tmp_min+($sub_tiempo*$i),$tmp_sec,$tmp_month,$tmp_day,$tmp_year));
+        $sql="insert into mdl_round (rou_sub_uid, rou_round, rou_datetime, rou_flag0, rou_flag1) values ($sub_uid,$i,'$dead_time',$flag0,0)";
+        
+        $db->query($sql);
+        }
+}
 // SUBIENDO LA IMAGEN PRODUCTOS
 $FILES = $_FILES ['pro_image'];
 if ($FILES["name"] != '')

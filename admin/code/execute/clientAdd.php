@@ -19,7 +19,9 @@ $cli_exist = admin::getDBvalue("select count(cli_user) FROM mdl_client where cli
 
 if($cli_exist==0){
 	$cli_uid = admin::getDBvalue("select max(cli_uid) FROM mdl_client");
+        if($cli_uid!=NULL)
 	$cli_uid++;
+        else $cli_uid=1;
 	//$mcl_pass = $cli_uid.chr(floor(rand(65,90))). chr(floor(rand(65,90))). chr(floor(rand(48,57))). chr(floor(rand(65,90))) . chr(floor(rand(65,90)));
 	$sql = "insert into mdl_client(							
 								cli_companyname,

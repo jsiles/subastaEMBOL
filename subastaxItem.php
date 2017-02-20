@@ -15,9 +15,17 @@ if(file_exists(PATH_ROOT.'/img/subasta/img_'.$details["pro_image"]))
 }
 	if ($width<132) $maxAncho=132-$width;
 	else $maxAncho=0;
+$sub_uid=$details["sub_uid"];
+    $sql = "update mdl_round set rou_flag0=1 where  rou_datetime < GETDATE()  and rou_sub_uid=$sub_uid";
+    
+    $db->query($sql);
+    $sql = "update mdl_round set rou_flag0=0 where  rou_datetime > GETDATE()  and rou_sub_uid=$sub_uid";
+    $db->query($sql);        
+        
+$getTimeDead = admin::getDbValue("select top 1 rou_datetime from mdl_round where rou_sub_uid=".$details["sub_uid"]." and rou_flag0=0 order by rou_uid asc");        
+$wheel = admin::getDbValue("select top 1 rou_round from mdl_round where rou_sub_uid=".$details["sub_uid"]." and rou_flag0=0 order by rou_uid asc");        
 $timetobe=admin::time_diff($details["sub_hour_end"],date('Y-m-d H:i:s'));
-$timedead=admin::time_diff($details["sub_deadtime"],date(
-'Y-m-d H:i:s'));
+$timedead=admin::time_diff($getTimeDead,date('Y-m-d H:i:s'));
 $finish=$details["sub_finish"];
 $timeSubasta = $details["sub_tiempo"];
 //$quantityDates = ceil(((($details["sub_mountdead"]-$details["sub_mount_base"])/($details["sub_mount_unidad"]))+1));
@@ -36,7 +44,7 @@ echo "noow:".date("Y/m/d H:i:s");
 echo "<br>";
 echo "timedead:".$timedead."<br>"."sub_deadtime:".$details["sub_deadtime"]."<br>".$sw;*/
 
-if (($timetobe>0)&&($finish==1)){
+if ($timetobe>0){
 $daystobe=intval($timetobe/86400);
 $timetobe=$timetobe-($daystobe*86400);
 $hourstobe=intval($timetobe/3600);
@@ -47,7 +55,7 @@ $faltante =$daystobe.'d '.$hourstobe.'h '.$minutetobe.'m '.$timetobe.'s ';
 $timeInicio = 1;
 $m=1;
 }
-elseif(($timedead>0)&&($finish==1))
+elseif($timedead>0)
 {
 $faltante='Iniciada';
 //echo $faltante;
@@ -66,14 +74,6 @@ $timeInicio = 2;
 	$timetobe=0;
 	$timeInicio = 3;
 	}
-$regBidsWin = admin::getDbValue("select max(bid_uid) from mdl_bid where bid_sub_uid = ".$details["sub_uid"]." and bid_cli_uid=".admin::getSession("uidClient"));
-									if(isset($regBidsWin))
-									{
-									$regBidsWinMax = admin::getDbValue("select max(bid_uid) from mdl_bid where bid_sub_uid = ".$details["sub_uid"]);
-									if($regBidsWin==$regBidsWinMax) $winMessage="Su oferta gan&oacute;";
-									else
-									$winMessage="Su oferta perdi&oacute;";
-									}	
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -102,24 +102,25 @@ $(function () {
 	?>
 	var austDay = new Date();
 	austDay = new Date(austDay.getFullYear() ,austDay.getMonth() ,austDay.getDate()+<?=$daystobe?>, austDay.getHours()+<?=$hourstobe?>, austDay.getMinutes()+<?=$minutetobe?>,austDay.getSeconds()+<?=$timetobe?>);
-	$('#defaultCountdown').countdown({until: austDay,format: 'HMS',onExpiry: subastaOn});
+	$('.defCountDown').countdown({until: austDay,format: 'HMS',onExpiry: subastaOn});
 	<?php
 	}elseif($timeInicio==2){
 	?>
 //	bids();
-	$("#tiempoRestante").html('Fecha cierre de la subasta:');
-	$('#defaultCountdown').html('<?=admin::changeFormatDate($details["sub_deadtime"],7)?>');
-	$("#tiempoSubasta").show();
-	$("#subastaP").fadeIn('slow');	
+        $(".subastandose").show();
+	$(".tiempoRestante").html('Fecha cierre de la subasta:');
+	$('.defCountDown').html('<?=admin::changeFormatDate($details["sub_deadtime"],7)?>');
+	$(".tiempoSubasta").show();
+	$(".subastaP").fadeIn('slow');	
 	var subastaDay = new Date();
 	subastaDay = new Date(subastaDay.getFullYear() ,subastaDay.getMonth() ,subastaDay.getDate()+<?=$daysdead?>, subastaDay.getHours()+<?=$hoursdead?>, subastaDay.getMinutes()+<?=$minutedead?>,subastaDay.getSeconds()+<?=$timedead?>);
-	$('#defaultCountdown1').countdown({until: subastaDay,format: 'MS',onExpiry: subastaReload});
+	$('.defCountDown1').countdown({until: subastaDay,format: 'MS',onExpiry: subastaReload});
 	<?php 
 	}else{
 	?>
-	$("#tiempoRestante").html('Fecha de la subasta:');
-	$('#defaultCountdown').html('<?=admin::changeFormatDate($details["sub_deadtime"],7)?>');
-	$("#tiempoSubasta").show();
+	$(".tiempoRestante").html('Fecha de la subasta:');
+	$('.defCountDown').html('<?=admin::changeFormatDate($details["sub_deadtime"],7)?>');
+	$(".tiempoSubasta").show();
 	subastaOff();
 	<?php
 	}
@@ -127,6 +128,7 @@ $(function () {
 });
 function bids()
 {
+    /*
 	$.ajax({
 	   type: "POST",
 	   url: "<?=$domain?>/code/valBidsIt.php",
@@ -136,55 +138,51 @@ function bids()
 //		 else subastaOff(); 
 		}
 	 });
-	
-	}
+	*/
+           alert('bids');
+}
 function subastaOn()
 {
 	//bids();
-	$("#tiempoSubasta").show();
-	$("#subastaP").fadeIn('slow');	
-	$("#tiempoRestante").html('Fecha de la subasta:');
-	$('#defaultCountdown').html('<?=admin::changeFormatDate($details["sub_deadtime"],7)?>');
+        $(".subastandose").show();
+	$(".tiempoSubasta").show();
+	$(".subastaP").fadeIn('slow');	
+	$(".tiempoRestante").html('Fecha de la subasta:');
+	$('.defCountDown').html('<?=admin::changeFormatDate($details["sub_deadtime"],7)?>');
 
 	var subastaDay = new Date();
 	subastaDay = new Date(subastaDay.getFullYear() ,subastaDay.getMonth() ,subastaDay.getDate(), subastaDay.getHours(), subastaDay.getMinutes()+<?=$timeSubasta?>,subastaDay.getSeconds());
-	$('#defaultCountdown1').countdown({until: subastaDay,format: 'MS',onExpiry: subastaReload});
-
+	$('.defCountDown1').countdown({until: subastaDay,format: 'MS',onExpiry: subastaReload});
 }
 function subastaReload()
 {
 	$.ajax({
 	   type: "POST",
 	   url: "<?=$domain?>/code/valBidsItem.php",
-	   data: "deadTime="+'<?=$details["sub_deadtime"]?>'+"&sub_uid="+<?=$details["sub_uid"]?>+"&timeSubasta="+'<?=$timeSubasta?>',
+	   data: "deadTime="+'<?=$timedead?>'+"&sub_uid="+<?=$details["sub_uid"]?>+"&timeSubasta="+'<?=$timeSubasta?>'+"&wheel='<?=$wheel?>'",
 	   success: function(valBids){
 		 if(valBids==1) subastaOff();
-		 else bids();
+		 else location.reload();
 	   }
 	 });
+  //  alert('subasta reload');
 }
 function subastaOff()
 {
-	/*$.ajax({
-	   type: "POST",
-	   url: "<?=$domain?>/code/valBidsIt.php",
-	   data: "deadTime="+'<?=$details["sub_deadtime"]?>'+"&sub_uid="+<?=$details["sub_uid"]?>,
-	   success: function(valBids){
-		 $("#subastaDetail").html(valBids);
-		}
-	 });*/
-	var message = $("#message").html();
-	if(!message ) message ='';
-	$("#subastaP").hide();
-	$("#unidadmejora").hide();
+	//var message = $("#message").html();
+	//if(!message ) message ='';
+	$(".subastaP").hide();
+	$(".unidadmejora").hide();
+	//$(".tiempoSubasta").hide();
+	$(".ronda").hide();
 	$.ajax({
 	   type: "POST",
 	   url: "<?=$domain?>/code/finish2.php",
-	   data: "deadTime="+'<?=$details["sub_deadtime"]?>'+"&sub_uid="+<?=$details["sub_uid"]?>,
+	   data: "sub_uid="+<?=$details["sub_uid"]?>,
 	      success: function(finish){
-			 $("#subastaDetail").html(finish);
-			 $("#defaultCountdown1").html('Concluida');
-		  jQuery.facebox('<form name="formBids" class="formLabel">La subasta fue concluida, '+ message+' gracias por participar!!<br><br><a href="Cerrar" onclick="$.facebox.close();return false;" class="addcart">Cerrar</a></p></form><br>');
+                  $(".tiempoSubasta").html('Subasta Concluida');
+                  $(".mensaje").show();
+		  jQuery.facebox('<form name="formBids" class="formLabel">La subasta fue concluida, gracias por participar!!<br><br><a href="Cerrar" onclick="$.facebox.close();return false;" class="addcart">Cerrar</a></p></form><br>');
 	   }
 	 });
 }

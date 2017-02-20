@@ -44,8 +44,14 @@ $tmp_day = substr($sub_hour_end,8,2);
 $tmp_hour = substr($sub_hour_end,11,2);
 $tmp_min = substr($sub_hour_end,14,2);
 $tmp_sec = substr($sub_hour_end,17,2);
-$dead_time = date("Y-m-d H:i:s",mktime($tmp_hour,$tmp_min+$sub_tiempo,$tmp_sec,$tmp_month,$tmp_day,$tmp_year));
+if($sub_modalidad=="ITEM")
+{
+$dead_time = date("Y-m-d H:i:s",mktime($tmp_hour,$tmp_min+($sub_tiempo*$sub_wheels),$tmp_sec,$tmp_month,$tmp_day,$tmp_year));
 
+}else
+{
+$dead_time = date("Y-m-d H:i:s",mktime($tmp_hour,$tmp_min+$sub_tiempo,$tmp_sec,$tmp_month,$tmp_day,$tmp_year));
+} 
 $sql = "update mdl_subasta set
 				sub_pca_uid='".$sub_pca_uid."',
 				sub_usr_uid=".admin::getSession('usr_uid').",
@@ -83,12 +89,24 @@ $db->query($sql);
 
 if($sub_modalidad=="ITEM")
 {
-	$sql ="delete from sys_item where ite_sub_uid=".$sub_uid;
-	$db->query($sql);
+//	$sql ="delete from sys_item where ite_sub_uid=".$sub_uid;
+//	$db->query($sql);
 
-	$sql="insert into sys_item (ite_uid, ite_sub_uid, ite_wheel, ite_flag) values(null,$sub_uid,1,0)";
-	$db->query($sql);
-	}
+//	$sql="insert into sys_item (ite_uid, ite_sub_uid, ite_wheel, ite_flag) values(null,$sub_uid,1,0)";
+//	$db->query($sql);
+    $sql ="delete from mdl_round where rou_sub_uid=".$sub_uid;
+    $db->query($sql);
+
+    for($i=1; $i<=$sub_wheels;$i++)
+        {
+            if ($i==1) $flag0=0;
+            else $flag0=1;
+            $dead_time = date("Y-m-d H:i:s",mktime($tmp_hour,$tmp_min+($sub_tiempo*$i),$tmp_sec,$tmp_month,$tmp_day,$tmp_year));
+        $sql="insert into mdl_round (rou_sub_uid, rou_round, rou_datetime, rou_flag0, rou_flag1) values ($sub_uid,$i,'$dead_time',$flag0,0)";
+        
+        $db->query($sql);
+        }
+}
 
 
 // SUBIENDO LA IMAGEN PRODUCTOS
@@ -173,5 +191,11 @@ if ($FILES2["name"] != '')
 	}
 $token=admin::getParam("token");
 unset($_POST);
-header('Location: ../../subastasList.php?token='.$token);	
+if($sub_modalidad=="ITEM")
+{
+header('Location: ../../subastasEdit2.php?token='.$token.'&sub_uid='.$sub_uid.'&pro_uid='.$pro_uid);
+}else{
+header('Location: ../../subastasList.php?token='.$token);
+
+}
 ?>

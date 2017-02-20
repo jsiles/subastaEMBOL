@@ -3,7 +3,8 @@
                 	
 					<!-- info de productos -->
                   	<?php
-                    
+                                        $cli_uid=  admin::getSession("uidClient");
+                                           
 					$sSQL ="select xit_uid, xit_sub_uid, xit_product, xit_description, xit_image, xit_price, xit_unity from mdl_xitem, mdl_clixitem where clx_xit_uid=xit_uid and xit_sub_uid= ".$details["sub_uid"]." and xit_delete=0 and clx_delete=0 and clx_cli_uid=".admin::getSession("uidClient");
 					$db2->query($sSQL);
 					//echo $sSQL;
@@ -29,10 +30,16 @@
 //echo $timeSubasta;
 								   $bidsCompra=admin::getDBvalue("SELECT sub_type FROM mdl_subasta where sub_uid=".$xitem["xit_sub_uid"]);
 									if($bidsCompra=='COMPRA') 
-									$valBids=admin::getDBvalue("SELECT min(bid_mount) FROM mdl_bid where bid_pro_uid='".$xitem["xit_uid"]."'");
-									else
-									$valBids=admin::getDBvalue("SELECT max(bid_mount) FROM mdl_bid where bid_pro_uid='".$xitem["xit_uid"]."'");
-									
+                                                                        {
+									$valBids=admin::getDBvalue("SELECT min(bid_mount) FROM mdl_biditem where bid_xit_uid='".$xitem["xit_uid"]."'");
+									$valBidsCli=admin::getDBvalue("SELECT min(bid_mount) FROM mdl_biditem where bid_xit_uid='".$xitem["xit_uid"]."' and bid_cli_uid=$cli_uid");
+                                                                        if($valBids==$valBids) $mensaje="Su oferta gano.";
+                                                                        }
+									else{
+									$valBids=admin::getDBvalue("SELECT max(bid_mount) FROM mdl_biditem where bid_xit_uid='".$xitem["xit_uid"]."'");
+									$valBidsCli=admin::getDBvalue("SELECT max(bid_mount) FROM mdl_biditem where bid_xit_uid='".$xitem["xit_uid"]."' and bid_cli_uid=$cli_uid");
+                                                                        if($valBids==$valBids) $mensaje="Su oferta gano.";
+                                                                        }								
 									$factor = admin::getDbValue("select inc_ajuste from mdl_incoterm where inc_delete=0 and inc_cli_uid=".admin::getSession("uidClient")." and inc_sub_uid=".$xitem["xit_sub_uid"]);
 									//$regBids = admin::getDbValue("select count(*) from mdl_bid where bid_sub_uid = ".$details["sub_uid"]);
 									
@@ -41,12 +48,12 @@
 										$centavos=substr($xitem["xit_price"],-3);
 										$montoGlobal=str_replace($centavos,'',$xitem["xit_price"]);
 										$valBids=$xitem["xit_price"];
-										}
+                                                                                }
 									else
 									{
-										$centavos=substr($valBids,-3);
+                                                                            	$centavos=substr($valBids,-3);
 										$montoGlobal=str_replace($centavos,'',$valBids);
-										}
+                                                                                }
 								
 									$centavos=str_replace('.','',$centavos);
 									
@@ -57,40 +64,57 @@
                                    if(isset($factor))
 								   {
 								   ?>
-                                    <p class="left"> Factor de ajuste:<?=$factor?>%
+                                    <p class="left"> Factor de ajuste:<?=$factor?>%</p>
+ 
                                     <div class="clear"></div>
                                     <?php
 								    }
-				                    ?><p class="left" id="tiempoRestante" style="display:">Tiempo de inicio:&nbsp; 
- <div id="defaultCountdown" class="defCountDown"></div>
+				                    ?>
+                                    
+                                    <p class="left ronda">Ronda:&nbsp;<?=$wheel?>
+                                    </p>
+                                    <br>
+                                    <br>
+                                    <p class="left tiempoRestante" style="display:">Tiempo de inicio:&nbsp; 
  </p>
+ <div id="defaultCountdown_<?=$xitem["xit_uid"]?>" class="defCountDown" ></div>
+ 
 
-<p class="left" id="tiempoSubasta" style="display:none">Tiempo de subasta:&nbsp;
- <div id="defaultCountdown1" class="defCountDown"></div>
- </p>
-
-										<form name="frmContact" id="formA" action="" method="post">
-		<p id="subastaP" style="display:none;">
-			<label class="bold">Oferta:</label>
-			<input name="ct_value" id="ct_value" type="text" size="15" class="inputB" value="" onKeyUp="valOfertIt();"/> <a href="<?=$domain?>/code/bidsIt.php?uid=<?=$xitem["xit_sub_uid"]?>&ofert=<?=$valBids?>" id="planCuentas" rel="facebox" class="addcart">Aceptar</a> (Ingrese <?php 
+ <p id="tiempoSubasta_<?=$xitem["xit_uid"]?>" class="left tiempoSubasta" style="display:none">
+    Tiempo de subasta:&nbsp;</p>
+ <div id="defaultCountdown_<?=$xitem["xit_uid"]?>" class="defCountDown1 subastandose" style="display:none"></div>
+ 
+ <p class="left mensaje" style="display:none;"><?=$mensaje?></p>
+	<form name="frmContact" id="formA" action="" method="post">
+	<div class="subastaP" style="display:none;">
+	<label class="bold">Oferta:</label>
+	<input name="ct_value_<?=$xitem["xit_uid"]?>" id="ct_value_<?=$xitem["xit_uid"]?>" type="text" size="15" class="inputB" value="" onKeyUp="valOfertIt(<?=$xitem["xit_uid"]?>);"/>
+        
+        <a href="<?=$domain?>/code/bidsIt.php?sub_uid=<?=$xitem["xit_sub_uid"]?>&ofert=<?=$valBids?>&uid=<?=$xitem["xit_uid"]?>" id="planCuentas_<?= $xitem["xit_uid"] ?>" rel="facebox" class="addcart">Aceptar</a> (Ingrese <?php 
 		if($bidsCompra=='COMPRA')
 		{
-		if($xitem["xit_price"]<=$valBids) echo $moneda.' '.number_format(round(($xitem["xit_price"]-$xitem["xit_unity"]),2),2).' o menos)'; 
-		else echo $moneda.' '.($valBids-$xitem["xit_price"]).' o menos)'; 
+		//if($xitem["xit_price"]<=$valBids) echo $moneda.' '.number_format(round(($xitem["xit_price"]-$xitem["xit_unity"]),2),2).' o menos)'; 
+		//else
+                    echo $moneda.' '.($valBids-$xitem["xit_unity"]).' o menos)'; 
 		
 			}
 		else
 		{
-		if($xitem["xit_price"]>=$valBids) echo $moneda.' '.number_format(round(($xitem["xit_price"]+$xitem["xit_unity"]),2),2).' o m&aacute;s)'; 
-		else echo $moneda.' '.($valBids+$xitem["xit_price"]).' o m&aacute;s)'; 
+		//if($xitem["xit_price"]>=$valBids) echo $moneda.' '.number_format(round(($xitem["xit_price"]+$xitem["xit_unity"]),2),2).' o m&aacute;s)'; 
+		//else 
+                echo $moneda.' '.($valBids+$xitem["xit_unity"]).' o m&aacute;s)'; 
 			}
-		?></p>
+		?>
+        </div>
       
-									  <p id="unidadmejora"><label class="bold">Unidad de Mejora:</label> <?=$moneda?> <?=$xitem["xit_price"]?></p>
-                                    
-           <input type="hidden" name="hOk" id="hOk" value="" />
-            <input type="hidden" name="domain" id="domain" value="<?=$domain?>" />
-            <input type="hidden" name="uid" id="uid" value="<?=$xitem["xit_sub_uid"]?>" />
+	  <p class="unidadmejora"><label class="bold">Unidad de Mejora:</label> <?=$moneda?> <?=$xitem["xit_unity"]?></p>
+                                
+           <input type="hidden" name="hOk_<?=$xitem["xit_uid"]?>" id="hOk_<?=$xitem["xit_uid"]?>" value="" />
+           <input type="hidden" name="cli_uid_<?=$xitem["xit_uid"]?>" id="cli_uid_<?=$xitem["xit_uid"]?>" value="<?=$cli_uid?>" />
+            <input type="hidden" name="domain_<?=$xitem["xit_uid"]?>" id="domain_<?=$xitem["xit_uid"]?>" value="<?=$domain?>" />
+            <input type="hidden" name="uid_<?=$xitem["xit_uid"]?>" id="uid_<?=$xitem["xit_uid"]?>" value="<?=$xitem["xit_uid"]?>" />
+            <input type="hidden" name="sub_uid_<?=$xitem["xit_uid"]?>" id="sub_uid_<?=$xitem["xit_uid"]?>" value="<?=$xitem["xit_sub_uid"]?>" />
+            <input type="hidden" name="round_<?=$xitem["xit_uid"]?>" id="round_<?=$xitem["xit_uid"]?>" value="<?=$wheel?>" />
 </form>
                     </div>
                     

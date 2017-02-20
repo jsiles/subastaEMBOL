@@ -640,7 +640,8 @@ else
 	  	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subastaxitem" >
 			<tr>
 				<td width="59%" align="center">
-				<a href="subastasEdit2.php?token=<?=admin::getParam("token")?>&pro_uid=<?=admin::getParam("pro_uid")?>&sub_uid=<?=admin::getParam("sub_uid")?>" class="button" >Paso 1 de 2</a></td>
+				<!--<a href="subastasEdit2.php?token=<?=admin::getParam("token")?>&pro_uid=<?=admin::getParam("pro_uid")?>&sub_uid=<?=admin::getParam("sub_uid")?>" class="button" >Paso 1 de 2</a></td>-->
+                                    <a href="save" onclick="document.frmsubasta.submit();return false;" class="button" >Paso 1 de 2</a></td>
 		<td width="41%" style="font-size:11px;">
 		<?=admin::labels('or');?> <a href="subastasList.php?token=<?=admin::getParam("token")?>" ><?=admin::labels('cancel');?></a> 
 		</td>

@@ -22,8 +22,27 @@ $mountBase=$subastaDList["sub_mount_base"];//admin::getDbValue("SELECT sub_mount
 
 $bidsCompra=$subastaDList["sub_type"];//admin::getDbValue("SELECT sub_type FROM mdl_subasta where sub_uid=$sub_uid");
 $numberRounds =$subastaDList["sub_wheels"];
+$wheel = admin::getParam("wheel");
+
+if($wheel<=$numberRounds)
+{
+    $sql = "update mdl_round set rou_flag0=1 where  rou_datetime<GETDATE()  and rou_sub_uid=$sub_uid";
+    $db->query($sql);
+    $sql = "update mdl_round set rou_flag0=0 where  rou_datetime<GETDATE()  and rou_sub_uid=$sub_uid";
+    $db->query($sql);  
+    echo "reload";
+}  else {
+ echo 1;   
+}
+
+
 //echo "numero ruedas $numberRounds";
-$maxBidRound=0;
+
+
+/*
+ * 
+ $maxBidRound=0;
+ 
 $maxBidRound=admin::getDbValue("select max(bid_flag0) from mdl_biditem where bid_pro_uid=$pro_uid");
 if(!isset($maxBidRound)) $maxBidRound=0;
 $oMaxBidRound=$maxBidRound;
@@ -114,7 +133,7 @@ if($valWheelFlag>0)
 	//	echo "cantidad:".$cantBids."#R1#".$maxBidRound."#R2#".$maxBidRound2; 
 		
 	}
-*/
+
 }// FIN IF(valWheelFlag)
 elseif ($maxBidRound==$numberRounds)
 {
@@ -124,4 +143,5 @@ elseif ($maxBidRound==$numberRounds)
 		echo 4;
 		}
 //echo $sql;
+*/
 ?>

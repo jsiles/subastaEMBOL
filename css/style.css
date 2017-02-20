@@ -707,6 +707,18 @@ font-weight:bold;
 color:#dd2d26;	
 }
 
-#subastaP{
-width:650px;
+.defCountDown1
+{
+/*width:500px;margin-top:9px;margin-left:4px;height:25px;font-size:12px;font-weight:bold;color:#dd2d26*/	
+width:500px;
+margin-top:9px;
+margin-left:4px;
+height:25px;
+font-size:12px;
+font-weight:bold;
+color:#dd2d26;	
+}
+
+.subastaP{
+width:750px;
 }

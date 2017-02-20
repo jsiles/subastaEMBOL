@@ -1782,6 +1782,39 @@ public static function updateSubasta()
     
     
 }
+
+
+public static function updateSubastaItem()
+  {
+    $dbLink=new DBmysql();
+    $SQL = "select sub_uid, sub_hour_end, sub_deadtime, sub_finish from mdl_subasta where sub_modalidad='ITEM' and sub_finish in (1,2)";
+   // echo $SQL;
+    $valCant=$dbLink->numrows($SQL);
+    if($valCant>0){
+        $dbLink->query($SQL);
+        while($details=$dbLink->next_record()){
+            $timetobe=admin::time_diff($details["sub_hour_end"],date('Y-m-d H:i:s'));
+            $timedead=admin::time_diff($details["sub_deadtime"],date('Y-m-d H:i:s'));
+            $finish=$details["sub_finish"];
+            $sub_uid=$details["sub_uid"];
+            //echo $timetobe." - ".$timedead. "-FINISH=".$finish;die;
+            if (($timetobe>0)){
+             //NADA Q ACTUALIZAR
+            }
+            elseif(($timedead>0))
+            {
+                //SUBASTANDOSE
+                if($finish!=2) self::getDbValue ("update mdl_subasta set sub_finish=2 where sub_uid=".$sub_uid);
+                
+            }else {
+                    //CONCLUIDA
+                        self::getDbValue ("update mdl_subasta set sub_finish=3 where sub_uid=".$sub_uid);
+                    }
+        }
+
+
+    }
+  }
 // LLAVE FINAL DE LA CLASE	
 }
 ?>

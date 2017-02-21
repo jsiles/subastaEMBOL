@@ -58,8 +58,8 @@ $regusers = $db->next_record();
           <tr>
             <td width="29%">Clasificacion juridica:</td>
             <td width="64%">
-            <select name="cli_lec_uid" class="txt10" id="cli_lec_uid">
             <div id="div_cli_lec_uid_select">
+            <select name="cli_lec_uid" class="txt10" id="cli_lec_uid">
                 <? 
 				$sql = "select lec_uid, lec_name from mdl_legalclassification where lec_delete=0";
 					$db2->query($sql);
@@ -71,7 +71,8 @@ $regusers = $db->next_record();
               	<? 
 					}
 				?>
-			</select><a href="javascript:changeClientCategory();" class="small2"><?=strtolower(admin::labels('add'));?></a> | 
+			</select>
+            <a href="javascript:changeClientCategory();" class="small2"><?=strtolower(admin::labels('add'));?></a> | 
                 <a href="javascript:deleteClientCategory();" class="small3"><?=admin::labels('del');?></a>
                 <div id="div_client_category" style="display:none;">
 		<input type="text" name="client_category" id="client_category" class="input3" onfocus="setClassInput3(this,'ON');document.getElementById('div_cli_lec_uid').style.display='none';" onblur="setClassInput3(this,'OFF');document.getElementById('div_cli_lec_uid').style.display='none';" onclick="setClassInput3(this,'ON');document.getElementById('div_cli_lec_uid').style.display='none';"/>		

@@ -3,7 +3,7 @@ include_once("../admin/core/admin.php");
 $usernameClient = $_REQUEST["usernameClient"];
 $passwordClient = $_REQUEST["passwordClient"];
 
-$uidClient = admin::getDBValue("SELECT cli_uid FROM mdl_client WHERE (cli_mainemail='".admin::toSql($usernameClient,"Text")."' or cli_user='".admin::toSql($usernameClient,"Text")."') and cli_password='".md5(admin::toSql($passwordClient,"Text"))."' and cli_delete=0 and cli_status=0");
+$uidClient = admin::getDBValue("SELECT cli_uid FROM mdl_client WHERE (cli_mainemail='".admin::toSql($usernameClient,"Text")."' or cli_user='".admin::toSql($usernameClient,"Text")."') and cli_password='".md5(admin::toSql($passwordClient,"Text"))."' and cli_delete=0 and cli_status=0 and cli_status_main=1");
 
 if (strlen($uidClient)>0)
 {

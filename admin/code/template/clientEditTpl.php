@@ -314,8 +314,8 @@ $regusers = $db->next_record();
 		    ($regusers["cli_status"]==1)?$selected1="selected":$selected1="";
 			?>
 			<select name="cli_status" class="txt10" id="cli_status">
-            	<option value="1" <?=$selected1?> ><?=admin::labels('active');?></option>
-              	<option value="0" <?=$selected0?> ><?=admin::labels('inactive');?></option>
+            	<option value="0" <?=$selected0?> ><?=admin::labels('active');?></option>
+              	<option value="1" <?=$selected1?> ><?=admin::labels('inactive');?></option>
 			</select>
 			<span id="div_cli_status" style="display:none;" class="error"></span>			</td>
             <td>&nbsp;</td>

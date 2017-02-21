@@ -4,14 +4,14 @@ admin::initialize('users','usersList',false);
 // Cambiamos el estado del contenido de activo a inactivo
 $uid = $_POST["uid"];
 $status = $_POST["status"];
-if ($status=='ACTIVE')
+if ($status==0)
 	{
-	$newStatus = 'INACTIVE';
+	$newStatus = 1;
 	$imgStatus = "lib/inactive_" . $lang . ".gif";
 	}
 else
 	{
-	$newStatus = 'ACTIVE';
+	$newStatus = 0;
 	$imgStatus = "lib/active_" . $lang . ".gif";	
 	}
 $sql="update mdl_client set cli_status='".$newStatus."' where cli_uid=".$uid;

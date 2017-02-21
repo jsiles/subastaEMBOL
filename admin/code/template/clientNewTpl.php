@@ -21,7 +21,7 @@
           </tr>
           
           <tr>
-               <td >Codigo interno:</td>
+            <td >Codigo interno:</td>
             <td>
 <input name="cli_interno" type="text" class="input" id="cli_interno" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_interno').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_interno').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_interno').style.display='none';" /><br /><span id="div_cli_interno" style="display:none;" class="error">Codigo interno es necesario</span>			</td>
             <td>&nbsp;</td>
@@ -243,8 +243,8 @@
             <td><?=admin::labels('status');?>:</td>
             <td>
 			<select name="cli_status" class="txt10" id="cli_status">
-            	<option selected="selected" value="1"><?=admin::labels('active');?></option>
-              	<option value="0"><?=admin::labels('inactive');?></option>
+            	<option selected="selected" value="0"><?=admin::labels('active');?></option>
+              	<option value="1"><?=admin::labels('inactive');?></option>
 			</select>
 			<span id="div_cli_status" style="display:none;" class="error"></span>			</td>
             <td>&nbsp;</td>

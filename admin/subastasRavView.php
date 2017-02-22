@@ -14,11 +14,23 @@ switch($tipUid){
             $moduleListId=11;
             $moduleCrearId=12;
             break;    
+    case 3: $opcionMenu = "ravSolicitud";
+            $opocionSubMenu ="ravSolicitudView";
+            $etiquetaCrear = "ravSolicitudNew";
+            $moduleListId=32;
+            $moduleCrearId=33;
+            break;    
+    case 4: $opcionMenu = "ravOrden";
+            $opocionSubMenu ="ravOrdenView";
+            $etiquetaCrear = "ravOrdenNew";
+            $moduleListId=35;
+            $moduleCrearId=36;
+            break;            
     default :
             $opcionMenu = "subastaRavParametros";
             $opocionSubMenu ="subastasRavEdit";
-         
-
+            $moduleListId=8;
+            $moduleCrearId=9;
 }
 admin::initialize($opcionMenu, $opocionSubMenu); 
 ?>

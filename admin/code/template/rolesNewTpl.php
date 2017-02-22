@@ -37,8 +37,7 @@
           </tr>-->
           
 <?php 
-if ($_SESSION["usr_uid"]!=2) $sqldat="select * from sys_modules where mod_language='".$lang."' and mod_parent=0  and  mod_status='ACTIVE'"; //and mod_uid not in ('1','31','34')
-else $sqldat="select * from sys_modules where mod_language='".$lang."' and mod_parent=0  and  mod_status='ACTIVE'"; //and mod_uid!=1
+$sqldat="select * from sys_modules where mod_language='".$lang."' and mod_parent=0  and  mod_status='ACTIVE' order by mod_position asc"; 
 
 
 $db3->query($sqldat);

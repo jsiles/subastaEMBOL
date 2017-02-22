@@ -603,16 +603,21 @@ class admin
 					{
 					 //echo "....".$row['mod_uid']."-";die;
                                          $mod_uid = admin::getDbValue("select mod_uid from sys_modules where mod_parent=".$row['mod_uid']." and mod_index='".$row['mod_index']."'");
+                                         $urlModule =$row['mod_index'];
+                                               if (strlen(strstr($urlModule,"?"))>0) {
+                                                    $urlModule=$urlModule."&";
+                                                }else{
+                                                    $urlModule=$urlModule."?";
+                                                }
 					 if ($row['mod_uid']==$indexMenu) {
-					  	$labelsMenu .= '<li><a id="first" title="'.$row['mod_name'].'" href="'.$row['mod_index'].'?token='.$_GET["token"].'&mod_uid='.$mod_uid.'">'.$row['mod_name'].'</a></li>'; 
+					  	$labelsMenu .= '<li><a id="first" title="'.$row['mod_name'].'" href="'.$urlModule.'token='.$_GET["token"].'&mod_uid='.$mod_uid.'">'.$row['mod_name'].'</a></li>'; 
                                          }
                                          else
                                          {
-					  	$labelsMenu .= '<li><a title="'.$row['mod_name'].'" href="'.$row['mod_index'].'?token='.$_GET["token"].'&mod_uid='.$mod_uid.'">'.$row['mod_name'].'</a></li>';						
+					  	$labelsMenu .= '<li><a title="'.$row['mod_name'].'" href="'.$urlModule.'token='.$_GET["token"].'&mod_uid='.$mod_uid.'">'.$row['mod_name'].'</a></li>';						
                                          }
 					}
         }
-        //echo $labelsMenu;die;
 
 		return $labelsMenu;
 		}
@@ -642,9 +647,15 @@ class admin
                // echo $sqldat;
 	        $rs->query($sqldat);
 	        while ($row = $rs->next_record()){
-					$params = (isset($_GET["con_parent"]) ? "?con_parent=".admin::toSql(safeHtml($_GET["con_parent"]),"Number")."&token=".$_GET['token'] ."&mod_uid=".$row['mod_uid'] : "?token=".$_GET['token']."&mod_uid=".$row['mod_uid']);
+					$params = (isset($_GET["con_parent"]) ? "con_parent=".admin::toSql(safeHtml($_GET["con_parent"]),"Number")."&token=".$_GET['token'] ."&mod_uid=".$row['mod_uid'] : "token=".$_GET['token']."&mod_uid=".$row['mod_uid']);
+                                        $urlSubModule =$row['mod_index'];
+                                                if(strpos($urlSubModule, '?')!==FALSE){
+                                                    $urlSubModule=$urlSubModule."&";
+                                                }else{
+                                                    $urlSubModule=$urlSubModule."?";
+                                                }
 						if ($row['mod_uid']==$indexSubMenu) $labelsSubMenu .= $row['mod_name'];
-						else $labelsSubMenu .= "<a title=\"".$row['mod_name']."\" href=\"".$row['mod_index'].$params."\" class=\"submenu\">".$row['mod_name']."</a>";
+						else $labelsSubMenu .= "<a title=\"".$row['mod_name']."\" href=\"".$urlSubModule.$params."\" class=\"submenu\">".$row['mod_name']."</a>";
 	        }
        }
 

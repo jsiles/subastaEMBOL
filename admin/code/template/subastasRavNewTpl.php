@@ -18,7 +18,7 @@ else $urlFrontLang=$lang.'/';
 $UrlProduct=admin::getDBvalue("select col_url FROM mdl_contents_languages where col_con_uid=3 and col_language='".$lang."'");
 
 $contentURL = admin::getContentUrl($con_uid,SYS_LANG);
-$qsearch="select * from mdl_rav where rav_tipologia=1 order by rav_uid asc";
+$qsearch="select * from mdl_rav where rav_tipologia=$tipUid order by rav_uid asc";
 ?>
 <div id="DIV_WAIT1" style="display:none;"><img border="0" src="lib/loading.gif"></div>
 <br>
@@ -64,16 +64,52 @@ $qsearch="select * from mdl_rav where rav_tipologia=1 order by rav_uid asc";
             <td width="7%">&nbsp;</td>
         </tr>
         <tr>
-            <td width="5%" >Moneda</td>
-        
+            <td width="5%" >Unidad Solicitante:</td>
+             <td width="20%">
+                  <span id="div_sub_unidad">
+                <?php
+                  $uUnidad = admin::getDbValue("select max(uni_uid) from mdl_unidad where uni_delete=0");
+                  $arrayUnidad = admin::dbFillArray("select uni_uid, uni_description from mdl_unidad where uni_delete=0 order by uni_uid");
+                  if(is_array($arrayUnidad)){
+                      $unidades=true;
+                  foreach($arrayUnidad as $key=>$value)
+                   {            
+                        if($key==$uUnidad) $nuevaLinea = "";
+                        else $nuevaLinea = "<br>";
+                         
+                        ?>
+                      <input name="rav_uni_uid[]" value="<?=$key?>" class="input" type="checkbox">&nbsp;<span class="txt10"><?=$value?></span>&nbsp;<?=$nuevaLinea?>
+                        <?php
+                   }
+                  } else{
+                        $unidades=false;
+		?>
+                        <span class="txt10">No existen unidades.</span>&nbsp;
+                <?php
+                    }
+                ?>
+                  </span>
+                         
+                <a href="javascript:addUnidad();" class="small2">agregar</a> | 
+                <a href="javascript:delUnidad();" class="small3"><?=admin::labels('del');?></a>
+
+                 <div id="div_add_unidad" style="display:none;">
+		<input type="text" name="add_unidad" id="add_unidad" class="input3" onfocus="setClassInput3(this,'ON');document.getElementById('div_add_unidad_error').style.display='none';" onblur="setClassInput3(this,'OFF');document.getElementById('div_add_unidad_error').style.display='none';" onclick="setClassInput3(this,'ON');document.getElementById('div_add_unidad_error').style.display='none';"/>		
+		<a href="javascript:addUnidadOption()" class="button3"><?=admin::labels('add');?></a><a href="javascript:closeUnidad();" class="link2">Cerrar</a>		
+                 </div>
+	     <br /><span id="div_add_unidad_error" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>
+                <br />
+            </td>
+            <td width="7%">&nbsp;</td>
+            
+        </tr>
+
+        <tr>
+            <td width="5%" >Moneda:</td>
         <td>
-    <?php 
-				
-				$arrayMoneda = admin::dbFillArray("select cur_uid, cur_description from mdl_currency where cur_delete=0");
-				
-				//print_r($arrayMoneda); 
-				
-				?>
+        <?php 
+            $arrayMoneda = admin::dbFillArray("select cur_uid, cur_description from mdl_currency where cur_delete=0");
+	?>
                 <span id="div_sub_moneda">
                 <select name="rav_moneda" id="sub_moneda" class="input" >
                 <?php
@@ -93,8 +129,9 @@ $qsearch="select * from mdl_rav where rav_tipologia=1 order by rav_uid asc";
 		<a href="javascript:addCurrencyOption()" class="button3"><?=admin::labels('add');?></a><a href="javascript:closeCurrency();" class="link2">Cerrar</a>		</div>
 				<br /><span id="div_add_currency_error" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>
                 </div>
-                <br /><span id="div_sub_mount_base" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('subastas','titleerror');?></span>
+                <br />
 				</td>
+                                 <td width="7%">&nbsp;</td>
         </tr>
         <tr>
             <td width="5%" >Estado:</td>
@@ -103,8 +140,8 @@ $qsearch="select * from mdl_rav where rav_tipologia=1 order by rav_uid asc";
             	<option selected="selected" value="1"><?=admin::labels('active');?></option>
               	<option value="0"><?=admin::labels('inactive');?></option>
 			</select>
-			<span id="div_col_status" style="display:none;" class="error"></span>			</td>
-                        <input name="rav_tipo" type="hidden" value="1" />
+			<span id="div_col_status" style="display:none;" class="error"></span>			
+                        <input name="rav_tipo" type="hidden" value="<?=$tipUid?>" />
                         </td>
                 <td width="7%">&nbsp;</td>
         </tr>

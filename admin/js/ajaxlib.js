@@ -2254,6 +2254,13 @@ function addCurrency(){
 	$("#div_add_currency").hide();
 	
 	} 
+function addUnidad(){
+	if($("#div_add_unidad").css('display')=='none')
+	$("#div_add_unidad").show();
+	else
+	$("#div_add_unidad").hide();
+	
+	} 
 function addCurrency1(){
 	if($("#div_add_currency1").css('display')=='none')
 	$("#div_add_currency1").show();
@@ -2264,6 +2271,10 @@ function addCurrency1(){
 function closeCurrency()
 {
 	$("#div_add_currency").hide();
+}
+function closeUnidad()
+{
+	$("#div_add_unidad").hide();
 }
 function closeCurrency1()
 {
@@ -2289,6 +2300,29 @@ function addCurrencyOption()
 		 });	
 	}
 	else $("#div_add_currency_error").show();
+	
+}
+function addUnidadOption()
+{
+	var token = $.getUrlVar('token');
+	$("#div_add_unidad_error").hide();
+	var addCurrencyVal = $("#add_unidad").val();	
+
+	if(addCurrencyVal!="")
+	{
+	$("#div_sub_unidad").html('<img border="0" src="'+SERVER+'/admin/lib/loading.gif">');
+		$.ajax({
+		   type: "POST",
+		   url: "code/execute/addUnidad.php",
+		   data: "unidad="+addCurrencyVal+"&token="+token,
+		   success: function(msg){
+			 $("#div_sub_unidad").html(msg);
+                         $("#add_unidad").val('');
+			 $("#div_add_unidad").hide();			 
+		   }
+		 });	
+	}
+	else $("#div_add_unidad_error").show();
 	
 }
 function addCurrencyOption1()
@@ -2335,6 +2369,37 @@ function delCurrency()
 		 });	
 	}
 	else $("#div_add_currency_error").show();
+}
+function delUnidad()
+{
+   	var token = $.getUrlVar('token');
+	$("#div_add_unidad").hide();	
+	$("#div_add_unidad_error").hide();
+        var collection = document.getElementsByName('rav_uni_uid[]');
+       var lista='';
+       j=0;
+       for(i=0 ; i<collection.length;i++){
+           if(collection.item(i).checked)
+           {
+                if(j==0) lista += collection.item(i).value;
+                else lista += "," + collection.item(i).value;
+                j++;
+            }
+        }
+	if(lista!="")
+	{
+	$("#div_sub_unidad").html('<img border="0" src="'+SERVER+'/admin/lib/loading.gif">');
+		$.ajax({
+		   type: "POST",
+		   url: "code/execute/delUnidad.php",
+		   data: "lista="+lista+"&token="+token,
+		   success: function(msg){
+			 $("#div_sub_unidad").html(msg);
+			 $("#div_add_unidad").hide();			 
+		   }
+		 });	
+	}
+	else $("#div_add_unidad_error").show();
 }
 function delCurrency1()
 {

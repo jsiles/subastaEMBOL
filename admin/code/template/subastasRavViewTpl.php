@@ -19,7 +19,7 @@ $UrlProduct=admin::getDBvalue("select col_url FROM mdl_contents_languages where 
 
 $contentURL = admin::getContentUrl($con_uid,SYS_LANG);
 $rav_uid=  admin::getParam("rav_uid");
-$qsearch="select * from mdl_rav where rav_tipologia=1 and rav_uid=".$rav_uid;
+$qsearch="select * from mdl_rav where rav_tipologia=$tipUid and rav_uid=".$rav_uid;
 $db->query($qsearch);
 $rav = $db->next_record();
 ?>
@@ -62,6 +62,78 @@ $rav = $db->next_record();
             <td width="7%">&nbsp;</td>
         </tr>
         <tr>
+            <td width="5%" >Unidad Solicitante:</td>
+             <td width="20%">
+                  <span id="div_sub_unidad">
+                <?php
+                  $uUnidad = admin::getDbValue("select max(uni_uid) from mdl_unidad where uni_delete=0");
+                  $arrayUnidad = admin::dbFillArray("select uni_uid, uni_description from mdl_unidad where uni_delete=0 order by uni_uid");
+                  if(is_array($arrayUnidad)){
+                  foreach($arrayUnidad as $key=>$value)
+                   {            
+                        if($key==$uUnidad) $nuevaLinea = "";
+                        else $nuevaLinea = "<br>";
+                        $valChecked=admin::getDbValue("select count(raa_uni_uid) from mdl_rav_access where raa_uni_uid=$key and raa_rav_uid=$rav_uid");
+                        if($valChecked>0)$selectUni ='checked="checked"';
+                        else $selectUni ="";
+                        ?>
+                      <input name="rav_uni_uid[]" value="<?=$key?>" disabled="disabled" class="input" type="checkbox" <?=$selectUni?>>&nbsp;<span class="txt10"><?=$value?></span>&nbsp;<?=$nuevaLinea?>
+                        <?php
+                   }
+                  } else{
+		?>
+                        <span class="txt10">No existen unidades.</span>&nbsp;
+                <?php
+                    }
+                ?>
+                  </span>
+                         
+                
+                 <div id="div_add_unidad" style="display:none;">
+		<input type="text" name="add_unidad" id="add_unidad" class="input3" onfocus="setClassInput3(this,'ON');document.getElementById('div_add_unidad_error').style.display='none';" onblur="setClassInput3(this,'OFF');document.getElementById('div_add_unidad_error').style.display='none';" onclick="setClassInput3(this,'ON');document.getElementById('div_add_unidad_error').style.display='none';"/>		
+		<a href="javascript:addUnidadOption()" class="button3"><?=admin::labels('add');?></a><a href="javascript:closeUnidad();" class="link2">Cerrar</a>		
+                 </div>
+	     <br /><span id="div_add_unidad_error" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>
+                <br />
+            </td>
+            <td width="7%">&nbsp;</td>
+            
+        </tr>
+        <tr>
+            <td width="5%" >Moneda</td>
+        
+        <td>
+    <?php 
+				
+				$arrayMoneda = admin::dbFillArray("select cur_uid, cur_description from mdl_currency where cur_delete=0");
+				
+				?>
+                <span id="div_sub_moneda">
+                    <select name="rav_moneda" disabled="disabled" id="sub_moneda" class="input" >
+                <?php
+				foreach($arrayMoneda as $key=>$value)
+				{   
+                                    echo $rav["rav_cur_uid"];
+                                    if($key==$rav["rav_cur_uid"]) $echoSel = 'selected="selected"';
+                                    else $echoSel = "";
+                                    
+				?>
+                	<option <?=$echoSel?> value="<?=$key?>"><?=$value?></option>
+				<?php
+				}
+				?>
+                </select>
+                                &nbsp;
+
+                 <div id="div_add_currency" style="display:none;">
+		<input type="text" name="add_currency" id="add_currency" class="input3" onfocus="setClassInput3(this,'ON');document.getElementById('div_add_currency_error').style.display='none';" onblur="setClassInput3(this,'OFF');document.getElementById('div_add_currency_error').style.display='none';" onclick="setClassInput3(this,'ON');document.getElementById('div_add_currency_error').style.display='none';"/>		
+		<a href="javascript:addCurrencyOption()" class="button3"><?=admin::labels('add');?></a><a href="javascript:closeCurrency();" class="link2">Cerrar</a>		</div>
+				<br /><span id="div_add_currency_error" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>
+                </div>
+                <br /><span id="div_sub_mount_base" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('subastas','titleerror');?></span>
+				</td>
+        </tr>
+        <tr>
             <td width="5%" >Estado:</td>
             <td width="10%">
                 <?php
@@ -89,7 +161,7 @@ $rav = $db->next_record();
 	  	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 			<tr>
 				<td width="59%" align="center">
-				    <a href="subastasRavList.php?token=<?=admin::getParam("token")?>" class="button">Volver</a>
+				    <a href="subastasRavList.php?token=<?=admin::getParam("token")?>&tipUid=<?=$tipUid?>" class="button">Volver</a>
 				</td>
          
         </tr>

@@ -1,6 +1,26 @@
 <?php 
 include_once ("core/admin.php");
-admin::initialize('subastaRavParametros','subastasRavNew'); 
+$tipUid=  admin::getParam("tipUid");
+switch($tipUid){
+    case 1: $opcionMenu = "subastaRavParametros";
+            $opocionSubMenu ="subastasRavNew";
+            $etiquetaCrear = "subastasRavNew";
+            $moduleListId=8;
+            $moduleCrearId=9;
+            break;
+    case 2: $opcionMenu = "subastaRavInforme";
+            $opocionSubMenu ="subastasRavInfNew";
+            $etiquetaCrear = "subastasRavInfNew";
+            $moduleListId=11;
+            $moduleCrearId=12;
+            break;    
+    default :
+            $opcionMenu = "subastaRavParametros";
+            $opocionSubMenu ="subastasRavNew";
+         
+
+}
+admin::initialize($opcionMenu, $opocionSubMenu); 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">    
 <html>
@@ -19,7 +39,7 @@ admin::initialize('subastaRavParametros','subastasRavNew');
 <meta http-equiv="Content-Type" content="text/html; ISO-8859-1">
 <script type="text/javascript">var SERVER='<?=$domain?>'; </script>
 <script type="text/javascript" src="js/jquery.js"></script>
-<script language="javascript" type="text/javascript" src="js/ajaxlib.js"></script>
+<script language="javascript" type="text/javascript" src="js/ajaxlib.js?<?=date("Y-m-d H:i:s")?>"></script>
 <script type="text/javascript" src="js/interface.js"></script>
 <!--BEGINIMPROMTU-->
 <link rel="stylesheet" type="text/css" href="css/impromptu.css">

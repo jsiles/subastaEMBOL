@@ -12,6 +12,7 @@ $rav_monto1 =admin::getParam("rav_monto1");
 $rav_tipo =admin::getParam("rav_tipo");
 $rav_status =(admin::getParam("rav_status")==1)?"ACTIVE":"INACTIVE";
 $rav_moneda = admin::getParam("rav_moneda");
+$rav_uni_uid =admin::getParam("rav_uni_uid");
 
     $sql="update mdl_rav set ".
          "rav_rol_uid= ". $rav_rol.
@@ -21,14 +22,17 @@ $rav_moneda = admin::getParam("rav_moneda");
          ",rav_cur_uid= ". $rav_moneda.
          " where ".   
          " rav_uid=".$rav_uid;
-    //echo $sql;die;
    $db->query($sql);
 
+   if(is_array($rav_uni_uid)){
+       admin::getDbValue("delete from mdl_rav_access where raa_rav_uid=$rav_uid");
+   foreach($rav_uni_uid as $value)
+   {
+       $sql="insert into mdl_rav_access (raa_rav_uid, raa_uni_uid) values($rav_uid, $value)";
+      // echo $rav_tipo."#".$sql;
+       $db->query($sql);
+   }
+   }
    unset($_POST);//die;
-if($rav_tipo==1){
-header('Location: ../../subastasRavList.php?token='.$token);	
-}else{
-header('Location: ../../subastasRavInfList.php?token='.$token);	    
-}
-
+header("Location: ../../subastasRavList.php?token=$token&tipUid=$rav_tipo");	
 ?>

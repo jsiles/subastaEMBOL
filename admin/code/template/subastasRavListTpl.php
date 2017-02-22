@@ -18,7 +18,7 @@ else $urlFrontLang=$lang.'/';
 $UrlProduct=admin::getDBvalue("select col_url FROM mdl_contents_languages where col_con_uid=3 and col_language='".$lang."'");
 
 $contentURL = admin::getContentUrl($con_uid,SYS_LANG);
-$qsearch="select * from mdl_rav where rav_tipologia=1 and rav_delete=0 order by rav_uid asc";
+$qsearch="select * from mdl_rav where rav_tipologia=$tipUid and rav_delete=0 order by rav_uid asc";
 /********EndResetColorDelete*************/
 $_pagi_sql=$qsearch.$orderCode;
 //echo $_pagi_sql;
@@ -42,10 +42,11 @@ if ($nroReg>0)
       <td width="77%" height="40"><span class="title"><?=admin::modulesLabels()?></span></td>
       <td width="23%" height="40" align="right">
         <?php
-        $moduleId=9;
-        $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=$moduleId and mop_lab_category='Crear' and moa_rol_uid=".$_SESSION['usr_rol']."");
+       
+        $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=$moduleCrearId and mop_lab_category='Crear' and moa_rol_uid=".$_SESSION['usr_rol']."");
 	if($valuePermit=='ACTIVE'){?>
-            <a href="<?=admin::modulesLink('subastasRavNew')?>?token=<?=admin::getParam("token")?>"><?=admin::modulesLabels('subastasRavNew')?></a>
+          
+          <a href="<?=admin::modulesLink($etiquetaCrear)?>&token=<?=admin::getParam("token")?>"><?=admin::modulesLabels($etiquetaCrear)?></a>
         <?php
         }
         ?>
@@ -65,7 +66,7 @@ if ($nroReg>0)
             <td width="15%" ><span class="txt11 color2">Rol</span></td>
             <td width="11%" ><span class="txt11 color2">Monto Inferior</span></td>
             <td width="11%" ><span class="txt11 color2">Monto Superior</span></td>
-            <td width="11%"><span class="txt11 color2">Tipo</span></td>
+            <td width="11%"><span class="txt11 color2">Unidad Solicitante</span></td>
             <td width="11%"><span class="txt11 color2">Moneda</span></td>
             <td align="center" width="5%" height="5">&nbsp;</td>
             <td align="center" width="5%" height="5">&nbsp;</td>
@@ -89,7 +90,20 @@ while ($subasta_list = $pagDb->next_record())
         $rav_rol = admin::getDbValue("select rol_description from mdl_roles where rol_uid=". $subasta_list["rav_rol_uid"]);
 	$rav_monto = trim($subasta_list["rav_monto_inf"]);
 	$rav_monto1 = ($subasta_list["rav_monto_sup"]!=0)?$subasta_list["rav_monto_sup"]:"Sin l&iacute;mite";
-	$rav_tipo =  ($subasta_list["rav_tipologia"]==1)?"Par&aacute;metros":"Informe";
+        
+	$unidadArray =  admin::dbFillArray("select uni_uid, uni_description from mdl_unidad, mdl_rav_access where raa_uni_uid=uni_uid and raa_rav_uid=$rav_uid group by uni_uid, uni_description");
+        $k=0; 
+        $rav_unidad="";
+        if(is_array($unidadArray))
+        foreach($unidadArray as $key => $value)
+        {
+            if($k==0) $rav_unidad.= $value;
+            else $rav_unidad.= ",".$value;
+            $k++;
+        }
+        else $rav_unidad="Sin asignar";
+        //echo $rav_unidad;
+        //print_r($unidadArray);
         $rav_status = $subasta_list["rav_status"];
         $rav_delete = $subasta_list["rav_delete"];
         $rav_moneda = admin::getDbValue("select cur_description from mdl_currency where cur_uid=".$subasta_list["rav_cur_uid"]);
@@ -105,14 +119,14 @@ while ($subasta_list = $pagDb->next_record())
         <td width="15%" ><span <?=$dest?>><?=ucfirst(strtolower(trim(admin::toHtml($rav_rol))))?></span></td>
         <td width="11%" ><span ><?=$rav_monto?></span></td>
         <td width="11%" ><span><?=$rav_monto1?></span></td>
-        <td width="11%" ><span><?=$rav_tipo?></span></td>
+        <td width="11%" ><span><?=$rav_unidad?></span></td>
         <td width="11%" ><span><?=$rav_moneda?></span></td>
                 <td align="center" width="5%" height="5">
             <?php
-            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=8 and mop_lab_category='Ver' and moa_rol_uid=".$_SESSION['usr_rol']."");
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=$moduleListId and mop_lab_category='Ver' and moa_rol_uid=".$_SESSION['usr_rol']."");
 	if($valuePermit=='ACTIVE'){
             ?>
-                    <a href="subastasRavView.php?rav_uid=<?=$rav_uid?>&token=<?=admin::getParam("token");?>">
+                    <a href="subastasRavView.php?rav_uid=<?=$rav_uid?>&token=<?=admin::getParam("token")?>&tipUid=<?=admin::getParam("tipUid")?>">
 		<img src="lib/view_es.gif" border="0" title="<?=admin::labels('view')?>" alt="<?=admin::labels('view')?>">
 		</a>
             <?php 
@@ -126,10 +140,10 @@ while ($subasta_list = $pagDb->next_record())
 	</td>
 	<td align="center" width="5%" height="5">
             <?php
-            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=8 and mop_lab_category='Editar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=$moduleListId and mop_lab_category='Editar' and moa_rol_uid=".$_SESSION['usr_rol']."");
 	if($valuePermit=='ACTIVE'){
             ?>
-		<a href="subastasRavEdit.php?rav_uid=<?=$rav_uid?>&token=<?=admin::getParam("token");?>">
+		<a href="subastasRavEdit.php?rav_uid=<?=$rav_uid?>&token=<?=admin::getParam("token")?>&tipUid=<?=admin::getParam("tipUid")?>">
 		<img src="lib/edit_es.gif" border="0" title="<?=admin::labels('edit')?>" alt="<?=admin::labels('edit')?>">
 		</a>
             <?php 
@@ -143,7 +157,7 @@ while ($subasta_list = $pagDb->next_record())
 	</td>
 	<td align="center" width="5%" height="5">
           <?php 
-            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=8 and mop_lab_category='Eliminar' and moa_rol_uid=".$_SESSION['usr_rol']."");
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=$moduleListId and mop_lab_category='Eliminar' and moa_rol_uid=".$_SESSION['usr_rol']."");
 	if($valuePermit=='ACTIVE'){
             ?>  
 		<a href="" onclick="removeList(<?=$rav_uid?>); return false;">
@@ -159,7 +173,7 @@ while ($subasta_list = $pagDb->next_record())
 	<td align="center" width="5%" height="5">
 	<div id="status_<?=$rav_uid?>">
         <?php
-            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=8 and mop_lab_category='Estado' and moa_rol_uid=".$_SESSION['usr_rol']."");
+            $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=$moduleListId and mop_lab_category='Estado' and moa_rol_uid=".$_SESSION['usr_rol']."");
 	if($valuePermit=='ACTIVE'){
             $status = ($rav_status=='ACTIVE') ? 'active_es.gif':'inactive_es.gif';
             ?>            
@@ -217,10 +231,9 @@ else
       <td width="77%" height="40"><span class="title"><?=admin::modulesLabels()?></span></td>
     <td width="23%" height="40" align="right">
         <?php
-        $moduleId=9;
-        $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=$moduleId and mop_lab_category='Crear' and moa_rol_uid=".$_SESSION['usr_rol']."");
+        $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=$moduleCrearId and mop_lab_category='Crear' and moa_rol_uid=".$_SESSION['usr_rol']."");
 	if($valuePermit=='ACTIVE'){?>
-            <a href="<?=admin::modulesLink('subastasRavNew')?>?token=<?=admin::getParam("token")?>"><?=admin::modulesLabels('subastasRavNew')?></a>
+            <a href="<?=admin::modulesLink($etiquetaCrear)?>&token=<?=admin::getParam("token")?>"><?=admin::modulesLabels($etiquetaCrear)?></a>
         <?php
         }
         ?>

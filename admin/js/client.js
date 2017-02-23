@@ -70,16 +70,19 @@ function verifyClient()
 function nal2(flag)
 {
 	if(flag==1){
+		$('#cal2').show();
 		$('#nal2').show();
 		$('#aal2').show();
 		$('#l2a').hide();
 		$('#l2b').show();	
 	}
 	else{
+		$('#cal2').hide();
 		$('#nal2').hide();
 		$('#aal2').hide();
 		$('#l2a').show();
 		$('#l2b').hide();
+		$('#cal3').hide();
 		$('#nal3').hide();
 		$('#aal3').hide();
 		$('#l3a').show();
@@ -90,12 +93,14 @@ function nal2(flag)
 function nal3(flag)
 {
 	if(flag==1){
+		$('#cal3').show();
 		$('#nal3').show();
 		$('#aal3').show();
 		$('#l3a').hide();
 		$('#l3b').show();	
 	}
 	else{
+		$('#cal3').hide();
 		$('#nal3').hide();
 		$('#aal3').hide();
 		$('#l3a').show();
@@ -111,4 +116,51 @@ function checkinOut()
 	else{
 		$(".subDocs").attr("checked", "");
 	}
+}
+
+function checkinOut2(id)
+{
+	if(!document.getElementById('cli_doc_uid['+id+']').checked){
+		$('.subDocs2').attr("checked", "");
+	}
+}
+
+function ptsClient(token)
+{
+    uid=document.getElementById('cli_pts_uid').value
+	divx = document.getElementById('div_cli_pts_uid_select');
+  	divx.innerHTML = '<img border="0" src="lib/loading.gif">';
+ 	//instanciamos el objetoAjax
+ 	ajax=objectAjax();
+ 	ajax.open("POST", "code/execute/waytopay.php",true);
+ 	ajax.onreadystatechange=function() {
+			if (ajax.readyState==4) 
+			{
+				//mostrar resultados en esta capa
+				divx.innerHTML=ajax.responseText;
+			}
+  	}  
+ 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+ 	//enviando los valores
+  	ajax.send("uid="+uid+"&token="+token)	
+}
+
+function gsClient(token)
+{
+	uid=document.getElementById('item_uid').value
+	divx = document.getElementById('div_cli_ite_uid_select');
+  	divx.innerHTML = '<img border="0" src="lib/loading.gif">';
+ 	//instanciamos el objetoAjax
+ 	ajax=objectAjax();
+ 	ajax.open("POST", "code/execute/item.php",true);
+ 	ajax.onreadystatechange=function() {
+			if (ajax.readyState==4) 
+			{
+				//mostrar resultados en esta capa
+				divx.innerHTML=ajax.responseText;
+			}
+  	}  
+ 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+ 	//enviando los valores
+  	ajax.send("uid="+uid+"&token="+token)	
 }

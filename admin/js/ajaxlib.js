@@ -2573,3 +2573,118 @@ function deleteClientType()
 		
 			}
 	}
+	
+// Client coverage
+function changeClientCoverage()
+{
+	$('#div_client_coverage').toggle();
+	$('#div_cli_cov_uid').hide();
+}
+function coverageClientAdd()
+	{
+	token = $.getUrlVar('token');
+	document.getElementById('div_cli_cov_uid').style.display='none';
+	var client_coverage = document.getElementById('client_coverage').value;
+	if (client_coverage=="")
+		{
+		$('#div_cli_cov_uid').fadeIn();
+		}
+	else
+		{
+		divx = document.getElementById('div_cli_cov_uid_select');
+		divx.innerHTML = '<img border="0" src="lib/loading.gif">';
+		//instanciamos el objetoAjax
+				$.ajax({
+				url: 'code/execute/clientCovAdd2.php',
+				data: "cov_uid="+client_coverage+"&token="+token,
+			 			error: function(objeto){
+            						alert("Pasó lo siguiente: "+objeto.responseText);
+        						},
+						success: function(datos){
+									divx.innerHTML=datos;
+        						 }	
+				});
+		}
+	}
+
+function deleteClientCoverage()
+	{
+	token = $.getUrlVar('token');
+	var sub_cov_uid = document.getElementById('cli_cov_uid').value;
+	if (sub_cov_uid!="")
+		{
+		divx = document.getElementById('div_cli_cov_uid_select');
+		divx.innerHTML = '<img border="0" src="lib/loading.gif">';
+		
+			$.ajax({
+				url: 'code/execute/delCovClient.php',
+				data: "cov_uid="+sub_cov_uid+"&token="+token,
+			 			error: function(objeto){
+            						alert("Pasó lo siguiente: "+objeto.responseText);
+        						},
+						success: function(datos){
+									divx.innerHTML=datos;
+        						 }	
+				});
+		
+			}
+	}
+
+
+// Client item
+function changeClientItem()
+{
+	$('#div_client_item').toggle();
+	$('#div_cli_ite_uid').hide();
+}
+function itemClientAdd()
+	{
+	token = $.getUrlVar('token');
+	document.getElementById('div_cli_ite_uid').style.display='none';
+	var client_item = document.getElementById('client_item').value;
+	var item_uid = document.getElementById('item_uid').value;
+	if (client_item=="")
+		{
+		$('#div_cli_ite_uid').fadeIn();
+		}
+	else
+		{
+		divx = document.getElementById('div_cli_ite_uid_select');
+		divx.innerHTML = '<img border="0" src="lib/loading.gif">';
+		//instanciamos el objetoAjax
+				$.ajax({
+				url: 'code/execute/clientIteAdd2.php',
+				data: "ite_uid="+client_item+"&item_uid="+item_uid+"&token="+token,
+			 			error: function(objeto){
+            						alert("Pasó lo siguiente: "+objeto.responseText);
+        						},
+						success: function(datos){
+									divx.innerHTML=datos;
+        						 }	
+				});
+		}
+	}
+
+function deleteClientItem()
+	{
+	token = $.getUrlVar('token');
+	var sub_ite_uid = document.getElementById('cli_ite_uid').value;
+	var item_uid = document.getElementById('item_uid').value;
+	if (sub_ite_uid!="" && item_uid!="")
+		{
+		divx = document.getElementById('div_cli_ite_uid_select');
+		divx.innerHTML = '<img border="0" src="lib/loading.gif">';
+		
+			$.ajax({
+				url: 'code/execute/delIteClient.php',
+				data: "ite_uid="+sub_ite_uid+"&item_uid="+item_uid+"&token="+token,
+			 			error: function(objeto){
+            						alert("Pasó lo siguiente: "+objeto.responseText);
+        						},
+						success: function(datos){
+									divx.innerHTML=datos;
+        						 }	
+				});
+		
+			}
+	}

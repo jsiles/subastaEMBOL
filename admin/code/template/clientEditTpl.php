@@ -82,6 +82,33 @@ $regusers = $db->next_record();
           </tr>
           
           <tr>
+            <td>Cobertura:</td>
+            <td>
+            <div id="div_cli_cov_uid_select">
+            <select name="cli_cov_uid" class="txt10" id="cli_cov_uid">
+                <? 
+				$sql = "select cov_uid, cov_name from mdl_coverage where cov_delete=0";
+					$db2->query($sql);
+					while ($content=$db2->next_record())
+					{
+						($content["cov_uid"]==$regusers["cli_cov_uid"])?$selected="selected":$selected="";
+				?>
+            	    <option value="<?=$content["cov_uid"]?>" <?=$selected?>><?=$content["cov_name"]?></option>	
+              	<? 
+					}
+				?>
+			</select>
+            <a href="javascript:changeClientCoverage();" class="small2"><?=strtolower(admin::labels('add'));?></a> | 
+                <a href="javascript:deleteClientCoverage();" class="small3"><?=admin::labels('del');?></a>
+                <div id="div_client_coverage" style="display:none;">
+		<input type="text" name="client_coverage" id="client_coverage" class="input3" onfocus="setClassInput3(this,'ON');document.getElementById('div_cli_cov_uid').style.display='none';" onblur="setClassInput3(this,'OFF');document.getElementById('div_cli_cov_uid').style.display='none';" onclick="setClassInput3(this,'ON');document.getElementById('div_cli_cov_uid').style.display='none';"/>		
+		<a href="javascript:coverageClientAdd()" class="button3"><?=admin::labels('add');?></a><a href="javascript:changeClientCoverage();" class="link2">Cerrar</a>		</div>
+				<br /><span id="div_cli_cov_uid" style="display:none;" class="error">Covertura es necesaria</span>	</div>
+                </td>
+            <td>&nbsp;</td>
+          </tr>
+          
+          <tr>
             <td width="29%">Razon social:</td>
             <td width="64%">
 <input name="cli_socialreason" type="text" class="input" id="cli_socialreason" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_socialreason').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_socialreason').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_socialreason').style.display='none';" value="<?=$regusers["cli_socialreason"]?>" /><br /><span id="div_cli_socialreason" style="display:none;" class="error">Razon social es necesario</span>			</td>
@@ -117,6 +144,13 @@ $regusers = $db->next_record();
           </tr>
           
           <tr>
+            <td>CI Adm/legal:</td>
+            <td>
+<input name="cli_legal_ci" type="text" class="input" id="cli_legal_ci" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_legal_ci').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_legal_ci').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_legal_ci').style.display='none';" value="<?=$regusers["cli_legal_ci"]?>"  /><br /><span id="div_cli_legal_ci" style="display:none;" class="error">CI Adm/legal es necesario</span>			</td>
+            <td>&nbsp;</td>
+          </tr>
+          
+          <tr>
             <td width="29%">Nombre Adm/legal:</td>
             <td width="64%">
 <input name="cli_legalname" type="text" class="input" id="cli_legalname" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_legalname').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_legalname').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_legalname').style.display='none';" value="<?=$regusers["cli_legalname"]?>" /><br /><span id="div_cli_legalname" style="display:none;" class="error">Nombre Adm/legal es necesario</span>			</td>
@@ -128,6 +162,13 @@ $regusers = $db->next_record();
             <td width="64%">
 <input name="cli_legallastname" type="text" class="input" id="cli_legallastname" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_legallastname').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_legallastname').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_legallastname').style.display='none';" value="<?=$regusers["cli_legallastname"]?>" /><br /><span id="div_cli_legallastname" style="display:none;" class="error">Apellido Adm/legal es necesario</span>			</td>
             <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr id="cal2" style="display:none">
+            <td>CI Adm/legal (2):</td>
+            <td>
+<input name="cli_legal_ci2" type="text" class="input" id="cli_legal_ci2" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_legal_ci2').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_legal_ci2').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_legal_ci2').style.display='none';" value="<?=$regusers["cli_legal_ci2"]?>" /><br /><span id="div_cli_legal_ci2" style="display:none;" class="error">CI Adm/legal es necesario</span>			</td>
+            <td>&nbsp;</td>
           </tr>
           
           <tr>
@@ -142,6 +183,13 @@ $regusers = $db->next_record();
             <td width="64%">
 <input name="cli_legallastname2" type="text" class="input" id="cli_legallastname2" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_legallastname2').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_legallastname2').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_legallastname2').style.display='none';" value="<?=$regusers["cli_legallastname2"]?>" /><br /><span id="div_cli_legallastname2" style="display:none;" class="error">Apellido Adm/legal (2) es necesario</span>			</td>
             <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr id="cal3" style="display:none">
+            <td>CI Adm/legal (3):</td>
+            <td>
+<input name="cli_legal_ci3" type="text" class="input" id="cli_legal_ci3" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_legal_ci3').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_legal_ci3').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_legal_ci3').style.display='none';" value="<?=$regusers["cli_legal_ci3"]?>" /><br /><span id="div_cli_legal_ci3" style="display:none;" class="error">CI Adm/legal es necesario</span>			</td>
+            <td>&nbsp;</td>
           </tr>
           
           <tr>
@@ -192,10 +240,44 @@ $regusers = $db->next_record();
           </tr>
           
           <tr>
+            <td width="29%">Rubro:</td>
+            <td width="64%">
+            <?
+            (0==$regusers["cli_item_uid"])?$selected0="selected":$selected="";
+			(1==$regusers["cli_item_uid"])?$selected1="selected":$selected="";
+			?>
+            <select name="item_uid" onchange="gsClient('<?=admin::getParam("token")?>');" class="txt10" id="item_uid">
+            	<option value="0" <?=$selected0?>>Bienes</option>	
+				<option value="1" <?=$selected1?>>Servicios</option>
+			</select>
+            <div id="div_cli_ite_uid_select">
+            <select name="cli_ite_uid" class="txt10" id="cli_ite_uid">
+                <? 
+				$sql = "select ite_uid, ite_name from mdl_item where ite_delete=0 and ite_item='".$regusers["cli_item_uid"]."'";
+					$db2->query($sql);
+					while ($content=$db2->next_record())
+					{
+						($content["ite_uid"]==$regusers["cli_ite_uid"])?$selected="selected":$selected="";
+				?>
+            	    <option value="<?=$content["ite_uid"]?>" <?=$selected?>><?=$content["ite_name"]?></option>	
+              	<? 
+					}
+				?>
+			</select>
+            <a href="javascript:changeClientItem();" class="small2"><?=strtolower(admin::labels('add'));?></a> | 
+                <a href="javascript:deleteClientItem();" class="small3"><?=admin::labels('del');?></a>
+                <div id="div_client_item" style="display:none;">
+		<input type="text" name="client_item" id="client_item" class="input3" onfocus="setClassInput3(this,'ON');document.getElementById('div_cli_ite_uid').style.display='none';" onblur="setClassInput3(this,'OFF');document.getElementById('div_cli_ite_uid').style.display='none';" onclick="setClassInput3(this,'ON');document.getElementById('div_cli_ite_uid').style.display='none';"/>		
+		<a href="javascript:itemClientAdd()" class="button3"><?=admin::labels('add');?></a><a href="javascript:changeClientItem();" class="link2">Cerrar</a>		</div>
+        <br /><span id="div_cli_ite_uid" style="display:none;" class="error">Forma de pago al proveedor es necesaria</span></div>
+             </td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          
+          <tr>
             <td width="29%">Forma de pago al proveedor:</td>
             <td width="64%">
-            <div id="div_cli_pts_uid_select">
-            <select name="cli_pts_uid" class="txt10" id="cli_pts_uid">
+            <select name="cli_pts_uid" class="txt10" id="cli_pts_uid" onchange="ptsClient('<?=admin::getParam("token")?>'); return false;">
                 <? 
 				$sql = "select pts_uid, pts_type from mdl_paymenttosupplier where pts_delete=0";
 					$db2->query($sql);
@@ -207,20 +289,36 @@ $regusers = $db->next_record();
               	<? 
 					}
 				?>
-			</select><a href="javascript:changeClientType();" class="small2"><?=strtolower(admin::labels('add'));?></a> | 
-                <a href="javascript:deleteClientType();" class="small3"><?=admin::labels('del');?></a>
-                <div id="div_client_type" style="display:none;">
-		<input type="text" name="client_type" id="client_type" class="input3" onfocus="setClassInput3(this,'ON');document.getElementById('div_cli_pts_uid').style.display='none';" onblur="setClassInput3(this,'OFF');document.getElementById('div_cli_pts_uid').style.display='none';" onclick="setClassInput3(this,'ON');document.getElementById('div_cli_pts_uid').style.display='none';"/>		
-		<a href="javascript:typeClientAdd()" class="button3"><?=admin::labels('add');?></a><a href="javascript:changeClientType();" class="link2">Cerrar</a>		</div>
-        <br /><span id="div_cli_pts_uid" style="display:none;" class="error">Forma de pago al proveedor es necesaria</span></div>			</td>
+			</select>			</td>
             <td width="7%">&nbsp;</td>
           </tr>
           
           <tr>
-            <td width="29%">Datos adicionales del pago:</td>
+          <td colspan="3">
+
+          <div id="div_cli_pts_uid_select">
+<table width="92%" class="box">
+<?
+$sql2 = "select w.wtp_uid, w.wtp_name,  d.wde_description from mdl_waytopay w, mdl_way_desc d where wtp_delete=0 and wtp_pts_uid='".$regusers["cli_pts_uid"]."' and d.wde_wtp_uid=w.wtp_uid and d.wde_cli_uid='".$regusers["cli_uid"]."'";
+			$db3->query($sql2);
+			while ($content2=$db3->next_record())
+			{
+          ?>
+          <tr>
+            <td width="29%"><?=$content2["wtp_name"]?>:</td>
             <td width="64%">
-<input name="cli_pts_description" type="text" class="input" id="cli_pts_description" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_pts_description').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_pts_description').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_pts_description').style.display='none';" value="<?=$regusers["cli_pts_description"]?>" /><br /><span id="div_cli_pts_description" style="display:none;" class="error">Datos adicionales del pago es necesario</span>			</td>
+                    <input name="cli_pts_description<?=$content2["wtp_uid"]?>" type="text" class="input" id="cli_pts_description<?=$content2["wtp_uid"]?>" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_pts_description<?=$content2["wtp_uid"]?>').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_pts_description<?=$content2["wtp_uid"]?>').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_pts_description<?=$content2["wtp_uid"]?>').style.display='none';"  value="<?=$content2["wde_description"]?>" /><br /><span id="div_cli_pts_description<?=$content2["wtp_uid"]?>" style="display:none;" class="error">Datos adicionales del pago es necesario</span>
+
+			</td>
             <td width="7%">&nbsp;</td>
+          </tr>
+<? 
+			}
+?>			
+</table>
+          </div>
+
+          </td>
           </tr>
           
           <tr>

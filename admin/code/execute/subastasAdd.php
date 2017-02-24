@@ -58,6 +58,7 @@ $pro_unidad = admin::toSql($_POST["pro_unidad"],"String");
 $pro_description = admin::toSql($_POST["pro_description"],"String");
 
 $sub_uid = admin::getDBvalue("select max(sub_uid) FROM mdl_subasta");
+if(!$sub_uid) $sub_uid=0;
 $sub_uid++;
 $sql = "insert into mdl_subasta
 					(

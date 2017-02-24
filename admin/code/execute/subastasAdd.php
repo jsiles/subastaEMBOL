@@ -106,7 +106,7 @@ $sql = "insert into mdl_subasta
 					'".$dead_time."',
 					0,
 					'SUBASTA')";
-echo $sql;die;
+//echo $sql;die;
 	$db->query($sql);
 
         

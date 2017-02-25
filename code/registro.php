@@ -35,7 +35,7 @@ else  $msgP='';
                         
                         <div class="clear"></div>
                           <input name="idUser" id="idUser" type="hidden" value="<?=$uidClient?>">
-                        <a href="<?=$domain?>" onclick="altas();" class="addcart">Continuar</a>
+                        <a href="" onclick="altas('<?=$domain?>');return false;" class="addcart">Continuar</a>
 						<div class="clear"></div><label id="message" class="red"></label>
 						</form>
                     </div>

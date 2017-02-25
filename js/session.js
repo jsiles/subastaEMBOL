@@ -14,7 +14,7 @@ $.ajax({
  });
 	return false;
 }
-function altas()
+function altas(ruta)
 {
 	pass2 = $("#pass2").val();
 	pass = $("#pass").val();
@@ -32,4 +32,7 @@ function altas()
 	}else{
 		$("#message").html('Usuario, contrase&ntilde;a y/o correo electr&oacute;nico requeridos.');
 	}
+	 setTimeout(function () {
+       window.location.href = ruta; //will redirect to your blog page (an ex: blog.html)
+    }, 4000);
 }

@@ -10,8 +10,8 @@
 						<p>&nbsp;</p>
 						<form name="formLabel" id="formLabel" class="formLabel" autocomplete="off" method="post" action="<?=$domain.'/code/session.php'?>">
 						<p>
-						  <label>Usuario:</label><input name="usernameClient" id="usernameClient" type="text" value="" onkeyup="if (event.keyCode==13) document.getElementById('passwordClient').focus();"/> </p><div class="clear"></div>
-						<p><label>Contrase&ntilde;a:</label><input name="passwordClient" id="passwordClient" type="password" value="" onkeyup="if (event.keyCode==13) document.formLabel.submit();"/> </p><div class="clear"></div>
+						  <label>Usuario:</label><input name="usernameClient" id="usernameClient" type="text" value="" onkeyup="if (event.keyCode==13) document.getElementById('passwordClient').focus();"  autocomplete="off"/> </p><div class="clear"></div>
+						<p><label>Contrase&ntilde;a:</label><input name="passwordClient" id="passwordClient" type="password" value="" onkeyup="if (event.keyCode==13) document.formLabel.submit();" autocomplete="off"/> </p><div class="clear"></div>
                                                 <p>&nbsp;</p>
                         <a href="#" onclick="document.formLabel.submit();" class="addcart">Ingresar</a>
 						<!--<p><label>C&oacute;digo de seguridad:</label><input name="password" id="password" value="" /></p>-->
@@ -36,3 +36,9 @@
                     </div>
 				</div>
 			</div>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("#usernameClient").val(" ");
+	$("#passwordClient").val("");
+})
+</script>

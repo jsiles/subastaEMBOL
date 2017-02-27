@@ -119,11 +119,11 @@ while ($user_list = $pagDb->next_record())
 	
 	switch ($cli_status_main)
                       {  
-                            case 0: $cli_status_main = 'Solicitud';
+                            case 0: $cli_status_literal = 'Solicitud';
                                 break;
-                            case 1: $cli_status_main = 'Aprobado';
+                            case 1: $cli_status_literal = 'Aprobado';
                                 break;
-                            case 2: $cli_status_main = 'Rechazado';
+                            case 2: $cli_status_literal = 'Rechazado';
                                 break;
                         }
   	?> 
@@ -134,7 +134,7 @@ while ($user_list = $pagDb->next_record())
     	<td width="15%"><?=$cli_socialreason;?></td>
     	<td width="15%"><?=$cli_mainemail;?></td>
     	<td width="15%"><?=$cli_user;?></td>
-        <td width="10%"><?=$cli_status_main;?></td>        
+        <td width="10%"><?=$cli_status_literal;?></td>        
         <td align="center" width="5%" height="5">
             <?php
                 $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=14 and mop_lab_category='Ver' and moa_rol_uid=".$_SESSION['usr_rol']."");

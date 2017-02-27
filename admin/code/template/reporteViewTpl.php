@@ -151,7 +151,7 @@ $obs=admin::getDBvalue("SELECT sua_observaciones FROM mdl_subasta_adjudicar wher
         </tr>
 <?php
 
-$sql ="select concat(cli_companyname, ' ', cli_socialreason) as nombre, inc_lugar_entrega, tra_name, inl_name, inc_ajuste 
+$sql ="select cli_socialreason as nombre, inc_lugar_entrega, tra_name, inl_name, inc_ajuste 
 from mdl_incoterm, mdl_incoterm_language, mdl_transporte, mdl_client 
 where inc_inl_uid=inl_uid and inc_tra_uid=tra_uid and inc_cli_uid=cli_uid and inc_delete=0 and inc_sub_uid='$sub_uid' 
 order by inc_uid desc";

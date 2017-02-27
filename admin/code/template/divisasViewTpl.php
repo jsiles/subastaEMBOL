@@ -152,7 +152,7 @@ $prod = $db->next_record();
 				$db2->query($sql2);
 				while ($content=$db2->next_record())
 				{
-				 $clientName=admin::getDBvalue("SELECT concat(cli_companyname, ' ', cli_socialreason) FROM mdl_client where cli_uid='".$content["bid_cli_uid"]."'");
+				 $clientName=admin::getDBvalue("SELECT cli_socialreason FROM mdl_client where cli_uid='".$content["bid_cli_uid"]."'");
 				 ?><tr>
 				<td width="40%"><?=$clientName?></td>
 				<td width="30%"><?=$content["bid_date"]?></td>
@@ -217,7 +217,7 @@ while ($list = $db2->next_record())
 
 	$inc_uid = $list["inc_uid"];
 	$cli_uid = $list["inc_cli_uid"];
-	$cli_name = admin::getDBvalue("select concat(cli_companyname, ' ', cli_socialreason) as nombre from mdl_client WHERE cli_uid='".$cli_uid."'");
+	$cli_name = admin::getDBvalue("select cli_socialreason as nombre from mdl_client WHERE cli_uid='".$cli_uid."'");
 	$inc_lugar_entrega = $list["inc_lugar_entrega"];
 	$tra_uid = $list["inc_tra_uid"];
 	$tra_name = admin::getDBvalue("select tra_name from mdl_transporte WHERE tra_uid='".$tra_uid."'");

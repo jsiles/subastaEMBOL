@@ -1,6 +1,40 @@
 <?php 
 include_once ("core/admin.php");
-admin::initialize('subastaRavInforme','subastasRavInfView'); 
+$tipUid=  admin::getParam("tipUid");
+switch($tipUid){
+    case 1: $opcionMenu = "solCompras";
+            $opocionSubMenu ="solComprasNew";
+            $etiquetaCrear = "solComprasNew";
+            $moduleListId=38;
+            $moduleCrearId=39;
+            break;
+    case 2: $opcionMenu = "subastaRavInforme";
+            $opocionSubMenu ="subastasRavInfList";
+            $etiquetaCrear = "subastasRavInfNew";
+            $moduleListId=11;
+            $moduleCrearId=12;
+            break;    
+    case 3: $opcionMenu = "ravSolicitud";
+            $opocionSubMenu ="ravSolicitudList";
+            $etiquetaCrear = "ravSolicitudNew";
+            $moduleListId=32;
+            $moduleCrearId=33;
+            break;    
+    case 4: $opcionMenu = "ravOrden";
+            $opocionSubMenu ="ravOrdenList";
+            $etiquetaCrear = "ravOrdenNew";
+            $moduleListId=35;
+            $moduleCrearId=36; 
+            break;
+    default :
+            $opcionMenu = "solCompras";
+            $opocionSubMenu ="solComprasList";
+            $etiquetaCrear = "solComprasNew";
+            $moduleListId=14;
+            $moduleCrearId=15; 
+            break;
+}
+admin::initialize($opcionMenu, $opocionSubMenu); 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">    
 <html>
@@ -19,7 +53,7 @@ admin::initialize('subastaRavInforme','subastasRavInfView');
 <meta http-equiv="Content-Type" content="text/html; ISO-8859-1">
 <script type="text/javascript">var SERVER='<?=$domain?>'; </script>
 <script type="text/javascript" src="js/jquery.js"></script>
-<script language="javascript" type="text/javascript" src="js/ajaxlib.js"></script>
+<script language="javascript" type="text/javascript" src="js/ajaxlib.js?<?=date("Y-m-d H:i:s")?>"></script>
 <script type="text/javascript" src="js/interface.js"></script>
 <!--BEGINIMPROMTU-->
 <link rel="stylesheet" type="text/css" href="css/impromptu.css">
@@ -86,7 +120,7 @@ function removeList(id){
 <tr><td valign="top"><?php include_once("skin/header.php");?>
 </td></tr>
   <tr>
-    <td valign="top" id="content"><?php include_once("code/template/subastasRavInfViewTpl.php"); ?></td>
+    <td valign="top" id="content"><?php include_once("code/template/solicitudNewTpl.php"); ?></td>
   </tr>
 <tr><td>
   <?php include("skin/footer.php"); ?>

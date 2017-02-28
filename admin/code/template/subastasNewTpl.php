@@ -8,25 +8,6 @@
 		</td>
 		<td width="23%" height="40">&nbsp;</td>
 	</tr>
-   <!-- <tr><td colspan="2">
-    
-         <div id="contentButton">
-	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
-		<tr>
-		<td width="59%" align="center">
-		<a href="javascript:verifysubasta();" class="button">
-		Guardar
-		</a> 
-		</td>
-		<td width="41%" style="font-size:11px;">
-		<?=admin::labels('or');?> <a href="subastasList.php?token=<?=admin::getParam("token")?>" ><?=admin::labels('cancel');?></a> 
-		</td>
-		</tr>
-	</table>
-</div>
-
-    </td></tr>
-	<tr><td colspan="2"><br /></td></tr> -->
   	<tr>
 	<td colspan="2" id="contentListing">
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -111,7 +92,7 @@
 		 <tr>
             <td><?=admin::labels('annex','adjunt');?>: </td>
             <td><input type="file" name="pro_adjunt" id="pro_adjunt" size="31" class="input">
-</textarea></td>
+            </td>
           </tr>
           <tr>
             <td valign="top"><?=admin::labels('status');?></td>
@@ -133,28 +114,7 @@
           <tr>
             <td colspan="3" class="titleBox"><?=admin::labels('data');?> subasta:</td>
           </tr>
-    <!--      <tr>
-			<td><?=admin::labels('date','event');?>:</td>
-			<td valign="top">
-			<table border="0" cellpadding="0" cellspacing="0" width="100%">
-				<tr><td width="28%" valign="middle"> 
-				<input name="sub_date" type="text" class="input"  id="sub_date" value="<?=date("d/m/Y");?>" size="15" readonly="">
-				</td><td width="72%" valign="middle">
-				<a href="javascript:void(0)" onClick="if(self.gfPop)gfPop.fPopCalendar(document.frmsubasta.sub_date);return false;" >
-				<img border="0" src="calendario/icon_calendar.gif">				</a>
-				</td>
-				</tr>
-				</table>			
-				</td>
-				</tr>
-				
-				<tr>
-					<td><?=admin::labels('hour');?> a comenzar:</td>
-					<td><input name="sub_hour" type="text" class="input" id="sub_hour" onfocus="setClassInput(this,'ON');" onblur="setClassInput(this,'OFF');" onclick="setClassInput(this,'ON');" value="<?=date('H:i')?>" size="15"/>
-					</td>
-				</tr>
--->                
-	<tr>
+  	<tr>
 				<td width="29%">Modalidad de subasta:</td>
 				<td width="64%">
 				<select name="sub_modalidad" id="sub_modalidad" class="input" onchange="subastaOpcion();" >

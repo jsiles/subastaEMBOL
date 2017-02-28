@@ -164,7 +164,7 @@ $qsearch="select * from mdl_rav where rav_tipologia=$tipUid order by rav_uid asc
 				</a> 
 				</td>
           <td width="41%" style="font-size:11px;">
-		  		<?=admin::labels('or');?> <a href="subastasRavList.php?token=<?=admin::getParam("token")?>" ><?=admin::labels('cancel');?></a> 
+		  		<?=admin::labels('or');?> <a href="subastasRavList.php?tipUid=<?=$tipUid?>&token=<?=admin::getParam("token")?>" ><?=admin::labels('cancel');?></a> 
 		  </td>
         </tr>
       </table></div>

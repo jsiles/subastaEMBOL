@@ -1,238 +1,466 @@
+<script language="javascript" type="text/javascript">
+function verifyFileUpload()
+	{
+	document.getElementById('div_sol_document').style.display="none";
+	var cv = document.getElementById('sol_document').value;
+	var filepart = cv.split(".");
+	var part = filepart.length-1;
+	var extension = filepart[part];
+	extension = extension.toLowerCase();
+	if (extension!='jpg' && extension!='jpeg' && extension!='bmp' && extension!='gif' && extension!='png'&& extension!='doc'&& extension!='docx'&& extension!='xls'&& extension!='xlsx'&& extension!='pdf')	
+		{
+		document.getElementById('sol_document').value="";
+		$('#div_sol_document').fadeIn(500);
+		}
+	}
+</script>
+
 <?php
-$cli_uid=admin::toSql($_REQUEST["cli_uid"],"String");
-$sql = "select * from mdl_client where cli_uid=".$cli_uid;
-$db->query($sql);
-$regusers = $db->next_record();
+define(SYS_LANG,$lang);
+if ($lang=='es') $urlFrontLang='';
+else $urlFrontLang=$lang.'/';
+$sol_uid=  admin::getParam("sol_uid");
+$sSQL="select * from mdl_solicitud_compra where sol_uid=$sol_uid";
+$db->query($sSQL);
+$solEdit=$db->next_record();
 ?>
-<br />
-<form name="frmClient" method="post" action="code/execute/clientUpd.php?token=<?=admin::getParam("token");?>" onsubmit="return false;" enctype="multipart/form-data">
-<input type="hidden" name="cli_uid" value="<?=$regusers["cli_uid"]?>" />
+<div id="DIV_WAIT1" style="display:none;"><img border="0" src="lib/loading.gif"></div>
+<br>
+<form name="updSol" method="post" action="code/execute/solicitudUpd.php?token=<?=admin::getParam("token")?>" enctype="multipart/form-data">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="77%" height="40"><span class="title">Ver proveedor</span></td>
+    <td width="77%" height="40"><span class="title"><?=admin::modulesLabels()?></span></td>
     <td width="23%" height="40">&nbsp;</td>
   </tr>
   <tr>
     <td colspan="2" id="contentListing"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td width="50%" valign="top"><table width="98%" border="0" cellpadding="5" cellspacing="5" class="box">
-          <tr>
-            <td colspan="3" class="titleBox"><?=admin::labels('user','personaldata');?></td>
-            </tr>
+         <tr>
+            <td colspan="3" class="titleBox">Datos Solicitud</td>
+         </tr>
           
-           <tr>
-               <td width="29%">NIT o CI:</td>
-            <td width="64%"><?=$regusers["cli_nit_ci"]?></td>
-            <td width="7%">&nbsp;</td>
-          </tr>
-          
-          <tr>
-               <td >Codigo interno:</td>
-            <td><?=$regusers["cli_interno"]?></td>
-            <td>&nbsp;</td>
-          </tr>
-          
-          <tr>
-            <td width="29%">Clasificacion juridica:</td>
-            <td width="64%">
-            	<? 
-				$sql = "select lec_name from mdl_legalclassification where lec_delete=0 and lec_uid='".$regusers["cli_lec_uid"]."'";
-					$db2->query($sql);
-					while ($content=$db2->next_record())
-					{
-				?>
-            	    <?=$content["lec_name"]?>	
-              	<? 
-					}
-				?>
+	<tr>
+            <td width="5%" >Unidad Solicitante:</td>
+             <td width="20%">
+                                 <input name="sol_uid" id="sol_uid" value="<?=$sol_uid?>" type="hidden" />
+                <input name="tipUid" id="tipUid" value="<?=$tipUid?>" type="hidden" />
+
+                  <span id="div_sub_unidad">
+                <?php
+                  $uUnidad = admin::getDbValue("select max(uni_uid) from mdl_unidad where uni_delete=0");
+                  $arrayUnidad = admin::dbFillArray("select uni_uid, uni_description from mdl_unidad where uni_delete=0 order by uni_uid");
+                  if(is_array($arrayUnidad)){
+                      $unidades=true;
+                  foreach($arrayUnidad as $key=>$value)
+                   {            
+                      
+                        if($key==$uUnidad) $nuevaLinea = "";
+                        else $nuevaLinea = "<br>";
+                        $valChecked=admin::getDbValue("select count(sou_uni_uid) from mdl_solicitud_unidad where sou_uni_uid=$key and sou_sol_uid=$sol_uid");
+                        if($valChecked>0)$selectUni ='checked="checked"';
+                        else $selectUni ="";
+                        ?>
+                      <input name="rav_uni_uid[]" disabled="disabled" value="<?=$key?>" class="input" type="checkbox" <?=$selectUni?>>&nbsp;<span class="txt10"><?=$value?></span>&nbsp;<?=$nuevaLinea?>
+                        <?php
+                   }
+                  } else{
+                        $unidades=false;
+		?>
+                        <span class="txt10">No existen unidades.</span>&nbsp;
+                <?php
+                    }
+                ?>
+                  </span>
+                         
+                <a href="javascript:addUnidad();" class="small2">agregar</a> | 
+                <a href="javascript:delUnidad();" class="small3"><?=admin::labels('del');?></a>
+
+                 <div id="div_add_unidad" style="display:none;">
+		<input type="text" name="add_unidad" id="add_unidad" class="input3" onfocus="setClassInput3(this,'ON');document.getElementById('div_add_unidad_error').style.display='none';" onblur="setClassInput3(this,'OFF');document.getElementById('div_add_unidad_error').style.display='none';" onclick="setClassInput3(this,'ON');document.getElementById('div_add_unidad_error').style.display='none';"/>		
+		<a href="javascript:addUnidadOption()" class="button3"><?=admin::labels('add');?></a><a href="javascript:closeUnidad();" class="link2">Cerrar</a>		
+                 </div>
+	     <br /><span id="div_add_unidad_error" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>
+                <br />
             </td>
             <td width="7%">&nbsp;</td>
-          </tr>
-          
-          <tr>
-            <td width="29%">Razon social:</td>
-            <td width="64%"><?=$regusers["cli_socialreason"]?></td>
-            <td width="7%">&nbsp;</td>
-          </tr>
-          
-          <tr>
-            <td width="29%">Direccion legal:</td>
-            <td width="64%"><?=$regusers["cli_legaldirection"]?></td>
-            <td width="7%">&nbsp;</td>
-          </tr>
-          
-          <tr>
-            <td width="29%">Telefono fijo:</td>
-            <td width="64%"><?=$regusers["cli_phone"]?></td>
-            <td width="7%">&nbsp;</td>
-          </tr>
-          
-          <tr>
-            <td width="29%">Email administrativo:</td>
-            <td width="64%"><?=$regusers["cli_mainemail"]?></td>
-            <td width="7%">&nbsp;</td>
-          </tr>
-          
-          <tr>
-            <td width="29%">Email comercial:</td>
-            <td width="64%"><?=$regusers["cli_commercialemail"]?></td>
-            <td width="7%">&nbsp;</td>
-          </tr>
-          
-          <tr>
-            <td width="29%">Nombre Adm/legal:</td>
-            <td width="64%"><?=$regusers["cli_legalname"]?></td>
-            <td width="7%">&nbsp;</td>
-          </tr>
-          
-          <tr>
-            <td width="29%">Apellido Adm/legal:</td>
-            <td width="64%"><?=$regusers["cli_legallastname"]?></td>
-            <td width="7%">&nbsp;</td>
-          </tr>
-          
-          <tr>
-            <td width="29%">Nombre Adm/legal (2):</td>
-            <td width="64%"><?=$regusers["cli_legalname2"]?></td>
-            <td width="7%">&nbsp;</td>
-          </tr>
-          
-          <tr>
-            <td width="29%">Apellido Adm/legal (2):</td>
-            <td width="64%"><?=$regusers["cli_legallastname2"]?></td>
-            <td width="7%">&nbsp;</td>
-          </tr>
-          
-          <tr>
-            <td width="29%">Nombre Adm/legal (3):</td>
-            <td width="64%"><?=$regusers["cli_legalname3"]?></td>
-            <td width="7%">&nbsp;</td>
-          </tr>
-          
-          <tr>
-            <td width="29%">Apellido Adm/legal (3):</td>
-            <td width="64%"><?=$regusers["cli_legallastname3"]?></td>
-            <td width="7%">&nbsp;</td>
-          </tr>
-          
-          <tr>
-            <td width="29%">Nombre comercial:</td>
-            <td width="64%"><?=$regusers["cli_commercialname"]?></td>
-            <td width="7%">&nbsp;</td>
-          </tr>
-          
-          <tr>
-            <td width="29%">Apellido comercial:</td>
-            <td width="64%"><?=$regusers["cli_commerciallastname"]?></td>
-            <td width="7%">&nbsp;</td>
-          </tr>
-          
-          
-        </table></td>
-        <td width="50%" valign="top">
-        <table width="98%" border="0" cellpadding="5" cellspacing="5" class="box">
-                  
-          <tr>
-            <td width="29%">Usuario:</td>
-            <td width="64%"><?=$regusers["cli_user"]?></td>
-            <td width="7%">&nbsp;</td>
-          </tr>
-          
-          <tr>
-            <td width="29%">Contrase&ntilde;a:</td>
-            <td width="64%">***************</td>
-            <td width="7%">&nbsp;</td>
-          </tr>
-          
-          <tr>
-            <td width="29%">Forma de pago al proveedor:</td>
-            <td width="64%">
-                <? 
-				$sql = "select pts_type from mdl_paymenttosupplier where pts_delete=0 and pts_uid='".$regusers["cli_pts_uid"]."'";
-					$db2->query($sql);
-					while ($content=$db2->next_record())
-					{
-				?>
-            	    <?=$content["pts_type"]?>	
-              	<? 
-					}
-				?>
-			</td>
-            <td width="7%">&nbsp;</td>
-          </tr>
-          
-          <tr>
-            <td width="29%">Datos adicionales del pago:</td>
-            <td width="64%"><?=$regusers["cli_pts_description"]?></td>
-            <td width="7%">&nbsp;</td>
-          </tr>
-          
-          <tr>
-            <td width="29%">Documentacion:</td>
-            <td width="64%">
-                <? 
-				$sql = "select doc_uid, doc_name from mdl_documents where doc_delete=0 and doc_uid!=10";
-					$db2->query($sql);
-					$check = '';
-					while ($content=$db2->next_record())
-					{
-						$MaxUid = admin::getDbValue("SELECT count(dcl_uid) FROM mdl_documentsclient WHERE dcl_cli_uid='".$regusers["cli_uid"]."' and dcl_doc_uid='".$content["doc_uid"]."'");
-						if ($MaxUid==0){
-							$check = '';
-						}
-						else{
-							$check = 'checked="checked"';
-						}
-				?>
-            	    <input disabled="disabled" <?=$check?> id="cli_doc_uid[<?=$content["doc_uid"]?>]" name="cli_doc_uid[<?=$content["doc_uid"]?>]" type="checkbox" /><?=$content["doc_name"]?>	<br />
-              	<? 
-					}
-				?>
-					</td>
-            <td width="7%">&nbsp;</td>
-          </tr>
-          
-          <tr>
-            <td width="16%"><?=admin::labels('photo');?>:</td>
-            <td width="84%">
-            	<img src="<?=$domain?>/img/client/thumb_<?=$regusers["cli_logo"]?>?<?=time()?>" alt="<?=$regusers["cli_user"]?>" title="<?=$regusers["cli_user"]?>" border="0"/>
-			</td>
-          </tr>
-          
-		  <tr>
-            <td><?=admin::labels('status');?>:</td>
-            <td><?
-				switch ($cli_status)
-                      {  
-                            case 0: echo 'Solicitud';
-                                break;
-                            case 1: echo 'Aprobado';
-                                break;
-                            case 2: echo 'Rechazado';
-                                break;
-                          
-                        }
-			?></td>
-            <td>&nbsp;</td>
-          </tr>
-        </table>
-        </td>
-      </tr>
-    </table></td>
-    </tr>
-</table>
-	  </form>
-      <br />
-      <br />
-      <div id="contentButton">
-	  	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
-			<tr>
-				<td width="25%" align="center">&nbsp;
-				
-				</td>
-          <td width="75%" style="font-size:11px;">
-		  		<a href="clientList.php?token=<?=admin::getParam("token")?>" class="button">Salir</a> 
-		  </td>
+            
         </tr>
-      </table></div>
-<br /><br /><br />
+        <tr>
+            <td width="5%" >Observaciones:</td>    
+            <td width="20%" ><input name="sol_observaciones" disabled="disabled" value="<?=$solEdit["sol_observaciones"]?>" class="input"></td>
+            <td width="7%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="5%" >Documento:</td>
+            <td width="20%" >
+            <input name="tipUid" type="hidden" value="<?=$tipUid?>" class="input">
+                        <?php
+			$docsSavedroot = PATH_ROOT."/docs/subasta/".$solEdit["sol_doc"];
+                        $extension = pathinfo($docsSavedroot, PATHINFO_EXTENSION);
+                        //echo $solEdit["sol_doc"]."##";
+			if (file_exists($docsSavedroot) && $solEdit["sol_doc"]!=""){
+                            switch ($extension){
+                                case 'png':
+                                    $imgSaved=PATH_DOMAIN."/admin/lib/ext/image.gif";
+                                    break;
+                                case 'pdf':
+                                    $imgSaved=PATH_DOMAIN."/admin/lib/ext/pdf.gif";
+                                    break;
+                                case 'xls':
+                                    $imgSaved=PATH_DOMAIN."/admin/lib/ext/excel.gif";
+                                    break;
+                                case 'xlsx':
+                                    $imgSaved=PATH_DOMAIN."/admin/lib/ext/excel.gif";
+                                    break;
+                                case 'doc':
+                                    $imgSaved=PATH_DOMAIN."/admin/lib/ext/word.gif";
+                                    break;
+                                case 'docx':
+                                    $imgSaved=PATH_DOMAIN."/admin/lib/ext/word.gif";
+                                    break;
+                                
+                                default :
+                                    $imgSaved=PATH_DOMAIN."/admin/lib/ext/doc-txt.png";
+                                    break;
+                            }
+                              // echo $imgSaved."##".$extension;
+			?>
+			<div id="image_edit_<?=$solEdit["sol_uid"]?>">
+			<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tableUpload">
+			<tr>
+				<td width="25%" rowspan="2" align="center" valign="middle" style="padding:4px;">
+                                    <img src="<?=$imgSaved?>?<?=time();?>" border="0" />
+                                </td>
+				<td width="75%" style="font-size:11px;">
+				<?=$solEdit["sol_doc"];?><br />
+				<a href="javascript:viewInputFile('on')" title="<?=admin::labels('change');?>" class="small2"><?=admin::labels('change');?></a>
+				<span class="pipe">|</span> <a href="#" onclick="removeImg(<?=$regusers["cli_uid"]?>);return false;" title="<?=admin::labels('del')?>" class="small3"><?=admin::labels('del')?></a>				</td>
+			</tr>
+			<tr>
+				<td height="24">
+				<div id="imageChange1" style="display:none">
+                                    <input type="file" name="sol_document" id="sol_document" size="14" style="font-size:11px;" onclick="verifyFileUpload()" >  
+                        <a href="javascript:viewInputFile('off')" 
+                           onclick="document.getElementById('sol_document').value='';document.getElementById('button_next').innerHTML='<?=admin::labels('public');?>';">
+                            <img border="0" src="lib/close.gif" align="top"/></a>
+			
+			<span id="div_sol_document" class="error" style="display:none">Solo archivos jpg bmp gif png doc pdf xls</span></div></td>
+			</tr>
+			</table>
+			</div>
+			<div id="image_add_<?=$solEdit["sol_uid"]?>" style="display:none;"></div>
+			<?php
+                        }
+			else
+				{ ?>
+				<input type="file" name="sol_document" id="cli_photo" size="32" class="input" onchange="verifyFileUpload();">
+				<span id="div_sol_document" class="error" style="display:none">Solo archivos jpg bmp gif png </span>	
+			<?php
+                        } 
+                        ?>
+            
+            
+            
+            </td>
+            <td width="7%">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td width="5%" >Proveedores:</td>
+            <td width="20%">
+         <?php
+        $arrayClient = admin::dbFillArray("select cli_uid, cli_socialreason as name from mdl_client where cli_delete=0 ");
+        if(is_array($arrayClient))
+        {
+	foreach($arrayClient as $value=>$name)
+	{
+                  $valChecked=admin::getDbValue("select count(sop_cli_uid) from mdl_solicitud_proveedor where sop_cli_uid=$value and sop_sol_uid=$sol_uid");
+                  if($valChecked>0)$selectUni ='checked="checked"';
+                  else $selectUni ="";
+                  
+	?>
+                <input name="sol_cli_uid[]" disabled="disabled" type="checkbox" value="<?=$value?>" size="9" <?=$selectUni?> /><?=$name?><br />
+    <?php
+        }
+        }
+        else{
+	?>
+           No existen proveedores.
+        <?php
+        }
+        ?>
+            </td>
+                       <td width="7%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td valign="top"><?=admin::labels('status');?></td>
+            <td><select name="sol_status" class="listMenu" id="sol_status">
+                    <option selected="selected" disabled="disabled" value="ACTIVE"><?=admin::labels('active');?></option>
+              	<option value="INACTIVE"><?=admin::labels('inactive');?></option>
+			</select>
+			<span id="div_sol_status" style="display:none;" class="error"></span></td>
+                       <td width="7%">&nbsp;</td>
+        </tr>
+        
+        
+    </table>
+            
+</div>
+</td></tr>
+</table>
+    </td>
+  </tr>
+</table>
+     </form>  
+     <br>
+            <br>
+            <br>
+
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+   <tr>
+      <td width="77%" height="40"><span class="title">Material solicitado</span></td>
+    <td width="23%" height="40">&nbsp;</td>
+  </tr>
+    <tr>
+    <td colspan="2" id="contentListing0">
+    <div class="row0" style="display:none">
+    <table class="list" width="100%">
+	<tr><td width="12%" style="color:#16652f">Nivel 1&nbsp;</td>
+    <td width="12%" style="color:#16652f">Nivel 2&nbsp;</td>
+    <td width="12%" style="color:#16652f">Nivel 3&nbsp;</td>
+    <td width="12%" style="color:#16652f">Descripci&oacute;n&nbsp;</td>
+    <td width="12%" style="color:#16652f">Cantidad&nbsp;</td>
+    <td width="12%" style="color:#16652f">Unidad&nbsp;</td>
+    <td align="center" width="12%" height="5">&nbsp;</td>
+    
+	</tr>
+	</table>
+    </div>
+        <div id="add<?=$ind_uid?>" class="row0" style="display:none">
+    <form name="frmSolicitud" action="code/execute/solAdd2.php" enctype="multipart/form-data" > 
+	<table class="list" width="100%">
+	<tr>
+            
+            <td width="12%">
+	   <div id="div_nivel1_select">
+				<select name="nivel1_uid" id="nivel1_uid" class="input" onchange="actualizaNiveles()">
+                                    <option value="" selected="selected">Seleccionar</option>
+                	<?php
+                    $sql = "select ca1_uid, ca1_description from mdl_categoria1 where ca1_delete=0";
+					$db2->query($sql);
+					while ($content=$db2->next_record())
+					{	
+					?>
+					<option value="<?=$content["ca1_uid"]?>"><?=$content["ca1_description"]?></option>					
+					<?php
+					}
+                    ?>
+				</select>
+                <a href="adicionar" onclick="addNivel1();return false;" class="small2"><?=strtolower(admin::labels('add'));?></a> | 
+                <a href="borrar" onclick="deleteNivel1();return false;" class="small3"><?=admin::labels('del');?></a>
+                <div id="div_nivel1" style="display:none;">
+		<input type="text" name="nivel1" id="nivel1" class="input3" 
+                       onfocus="setClassInput3(this,'ON');document.getElementById('div_nivel1_error').style.display='none';" 
+                       onblur="setClassInput3(this,'OFF');document.getElementById('div_nivel1_error').style.display='none';" 
+                       onclick="setClassInput3(this,'ON');document.getElementById('div_nivel1_error').style.display='none';"/>		
+                
+		<a href="" onclick="nivel1Add();return false;" class="button3"><?=admin::labels('add');?></a><a href="javascript:addNivel1();" class="link2">Cerrar</a>		
+                </div>
+				<br /><span id="div_nivel1_error" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>
+                </div>
+                <input name="sol_uid" id="sol_uid" value="<?=$sol_uid?>" type="hidden" />
+                <input name="tipUid" id="tipUid" value="<?=$tipUid?>" type="hidden" />
+            </td>
+            
+            
+    <td width="12%">
+	   <div id="div_nivel2_select">
+				<select name="nivel2_uid" id="nivel2_uid" class="input"  >
+                                 <option value="" selected="selected" onchange="actualizaNiveles2();">Seleccionar</option>
+				</select>
+               <a href="adicionar" onclick="addNivel2();return false;" class="small2"><?=strtolower(admin::labels('add'));?></a> | 
+                <a href="borrar" onclick="deleteNivel2();return false;" class="small3"><?=admin::labels('del');?></a>
+                <div id="div_nivel2" style="display:none;">
+		<input type="text" name="nivel2" id="nivel2" class="input3" 
+                       onfocus="setClassInput3(this,'ON');document.getElementById('div_nivel2_error').style.display='none';" 
+                       onblur="setClassInput3(this,'OFF');document.getElementById('div_nivel2_error').style.display='none';" 
+                       onclick="setClassInput3(this,'ON');document.getElementById('div_nivel2_error').style.display='none';"/>		
+                
+		<a href="" onclick="nivel2Add();return false;" class="button3"><?=admin::labels('add');?></a><a href="javascript:addNivel2();" class="link2">Cerrar</a>		
+                </div>
+				<br /><span id="div_nivel2_error" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>
+               
+           </div>
+    </td>
+    <td width="12%">
+	   <div id="div_nivel3_select">
+				<select name="nivel3_uid" id="nivel3_uid" class="input"  >
+                                 <option value="" selected="selected">Seleccionar</option>
+				</select>
+               <a href="adicionar" onclick="addNivel3();return false;" class="small2"><?=strtolower(admin::labels('add'));?></a> | 
+                <a href="borrar" onclick="deleteNivel3();return false;" class="small3"><?=admin::labels('del');?></a>
+                <div id="div_nivel3" style="display:none;">
+		<input type="text" name="nivel3" id="nivel3" class="input3" 
+                       onfocus="setClassInput3(this,'ON');document.getElementById('div_nivel3_error').style.display='none';" 
+                       onblur="setClassInput3(this,'OFF');document.getElementById('div_nivel3_error').style.display='none';" 
+                       onclick="setClassInput3(this,'ON');document.getElementById('div_nivel3_error').style.display='none';"/>		
+                
+		<a href="" onclick="nivel3Add();return false;" class="button3"><?=admin::labels('add');?></a><a href="javascript:addNivel3();" class="link2">Cerrar</a>		
+                </div>
+				<br /><span id="div_nivel3_error" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>
+               
+           </div>
+    </td>
+    <td width="12%">
+        <input type="text" class="input3" name="sol_description" id="sol_description" />
+        <br /><span id="div_sol_description_error" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>
+	</td>
+<td width="12%">
+    <input type="text" class="input3" name="sol_cantidad" id="sol_cantidad" />
+    <br /><span id="div_sol_cantidad_error" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>
+	</td>
+<td width="12%">
+    <input type="text" class="input3" name="sol_unidad" id="sol_unidad" />
+    <br /><span id="div_sol_unidad_error" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>
+	</td>
+<td width="12%">
+    <a href="guardar" onclick="verifySolicitud(); return false;">
+		<img src="lib/save_es.gif" border="0" title="<?=admin::labels('save')?>" alt="<?=admin::labels('save')?>">
+		</a>
+	</td>
+
+    </tr>
+    <tr><td><div id='autocomplete' style="display:none"></div> </td></tr>
+	</table>
+    <input name="token" id="token" value="<?=admin::getParam("token")?>" type="hidden" />
+	</form>
+    </div>
+    
+    </td>
+    </tr>
+   <?php 
+   $sSQL= "select * from mdl_solicitud_material where som_sol_uid=$sol_uid and som_delete=0";
+   //echo $sSQL;
+   $nroReg = $db2->numrows($sSQL);
+$db2->query($sSQL);
+if ($nroReg>0)
+	{
+	?> 
+   <tr>
+      <td width="77%" height="40"><span class="title"><?=admin::labels('list','dpflist')?></span></td>
+    <td width="23%" height="40">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2" id="contentListing">
+    <div class="row0">
+    <table class="list" width="100%">
+    <tr>
+        <td width="12%" style="color:#16652f">Nivel 1</td>
+        <td width="12%" style="color:#16652f">Nivel 2</td>
+        <td width="12%" style="color:#16652f">Nivel 3</td>
+        <td width="12%" style="color:#16652f">Descripci&oacute;n</td>
+        <td width="12%" style="color:#16652f">Cantidad</td>
+        <td width="12%" style="color:#16652f">Unidad</td>
+	<td align="center" width="12%" height="5">&nbsp;</td>
+    </tr>
+	</table>
+    </div>
+<div class="itemList" id="itemList" style="width:99%">  
+	<?php
+$i=1;
+while ($list = $db2->next_record())
+	{
+	$som_uid=$list["som_uid"];
+	$som_sol_uid=$list["som_sol_uid"];
+	$som_ca1_uid=admin::getDbValue("select ca1_description from mdl_categoria1 where ca1_uid=".$list["som_ca1_uid"]);
+	$som_ca2_uid=admin::getDbValue("select ca2_description from mdl_categoria2 where ca2_uid=".$list["som_ca2_uid"]);
+	$som_ca3_uid=admin::getDbValue("select ca3_description from mdl_categoria3 where ca3_uid=".$list["som_ca3_uid"]);
+	$som_description=$list["som_description"];
+	$som_cantidad=$list["som_cantidad"];
+	$som_unidad=$list["som_unidad"];
+
+	if ($i%2==0) $class='row0';
+	else  $class='row';
+	if ($i%2==0) $class2='row';
+	else  $class2='row1';
+  	?> 
+    <div class="groupItem" id="<?=$som_uid?>">
+  	<div id="list_<?=$som_uid?>" class="<?=$class?>" style="width:100%" >
+<table class="list" width="100%">
+	<tr>
+    <td width="12%"><?=$som_ca1_uid?></td>
+    <td width="12%"><?=$som_ca2_uid?></td>
+    <td width="12%"><?=$som_ca3_uid?></td>
+    <td width="12%"><?=$som_description?></td>
+    <td width="12%"><?=$som_cantidad?></td>
+    <td width="12%"><?=$som_unidad?></td>
+	<td align="center" width="12%" height="5">
+		<!--<a href="#" onclick="removeList(<?=$som_uid?>);return false;">
+		<img src="lib/delete_es.gif" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
+		</a>-->
+	</td>
+	</tr>
+	</table>
+	</div>
+    </div>
+    
+	<?php
+	$i++;
+	} 
+ ?>
+</div> 
+    </td>
+    </tr>
+    <?php
+    } 
+else
+	{ ?>
+    <tr>
+    <td colspan="2"><br /></td>
+    </tr>
+  <tr>
+    <td colspan="2">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">   
+  <tr>
+    <td colspan="2" id="contentListing">
+<div  style="background-color: #f7f8f8;">
+<table class="list"  width="100%">
+	<tr><td height="30px" align="left" class="bold">
+	No existen registros
+	</td></tr>	
+ </table>
+</div>
+</td></tr></table>
+</td>
+</tr>
+<?php 	} ?>
+<tr>
+<td colspan="2">
+    <br>
+    <br>
+
+<br /><br /><br /><br /><br />
+</td></tr>
+</table>
+           
+    
+<br />
+      <br />
+      
+      <div id="contentButton"  style="display:">
+      <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subasta" >
+			<tr>
+				<td width="59%" align="center">
+                                    <a href="solicitudList.php?tipUid=<?=$tipUid?>&token=<?=admin::getParam("token")?>" onclick=";" class="button">Finalizar</a></td>
+		
+        </tr>
+      </table>
+      
+      </div>
+<br />
+<br />
+    
+      <br />
+      <br />
+

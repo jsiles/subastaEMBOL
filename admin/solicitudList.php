@@ -8,30 +8,18 @@ switch($tipUid){
             $moduleListId=38;
             $moduleCrearId=39;
             break;
-    case 2: $opcionMenu = "subastaRavInforme";
-            $opocionSubMenu ="subastasRavInfList";
-            $etiquetaCrear = "subastasRavInfNew";
-            $moduleListId=11;
-            $moduleCrearId=12;
+    case 2: $opcionMenu = "aprCompras";
+            $opocionSubMenu ="aprComprasList";
+            $etiquetaCrear = "aprComprasNew";
+            $moduleListId=41;
+            $moduleCrearId=42;
             break;    
-    case 3: $opcionMenu = "ravSolicitud";
-            $opocionSubMenu ="ravSolicitudList";
-            $etiquetaCrear = "ravSolicitudNew";
-            $moduleListId=32;
-            $moduleCrearId=33;
-            break;    
-    case 4: $opcionMenu = "ravOrden";
-            $opocionSubMenu ="ravOrdenList";
-            $etiquetaCrear = "ravOrdenNew";
-            $moduleListId=35;
-            $moduleCrearId=36; 
-            break;
     default :
             $opcionMenu = "solCompras";
             $opocionSubMenu ="solComprasList";
             $etiquetaCrear = "solComprasNew";
-            $moduleListId=14;
-            $moduleCrearId=15; 
+            $moduleListId=38;
+            $moduleCrearId=39;
             break;
 }
 admin::initialize($opcionMenu, $opocionSubMenu); 
@@ -53,7 +41,7 @@ admin::initialize($opcionMenu, $opocionSubMenu);
 <META NAME="rating" CONTENT="General" />
 
 <script type="text/javascript" src="js/jquery.js"></script>
-<script language="javascript" type="text/javascript" src="js/ajaxlib.js"></script>
+<script language="javascript" type="text/javascript" src="js/ajaxlib.js?<?=date('dmYhis')?>"></script>
 <script type="text/javascript" src="js/interface.js"></script>
 <!--BEGINIMPROMTU-->
 <link rel="stylesheet" type="text/css" href="css/impromptu.css">
@@ -61,7 +49,7 @@ admin::initialize($opcionMenu, $opocionSubMenu);
 <!--ENDIMPROMTU--> 
 <script type="text/javascript">        
 function removeList(id){
-	var txt = '¿<?=admin::labels('delete','sure')?>?<br><input type="hidden" id="list" name="list" value="'+ id +'" />';
+	var txt = '<?=admin::labels('delete','sure')?>?<br><input type="hidden" id="list" name="list" value="'+ id +'" />';
 	$.prompt(txt,{
 		show:'fadeIn' ,
 		opacity:0,
@@ -71,9 +59,9 @@ function removeList(id){
 			if(v){
 				var uid = m.find('#list').val();
 
-				  $('#sub_'+uid).fadeOut(500, function(){ $(this).remove(); });
+				  $('#sol_'+uid).fadeOut(500, function(){ $(this).remove(); });
 					  $.ajax({
-						url: 'code/execute/clientDel.php?token=<?=admin::getParam("token");?>',
+						url: 'code/execute/solicitudDel.php?token=<?=admin::getParam("token");?>',
 						type: 'POST',
 						data: 'uid='+uid
 					});
@@ -84,33 +72,7 @@ function removeList(id){
 		}
 	});
 }
-function removeListCat(id){
-	var txt = '¿<?=admin::labels('delete','sure')?>?<br><input type="hidden" id="list" name="list" value="'+ id +'" />';
-	$.prompt(txt,{
-		show:'fadeIn' ,
-		opacity:0,
-		buttons:{Eliminar:true, Cancelar:false},
-		callback: function(v,m){
-										   
-			if(v){
-				var uid = m.find('#list').val();
-				  $('#'+id).fadeOut(500, function(){ $(this).remove(); });
-					  $.ajax({
-						url: 'code/execute/clientCatDel.php?token=<?=admin::getParam("token");?>',
-						type: 'POST',
-						data: 'uid='+id
-					});
-				 /********BeginResetColorDelete*************/  
-				  resetOrderRemove(id);  
-				 /********EndResetColorDelete*************/ 
-		 
-			}
-			else{}
-			
-		}
-	});
-}
-function aprobarSubasta(id){
+function aprobarSolicitud(id){
 	var txt = 'Esta seguro de Aprobar esta Solicitud?<br><input type="hidden" id="list" name="list" value="'+ id +'" />';
 	$.prompt(txt,{
 		show:'fadeIn' ,
@@ -120,13 +82,13 @@ function aprobarSubasta(id){
 										   
 			if(v){
 				var uid = m.find('#list').val();
-				  $('#sub_'+id).fadeOut(500, function(){ $(this).remove(); });
+				  $('#sol_'+id).fadeOut(500, function(){ $(this).remove(); });
 					  $.ajax({
-						url: 'code/execute/clientApr.php',
+						url: 'code/execute/solicitudApr.php',
 						type: 'POST',
 						data: 'uid='+id,
 						 success: function() { 
-								window.location.href='./clientList.php?token=<?=admin::getParam("token")?>';
+								window.location.href='./solicitudList.php?token=<?=admin::getParam("token")?>&tipUid=<?=admin::getParam("tipUid")?>';
 							}
 					});
 					 
@@ -137,7 +99,7 @@ function aprobarSubasta(id){
 	});
 }
 
-function rechazarSubasta(id){
+function rechazarSolicitud(id){
 	var txt = 'Esta seguro de Rechazar esta Solicitud?<br><input type="hidden" id="list" name="list" value="'+ id +'" />';
 	$.prompt(txt,{
 		show:'fadeIn' ,
@@ -147,13 +109,13 @@ function rechazarSubasta(id){
 										   
 			if(v){
 				var uid = m.find('#list').val();
-				  $('#sub_'+id).fadeOut(500, function(){ $(this).remove(); });
+				  $('#sol_'+id).fadeOut(500, function(){ $(this).remove(); });
 					  $.ajax({
-						url: 'code/execute/clientRechazar.php',
+						url: 'code/execute/solicitudRechazar.php',
 						type: 'POST',
 						data: 'uid='+id,
 						 success: function() { 
-								window.location.href='./clientList.php?token=<?=admin::getParam("token")?>';
+								window.location.href='./solicitudList.php?token=<?=admin::getParam("token")?>&tipUid=<?=admin::getParam("tipUid")?>';
 							}
 					});
 					 

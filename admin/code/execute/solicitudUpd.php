@@ -9,38 +9,13 @@ $token= admin::getParam("token");
 $solObservaciones=  admin::getParam("sol_observaciones");
 $rav_uni_uid =admin::getParam("rav_uni_uid");
 $cli_uid =  admin::getParam("sol_cli_uid");
-$solUid =  admin::getDbValue("select max(sol_uid) from mdl_solicitud_compra");
+$solUid =  admin::getParam("sol_uid");
 $sol_status =  admin::getParam("sol_status");
-if($solUid=='NULL') $solUid=0;
-$solUid++;
-$mythumb = new thumb(); 
-$sql = "insert into mdl_solicitud_compra
-                                 (
-                                 sol_uid,
-                                 sol_date,
-                                 sol_usu_uid,
-                                 sol_observaciones,
-                                 sol_doc,
-                                 sol_apr_uid,
-                                 sol_apr_date,
-                                 sol_imp_date,
-                                 sol_estado,
-                                 sol_status,
-                                 sol_delete
-					)
-			values	(
-                                 $solUid,
-                                 GETDATE(),
-                                 ".admin::getSession("usr_uid").",
-                                 '$solObservaciones',
-                                 '',
-                                 0,
-                                 GETDATE(),
-                                 GETDATE(),
-                                 0,
-                                 '$sol_status',
-                                 0
-				)";
+ 
+$sql = "update mdl_solicitud_compra set
+                                 sol_observaciones= '$solObservaciones',
+                                 sol_status='$sol_status'
+                                 where sol_uid=$solUid ";
 //echo $sql;die;
 	$db->query($sql);
 
@@ -73,5 +48,5 @@ if(is_array($cli_uid)){
 }
 //die;
 unset($_POST);
-header('Location: ../../solicitudNew2.php?token='.$token."&sol_uid=".$solUid."&tipUid=".$tipUid);	
+header('Location: ../../solicitudList.php?token='.$token."&sol_uid=".$solUid."&tipUid=".$tipUid);	
 ?>

@@ -4,7 +4,7 @@
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 		<td width="77%" height="40">
-		<span class="title"><?=admin::labels('subastas','create');?></span>
+		<span class="title"><?=admin::modulesLabels()?></span>
 		</td>
 		<td width="23%" height="40">&nbsp;</td>
 	</tr>
@@ -18,15 +18,66 @@
 		<td width="57%" valign="top" rowspan="2">
 		<table width="98%" border="0" cellpadding="5" cellspacing="5" class="box">			
 			<tr>
-			<td colspan="2" class="titleBox"><?=admin::labels('data');?> subasta:</td>
+                            <td colspan="2" class="titleBox"><?=admin::labels('data');?> B&aacute;sicos:</td>
 			</tr>
+                        <tr>
+		<td width="29%">Nro de Solicitud:</td>
+                <td width="64%"><input type="text" class="input3" value="" name="sol_uid" id="sol_uid" />
+                    <br /><span id="div_sol_uid" style="display:none; padding-left:5px; padding-right:5px;" class="error">Campo requerido</span>
+                </td>
+                <td width="7%">&nbsp;</td>
+            </tr>
             <tr>
 				<td><?=admin::labels('name');?>:</td>
 				<td>
 				<input name="pro_name" type="text" class="input" id="pro_name" onfocus="setClassInput(this,'ON');document.getElementById('div_pro_name').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_pro_name').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_pro_name').style.display='none';" size="50" />
-				<br /><span id="div_pro_name" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('subasta','titleerror');?></span>
+				<br /><span id="div_pro_name" style="display:none; padding-left:5px; padding-right:5px;" class="error">Campo requerido</span>
 				</td>
 			</tr>
+                        <tr>
+            <td width="5%" >Unidad Solicitante:</td>
+             <td width="20%">
+                  <span id="div_sub_unidad">
+                <?php
+                  $uUnidad = admin::getDbValue("select max(uni_uid) from mdl_unidad where uni_delete=0");
+                  $arrayUnidad = admin::dbFillArray("select uni_uid, uni_description from mdl_unidad where uni_delete=0 order by uni_uid");
+                  if(is_array($arrayUnidad)){
+                      $unidades=true;
+                  foreach($arrayUnidad as $key=>$value)
+                   {            
+                        if($key==$uUnidad) $nuevaLinea = "";
+                        else $nuevaLinea = "<br>";
+                         
+                        ?>
+                      <input name="rav_uni_uid[]" value="<?=$key?>" class="input" type="checkbox">&nbsp;<span class="txt10"><?=$value?></span>&nbsp;<?=$nuevaLinea?>
+                        <?php
+                   }
+                  } else{
+                        $unidades=false;
+		?>
+                        <span class="txt10">No existen unidades.</span>&nbsp;
+                <?php
+                    }
+                ?>
+                  </span>
+                         
+                <a href="javascript:addUnidad();" class="small2">agregar</a> | 
+                <a href="javascript:delUnidad();" class="small3"><?=admin::labels('del');?></a>
+
+                 <div id="div_add_unidad" style="display:none;">
+		<input type="text" name="add_unidad" id="add_unidad" class="input3" 
+                       onfocus="setClassInput3(this,'ON');document.getElementById('div_add_unidad_error').style.display='none';" 
+                       onblur="setClassInput3(this,'OFF');document.getElementById('div_add_unidad_error').style.display='none';" 
+                       onclick="setClassInput3(this,'ON');document.getElementById('div_add_unidad_error').style.display='none';"/>		
+		<a href="javascript:addUnidadOption()" class="button3"><?=admin::labels('add');?></a><a href="javascript:closeUnidad();" class="link2">Cerrar</a>		
+                 </div>
+	     <br /><span id="div_add_unidad_error" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>
+                <br />
+            </td>
+            <td width="7%">&nbsp;</td>
+            
+        </tr>
+                
             <tr>
 				<td width="29%"><?=admin::labels('category','label');?>:</td>
 				<td width="64%">
@@ -112,23 +163,24 @@
         <td width="43%" valign="top">
 		<table width="98%" border="0" align="right" cellpadding="5" cellspacing="5" class="box">
           <tr>
-            <td colspan="3" class="titleBox"><?=admin::labels('data');?> subasta:</td>
+            <td colspan="3" class="titleBox"><?=admin::labels('data');?> Adicionales:</td>
           </tr>
   	<tr>
-				<td width="29%">Modalidad de subasta:</td>
+				<td width="29%">Modalidad:</td>
 				<td width="64%">
 				<select name="sub_modalidad" id="sub_modalidad" class="input" onchange="subastaOpcion();" >
                 	<option value="TIEMPO">Por tiempo</option>
-                   <!-- <option value="HOLANDESA">Inversa Holandesa</option>
-                    <option value="JAPONESA">Inversa Japonesa</option>-->
+                   <!-- <option value="HOLANDESA">Inversa Holandesa</option>-->
+                    
                     <option value="ITEM">Por Item</option>
+                    <option value="PRECIO">Por Precio</option>
 				</select>
 				<br /><span id="div_sub_modalidad" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>	
 				</td>
 			</tr>				
 				
 <tr>
-				<td width="29%">Tipo de subasta:</td>
+				<td width="29%">Tipo:</td>
 				<td width="64%">
 				<select name="sub_type" id="sub_type" class="input" onchange="subastaOpcion();" >
                 	<option value="COMPRA">Compra</option>
@@ -140,7 +192,7 @@
 
             
             <tr>
-			<td>Fecha de subasta:</td>
+			<td>Fecha:</td>
 			<td valign="top">
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr><td width="28%" valign="middle"> 
@@ -155,16 +207,16 @@
 				</tr>
                 
    <tr>
-					<td>Hora de subasta:</td>
+					<td>Hora:</td>
 					<td><input name="sub_hour_end1" type="text" class="input" id="sub_hour_end1" onfocus="setClassInput(this,'ON');" onblur="setClassInput(this,'OFF');" onclick="setClassInput(this,'ON');" value="<?=date('H:i')?>" size="15"/>
 					</td>
 				</tr>
                 
-                <tr id="tr_numeroruedas" style="display:">
+                <tr id="tr_numeroruedas" style="display:none">
 				<td width="29%">N&uacute;mero de ruedas:</td>
 				<td width="64%">
-				<input name="sub_wheels" type="text" class="input" id="sub_wheels" onfocus="setClassInput(this,'ON');document.getElementById('div_sub_wheels').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_sub_wheels').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_sub_wheels').style.display='none';" size="9" />
-                <br /><span id="div_sub_wheels" style="display:none; padding-left:5px; padding-right:5px;" class="error">Número de ruedas requerido</span>
+				<input name="sub_wheels" value="" type="text" class="input" id="sub_wheels" onfocus="setClassInput(this,'ON');document.getElementById('div_sub_wheels').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_sub_wheels').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_sub_wheels').style.display='none';" size="9" />
+                <br /><span id="div_sub_wheels" style="display:none; padding-left:5px; padding-right:5px;" class="error">N&uacaute;mero de ruedas requerido</span>
 				</td>
 			</tr>     
                              

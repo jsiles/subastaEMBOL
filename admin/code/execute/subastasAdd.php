@@ -18,10 +18,10 @@ $sub_modalidad = admin::toSql($_POST["sub_modalidad"],"String");
 $sub_date = date("Y-m-d"); //admin::changeFormatDate(admin::toSql($_POST["sub_date"],"String"),1);
 $sub_hour = date("H:i:s");//admin::toSql($_POST["sub_hour"],"String");
 $sub_mount_base = $_POST["sub_mount_base"];
-if($sub_modalidad=='ITEM') $sub_mount_base=0;
+if($sub_modalidad!='TIEMPO') $sub_mount_base=0;
 $sub_moneda = admin::toSql($_POST["sub_moneda"],"String");
 $sub_mount_unidad = $_POST["sub_mount_unidad"];
-if($sub_modalidad=='ITEM') $sub_mount_unidad=0;
+if($sub_modalidad!='TIEMPO') $sub_mount_unidad=0;
 $sub_hour_end0 = admin::changeFormatDate(admin::toSql($_POST["sub_hour_end0"],"String"),1);
 $sub_hour_end1 = admin::toSql($_POST["sub_hour_end1"],"String");
 $sub_hour_end=$sub_hour_end0.' '.$sub_hour_end1;
@@ -31,7 +31,7 @@ $sub_mountdead = admin::toSql($_POST["sub_mountdead"],"Number");
 $sub_wheels = admin::toSql($_POST["sub_wheels"],"Number");
 if(!$sub_mountdead) $sub_mountdead=0;
 if(!$sub_wheels) $sub_wheels=0;
-
+if($sub_modalidad=='PRECIO') $sub_wheels=1;
 //2007/10/09 11:00:00
 //0123456789012345678
 $tmp_year = substr($sub_hour_end,0,4);
@@ -40,7 +40,7 @@ $tmp_day = substr($sub_hour_end,8,2);
 $tmp_hour = substr($sub_hour_end,11,2);
 $tmp_min = substr($sub_hour_end,14,2);
 $tmp_sec = substr($sub_hour_end,17,2);
-if($sub_modalidad=="ITEM")
+if($sub_modalidad!="TIEMPO")
 {
 $dead_time = date("Y-m-d H:i:s",mktime($tmp_hour,$tmp_min+($sub_tiempo*$sub_wheels),$tmp_sec,$tmp_month,$tmp_day,$tmp_year));
 
@@ -60,11 +60,13 @@ $pro_description = admin::toSql($_POST["pro_description"],"String");
 $sub_uid = admin::getDBvalue("select max(sub_uid) FROM mdl_subasta");
 if(!$sub_uid) $sub_uid=0;
 $sub_uid++;
+$sub_sol_uid=  admin::getParam("sol_uid");
 $sql = "insert into mdl_subasta
 					(
 					sub_uid,
 					sub_pca_uid,
 					sub_usr_uid,
+					sub_sol_uid,
 					sub_description,
 					sub_type,
 					sub_modalidad,
@@ -88,6 +90,7 @@ $sql = "insert into mdl_subasta
 					'".$sub_uid."', 
 					'".$sub_pca_uid."', 
 					".admin::getSession('usr_uid').", 
+					".$sub_sol_uid.", 
 					'".$sub_description."', 
 					'".$sub_type."',
 					'".$sub_modalidad."',
@@ -147,6 +150,32 @@ if($sub_modalidad=="ITEM")
         
         $db->query($sql);
         }
+}
+
+if($sub_modalidad=="PRECIO")
+{
+//	$sql="insert into sys_item (ite_sub_uid, ite_wheel, ite_flag) values($sub_uid,1,0)";
+//	$db->query($sql);
+
+        for($i=1; $i<=$sub_wheels;$i++)
+        {
+            if ($i==1) $flag0=0;
+            else $flag0=1;
+            $dead_time = date("Y-m-d H:i:s",mktime($tmp_hour,$tmp_min+($sub_tiempo*$i),$tmp_sec,$tmp_month,$tmp_day,$tmp_year));
+        $sql="insert into mdl_round (rou_sub_uid, rou_round, rou_datetime, rou_flag0, rou_flag1) values ($sub_uid,$i,'$dead_time',$flag0,0)";
+        
+        $db->query($sql);
+        }
+}
+$rav_uni_uid=  admin::getParam("rav_uni_uid");
+if(is_array($rav_uni_uid)){
+       admin::getDbValue("delete from mdl_subasta_unidad where suu_sub_uid=$sub_uid");
+   foreach($rav_uni_uid as $value)
+   {
+       $sql="insert into mdl_subasta_unidad (suu_sub_uid, suu_uni_uid) values($sub_uid, $value)";
+      // echo $rav_tipo."#".$sql;
+       $db->query($sql);
+   }
 }
 // SUBIENDO LA IMAGEN PRODUCTOS
 $FILES = $_FILES ['pro_image'];

@@ -32,6 +32,9 @@ switch(valOpcion)
 					break;
 
 	case 'ITEM':
+                                       
+                                        $("#sub_wheels").val('');
+					
 					$("#tr_numeroruedas").show();
 					$("#tr_montodead").hide();
 					$("#tr_montobase").hide();
@@ -39,11 +42,23 @@ switch(valOpcion)
 					//if($("#sub_type").val()=='COMPRA') $("#montotype").html('Monto m&aacute;ximo');
 					//else $("#montotype").html('Monto m&iacute;nimo');
 					$("#tbl_subasta").hide();
+                                        $("#tbl_subastaxitem").show()
+					break;
+        case 'PRECIO':
+                                        var valorInicial=1;
+                                        $("#sub_wheels").val(valorInicial);
+					$("#tr_numeroruedas").hide();
+                                        $("#tr_montodead").hide();
+					$("#tr_montobase").hide();
+					$("#tr_unidadmejora").hide();
+					$("#tbl_subasta").hide();
+                                        $("#tbl_subastaxitem").show()
 					break;
 	default:
 					$("#tr_numeroruedas").hide();
 					$("#tr_montodead").hide();
 					$("#tbl_subastaxitem").hide();
+                                        break;
 					
 	}
 	

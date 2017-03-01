@@ -719,13 +719,19 @@ function verifysubasta()
 	{
 	sw=true;
 	document.getElementById('div_pro_name').style.display='none';
+	document.getElementById('div_sol_uid').style.display='none';
 	if (document.getElementById('pro_name').value=='')
 		{
 		document.getElementById('pro_name').className='inputError';
 		document.getElementById('div_pro_name').style.display='';
 		sw=false;
 		}
-	
+	if (document.getElementById('sol_uid').value=='')
+		{
+		document.getElementById('sol_uid').className='inputError';
+		document.getElementById('div_sol_uid').style.display='';
+		sw=false;
+		}
 	if (sw) 
 		{
 		document.frmsubasta.submit();
@@ -1088,6 +1094,21 @@ function changeOtherTransporte()
 	$('#div_other_transporte').toggle();
 	$('#div_other_transporte_error').hide();
 }
+function nivel1()
+{
+	$('#div_nivel1').toggle();
+	$('#div_nivel1_error').hide();
+}
+function nivel2()
+{
+	$('#div_nivel2').toggle();
+	$('#div_nivel2_error').hide();
+}
+function nivel3()
+{
+	$('#div_nivel3').toggle();
+	$('#div_nivel3_error').hide();
+}
 function transporteAdd()
 	{
 	token = $.getUrlVar('token');
@@ -1105,6 +1126,91 @@ function transporteAdd()
 		$.ajax({
 				url: 'code/execute/transporteAdd.php',
 				data: "tra_name="+other_category+"&token="+token,
+			 			error: function(objeto){
+            						alert("Pasó lo siguiente: "+objeto.responseText);
+        						},
+						success: function(datos){
+									divx.innerHTML=datos;
+            						//document.location.href='incotermList.php?token='+token+"&sub_uid="+sub_uid;
+        						 }	
+	 });
+	}
+}
+function nivel1Add()
+	{
+	token = $.getUrlVar('token');
+	document.getElementById('div_nivel1_error').style.display='none';
+	var other_category = document.getElementById('nivel1').value;
+	var sol_uid = document.getElementById('sol_uid').value;
+	if (other_category=="")
+		{
+		$('#div_nivel1_error').fadeIn();
+		}
+	else
+		{
+		divx = document.getElementById('div_nivel1_select');
+		divx.innerHTML = '<img border="0" src="lib/loading.gif">';
+		$.ajax({
+				url: 'code/execute/nivel1Add.php',
+				data: "nivel1_desc="+other_category+"&token="+token+"&sol_uid="+sol_uid,
+			 			error: function(objeto){
+            						alert("Pasó lo siguiente: "+objeto.responseText);
+        						},
+						success: function(datos){
+									divx.innerHTML=datos;
+            						//document.location.href='incotermList.php?token='+token+"&sub_uid="+sub_uid;
+        						 }	
+	 });
+	}
+}
+
+function nivel2Add()
+	{
+	token = $.getUrlVar('token');
+	document.getElementById('div_nivel2_error').style.display='none';
+        var nivel1 = document.getElementById('nivel1_uid').value;
+    	var other_category = document.getElementById('nivel2').value;
+	var sol_uid = document.getElementById('sol_uid').value;
+	if (other_category==""||nivel1=="")
+		{
+		$('#div_nivel2_error').fadeIn();
+		}
+	else
+		{
+		divx = document.getElementById('div_nivel2_select');
+		divx.innerHTML = '<img border="0" src="lib/loading.gif">';
+		$.ajax({
+				url: 'code/execute/nivel2Add.php',
+				data: "ca1_uid="+nivel1+"&nivel2_desc="+other_category+"&token="+token+"&sol_uid="+sol_uid,
+			 			error: function(objeto){
+            						alert("Pasó lo siguiente: "+objeto.responseText);
+        						},
+						success: function(datos){
+									divx.innerHTML=datos;
+            						//document.location.href='incotermList.php?token='+token+"&sub_uid="+sub_uid;
+        						 }	
+	 });
+	}
+}
+
+function nivel3Add()
+	{
+	token = $.getUrlVar('token');
+	document.getElementById('div_nivel3_error').style.display='none';
+        var nivel2 = document.getElementById('nivel2_uid').value;
+    	var other_category = document.getElementById('nivel3').value;
+	var sol_uid = document.getElementById('sol_uid').value;
+	if (other_category==""||nivel2=="")
+		{
+		$('#div_nivel3_error').fadeIn();
+		}
+	else
+		{
+		divx = document.getElementById('div_nivel3_select');
+		divx.innerHTML = '<img border="0" src="lib/loading.gif">';
+		$.ajax({
+				url: 'code/execute/nivel3Add.php',
+				data: "ca2_uid="+nivel2+"&nivel3_desc="+other_category+"&token="+token+"&sol_uid="+sol_uid,
 			 			error: function(objeto){
             						alert("Pasó lo siguiente: "+objeto.responseText);
         						},
@@ -1138,6 +1244,73 @@ function deleteOtherTransporte()
 	}	
 }
 
+function deleteNivel1()
+	{
+            
+	token = $.getUrlVar('token');
+	var nivel1_uid = document.getElementById('nivel1_uid').value;
+        //alert(nivel1_uid);
+	if (nivel1_uid!="")
+		{
+		divx = document.getElementById('div_nivel1_select');
+		divx.innerHTML = '<img border="0" src="lib/loading.gif">';
+		$.ajax({
+				url: 'code/execute/delNivel1.php',
+				data: 'ca1_uid='+nivel1_uid+'&token='+token,
+			 	error: function(objeto){
+            						alert("Pasó lo siguiente: "+objeto.responseText);
+        						},
+				success: function(datos){
+									divx.innerHTML=datos;
+            						//document.location.href='incotermList.php?token='+token+"&sub_uid="+sub_uid;
+        						 }	
+	 });
+	}	
+}
+function deleteNivel2()
+	{
+	token = $.getUrlVar('token');
+	var sol_ca2_uid = document.getElementById('nivel2_uid').value;
+	var sol_ca1_uid = document.getElementById('nivel1_uid').value;
+	if (sol_ca2_uid!="")
+		{
+		divx = document.getElementById('div_nivel2_select');
+		divx.innerHTML = '<img border="0" src="lib/loading.gif">';
+		$.ajax({
+				url: 'code/execute/delNivel2.php',
+				data: 'ca1_uid='+sol_ca1_uid+'&ca2_uid='+sol_ca2_uid+'&token='+token,
+			 	error: function(objeto){
+            						alert("Pasó lo siguiente: "+objeto.responseText);
+        						},
+				success: function(datos){
+									divx.innerHTML=datos;
+            						//document.location.href='incotermList.php?token='+token+"&sub_uid="+sub_uid;
+        						 }	
+	 });
+	}	
+}
+function deleteNivel3()
+	{
+	token = $.getUrlVar('token');
+	var sol_ca2_uid = document.getElementById('nivel2_uid').value;
+	var sol_ca3_uid = document.getElementById('nivel3_uid').value;
+	if (sol_ca3_uid!="")
+		{
+		divx = document.getElementById('div_nivel3_select');
+		divx.innerHTML = '<img border="0" src="lib/loading.gif">';
+		$.ajax({
+				url: 'code/execute/delNivel3.php',
+				data: 'ca2_uid='+sol_ca2_uid+'&ca3_uid='+sol_ca3_uid+'&token='+token,
+			 	error: function(objeto){
+            						alert("Pasó lo siguiente: "+objeto.responseText);
+        						},
+				success: function(datos){
+									divx.innerHTML=datos;
+            						//document.location.href='incotermList.php?token='+token+"&sub_uid="+sub_uid;
+        						 }	
+	 });
+	}	
+}
 function changeOtherIncoterm()
 {
 	$('#div_other_incoterm').toggle();
@@ -2154,6 +2327,54 @@ function verifyIncoterm()
 		}
 	}
 
+function verifySolicitud()
+	{
+	sw=true;
+	if (document.getElementById('nivel1_uid').value=='')
+		{
+		//document.getElementById('div_nivel1_error').className='inputError';
+		document.getElementById('div_nivel1_error').style.display='';
+		sw=false;
+		}
+	if (document.getElementById('nivel2_uid').value=='')
+		{
+		//document.getElementById('div_nivel2_error').className='inputError';
+		document.getElementById('div_nivel2_error').style.display='';
+		sw=false;
+		}
+        if (document.getElementById('nivel3_uid').value=='')
+		{
+		//document.getElementById('div_nivel3_error').className='inputError';
+		document.getElementById('div_nivel3_error').style.display='';
+		sw=false;
+		}                
+        if (document.getElementById('sol_description').value=='')
+		{
+		//document.getElementById('div_sol_description_error').className='inputError';
+		document.getElementById('div_sol_description_error').style.display='';
+		sw=false;
+		}                  
+        if (document.getElementById('sol_cantidad').value=='')
+		{
+		//document.getElementById('div_sol_cantidad_error').className='inputError';
+		document.getElementById('div_sol_cantidad_error').style.display='';
+		sw=false;
+		}  
+        if (document.getElementById('sol_unidad').value=='')
+		{
+		//document.getElementById('div_sol_unidad_error').className='inputError';
+		document.getElementById('div_sol_unidad_error').style.display='';
+		sw=false;
+		}                  
+        if (sw) 
+		{
+		document.frmSolicitud.submit();
+		}
+	else
+		{
+		scroll(0,0);
+		}
+	}
 function chageUploadFile(status,val){
 	if(val!=undefined){
 		if (status=='on'){
@@ -2261,12 +2482,69 @@ function addUnidad(){
 	$("#div_add_unidad").hide();
 	
 	} 
+function addNivel1(){
+	if($("#div_nivel1").css('display')=='none')
+	$("#div_nivel1").show();
+	else
+	$("#div_nivel1").hide();
+	
+	} 
+function addNivel2(){
+    var nivel1 = document.getElementById('nivel1_uid').value;
+    if(nivel1=='')
+            document.getElementById('div_nivel1_error').style.display='';
+    else{
+    if($("#div_nivel2").css('display')=='none')
+	$("#div_nivel2").show();
+	else
+	$("#div_nivel2").hide();
+        }
+}
+function addNivel3(){
+    var nivel2 = document.getElementById('nivel2_uid').value;
+    if(nivel2=='')
+            document.getElementById('div_nivel2_error').style.display='';
+    else{
+    if($("#div_nivel3").css('display')=='none')
+	$("#div_nivel3").show();
+	else
+	$("#div_nivel3").hide();
+        }
+}
+function actualizaNiveles(){
+    var nivel1 = document.getElementById('nivel1_uid').value;
+    if(nivel1!='')  {document.getElementById('div_nivel1_error').style.display='none';   
+    $("#div_nivel2_select").html('<img border="0" src="'+SERVER+'/admin/lib/loading.gif">');
+    $.ajax({
+		   type: "POST",
+		   url: "code/execute/nivel2Add.php",
+		   data: "ca1_uid="+nivel1+"&token="+token,
+		   success: function(msg){
+			 $("#div_nivel2_select").html(msg);
+		   }
+		 });
+             }
+}
+function actualizaNiveles2(){
+    var nivel2 = document.getElementById('nivel2_uid').value;
+    if(nivel2!='')  {document.getElementById('div_nivel2_error').style.display='none';   
+    $("#div_nivel3_select").html('<img border="0" src="'+SERVER+'/admin/lib/loading.gif">');
+    $.ajax({
+		   type: "POST",
+		   url: "code/execute/nivel3Add.php",
+		   data: "ca2_uid="+nivel2+"&token="+token,
+		   success: function(msg){
+			 $("#div_nivel3_select").html(msg);
+		   }
+		 });
+             }
+}
+        
 function addCurrency1(){
 	if($("#div_add_currency1").css('display')=='none')
 	$("#div_add_currency1").show();
 	else
 	$("#div_add_currency1").hide();
-	
 	} 
 function closeCurrency()
 {
@@ -2688,3 +2966,25 @@ function deleteClientItem()
 		
 			}
 	}
+        
+function solicitudCS(uid,status)
+  {
+    token = $.getUrlVar('token');	 	  
+    divx = document.getElementById('status_' + uid);
+    divx.innerHTML = '<img border="0" src="lib/loading.gif">';
+    //instanciamos el objetoAjax
+    ajax=objectAjax();
+    //uso del medotod POST
+    ajax.open("POST", "code/execute/solicitudCS.php",true);
+    ajax.onreadystatechange=function() {
+                                                                            if (ajax.readyState==4) 
+                                                                                  {
+                                                                                  //mostrar resultados en esta capa
+                                                                                  divx.innerHTML=ajax.responseText;
+                                                                                  }
+                                                                          }  
+    ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    //enviando los valores
+    ajax.send("uid="+uid+"&status="+status+"&token="+token)
+  }
+        

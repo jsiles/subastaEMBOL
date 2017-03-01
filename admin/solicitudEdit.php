@@ -3,20 +3,20 @@ include_once ("core/admin.php");
 $tipUid=  admin::getParam("tipUid");
 switch($tipUid){
     case 1: $opcionMenu = "solCompras";
-            $opocionSubMenu ="solComprasNew";
+            $opocionSubMenu ="solComprasEdit";
             $etiquetaCrear = "solComprasNew";
             $moduleListId=38;
             $moduleCrearId=39;
             break;
     case 2: $opcionMenu = "aprCompras";
-            $opocionSubMenu ="aprComprasNew";
+            $opocionSubMenu ="aprComprasEdit";
             $etiquetaCrear = "aprComprasNew";
             $moduleListId=41;
             $moduleCrearId=42;
             break;    
     default :
             $opcionMenu = "solCompras";
-            $opocionSubMenu ="solComprasNew";
+            $opocionSubMenu ="solComprasEdit";
             $etiquetaCrear = "solComprasNew";
             $moduleListId=38;
             $moduleCrearId=39;
@@ -108,7 +108,7 @@ function removeList(id){
 <tr><td valign="top"><?php include_once("skin/header.php");?>
 </td></tr>
   <tr>
-    <td valign="top" id="content"><?php include_once("code/template/solicitudNewTpl.php"); ?></td>
+    <td valign="top" id="content"><?php include_once("code/template/solicitudEditTpl.php"); ?></td>
   </tr>
 <tr><td>
   <?php include("skin/footer.php"); ?>

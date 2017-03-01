@@ -242,7 +242,7 @@ $regusers = $db->next_record();
           <tr>
             <td width="29%">Rubro:</td>
             <td width="64%">
-            <?
+            <?php
             (0==$regusers["cli_item_uid"])?$selected0="selected":$selected="";
 			(1==$regusers["cli_item_uid"])?$selected1="selected":$selected="";
 			?>
@@ -278,7 +278,7 @@ $regusers = $db->next_record();
             <td width="29%">Forma de pago al proveedor:</td>
             <td width="64%">
             <select name="cli_pts_uid" class="txt10" id="cli_pts_uid" onchange="ptsClient('<?=admin::getParam("token")?>'); return false;">
-                <? 
+                <?php 
 				$sql = "select pts_uid, pts_type from mdl_paymenttosupplier where pts_delete=0";
 					$db2->query($sql);
 					while ($content=$db2->next_record())
@@ -286,7 +286,7 @@ $regusers = $db->next_record();
 						($content["pts_uid"]==$regusers["cli_pts_uid"])?$selecteds="selected":$selecteds="";
 				?>
             	    <option value="<?=$content["pts_uid"]?>" <?=$selecteds?>><?=$content["pts_type"]?></option>	
-              	<? 
+              	<?php 
 					}
 				?>
 			</select>			</td>
@@ -298,7 +298,7 @@ $regusers = $db->next_record();
 
           <div id="div_cli_pts_uid_select">
 <table width="92%" class="box">
-<?
+<?php
 $sql2 = "select w.wtp_uid, w.wtp_name,  d.wde_description from mdl_waytopay w, mdl_way_desc d where wtp_delete=0 and wtp_pts_uid='".$regusers["cli_pts_uid"]."' and d.wde_wtp_uid=w.wtp_uid and d.wde_cli_uid='".$regusers["cli_uid"]."'";
 			$db3->query($sql2);
 			while ($content2=$db3->next_record())
@@ -312,7 +312,7 @@ $sql2 = "select w.wtp_uid, w.wtp_name,  d.wde_description from mdl_waytopay w, m
 			</td>
             <td width="7%">&nbsp;</td>
           </tr>
-<? 
+<?php 
 			}
 ?>			
 </table>
@@ -325,7 +325,7 @@ $sql2 = "select w.wtp_uid, w.wtp_name,  d.wde_description from mdl_waytopay w, m
             <td width="29%">Documentacion:</td>
             <td width="64%">
             <div style="float: left; width:50%">
-            <? 
+            <?php 
 				$sql = "select doc_uid, doc_name from mdl_documents where doc_delete=0 and doc_uid=10";
 					$db2->query($sql);
 					while ($content=$db2->next_record())
@@ -339,11 +339,11 @@ $sql2 = "select w.wtp_uid, w.wtp_name,  d.wde_description from mdl_waytopay w, m
 						}
 				?><br /><br /><br /><br /><br />
             	    <input id="cli_doc_uid[<?=$content["doc_uid"]?>]" name="cli_doc_uid[<?=$content["doc_uid"]?>]" type="checkbox" onclick="checkinOut();" <?=$check?> /><?=$content["doc_name"]?>	
-              	<? 
+              	<?php 
 					}
 				?>
             </div>
-            <div style="float: left; width:50%"><? 
+            <div style="float: left; width:50%"><?php 
 				$sql = "select doc_uid, doc_name from mdl_documents where doc_delete=0 and doc_uid!=10";
 					$db2->query($sql);
 					while ($content=$db2->next_record())
@@ -357,7 +357,7 @@ $sql2 = "select w.wtp_uid, w.wtp_name,  d.wde_description from mdl_waytopay w, m
 						}
 				?>
             	    <input id="cli_doc_uid[<?=$content["doc_uid"]?>]" name="cli_doc_uid[<?=$content["doc_uid"]?>]" type="checkbox" class="subDocs" <?=$check?> /><?=$content["doc_name"]?>	<br />
-              	<? 
+              	<?php 
 					}
 				?></div>
 					</td>

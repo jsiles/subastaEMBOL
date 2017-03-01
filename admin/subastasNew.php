@@ -20,11 +20,11 @@
 <script type="text/javascript">var SERVER='<?=$domain?>'; </script>
 
 <script language="javascript" type="text/javascript" src="js/jquery-1.3.2.js"></script>
-<script language="javascript" type="text/javascript" src="js/ajaxlib.js"></script>
+<script language="javascript" type="text/javascript" src="js/ajaxlib.js?<?=date('dmyHis')?>"></script>
 <script src="js/ui.core.js" type="text/javascript"></script>
 <script src="js/ui.sortable.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/interface.js"></script>
-<script type="text/javascript" src="js/subastas.js"></script>
+<script type="text/javascript" src="js/subastas.js?<?=date('dmyHis')?>"></script>
 
 <!--BEGINIMPROMTU-->
 <link rel="stylesheet" type="text/css" href="css/impromptu.css">

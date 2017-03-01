@@ -3,7 +3,6 @@ define(SYS_LANG,$lang);
 if ($lang=='es') $urlFrontLang='';
 else $urlFrontLang=$lang.'/';
 
-$qsearch="select * from mdl_rav where rav_tipologia=$tipUid order by rav_uid asc";
 ?>
 <div id="DIV_WAIT1" style="display:none;"><img border="0" src="lib/loading.gif"></div>
 <br>
@@ -68,7 +67,9 @@ $qsearch="select * from mdl_rav where rav_tipologia=$tipUid order by rav_uid asc
         </tr>
         <tr>
             <td width="5%" >Documento:</td>
-            <td width="20%" ><input name="sol_document" type="file" value="" class="input"></td>
+            <td width="20%" ><input name="sol_document" type="file" value="" class="input">
+            <input name="tipUid" type="hidden" value="<?=$tipUid?>" class="input">
+            </td>
             <td width="7%">&nbsp;</td>
         </tr>
 
@@ -82,7 +83,7 @@ $qsearch="select * from mdl_rav where rav_tipologia=$tipUid order by rav_uid asc
 	foreach($arrayClient as $value=>$name)
 	{
 	?>
-    <input name="sol_cli_id[]" type="checkbox" value="<?=$value?>" size="9" /><?=$name?><br />
+    <input name="sol_cli_uid[]" type="checkbox" value="<?=$value?>" size="9" /><?=$name?><br />
     <?php
         }
         }
@@ -93,6 +94,15 @@ $qsearch="select * from mdl_rav where rav_tipologia=$tipUid order by rav_uid asc
         }
         ?>
             </td>
+                       <td width="7%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td valign="top"><?=admin::labels('status');?></td>
+            <td><select name="sol_status" class="listMenu" id="sol_status">
+            	<option selected="selected" value="ACTIVE"><?=admin::labels('active');?></option>
+              	<option value="INACTIVE"><?=admin::labels('inactive');?></option>
+			</select>
+			<span id="div_sol_status" style="display:none;" class="error"></span></td>
                        <td width="7%">&nbsp;</td>
         </tr>
     </table>
@@ -110,7 +120,7 @@ $qsearch="select * from mdl_rav where rav_tipologia=$tipUid order by rav_uid asc
 	  	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 			<tr>
 				<td width="59%" align="center">
-				<a href="" onclick="document.addRav.submit(); return false;" class="button">Siguiente
+				<a href="" onclick="document.addSol.submit(); return false;" class="button">Siguiente
 				</a> 
 				</td>
           <td width="41%" style="font-size:11px;">

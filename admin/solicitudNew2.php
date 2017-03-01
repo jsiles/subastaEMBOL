@@ -8,18 +8,30 @@ switch($tipUid){
             $moduleListId=38;
             $moduleCrearId=39;
             break;
-    case 2: $opcionMenu = "aprCompras";
-            $opocionSubMenu ="aprComprasNew";
-            $etiquetaCrear = "aprComprasNew";
-            $moduleListId=41;
-            $moduleCrearId=42;
+    case 2: $opcionMenu = "subastaRavInforme";
+            $opocionSubMenu ="subastasRavInfList";
+            $etiquetaCrear = "subastasRavInfNew";
+            $moduleListId=11;
+            $moduleCrearId=12;
             break;    
+    case 3: $opcionMenu = "ravSolicitud";
+            $opocionSubMenu ="ravSolicitudList";
+            $etiquetaCrear = "ravSolicitudNew";
+            $moduleListId=32;
+            $moduleCrearId=33;
+            break;    
+    case 4: $opcionMenu = "ravOrden";
+            $opocionSubMenu ="ravOrdenList";
+            $etiquetaCrear = "ravOrdenNew";
+            $moduleListId=35;
+            $moduleCrearId=36; 
+            break;
     default :
             $opcionMenu = "solCompras";
-            $opocionSubMenu ="solComprasNew";
+            $opocionSubMenu ="solComprasList";
             $etiquetaCrear = "solComprasNew";
-            $moduleListId=38;
-            $moduleCrearId=39;
+            $moduleListId=14;
+            $moduleCrearId=15; 
             break;
 }
 admin::initialize($opcionMenu, $opocionSubMenu); 
@@ -85,12 +97,12 @@ function removeList(id){
 		callback: function(v,m){
 										   
 			if(v){
-				var uid = m.find('#list').val();
-				  $('#sub_'+id).fadeOut(500, function(){ $(this).remove(); });
+				//var uid = m.find('#list').val();
+				  $('#list_'+id).fadeOut(500, function(){ $(this).remove(); });
 					  $.ajax({
-						url: 'code/execute/subastasDel.php',
+						url: 'code/execute/solicitudMaterialDel.php',
 						type: 'POST',
-						data: 'sub_uid='+id
+						data: 'som_uid='+id
 					});
 				/********BeginResetColorDelete*************/  
 				//	  resetOrderRemove(id);  
@@ -108,7 +120,7 @@ function removeList(id){
 <tr><td valign="top"><?php include_once("skin/header.php");?>
 </td></tr>
   <tr>
-    <td valign="top" id="content"><?php include_once("code/template/solicitudNewTpl.php"); ?></td>
+    <td valign="top" id="content"><?php include_once("code/template/solicitudNew2Tpl.php"); ?></td>
   </tr>
 <tr><td>
   <?php include("skin/footer.php"); ?>

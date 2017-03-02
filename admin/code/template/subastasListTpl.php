@@ -110,14 +110,14 @@ if ($nroReg>0)
   <table width="100%" border="0">
 	<tr>
 	<td width="10%"><a href="subastasList.php?order=<?=$uidOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$uidClass;?>"><?=admin::labels('code');?>:</a></td>
-        <td width="10%" ><a href="subastasList.php?order=<?=$nameOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$nameClass;?>"><?=admin::labels('name');?>:</a></td>
-        <td width="10%" ><a href="subastasList.php?order=<?=$linOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$linClass;?>"><?=admin::labels('category');?>:</a></td>
-        <td width="10%" ><span class="txt11 color2">Estado:</span></td>
-        <td align="center" width="10%" height="5"><span class="txt11 color2">Lista de pujas</span></td>
+        <td width="10%"><a href="subastasList.php?order=<?=$nameOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$nameClass;?>"><?=admin::labels('name');?>:</a></td>
+        <td width="10%"><a href="subastasList.php?order=<?=$linOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$linClass;?>"><?=admin::labels('category');?>:</a></td>
+        <td width="10%"><span class="txt11 color2">Estado:</span></td>
+        <td width="10%"><span class="txt11 color2">Unidad Solicitante</span></td>
         <td width="5%">&nbsp;</td>		
-	<td align="center" width="5%" height="5">&nbsp;</td>
-	<td align="center" width="5%" height="5">&nbsp;</td>
-	<td align="center" width="5%" height="5">&nbsp;</td>
+	<td width="5%">&nbsp;</td>
+	<td width="5%">&nbsp;</td>
+	<td width="5%">&nbsp;</td>
 	</tr>
 	</table>
   </td>
@@ -200,6 +200,18 @@ while ($subasta_list = $pagDb->next_record())
 
 	if ($subasta_list["pro_stress"]==1) $dest = 'style=" font-weight:bold;"';
 	else $dest = '';
+        
+        $unidadArray =  admin::dbFillArray("select uni_uid, uni_description from mdl_unidad, mdl_subasta_unidad where suu_uni_uid=uni_uid and suu_sub_uid=$sub_uid group by uni_uid, uni_description");
+        $k=0; 
+        $rav_unidad="";
+        if(is_array($unidadArray))
+        foreach($unidadArray as $key => $value)
+        {
+            if($k==0) $rav_unidad.= $value;
+            else $rav_unidad.= ",".$value;
+            $k++;
+        }
+        else $rav_unidad="Sin asignar";
   	?> 
 	<div class="groupItem" id="<?=$pro_uid?>">
     
@@ -211,15 +223,18 @@ while ($subasta_list = $pagDb->next_record())
         <td width="10%" ><span <?=$dest?>><?=ucfirst(strtolower(trim(admin::toHtml($pro_name))))?></span></td>
         <td width="10%" ><span <?=$dest?>><?=ucwords(strtolower(trim(admin::toHtml($pca_name))))?></span></td>
         <td width="10%" ><span><?=$sub_estado?></span></td>
-		<td align="left" width="10%" height="5">
+		<td align="left" width="10%" height="5"><span><?=$rav_unidad?></span>
          <?php
 		 
-		 if ($countBids>0){
+		/* if ($countBids>0){
 		 ?>
         <a href="excel" onclick="document.location.href='ficheroExcel.php?subasta=<?=$sub_uid?>'; return false;" class="xls">
 				<img src="lib/ext/excel.png" border="0" alt="Excel" title="Excel" />
 					</a>
-		<?php }?>	
+		<?php }
+                 * ?>	
+                 */
+         ?>
 		</td>
         <td align="center" width="5%" height="5">
             <?php

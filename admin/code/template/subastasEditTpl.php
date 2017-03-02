@@ -13,7 +13,7 @@ $prod = $db->next_record();
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 		<td width="77%" height="40">
-		<span class="title"><?=admin::labels('subastas','create');?></span>
+                    <span class="title">&nbsp;</span>
 		</td>
 		<td width="23%" height="40">&nbsp;</td>
 	</tr>
@@ -205,6 +205,7 @@ $prod = $db->next_record();
                      <option <?php if ('HOLANDESA'==$prod["sub_modalidad"]) echo 'selected="selected"';?> value="HOLANDESA">Inversa Holandesa</option>
                     <option <?php if ('JAPONESA'==$prod["sub_modalidad"]) echo 'selected="selected"';?> value="JAPONESA">Inversa Japonesa</option>
                     <option <?php if ('ITEM'==$prod["sub_modalidad"]) echo 'selected="selected"';?> value="ITEM">Por Item</option>
+                    <option <?php if ('PRECIO'==$prod["sub_modalidad"]) echo 'selected="selected"';?> value="PRECIO">Por Precio</option>
                     </select>
 				<br /><span id="div_sub_modalidad" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>	
 				</td>
@@ -627,6 +628,7 @@ else
 <td colspan="2">
     
      <?php
+     //echo $prod["sub_modalidad"]."##";
     if($prod["sub_modalidad"]=="TIEMPO"){
         $displayTiempo="";
         $displayItem="none";

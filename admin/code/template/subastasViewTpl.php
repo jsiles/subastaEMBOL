@@ -1,6 +1,6 @@
 <?php
 $pro_uid = admin::toSql($_GET["pro_uid"],"String");
-$sub_uid=admin::getParam("pro_uid");
+$sub_uid=admin::getParam("sub_uid");
 if (!$pro_uid) header('Location: ../../subastasList.php?token='.$token);
 $sql = "SELECT * FROM mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_status='ACTIVE' and pro_uid='".$pro_uid."'";
 $db->query($sql);
@@ -13,7 +13,7 @@ $prod = $db->next_record();
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 		<td width="77%" height="40">
-		<span class="title">Ver subasta</span>
+                    <span class="title">&nbsp;</span>
 		</td>
 		<td width="23%" height="40">&nbsp;</td>
 	</tr>
@@ -26,7 +26,7 @@ $prod = $db->next_record();
         
         <table width="98%" border="0" cellpadding="5" cellspacing="5" class="box">			
 			<tr>
-			<td colspan="2" class="titleBox"><?=admin::labels('data');?> subasta:</td>
+			<td colspan="2" class="titleBox"><?=admin::labels('data');?> B&aacute;sicos:</td>
 			</tr>
             <tr>
 				<td><?=admin::labels('name');?>:</td>
@@ -143,7 +143,7 @@ $prod = $db->next_record();
           </tr>
           <tr>
             <td valign="top"><?=admin::labels('status');?></td>
-            <td><? if ('ACTIVE'==$prod["sub_status"]) echo "Activo"; else echo "Inactivo";?></td>
+            <td><?php if ('ACTIVE'==$prod["sub_status"]) echo "Activo"; else echo "Inactivo";?></td>
           </tr>
         </table>
 
@@ -155,26 +155,29 @@ $prod = $db->next_record();
 
 		<table width="98%" border="0" align="right" cellpadding="5" cellspacing="5" class="box">
           <tr>
-            <td colspan="2" class="titleBox"><?=admin::labels('data');?> subasta:</td>
+            <td colspan="2" class="titleBox"><?=admin::labels('data');?> Adicionales:</td>
           </tr>
                         
             <tr>
-				<td width="29%">Modalidad de subasta:</td>
+				<td width="29%">Modalidad:</td>
 				<td width="64%">
-				<?php if ('TIEMPO'==$prod["sub_modalidad"]) echo "Por tiempo"; else echo "";?>
+				<?php if ('TIEMPO'==$prod["sub_modalidad"]) echo "Por tiempo";?>
+				<?php if ('ITEM'==$prod["sub_modalidad"]) echo "Por Item"; ?>
+				<?php if ('PRECIO'==$prod["sub_modalidad"]) echo "Por Precio"; ?>
+                                    <input type="hidden" name="sub_modalidad" id="sub_modalidad" value="<?=$prod["sub_modalidad"]?>" />
 				</td>
 			</tr>         
                 
                 
                 <tr>
-				<td width="29%">Tipo de subasta:</td>
+				<td width="29%">Tipo:</td>
 				<td width="64%">
 				<?php if ('COMPRA'==$prod["sub_type"]) echo "Compra"; else echo "Venta";?></td>
 			</tr>
             
        
 <tr>
-			<td>Fecha de subasta:</td>
+			<td>Fecha:</td>
 			<td valign="top">
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr><td width="28%" valign="middle"> 
@@ -191,7 +194,7 @@ $prod = $db->next_record();
 				</td>
 				</tr>          
                 	<tr>
-					<td>Hora de subasta:</td>
+					<td>Hora:</td>
 					<td><?=$hour_end1?>
 					</td>
 				</tr>  
@@ -206,7 +209,10 @@ $prod = $db->next_record();
 				<td><?=$prod["sub_mount_unidad"]?>
 				</td>
 			</tr>
-            
+            <tr id="tr_numeroruedas" style="display:">
+                <td>N&uacute;mero de ruedas:</td>
+				<td><?=$prod["sub_wheels"]?></td>
+			</tr>
 			<tr>
 				<td>Tiempo l&iacute;mite de mejora en min.:</td>
 				<td><?=$prod["sub_tiempo"]?>
@@ -269,9 +275,8 @@ $prod = $db->next_record();
     
    <?php 
    $sSQL= "select * from mdl_incoterm, mdl_incoterm_language, mdl_transporte, mdl_client where inc_inl_uid=inl_uid and inc_tra_uid=tra_uid and inc_cli_uid=cli_uid and inc_delete=0 and inc_sub_uid='".$sub_uid."' order by inc_uid desc";
-   $nroReg = $db2->numrows($sSQL);
+   $nroReg = admin::getDbValue("select count(*) from mdl_incoterm, mdl_incoterm_language, mdl_transporte, mdl_client where inc_inl_uid=inl_uid and inc_tra_uid=tra_uid and inc_cli_uid=cli_uid and inc_delete=0 and inc_sub_uid='".$sub_uid."'");
    $db2->query($sSQL);
-
 if ($nroReg>0)
 	{
 	?> 
@@ -296,9 +301,10 @@ if ($nroReg>0)
 <div class="itemList" id="itemList" style="width:99%">  
 	<?php
 $i=1;
+
 while ($list = $db2->next_record())
 	{
-
+  
 	$inc_uid = $list["inc_uid"];
 	$cli_uid = $list["inc_cli_uid"];
 	$cli_name = admin::getDBvalue("select cli_socialreason as nombre from mdl_client WHERE cli_uid='".$cli_uid."'");

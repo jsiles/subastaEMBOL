@@ -116,6 +116,6 @@ if ($validFile && $FILES['error']==0)
 
 }
 $token=admin::getParam("token");		
-unset($_POST);	
+	
 header('Location: ../../userList.php?token='.$token);
 ?>

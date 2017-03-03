@@ -72,6 +72,6 @@ if(is_array($cli_uid)){
    }
 }
 //die;
-unset($_POST);
+
 header('Location: ../../solicitudNew2.php?token='.$token."&sol_uid=".$solUid."&tipUid=".$tipUid);	
 ?>

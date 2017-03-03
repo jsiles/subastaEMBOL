@@ -32,6 +32,6 @@ $cropped = resizeThumbnailImage($thumb_image_location, $large_image_location,$w,
 //$nomIMG22 = "thumb2_" . $imagename["team_image"]; //listado noticias 112x75
 //redimImgWidth($thumb_image_location, PATH_ROOT . "/admin/upload/news/". $nomIMG22,90,100);	//listado noticias 112x75
 
-unset($_POST);	
+	
 header('Location: ../../teamList.php');	
 ?>

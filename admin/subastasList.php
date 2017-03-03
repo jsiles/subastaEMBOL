@@ -1,6 +1,28 @@
 <?php 
 include_once ("core/admin.php");
-admin::initialize('subastas','subastasList'); 
+$tipUid=  admin::getParam("tipUid");
+switch($tipUid){
+    case 1: $opcionMenu = "subastas";
+            $opocionSubMenu ="subastasList";
+            $etiquetaCrear = "subastasNew";
+            $moduleListId=17;
+            $moduleCrearId=18;
+            break;
+    case 2: $opcionMenu = "parametrizaciones";
+            $opocionSubMenu ="parametrizacionesList";
+            $etiquetaCrear = "parametrizacionesNew";
+            $moduleListId=20;
+            $moduleCrearId=20;
+            break;    
+    default :
+            $opcionMenu = "subastas";
+            $opocionSubMenu ="subastasList";
+            $etiquetaCrear = "subastasNew";
+            $moduleListId=17;
+            $moduleCrearId=18;
+            break;
+}
+admin::initialize($opcionMenu, $opocionSubMenu); 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">    
 <html>
@@ -78,6 +100,60 @@ function removeList(id){
 		}
 	});
 }
+function aprobarSubasta(id){
+	var txt = 'Esta seguro de Aprobar esta Solicitud?<br><input type="hidden" id="list" name="list" value="'+ id +'" />';
+	$.prompt(txt,{
+		show:'fadeIn' ,
+		opacity:0,
+		buttons:{Aprobar:true, Cancelar:false},
+		callback: function(v,m){
+										   
+			if(v){
+				var uid = m.find('#list').val();
+				  $('#sub_'+id).fadeOut(500, function(){ $(this).remove(); });
+					  $.ajax({
+						url: 'code/execute/autorizacionApr.php',
+						type: 'POST',
+						data: 'uid='+id,
+						 success: function() { 
+								window.location.href='./subastasList.php?token=<?=admin::getParam("token")?>&tipUid=<?=admin::getParam("tipUid")?>';
+							}
+					});
+					 
+				}
+			else {}
+		//$("#list_"+id).hide();	
+		}
+	});
+}
+
+function rechazarSubasta(id){
+	var txt = 'Esta seguro de Rechazar esta Solicitud?<br><input type="hidden" id="list" name="list" value="'+ id +'" />';
+	$.prompt(txt,{
+		show:'fadeIn' ,
+		opacity:0,
+		buttons:{Rechazar:true, Cancelar:false},
+		callback: function(v,m){
+										   
+			if(v){
+				var uid = m.find('#list').val();
+				  $('#sub_'+id).fadeOut(500, function(){ $(this).remove(); });
+					  $.ajax({
+						url: 'code/execute/autorizacionRechazar.php',
+						type: 'POST',
+						data: 'uid='+id,
+						 success: function() { 
+								window.location.href='./subastasList.php?token=<?=admin::getParam("token")?>&tipUid=<?=admin::getParam("tipUid")?>';
+							}
+					});
+					 
+				}
+			else {}
+		//$("#list_"+id).hide();	
+		}
+	});
+}
+
 </script>
 </head>
 <body>

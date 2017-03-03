@@ -85,6 +85,6 @@ if ($FILES["name"] != '')
 									)";
 		$db2->query($sql);
 		
-unset($_POST);	
+	
 header('Location: ../../bannerNew2.php?token='.admin::getParam("token").'&ban_uid='.$ban_uid);
 ?>

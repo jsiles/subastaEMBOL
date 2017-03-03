@@ -112,6 +112,6 @@ if ($validFile && $FILES['error']==0)
 	$db->query($sql);
 	}
 $token=admin::getParam("token");		
-unset($_POST);	
+	
 header('Location: ../../clientList.php?token='.$token);		
 ?>

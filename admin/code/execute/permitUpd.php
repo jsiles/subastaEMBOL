@@ -97,6 +97,6 @@ if (is_array($_POST["con_uid"]))
 	}	
 }
 $token=admin::getParam("token");
-unset($_POST);
+
 header('Location: ../../permitList.php?token='.$token);
 ?>

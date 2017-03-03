@@ -225,6 +225,6 @@ if($j){
 		}
 }	
 
-unset($_POST);
+
 header('Location: ../../'.$nextUrl);
 ?>

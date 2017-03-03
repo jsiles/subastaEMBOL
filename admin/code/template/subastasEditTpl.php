@@ -26,8 +26,15 @@ $prod = $db->next_record();
         
         <table width="98%" border="0" cellpadding="5" cellspacing="5" class="box">			
 			<tr>
-			<td colspan="2" class="titleBox"><?=admin::labels('data');?> subasta:</td>
+                            <td colspan="2" class="titleBox"><?=admin::labels('data');?> B&aacute;sicos:</td>
 			</tr>
+                         <tr>
+		<td width="29%">Nro de Solicitud:</td>
+                <td width="64%"><input type="text" class="input3" value="<?=$prod["sub_sol_uid"]?>" name="sol_uid" id="sol_uid" />
+                    <br /><span id="div_sol_uid" style="display:none; padding-left:5px; padding-right:5px;" class="error">Campo requerido</span>
+                </td>
+                <td width="7%">&nbsp;</td>
+            </tr>
             <tr>
 				<td><?=admin::labels('name');?>:</td>
 				<td>
@@ -35,6 +42,52 @@ $prod = $db->next_record();
 				<br /><span id="div_pro_name" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('subasta','titleerror');?></span>
 				</td>
 			</tr>
+                        <tr>
+            <td width="5%" >Unidad Solicitante:</td>
+             <td width="20%">
+                  <span id="div_sub_unidad">
+                <?php
+                  $uUnidad = admin::getDbValue("select max(uni_uid) from mdl_unidad where uni_delete=0");
+                  $arrayUnidad = admin::dbFillArray("select uni_uid, uni_description from mdl_unidad where uni_delete=0 order by uni_uid");
+                  if(is_array($arrayUnidad)){
+                      $unidades=true;
+                  foreach($arrayUnidad as $key=>$value)
+                   {            
+                        if($key==$uUnidad) $nuevaLinea = "";
+                        else $nuevaLinea = "<br>";
+                         $valChecked=admin::getDbValue("select count(suu_uni_uid) from mdl_subasta_unidad where suu_uni_uid=$key and suu_sub_uid=".$prod["sub_uid"]);
+                        if($valChecked>0)$selectUni ='checked="checked"';
+                        else $selectUni ="";
+                         
+                        ?>
+                      <input name="rav_uni_uid[]" <?=$selectUni?> value="<?=$key?>" class="input" type="checkbox">&nbsp;<span class="txt10"><?=$value?></span>&nbsp;<?=$nuevaLinea?>
+                        <?php
+                   }
+                  } else{
+                        $unidades=false;
+		?>
+                        <span class="txt10">No existen unidades.</span>&nbsp;
+                <?php
+                    }
+                ?>
+                  </span>
+                         
+                <a href="javascript:addUnidad();" class="small2">agregar</a> | 
+                <a href="javascript:delUnidad();" class="small3"><?=admin::labels('del');?></a>
+
+                 <div id="div_add_unidad" style="display:none;">
+		<input type="text" name="add_unidad" id="add_unidad" class="input3" 
+                       onfocus="setClassInput3(this,'ON');document.getElementById('div_add_unidad_error').style.display='none';" 
+                       onblur="setClassInput3(this,'OFF');document.getElementById('div_add_unidad_error').style.display='none';" 
+                       onclick="setClassInput3(this,'ON');document.getElementById('div_add_unidad_error').style.display='none';"/>		
+		<a href="javascript:addUnidadOption()" class="button3"><?=admin::labels('add');?></a><a href="javascript:closeUnidad();" class="link2">Cerrar</a>		
+                 </div>
+	     <br /><span id="div_add_unidad_error" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>
+                <br />
+            </td>
+            <td width="7%">&nbsp;</td>
+            
+        </tr>
             <tr>
 				<td width="29%"><?=admin::labels('category','label');?>:</td>
 				<td width="64%"><div id="div_doc_dca_uid_select">
@@ -363,6 +416,7 @@ $prod = $db->next_record();
 <input id="maxVal" name="maxVal" value="0" type="hidden" />
 <input id="pro_uid" name="pro_uid" value="<?=$prod["pro_uid"]?>" type="hidden" />
 <input id="sub_uid" name="sub_uid" value="<?=$prod["sub_uid"]?>" type="hidden" />
+<input id="tipUid" name="tipUid" value="<?=$tipUid?>" type="hidden" />
 
 </td></tr>
 </table>
@@ -463,6 +517,7 @@ $prod = $db->next_record();
 	</tr>
     <tr><td><div id='autocomplete' style="display:none"></div> </td></tr>
 	</table>
+        <input id="tipUid" name="tipUid" value="<?=$tipUid?>" type="hidden" />
     <input name="token" id="token" value="<?=admin::getParam("token")?>" type="hidden" />
 	</form>
     </div>
@@ -538,62 +593,6 @@ while ($list = $db2->next_record())
 	</table>
 	</div>
     </div>
-    <div id="Add_<?=$inc_uid?>" class="<?=$class2?>" style="display:none">
-    <form name="frmIncotermUpd<?=$inc_uid?>" id="frmIncotermUpd<?=$inc_uid?>" action="code/execute/IncotermUpd.php"  enctype="multipart/form-data" >
-<table class="list" width="100%">
-	<tr><td width="12%">
-    			<input name="cli_name<?=$cli_uid?>" id="cli_name<?=$cli_uid?>" onkeyup="lookup(this.value,<?=$cli_uid?>);" type="text" size="15" value="<?=$cli_name?>" />
-    			<div id='autocomplete<?=$cli_uid?>' style="display:none"></div>
-                <input name="cli_uid<?=$cli_uid?>" id="cli_uid<?=$cli_uid?>" value="<?=$cli_uid?>" type="hidden" />
-                
-                
-                <input name="sub_uid2" id="sub_uid2" value="<?=$sub_uid?>" type="hidden" /></td>
-    <td width="12%"><input name="inc_lugar_entrega" id="inc_lugar_entrega" type="text"  size="15" value="<?=utf8_decode($inc_lugar_entrega)?>" /></td>
-    <td width="12%">
-    				<select name="inc_tra_uid<?=$tra_uid?>" id="inc_tra_uid<?=$tra_uid?>" class="input"  >
-                	<?php
-                    $sql3 = "select tra_uid, tra_name from mdl_transporte where tra_delete=0";
-					$db3->query($sql3);
-					while ($content=$db3->next_record())
-					{	
-					?>
-					<option <? if($content["tra_name"]==$tra_name) echo 'selected="selected"';?> value="<?=$content["tra_uid"]?>"><?=utf8_decode($content["tra_name"])?></option>					
-					<?php
-					}
-                    ?>
-				</select>
-                </td>
-    <td width="12%">
-				<select name="inc_inl_uid" id="inc_inl_uid" class="input"  >
-                	<?php
-                    $sql3 = "select inl_uid, inl_name from mdl_incoterm_language where inl_delete=0";
-					$db3->query($sql3);
-					while ($content=$db3->next_record())
-					{	
-					?>
-					<option <? if($content["inl_name"]==$inl_name) echo 'selected="selected"';?> value="<?=$content["inl_uid"]?>"><?=$content["inl_name"]?></option>					
-					<?php
-					}
-                    ?>
-				</select>
-                </td>
-    <td width="12%"><input name="inc_ajuste2" id="inc_ajuste2" type="text" size="9" value="<?=round($inc_ajuste,2)?>"/></td>
-	<td align="center" width="12%" height="5">
-		<a href="#" onclick="editListDpf('<?=$inc_uid?>');return false;">
-		<img src="lib/save_es.gif" border="0" title="<?=admin::labels('edit')?>" alt="<?=admin::labels('edit')?>">
-		</a>
-	</td>
-	<td align="center" width="12%" height="5">
-		<a href="#" onclick="showTab('list_<?=$inc_uid?>');showTab('Add_<?=$inc_uid?>'); return false;">
-		<img src="lib/cancel_es.gif" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
-		</a>
-	</td>
-	</tr>
-	</table>
-     <input name="token" id="token" value="<?=admin::getParam("token")?>" type="hidden" />
-     <input name="inc_uid" id="inc_uid" value="<?=$inc_uid?>" type="hidden" />
-    </form>
-     </div>
 	<?php
 	$i++;
 	} 
@@ -660,7 +659,7 @@ else
                                                     </a> 
                                                     </td>
                                                     <td width="41%" style="font-size:11px;">
-                                                    <?=admin::labels('or');?> <a href="subastasList.php?token=<?=admin::getParam("token")?>" ><?=admin::labels('cancel');?></a> 
+                                                    <?=admin::labels('or');?> <a href="subastasList.php?token=<?=admin::getParam("token")?>&tipUid=<?=$tipUid?>" ><?=admin::labels('cancel');?></a> 
                                                     </td>
         </tr>
      </table>

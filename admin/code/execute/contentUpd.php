@@ -101,6 +101,6 @@ foreach( $_FILES as $key => $FILES2){
 	
 }
 $token=admin::getParam("token");
-unset($_POST);
+
 header('Location: ../../contentList.php?token='.$token);
 ?>

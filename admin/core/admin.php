@@ -1826,6 +1826,35 @@ public static function updateSubastaItem()
 
     }
   }
-// LLAVE FINAL DE LA CLASE	
+public static function validaRav($uid, $rol, $tipologia, $moneda, $monto, $unidadUid)
+{
+    //echo $uid.":".$rol."-".$tipologia."#".$moneda."%".$monto."$".$unidad."<br>";
+    $rolAplica = false;
+            $sql =  "select count(*) from mdl_rav where rav_tipologia=$tipologia and rav_delete=0 and rav_rol_uid=$rol and rav_cur_uid=".$moneda;
+            $valida = admin::getDbValue($sql);
+            $unidad=0;
+            switch ($tipologia){
+                case 1:
+                    $sql =  "select count(*) from mdl_subasta_unidad where suu_sub_uid=$uid and suu_uni_uid in(".$unidadUid.")";
+                    $unidad = admin::getDbValue($sql);
+                    break;
+                default:
+                    $sql =  "select count(*) from mdl_subasta_unidad where suu_sub_uid=$uid and suu_uni_uid in(".$unidadUid.")";
+                    $unidad = admin::getDbValue($sql);
+                    break;
+            }
+            if(($valida>0)&&($unidad>0))
+            {   
+                $montoBase = $monto;
+                $montoMenor = admin::getDbValue("SELECT rav_monto_inf FROM mdl_rav WHERE rav_tipologia=$tipologia and rav_delete=0 and rav_rol_uid=".$rol." and rav_cur_uid=".$moneda);
+                $montoMayor = admin::getDbValue("SELECT rav_monto_sup FROM mdl_rav WHERE rav_tipologia=$tipologia and rav_delete=0 and rav_rol_uid=".$rol." and rav_cur_uid=".$moneda);
+                if($montoMayor!=0){
+            
+                    if(($montoBase>=$montoMenor)&&($montoBase<=$montoMayor)) $rolAplica=true;
+                   
+                }else{if($montoBase>=$montoMenor) $rolAplica=true;}                
+            }
+            return $rolAplica;
 }
+}// LLAVE FINAL DE LA CLASE	
 ?>

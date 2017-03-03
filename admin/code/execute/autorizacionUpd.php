@@ -183,7 +183,7 @@ if ($FILES2["name"] != '')
 	$db->query($sql);
 	}
 $token=admin::getParam("token");
-unset($_POST);if($sub_modalidad=="ITEM")
+if($sub_modalidad=="ITEM")
 {
 header('Location: ../../autorizacionEdit2.php?token='.$token.'&sub_uid='.$sub_uid.'&pro_uid='.$pro_uid);
 }else{

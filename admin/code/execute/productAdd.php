@@ -101,9 +101,9 @@ $sql = "insert into mdl_clixitem(
 						".$fldxitem.", 
 						0
 					)";
-echo $sql;
+//echo $sql;
 $db->query($sql);
 }
 $token=admin::getParam("token");
-header('Location: ../../subastasEdit2.php?token='.$token.'&pro_uid='.$pro_uid.'&sub_uid='.$sub_uid);
+header('Location: ../../subastasEdit2.php?token='.$token.'&pro_uid='.$pro_uid.'&sub_uid='.$sub_uid.'&tipUid='.admin::getParam("tipUid"));
 ?>

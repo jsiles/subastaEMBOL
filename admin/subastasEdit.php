@@ -1,6 +1,28 @@
 <?php
  include ("core/admin.php"); 
- admin::initialize('subastas','subastasEdit'); 
+$tipUid=  admin::getParam("tipUid");
+switch($tipUid){
+    case 1: $opcionMenu = "subastas";
+            $opocionSubMenu ="subastasEdit";
+            $etiquetaCrear = "subastasNew";
+            $moduleListId=17;
+            $moduleCrearId=18;
+            break;
+    case 2: $opcionMenu = "parametrizaciones";
+            $opocionSubMenu ="parametrizacionesEdit";
+            $etiquetaCrear = "parametrizacionesNew";
+            $moduleListId=20;
+            $moduleCrearId=20;
+            break;    
+    default :
+            $opcionMenu = "subastas";
+            $opocionSubMenu ="subastasEdit";
+            $etiquetaCrear = "subastasNew";
+            $moduleListId=17;
+            $moduleCrearId=18;
+            break;
+}
+admin::initialize($opcionMenu, $opocionSubMenu);  
  ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">    
 <html>
@@ -84,7 +106,7 @@ function removeList(id){
 					  $.ajax({
 						url: 'code/execute/incotermDel.php',
 						type: 'POST',
-						data: 'uid='+id+'&token=<?=admin::getParam("token")?>'
+						data: 'uid='+id+'&token=<?=admin::getParam("token")?>&tipUid=<?=admin::getParam("tipUid")?>'
 					});
 				   
 				 }

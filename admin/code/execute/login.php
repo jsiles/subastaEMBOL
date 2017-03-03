@@ -2,7 +2,7 @@
 //include_once("../../database/connection.php");  
 include_once("../../core/admin.php");
 $form = $_POST;
-unset($_POST);
+
 
 $usuario    = strtolower( trim(safeHtml(trim($form['usuario'])) ) );
 $contrasena = trim( safeHtml($form['contrasena']) );

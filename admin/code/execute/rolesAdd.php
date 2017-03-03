@@ -43,6 +43,6 @@ if(is_array($modId)){
     }
 }
 $token=admin::getParam("token");
-unset($_POST);
+
 header('Location: ../../rolesList.php?token='.$token);
 ?>

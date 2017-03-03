@@ -65,6 +65,6 @@ if ($validFile && $FILES['error']==0)
 	$sql = "update mdl_roles_users set rus_rol_uid=".$usr_rolA." where rus_usr_uid=".$use_uidA;
 	$db->query($sql);
 $token=admin::getParam("token");		
-unset($_POST);	
+	
 header('Location: ../../userList.php?token='.$token);		
 ?>

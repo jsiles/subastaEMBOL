@@ -10,6 +10,6 @@ $sql = "update mdl_team_category set
 		tca_status='" . admin::toSql($_POST["dcl_status"],"String") . "'
 		WHERE tca_uid=" . $dca_uid . " and tca_delete=0";
 $db->query($sql);
-unset($_POST);	
+	
 header('Location: ../../teamList.php');	
 ?>

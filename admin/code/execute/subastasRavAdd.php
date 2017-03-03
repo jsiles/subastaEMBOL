@@ -29,6 +29,6 @@ $rav_moneda = admin::getParam("rav_moneda");
        //echo $sql;
        $db->query($sql);
    }//die;
-unset($_POST);//die;
+//die;
 header("Location: ../../subastasRavList.php?tipUid=$rav_tipo&token=$token");	    
 ?>

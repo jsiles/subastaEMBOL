@@ -22,6 +22,6 @@ $nextUrl ='modulesList.php?token='.$token;
 	mod_index='".$mod_index."'
 	where mod_uid = '".$mod_uid."' and mod_language='".$lang."'";
 	$db->query($sql);
-unset($_POST);	
+	
 header('Location: ../../'.$nextUrl);
 ?>

@@ -41,6 +41,6 @@ $db->query($sql);
 $sql = "insert into sys_modules_users set mus_rol_uid=1, mus_mod_uid=".$mod_max .", mus_place='MODULE', mus_delete=0";
 $db->query($sql);
 
-unset($_POST);	
+	
 header('Location: ../../'.$nextUrl);	
 ?>

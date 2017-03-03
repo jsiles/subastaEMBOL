@@ -33,6 +33,6 @@ $rav_uni_uid =admin::getParam("rav_uni_uid");
        $db->query($sql);
    }
    }
-   unset($_POST);//die;
+   //die;
 header("Location: ../../subastasRavList.php?token=$token&tipUid=$rav_tipo");	
 ?>

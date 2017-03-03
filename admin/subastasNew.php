@@ -1,6 +1,28 @@
 <?php
  include ("core/admin.php"); 
- admin::initialize('subastas','subastasNew'); 
+$tipUid=  admin::getParam("tipUid");
+switch($tipUid){
+    case 1: $opcionMenu = "subastas";
+            $opocionSubMenu ="subastasNew";
+            $etiquetaCrear = "subastasNew";
+            $moduleListId=17;
+            $moduleCrearId=18;
+            break;
+    case 2: $opcionMenu = "parametrizaciones";
+            $opocionSubMenu ="parametrizacionesNew";
+            $etiquetaCrear = "parametrizacionesNew";
+            $moduleListId=20;
+            $moduleCrearId=20;
+            break;    
+    default :
+            $opcionMenu = "subastas";
+            $opocionSubMenu ="subastasNew";
+            $etiquetaCrear = "subastasNew";
+            $moduleListId=17;
+            $moduleCrearId=18;
+            break;
+}
+admin::initialize($opcionMenu, $opocionSubMenu);   
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">    
 <html>

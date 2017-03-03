@@ -118,12 +118,12 @@ if ($nroReg>0)
       <td width="100%" colspan="2">
   <table width="100%" border="0">
 	<tr>
-		<td width="10%"><a href="subastasList.php?order=<?=$uidOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$uidClass;?>"><?=admin::labels('code');?>:</a></td>
-        <td width="10%" ><a href="subastasList.php?order=<?=$nameOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$nameClass;?>"><?=admin::labels('name');?>:</a></td>
-        <td width="10%" ><a href="subastasList.php?order=<?=$linOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$linClass;?>"><?=admin::labels('category');?>:</a></td>
+		<td width="10%"><a href="informeList.php?order=<?=$uidOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$uidClass;?>"><?=admin::labels('code');?>:</a></td>
+        <td width="10%" ><a href="informeList.php?order=<?=$nameOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$nameClass;?>"><?=admin::labels('name');?>:</a></td>
+        <td width="10%" ><a href="informeList.php?order=<?=$linOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$linClass;?>"><?=admin::labels('category');?>:</a></td>
         <td width="10%" ><span class="txt11 color2">Monto Base:</span></td>
         <td width="10%" ><span class="txt11 color2">Estado:</span></td>
-	<td align="left" width="10%" height="5"><span class="txt11 color2">Lista de pujas</span></td>
+	<td width="10%" ><span class="txt11 color2">Unidad solicitante:</span></td>
         <td width="5%">&nbsp;</td>		
 	<td align="center" width="5%" height="5">&nbsp;</td>
 	<td align="center" width="5%" height="5">&nbsp;</td>
@@ -154,7 +154,7 @@ while ($subasta_list = $pagDb->next_record())
         $sub_modalidad = $subasta_list["sub_modalidad"];
         $sub_status = $subasta_list["sub_status"];
         $sub_moneda = $subasta_list["sub_moneda"];
-        if($sub_modalidad=="ITEM")
+        if(($sub_modalidad=="ITEM")||($sub_modalidad=="PRECIO"))
         {
             //echo "SELECT SUM(xit_price) FROM mdl_xitem WHERE xit_sub_uid=$sub_uid and xit_delete=0 ";
          $sub_monto = admin::getDbValue("SELECT SUM(xit_price) FROM mdl_xitem WHERE xit_sub_uid=$sub_uid and xit_delete=0 "); 
@@ -213,6 +213,19 @@ while ($subasta_list = $pagDb->next_record())
     		break;
     }
 
+         $unidadArray =  admin::dbFillArray("select uni_uid, uni_description from mdl_unidad, mdl_subasta_unidad where suu_uni_uid=uni_uid and suu_sub_uid=$sub_uid group by uni_uid, uni_description");
+        $k=0; 
+        $rav_unidad="";
+        $unidadUid="";
+        if(is_array($unidadArray))
+        foreach($unidadArray as $key => $value)
+        {
+            if($k==0){$rav_unidad.= $value;$unidadUid.=$key;}
+            else {$rav_unidad.= ",".$value;$unidadUid.=",".$key;}
+            $k++;
+        }
+        else $rav_unidad="Sin asignar";
+        
 	if ($pro_status=='ACTIVE') $labels_content='status_on';
 	else $labels_content='status_off';
 
@@ -233,17 +246,7 @@ while ($subasta_list = $pagDb->next_record())
         <td width="10%" ><span <?=$dest?>><?=ucwords(strtolower(trim(admin::toHtml($pca_name))))?></span></td>
         <td width="10%" ><span><?=$sub_monto?></span></td>
         <td width="10%" ><span><?=$sub_estado?></span></td>
-		<td align="left" width="10%" height="5">
-         <?php
-		 if ($countBids>0){
-		 ?>
-        <a href="excel" onclick="document.location.href='ficheroExcel.php?subasta=<?=$sub_uid?>'; return false;" class="xls">
-				<img src="lib/ext/excel.png" border="0" alt="Excel" title="Excel" />
-					</a>
-		<?php
-                } 
-                ?>	
-		</td>
+		<td align="left" width="10%" height="5"><span><?=$rav_unidad?></span></td>
         <td align="center" width="5%" height="5">
     		 <?php
                 $existInf =  admin::getDbValue("select sua_uid from mdl_subasta_informe where sua_sub_uid=$sub_uid");
@@ -287,7 +290,7 @@ while ($subasta_list = $pagDb->next_record())
                 //echo "<br>"."select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=2 and mop_lab_category='Crear' and moa_rol_uid=".$_SESSION['usr_rol'];
                 if(($valuePermit=='ACTIVE')&&($existInf==null)){
                 ?>
-                    <a href="adjudicarSubasta.php?token=<?=admin::getParam("token")?>&pro_uid=<?=$pro_uid?>">
+                    <a href="adjudicarSubasta.php?token=<?=admin::getParam("token")?>&pro_uid=<?=$pro_uid?>&sub_uid=<?=$sub_uid?>">
                         <img src="lib/crear_on_es.png" border="0" title="Crear" alt="Crear">
                     </a>
                 <?php
@@ -303,20 +306,7 @@ while ($subasta_list = $pagDb->next_record())
 	<td align="center" width="5%" height="5">
 	<?php
 
-            $rolAplica = false;
-            $sql =  "select count(*) from mdl_rav where rav_tipologia=1 and rav_rol_uid=$rol";
-            $valida = admin::getDbValue($sql);
-            if($valida>0)
-            {   
-                $montoBase = $sub_monto;
-                $montoMenor = admin::getDbValue("SELECT rav_monto_inf FROM mdl_rav WHERE rav_tipologia=1 and rav_rol_uid=".$rol);
-                $montoMayor = admin::getDbValue("SELECT rav_monto_sup FROM mdl_rav WHERE rav_tipologia=1 and rav_rol_uid=".$rol);
-                if($montoMayor!=0){
-            
-                    if(($montoBase>=$montoMenor)&&($montoBase<=$montoMayor)) $rolAplica=true;
-                   
-                }else{if($montoBase>=$montoMenor) $rolAplica=true;}                
-            }
+            $rolAplica =admin::validaRav($sub_uid, admin::getSession("usr_rol"), 2, $sub_moneda, $sub_monto, $unidadUid);
 
             if($rolAplica)
             {
@@ -346,21 +336,6 @@ while ($subasta_list = $pagDb->next_record())
         
         <td align="center" width="5%" height="5">
 	<?php
-            $rolAplica = false;
-            $sql =  "select count(*) from mdl_rav where rav_tipologia=1 and rav_rol_uid=$rol";
-            $valida = admin::getDbValue($sql);
-            if($valida>0)
-            {   
-                $montoBase = $sub_monto;
-                $montoMenor = admin::getDbValue("SELECT rav_monto_inf FROM mdl_rav WHERE rav_tipologia=1 and rav_rol_uid=".$rol);
-                $montoMayor = admin::getDbValue("SELECT rav_monto_sup FROM mdl_rav WHERE rav_tipologia=1 and rav_rol_uid=".$rol);
-                if($montoMayor!=0){
-            
-                    if(($montoBase>=$montoMenor)&&($montoBase<=$montoMayor)) $rolAplica=true;
-                   
-                }else{if($montoBase>=$montoMenor) $rolAplica=true;}                
-            }
-
             if($rolAplica)
             {
             ?>

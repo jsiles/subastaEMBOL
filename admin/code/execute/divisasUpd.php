@@ -152,6 +152,6 @@ if ($FILES2["name"] != '')
 	$db->query($sql);
 	}
 $token=admin::getParam("token");
-unset($_POST);
+
 header('Location: ../../divisasList.php?token='.$token);	
 ?>

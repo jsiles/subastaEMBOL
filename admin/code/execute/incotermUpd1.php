@@ -15,6 +15,6 @@ $db->query($sqldat);
 
 $token=admin::getParam("token");
 $nextUrl='dpfList.php?token='.admin::getParam("token");
-unset($_POST);
+
 header('Location: ../../'.$nextUrl);
 ?>

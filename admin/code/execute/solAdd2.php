@@ -33,6 +33,6 @@ $sSQL="insert into mdl_solicitud_material "
 //echo$sSQL; die;
 $db->query($sSQL);
 
-unset($_POST);
+
 header('Location: ../../solicitudNew2.php?token='.$token."&sol_uid=".$solUid."&tipUid=".$tipUid);	
 ?>

@@ -424,6 +424,87 @@ else
 </td>
 </tr>
 <?php 	} ?>
+<?php
+   $sSQL= "SELECT * FROM mdl_xitem WHERE xit_delete=0 and xit_sub_uid='".$sub_uid."' order by xit_uid asc";
+   $nroReg = admin::getDbValue("SELECT count(*) FROM mdl_xitem WHERE xit_delete=0 and xit_sub_uid='".$sub_uid."'");
+//echo $nroReg."ssss";  
+$db2->query($sSQL);
+
+if ($nroReg>0)
+	{
+	?> 
+   <tr>
+      <td width="77%" height="40"><span class="title"><?=admin::labels('list','dpflist')?></span></td>
+    <td width="23%" height="40">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2" id="contentListing">
+    <div class="row0">
+    <table class="list" width="100%">
+	<tr>
+    <td width="12%" style="color:#16652f">Producto</td>
+    <td width="12%" style="color:#16652f">Descripci&oacute;n</td>
+    <td width="12%" style="color:#16652f">Imagen</td>
+    <td width="12%" style="color:#16652f">Precio base</td>
+    <td width="12%" style="color:#16652f">Unidad de mejora</td>
+	<td width="12%" style="color:#16652f">Proveedor</td>
+	<td align="center" width="12%" height="5">&nbsp;</td>
+	</tr>
+	</table>
+    </div>
+<div class="itemList" id="itemList" style="width:99%">  
+	<?php
+$i=1;
+while ($list = $db2->next_record())
+	{
+	$flduid = $list["xit_uid"];
+	$fldproduct = $list["xit_product"];
+	$flddescription = $list["xit_description"];
+	$fldimage = $list["xit_image"];
+	$fldprice = $list["xit_price"];
+	$fldunidad = $list["xit_unity"];
+	if ($i%2==0) $class='row0';
+	else  $class='row';
+	if ($i%2==0) $class2='row';
+	else  $class2='row1';
+  	?> 
+    <div class="groupItem" id="<?=$flduid?>">
+  	<div id="list_<?=$flduid?>" class="<?=$class?>" style="width:100%" >
+<table class="list" width="100%">
+	<tr>
+    
+    <td width="12%"><?=utf8_decode($fldproduct)?></td>
+    <td width="12%"><?=utf8_decode($flddescription)?></td>
+    <td width="12%"><img src="<?=PATH_DOMAIN."/img/subasta/thumb2_".utf8_decode($fldimage)?>"  border="0"> </td>
+    <td width="12%" align="center"><?=round($fldprice,2)?></td>
+	<td width="12%" align="center"><?=$fldunidad?></td>
+	<td width="12%"><?php
+    $db3->query("select clx_cli_uid from mdl_clixitem where clx_delete=0 and clx_xit_uid=$flduid ");
+	
+	while ($user = $db3->next_record())
+	{
+		
+		$cli_name = admin::getDBvalue("select cli_socialreason as nombre from mdl_client WHERE cli_uid=".$user["clx_cli_uid"]);
+		echo $cli_name."<br>";
+	}
+	
+	?></td>
+    	<td align="center" width="12%" height="5">
+		<img src="lib/delete_off_es.gif" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
+	</td>
+	</tr>
+	</table>
+	</div>
+    </div>
+	<?php
+	$i++;
+	} 
+ ?>
+</div> 
+    </td>
+    </tr>
+    <?php 	} 
+?>
 <tr>
 <td colspan="2">
 <br />
@@ -431,7 +512,7 @@ else
 	  	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 			<tr>
 				<td width="59%" align="center">
-				<a href="subastasList.php?token=<?=admin::getParam("token")?>" class="button" >Volver</a>
+				<a href="subastasList.php?token=<?=admin::getParam("token")?>&tipUid=<?=$tipUid?>" class="button" >Volver</a>
 				</td>
           
         </tr>

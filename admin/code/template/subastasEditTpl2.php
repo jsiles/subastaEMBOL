@@ -68,6 +68,7 @@ $prod = $db->next_record();
     <tr><td><div id='autocomplete' style="display:none"></div> </td></tr>
 	</table>
     <input name="token" id="token" value="<?=admin::getParam("token")?>" type="hidden" />
+    <input name="tipUid" id="tipUid" value="<?=admin::getParam("tipUid")?>" type="hidden" />
 	</form>
     </div>
     
@@ -244,7 +245,7 @@ else
 	  	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 			<tr>
 				<td width="59%" align="center">
-				<a href="subastasList.php?token=<?=admin::getParam("token")?>" class="button" >Finalizar</a></td>
+                                    <a href="subastasList.php?token=<?=admin::getParam("token")?>&tipUid=<?=admin::getParam("tipUid")?>" class="button" >Finalizar</a></td>
 		<td width="41%" style="font-size:11px;">&nbsp;
 		</td>
           

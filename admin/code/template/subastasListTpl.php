@@ -361,7 +361,7 @@ while ($subasta_list = $pagDb->next_record())
             //echo "ACA";
             $rolAplica =admin::validaRav($sub_uid,admin::getSession("usr_rol"),1,$sub_moneda, $sub_monto, $unidadUid);
 
-            if($rolAplica)
+            if($rolAplica==1)
             {
             ?>
                 <?php
@@ -396,7 +396,7 @@ while ($subasta_list = $pagDb->next_record())
 		<img src="lib/rechazar_off.png" border="0" title="Rechazar" alt="Rechazar">
     <?php }
 	else{
-            if($rolAplica)
+            if($rolAplica==1)
             {
             ?>
                 <?php

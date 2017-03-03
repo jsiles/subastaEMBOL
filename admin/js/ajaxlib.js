@@ -2970,6 +2970,7 @@ function deleteClientItem()
 function solicitudCS(uid,status)
   {
     token = $.getUrlVar('token');	 	  
+    tipUid = $.getUrlVar('tipUid');
     divx = document.getElementById('status_' + uid);
     divx.innerHTML = '<img border="0" src="lib/loading.gif">';
     //instanciamos el objetoAjax
@@ -2985,6 +2986,45 @@ function solicitudCS(uid,status)
                                                                           }  
     ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     //enviando los valores
-    ajax.send("uid="+uid+"&status="+status+"&token="+token)
+    ajax.send("uid="+uid+"&status="+status+"&token="+token+"&tipUid="+tipUid);
   }
-        
+function ordenCS(uid,status)
+  {
+    token = $.getUrlVar('token');	 	  
+    tipUid = $.getUrlVar('tipUid');
+    divx = document.getElementById('status_' + uid);
+    divx.innerHTML = '<img border="0" src="lib/loading.gif">';
+    //instanciamos el objetoAjax
+    ajax=objectAjax();
+    //uso del medotod POST
+    ajax.open("POST", "code/execute/ordenCS.php",true);
+    ajax.onreadystatechange=function() {
+                                                                            if (ajax.readyState==4) 
+                                                                                  {
+                                                                                  //mostrar resultados en esta capa
+                                                                                  divx.innerHTML=ajax.responseText;
+                                                                                  }
+                                                                          }  
+    ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    //enviando los valores
+    ajax.send("uid="+uid+"&status="+status+"&token="+token+"&tipUid="+tipUid);
+  }     
+function verifyOC()
+{
+    var sw=true;
+    $("#div_orc_sol_uid").hide();
+    $("#div_orc_nro_oc").hide();
+    $("#div_orc_fecha").hide();
+    $("#div_orc_hora").hide();
+    $("#div_orc_aprobado").hide();
+    $("#div_orc_document").hide();
+    if($("#orc_sol_uid").val()=='') { sw=false; $("#div_orc_sol_uid").show();}
+    if($("#orc_nro_oc").val()=='') { sw=false; $("#div_orc_nro_oc").show();}
+    if($("#orc_fecha").val()=='') { sw=false; $("#div_orc_orc_fecha").show();}
+    if($("#orc_hora").val()=='') { sw=false; $("#div_orc_hora").show();}
+    if($("#orc_aprobado").val()=='') { sw=false; $("#div_orc_aprobado").show();}
+    if($("#orc_document").val()=='') { sw=false; $("#div_orc_document").show();}
+    
+    if(sw) document.addOC.submit();
+    else scroll(0,0);
+}

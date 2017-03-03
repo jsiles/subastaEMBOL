@@ -1829,13 +1829,18 @@ public static function updateSubastaItem()
 public static function validaRav($uid, $rol, $tipologia, $moneda, $monto, $unidadUid)
 {
     //echo $uid.":".$rol."-".$tipologia."#".$moneda."%".$monto."$".$unidad."<br>";
-    $rolAplica = false;
+    $rolAplica = 0;
             $sql =  "select count(*) from mdl_rav where rav_tipologia=$tipologia and rav_delete=0 and rav_rol_uid=$rol and rav_cur_uid=".$moneda;
+            //echo $sql;
             $valida = admin::getDbValue($sql);
             $unidad=0;
             switch ($tipologia){
                 case 1:
                     $sql =  "select count(*) from mdl_subasta_unidad where suu_sub_uid=$uid and suu_uni_uid in(".$unidadUid.")";
+                    $unidad = admin::getDbValue($sql);
+                    break;
+                case 4:
+                    $sql =  "select count(*) from mdl_orden_unidad where oru_orc_uid=$uid and oru_uni_uid in(".$unidadUid.")";
                     $unidad = admin::getDbValue($sql);
                     break;
                 default:
@@ -1848,11 +1853,14 @@ public static function validaRav($uid, $rol, $tipologia, $moneda, $monto, $unida
                 $montoBase = $monto;
                 $montoMenor = admin::getDbValue("SELECT rav_monto_inf FROM mdl_rav WHERE rav_tipologia=$tipologia and rav_delete=0 and rav_rol_uid=".$rol." and rav_cur_uid=".$moneda);
                 $montoMayor = admin::getDbValue("SELECT rav_monto_sup FROM mdl_rav WHERE rav_tipologia=$tipologia and rav_delete=0 and rav_rol_uid=".$rol." and rav_cur_uid=".$moneda);
+                //echo "SELECT rav_monto_inf FROM mdl_rav WHERE rav_tipologia=$tipologia and rav_delete=0 and rav_rol_uid=".$rol." and rav_cur_uid=".$moneda."<br>";
+                //echo "SELECT rav_monto_sup FROM mdl_rav WHERE rav_tipologia=$tipologia and rav_delete=0 and rav_rol_uid=".$rol." and rav_cur_uid=".$moneda."<br>";
+                //echo $monto."##".$moneda;
                 if($montoMayor!=0){
             
-                    if(($montoBase>=$montoMenor)&&($montoBase<=$montoMayor)) $rolAplica=true;
+                    if(($montoBase>=$montoMenor)&&($montoBase<=$montoMayor)) {$rolAplica=1;}
                    
-                }else{if($montoBase>=$montoMenor) $rolAplica=true;}                
+                }else{if($montoBase>=$montoMenor) {$rolAplica=1;}}                
             }
             return $rolAplica;
 }

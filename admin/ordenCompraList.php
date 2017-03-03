@@ -8,9 +8,9 @@ switch($tipUid){
             $moduleListId=43;
             $moduleCrearId=44;
             break;
-    case 2: $opcionMenu = "aprCompras";
-            $opocionSubMenu ="aprComprasList";
-            $etiquetaCrear = "aprComprasNew";
+    case 2: $opcionMenu = "aprOrdCompras";
+            $opocionSubMenu ="aprOrdComprasList";
+            $etiquetaCrear = "aprOrdComprasNew";
             $moduleListId=46;
             $moduleCrearId=46;
             break;    
@@ -59,9 +59,9 @@ function removeList(id){
 			if(v){
 				var uid = m.find('#list').val();
 
-				  $('#sol_'+uid).fadeOut(500, function(){ $(this).remove(); });
+				  $('#sub_'+uid).fadeOut(500, function(){ $(this).remove(); });
 					  $.ajax({
-						url: 'code/execute/solicitudDel.php?token=<?=admin::getParam("token");?>',
+						url: 'code/execute/ordenDel.php?token=<?=admin::getParam("token");?>',
 						type: 'POST',
 						data: 'uid='+uid
 					});
@@ -72,7 +72,7 @@ function removeList(id){
 		}
 	});
 }
-function aprobarSolicitud(id){
+function aprobarOC(id){
 	var txt = 'Esta seguro de Aprobar esta Solicitud?<br><input type="hidden" id="list" name="list" value="'+ id +'" />';
 	$.prompt(txt,{
 		show:'fadeIn' ,
@@ -84,11 +84,11 @@ function aprobarSolicitud(id){
 				var uid = m.find('#list').val();
 				  $('#sol_'+id).fadeOut(500, function(){ $(this).remove(); });
 					  $.ajax({
-						url: 'code/execute/solicitudApr.php',
+						url: 'code/execute/ordenApr.php',
 						type: 'POST',
 						data: 'uid='+id,
 						 success: function() { 
-								window.location.href='./solicitudList.php?token=<?=admin::getParam("token")?>&tipUid=<?=admin::getParam("tipUid")?>';
+								window.location.href='./ordenCompraList.php?token=<?=admin::getParam("token")?>&tipUid=<?=admin::getParam("tipUid")?>';
 							}
 					});
 					 
@@ -99,7 +99,7 @@ function aprobarSolicitud(id){
 	});
 }
 
-function rechazarSolicitud(id){
+function rechazarOC(id){
 	var txt = 'Esta seguro de Rechazar esta Solicitud?<br><input type="hidden" id="list" name="list" value="'+ id +'" />';
 	$.prompt(txt,{
 		show:'fadeIn' ,
@@ -111,11 +111,11 @@ function rechazarSolicitud(id){
 				var uid = m.find('#list').val();
 				  $('#sol_'+id).fadeOut(500, function(){ $(this).remove(); });
 					  $.ajax({
-						url: 'code/execute/solicitudRechazar.php',
+						url: 'code/execute/ordenRechazar.php',
 						type: 'POST',
 						data: 'uid='+id,
 						 success: function() { 
-								window.location.href='./solicitudList.php?token=<?=admin::getParam("token")?>&tipUid=<?=admin::getParam("tipUid")?>';
+								window.location.href='./ordenCompraList.php?token=<?=admin::getParam("token")?>&tipUid=<?=admin::getParam("tipUid")?>';
 							}
 					});
 					 

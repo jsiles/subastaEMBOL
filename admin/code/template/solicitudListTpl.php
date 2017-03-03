@@ -71,7 +71,7 @@ if ($nroReg>0)
 	<tr>
             <td width="12%" class="list1a" style="color:#16652f;">Fecha:</td>
             <td width="12%" class="list1a" style="color:#16652f;">Nro Solicitud:</td>
-            <td width="12%" style="color:#16652f">Unidad:</td>
+            <td width="12%" style="color:#16652f">Unidad Solicitante:</td>
             <td width="12%" style="color:#16652f">Observaciones:</td>
             <td width="12%" style="color:#16652f">Usuario:</td>
             <td width="12%" style="color:#16652f">Estado:</td>

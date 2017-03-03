@@ -35,7 +35,7 @@ $solEdit=$db->next_record();
   <tr>
     <td colspan="2" id="contentListing"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td width="50%" valign="top"><table width="98%" border="0" cellpadding="5" cellspacing="5" class="box">
+        <td width="50%" valign="top"><table width="50%" border="0" cellpadding="5" cellspacing="5" class="box">
          <tr>
             <td colspan="3" class="titleBox">Datos Solicitud</td>
          </tr>
@@ -130,12 +130,12 @@ $solEdit=$db->next_record();
 			<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tableUpload">
 			<tr>
 				<td width="25%" rowspan="2" align="center" valign="middle" style="padding:4px;">
-                                    <img src="<?=$imgSaved?>?<?=time();?>" border="0" />
+                                    <a target="blank" href="<?=PATH_DOMAIN."/docs/subasta/".$solEdit["sol_doc"];?>"><img src="<?=$imgSaved?>?<?=time();?>" border="0" /></a>
                                 </td>
 				<td width="75%" style="font-size:11px;">
 				<?=$solEdit["sol_doc"];?><br />
 				<a href="javascript:viewInputFile('on')" title="<?=admin::labels('change');?>" class="small2"><?=admin::labels('change');?></a>
-				<span class="pipe">|</span> <a href="#" onclick="removeImg(<?=$regusers["cli_uid"]?>);return false;" title="<?=admin::labels('del')?>" class="small3"><?=admin::labels('del')?></a>				</td>
+				<span class="pipe">|</span> <a href="#" onclick="removeImg(<?=$solEdit["sol_uid"]?>);return false;" title="<?=admin::labels('del')?>" class="small3"><?=admin::labels('del')?></a>				</td>
 			</tr>
 			<tr>
 				<td height="24">

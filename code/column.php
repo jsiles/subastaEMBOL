@@ -2,7 +2,7 @@
 $arrayURL = admin::urlArray();
 //print_r($arrayURL);
 
-if($arrayURL[$urlPositionTitle]!='divisas')
+if($arrayURL[$urlPositionTitle]!='divisas' && $arrayURL[$urlPositionTitle]!='session' && $arrayURL[$urlPositionTitle]!='registro')
 {
 ?>
 <div id="sidebar">
@@ -30,7 +30,7 @@ if($arrayURL[$urlPositionTitle]!='divisas')
 				</div>
 </div>
 <?php
-}else{
+}else if($arrayURL[$urlPositionTitle]!='session' && $arrayURL[$urlPositionTitle]!='registro'){
 ?>
 <div id="sidebar">
 				<div id="box1" class="box-style">

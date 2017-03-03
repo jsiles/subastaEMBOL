@@ -5,7 +5,7 @@
 				$urlTitle = $arrayURL[$urlPositionTitle];
 				$uidClient = admin::getSession("uidClient");
 				if($uidClient) $sWhere= " and con_uid not in (2,3) ";
-				else $sWhere= " and con_uid not in (2) ";
+				else $sWhere= " and con_uid not in (2,3) ";
 $sql3 = "select * 
 		from mdl_contents 
 		left join mdl_contents_languages on (con_uid=col_con_uid) 

@@ -50,7 +50,6 @@
  //$_pagi_sqlConta;
 
  $_pagi_totalReg = $nroReg;
-
  //Si ocurrió error y mostrar errores está activado
  if($_pagi_totalReg == false && $_pagi_mostrar_errores == true){
 	//die (" Error en la consulta de conteo de registros. Mysql dijo: <b>".mysql_error()."</b>");

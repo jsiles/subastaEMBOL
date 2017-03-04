@@ -58,6 +58,7 @@ if ($nroReg>0)
           <input name="Buscar" id="Buscar" type="image" src="lib/buscar.png" />
            <input type="hidden" name="qfiltro" id="qfiltro" value="1"/>
            <input type="hidden" name="token" value="<?=admin::getParam("token")?>" />
+           <input type="hidden" name="tipUid" value="<?=admin::getParam("tipUid")?>" />
           </td>
          </tr>
         </table>
@@ -309,7 +310,7 @@ else
         
         &nbsp;</td>
   </tr>
-  <tr>
+  <!--<tr>
 	<td width="90%" height="40"></td>
     <td>
         <div class="boxSearch">
@@ -329,7 +330,7 @@ else
          </form>
        </div>
    </td>
-  </tr>  
+  </tr>  -->
   <tr>
     <td colspan="2" id="contentListing">
 <div  style="background-color: #f7f8f8;">

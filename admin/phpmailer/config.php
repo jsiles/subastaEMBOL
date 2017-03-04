@@ -1,6 +1,4 @@
-<?
-define(MAILSERVER,"logoscomunicaciones.com");
-//define(MAILSERVER,"localhost");
+<?php
+define(MAILSERVER,"devzon.xyz");
 define(MAILTYPE,"smtp");
-
 ?>

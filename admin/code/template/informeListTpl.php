@@ -97,7 +97,7 @@ if ($nroReg>0)
 	<td width="90%" height="40"></td>
     <td>
         <div class="boxSearch">
-        <form name="frmSubastasSearch" action="subastasList.php" >
+        <form name="frmSubastasSearch" action="informeList.php" >
         <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
          <tr>
           <td>
@@ -107,6 +107,7 @@ if ($nroReg>0)
           <input name="Buscar" id="Buscar" type="image" src="lib/buscar.png" />
            <input type="hidden" name="qfiltro" id="qfiltro" value="1"/>
            <input type="hidden" name="token" value="<?=admin::getParam("token")?>" />
+           <input type="hidden" name="tipUid" value="<?=admin::getParam("tipUid")?>" />
           </td>
          </tr>
         </table>

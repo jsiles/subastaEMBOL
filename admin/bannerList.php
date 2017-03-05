@@ -19,7 +19,7 @@ admin::initialize('banners','bannerList');
 <META HTTP-EQUIV="Content-Type" content="text/html; ISO-8859-1">
 <!--BEGINDRAG&DROP-->
 <script type="text/javascript" src="js/jquery.js"></script>
-<script language="javascript" type="text/javascript" src="js/ajaxlib.js"></script>
+<script language="javascript" type="text/javascript" src="js/ajaxlib.js?version=<?=VERSION?>"></script>
 <script type="text/javascript" src="js/interface.js"></script>
 <!--ENDDRAG&DROP-->
 <!--BEGINIMPROMTU-->

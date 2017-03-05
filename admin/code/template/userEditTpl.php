@@ -4,6 +4,8 @@ $use_uidA=admin::toSql($_REQUEST["usr_uidA"],"String");
 $sql = "select * from sys_users where usr_uid=" . $use_uidA;
 $db->query($sql);
 $regusers = $db->next_record();
+//$rolLogged=admin::getSession("usr_rol");
+        
 ?>
 <br />
 <form name="frmUsers" method="post" action="code/execute/userUpd.php?token=<?=admin::getParam("token");?>" enctype="multipart/form-data" onsubmit="return false;">
@@ -109,10 +111,11 @@ $regusers = $db->next_record();
 			$sql2="select rol_uid, rol_description from mdl_roles where rol_delete=0 and rol_status='ACTIVE' ";	
 			//die($sql2);
 			$db2->query($sql2);
+                        $rolUser = admin::getDbValue("select rus_rol_uid from mdl_roles_users where rus_usr_uid=".$regusers["usr_uid"]);
 			while($row = $db2->next_record())
 			{
             ?>
-            	<option <? if($rolLogged==$row["rol_uid"]) echo 'selected="selected"';?> value="<?=$row["rol_uid"]?>"><?=$row["rol_description"]?></option>
+            	<option <?php if($rolUser==$row["rol_uid"]) echo 'selected="selected"';?> value="<?=$row["rol_uid"]?>"><?=$row["rol_description"]?></option>
             <?php
 			}
             ?>

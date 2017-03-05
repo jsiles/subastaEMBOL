@@ -9,10 +9,10 @@ $token= admin::getParam("token");
 $solObservaciones=  admin::getParam("sol_observaciones");
 $rav_uni_uid =admin::getParam("rav_uni_uid");
 $cli_uid =  admin::getParam("sol_cli_uid");
-$solUid =  admin::getDbValue("select max(sol_uid) from mdl_solicitud_compra");
 $sol_status =  admin::getParam("sol_status");
 $sol_monto =  admin::getParam("sol_monto");
 $sol_moneda =  admin::getParam("sol_moneda");
+$solUid =  admin::getDbValue("select max(sol_uid) from mdl_solicitud_compra");
 if($solUid=='NULL') $solUid=0;
 $solUid++;
 $mythumb = new thumb(); 
@@ -36,6 +36,8 @@ $sql = "insert into mdl_solicitud_compra
                                  $solUid,
                                  GETDATE(),
                                  ".admin::getSession("usr_uid").",
+                                 $sol_monto,
+                                 $sol_moneda,
                                  '$solObservaciones',
                                  '',
                                  0,
@@ -45,7 +47,7 @@ $sql = "insert into mdl_solicitud_compra
                                  '$sol_status',
                                  0
 				)";
-//echo $sql;die;
+//echo $sql;//die;
 	$db->query($sql);
 
         
@@ -76,6 +78,5 @@ if(is_array($cli_uid)){
    }
 }
 //die;
-
 header('Location: ../../solicitudNew2.php?token='.$token."&sol_uid=".$solUid."&tipUid=".$tipUid);	
 ?>

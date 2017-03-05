@@ -6,6 +6,8 @@ $form = $_POST;
 
 $usuario    = strtolower( trim(safeHtml(trim($form['usuario'])) ) );
 $contrasena = trim( safeHtml($form['contrasena']) );
+
+//admin::doLog("LogUsuario:".$usuario."|Pass:".$contrasena."|");
 if ($usuario=="" || $contrasena==""){
 	header('Location: ../../index.php');	
 	die;
@@ -13,10 +15,13 @@ if ($usuario=="" || $contrasena==""){
 $sql = "SELECT * FROM sys_users " .
         "		WHERE usr_login='".admin::toSql($usuario,'text')."' and ".
         " usr_pass ='".md5($contrasena)."' ";
-        
+
+$numfiles = admin::getDbValue("SELECT count(*) FROM sys_users " .
+        "		WHERE usr_login='".admin::toSql($usuario,'text')."' and ".
+        " usr_pass ='".md5($contrasena)."' ");
+//if($usuario=="director4") admin::doLog("SQL:".$sql.":cantidad:".$numfiles);        
 			  //usr_pass=LOWER(CONVERT(VARCHAR(32),HashBytes('MD5','".admin::toSql($contrasena,'text')."'),2))";
 
-$numfiles = $db->numrows($sql); 
 $db->query($sql);
 
 
@@ -31,7 +36,9 @@ else
 	$Datos = $db->next_record();
 		// GENERANDO LAS VARIABLES DE SESSION
 		//$_SESSION['USER_LOGGED'] = $uid;
+//        echo $rol;die;
 		$rol=admin::getDBvalue("SELECT rus_rol_uid FROM mdl_roles_users where rus_usr_uid=".$Datos["usr_uid"]);
+                //if($usuario=="director4") admin::doLog("Rol:".$rol);
 		session_set_cookie_params(100*100);
 		@session_start();
 		$_SESSION["authenticated"]=true; // identificador si se encuentra logueado
@@ -40,7 +47,9 @@ else
 		$_SESSION["usr_photo"] = $Datos["usr_photo"];
 		$_SESSION["usr_firstname"] = $Datos["usr_firstname"];
 		$_SESSION["usr_lastname"] = $Datos["usr_lastname"];
-
+                /*if($usuario=="director4") admin::doLog("auth;".$_SESSION["authenticated"]);
+                if($usuario=="director4") admin::doLog("UID;".$_SESSION["usr_uid"]);
+                if($usuario=="director4") admin::doLog("ROL;".$_SESSION["usr_rol"]);*/
 		/*
 		Estados de token
 		0 = activo
@@ -57,17 +66,25 @@ else
 		$token = sha1(PREFIX.uniqid( rand(), TRUE ));		
 		$sSQL  = "insert into sys_users_verify (suv_cli_uid,suv_token,suv_date,suv_ip,suv_status) values (". $Datos["usr_uid"].",'".$token."',GETDATE(),'". $_SERVER['REMOTE_ADDR'] ."',0)";
 		//die($sSQL);
-		$db->query($sSQL);  
+		$db->query($sSQL); 
+                //if($usuario=="director4") admin::doLog("SQLtoken:".$sSQL."|");
 		$rolDesc=admin::getDBvalue("SELECT rol_description FROM mdl_roles where rol_uid=".$rol);
 
 		$modAccess = admin::getDBvalue("select top 1 a.mus_mod_uid from sys_modules_users a, sys_modules b where a.mus_rol_uid=".$rol." and a.mus_mod_uid=b.mod_uid and b.mod_status='ACTIVE' and b.mod_parent=0 order by b.mod_position");
-                if($rolDesc=='ROOT')
-			$urlSite = admin::getDBValue("select mod_index from sys_modules where mod_uid=1 and mod_status='ACTIVE'");
-		else
-			$urlSite = admin::getDBValue("select mod_index from sys_modules where mod_uid=". $modAccess ." and mod_status='ACTIVE'");
+                //if($usuario=="director4") admin::doLog("ModACCess:".$modAccess);
+		$urlSite = admin::getDBValue("select mod_index from sys_modules where mod_uid=". $modAccess ." and mod_status='ACTIVE'");
 		
 		$_POST = NULL;
 		//echo "ROl:".$rolDesc."-". $modAccess."-".$urlSite;die;
-		header('Location: ../../'.$urlSite.'?token='.$token);
+                if($urlSite){
+                     if(strpos($urlSite, '?')!==FALSE){
+                                                    $urlSite.="&token=".$token;
+                                                }else{
+                                                    $urlSite.="?token=".$token;
+                                                }
+                //echo $urlSite;die;                                                
+                //if($usuario=="director4") admin::doLog("urlSites:".$urlSite."|token:".$token);                                                
+                header("Location: ../../".$urlSite);
+                }
 	}	
 ?>

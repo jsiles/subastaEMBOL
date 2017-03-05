@@ -22,7 +22,9 @@ switch($tipUid){
             $moduleCrearId=39;
             break;
 }
+//if($_SESSION["usr_uid"]==14) admin::doLog ("Antes de ingresar");
 admin::initialize($opcionMenu, $opocionSubMenu); 
+//if($_SESSION["usr_uid"]==14) admin::doLog ("despues");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">    
 <html>
@@ -41,7 +43,7 @@ admin::initialize($opcionMenu, $opocionSubMenu);
 <META NAME="rating" CONTENT="General" />
 
 <script type="text/javascript" src="js/jquery.js"></script>
-<script language="javascript" type="text/javascript" src="js/ajaxlib.js?<?=date('dmYhis')?>"></script>
+<script language="javascript" type="text/javascript" src="js/ajaxlib.js?version=<?=VERSION?>"></script>
 <script type="text/javascript" src="js/interface.js"></script>
 <!--BEGINIMPROMTU-->
 <link rel="stylesheet" type="text/css" href="css/impromptu.css">

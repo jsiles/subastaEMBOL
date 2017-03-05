@@ -27,11 +27,11 @@ $search = admin::toSql(admin::getParam("search"),"String");
 
 if (!$search || $search==''){
 	$_pagi_sql= "select usr_uid,usr_lastname,usr_firstname,usr_status, usr_email,rol_description, usr_login, usr_pass, usr_photo from sys_users,mdl_roles, mdl_roles_users where rus_rol_uid=rol_uid and usr_delete=0 and rus_usr_uid=usr_uid ".$noRoot.$orderCode;
-	$nroReg=admin::getDBvalue("select count(usr_uid) from sys_users,mdl_roles, mdl_roles_users where rus_rol_uid=rol_uid and usr_delete=0 and rus_usr_uid=usr_uid ".$noRoot);
+	//$nroReg=admin::getDBvalue("select count(usr_uid) from sys_users,mdl_roles, mdl_roles_users where rus_rol_uid=rol_uid and usr_delete=0 and rus_usr_uid=usr_uid ".$noRoot);
 }
 else{
-	$_pagi_sql= "select usr_uid,usr_lastname,usr_firstname,usr_status, usr_email, rol_description, rol_description, usr_login, usr_pass, usr_photo from sys_users,mdl_roles, mdl_roles_users where rus_rol_uid=rol_uid and usr_delete=0 and rus_usr_uid=usr_uid and (MATCH(usr_login, usr_firstname, usr_lastname, usr_email, usr_phone, usr_cellular, rol_description) AGAINST('+".$search."%' IN BOOLEAN MODE) or usr_login like '%".$search."%' or usr_firstname like '%".$search."%' or usr_lastname like '%".$search."%' or usr_email like '%".$search."%' or usr_phone like '%".$search."%' or usr_cellular like '%".$search."%' or rol_description like '%".$search."%') ".$noRoot.$orderCode;
-	$nroReg=admin::getDBvalue("select count(usr_uid) from sys_users,mdl_roles, mdl_roles_users where rus_rol_uid=rol_uid and usr_delete=0 and rus_usr_uid=usr_uid and usr_login like '%".$search."%' or usr_firstname like '%".$search."%' or usr_lastname like '%".$search."%' or usr_email like '%".$search."%' or usr_phone like '%".$search."%' or usr_cellular like '%".$search."%' or rol_description like '%".$search."%') ".$noRoot);
+	$_pagi_sql= "select usr_uid,usr_lastname,usr_firstname,usr_status, usr_email, rol_description, rol_description, usr_login, usr_pass, usr_photo from sys_users,mdl_roles, mdl_roles_users where rus_rol_uid=rol_uid and usr_delete=0 and rus_usr_uid=usr_uid and (usr_login like '%".$search."%' or usr_firstname like '%".$search."%' or usr_lastname like '%".$search."%' or usr_email like '%".$search."%' or usr_phone like '%".$search."%' or usr_cellular like '%".$search."%' or rol_description like '%".$search."%') ".$noRoot.$orderCode;
+	//$nroReg=admin::getDBvalue("select count(usr_uid) from sys_users,mdl_roles, mdl_roles_users where rus_rol_uid=rol_uid and usr_delete=0 and rus_usr_uid=usr_uid and usr_login like '%".$search."%' or usr_firstname like '%".$search."%' or usr_lastname like '%".$search."%' or usr_email like '%".$search."%' or usr_phone like '%".$search."%' or usr_cellular like '%".$search."%' or rol_description like '%".$search."%') ".$noRoot);
 }	
 
 //echo $_pagi_sql;
@@ -41,6 +41,8 @@ $_pagi_cuantos = 20;//Elegí un número pequeño para que se generen varias páginas
 $_pagi_nav_num_enlaces = 5;//Elegí un número pequeño para que se note el resultado
 //Decidimos si queremos que se muesten los errores de mysql
 $_pagi_mostrar_errores = false;//recomendado true sólo en tiempo de desarrollo.
+$nroReg=$db->numrows($_pagi_sql);
+//echo $nroReg;
 include("core/paginator.inc.php");
 
 if ($nroReg>0){
@@ -284,7 +286,7 @@ else
 <div  style="background-color: #f7f8f8;">
 <table class="list"  width="100%">
 	<tr><td height="30px" align="center" class="bold">
-	<?=admin::labels('nocontent')?>
+	No existen registros.
 	</td></tr>	
  </table>
 </div>

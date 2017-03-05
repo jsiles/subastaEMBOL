@@ -41,8 +41,8 @@ admin::initialize($opcionMenu, $opocionSubMenu);
 <META HTTP-EQUIV="Content-Type" content="text/html; ISO-8859-1">
 <script type="text/javascript">var SERVER='<?=$domain?>'; </script>
 <script language="javascript" type="text/javascript" src="js/jquery-1.3.2.js"></script>
-<script language="javascript" type="text/javascript" src="js/ajaxlib.js?<?=date('dmYHis')?>"></script>
-<script language="javascript" type="text/javascript" src="js/subastas.js?<?=date('dmYHis')?>"></script>
+<script language="javascript" type="text/javascript" src="js/ajaxlib.js?version=<?=VERSION?>"></script>
+<script language="javascript" type="text/javascript" src="js/subastas.js?version=<?=VERSION?>"></script>
 <!-- PROMPT -->
 <script language="javascript" type="text/javascript" src="js/jquery.Impromptu.js"></script>
 <script src="js/ui.core.js" type="text/javascript"></script>

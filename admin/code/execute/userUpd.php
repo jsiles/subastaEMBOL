@@ -3,8 +3,6 @@ include_once("../../core/admin.php");
 include_once("../../core/files.php");
 include_once("../../core/images.php");
 admin::initialize('users','usersEdit',false);
-//print_r($_SESSION);
-//print_r('<br />'.$_POST);
 $use_uidA = $_POST["use_uidA"];
 $usr_loginA = admin::toSql(safeHtml($_POST["usr_login"]),"String");
 $usr_passA = $_POST["usr_pass"];
@@ -12,26 +10,18 @@ $usr_firstnameA = admin::toSql(safeHtml($_POST["usr_firstname"]),"String");
 $usr_lastnameA = admin::toSql(safeHtml($_POST["usr_lastname"]),"String");
 $usr_emailA = admin::toSql(safeHtml($_POST["usr_email"]),"String");
 $usr_photoA = admin::toSql(safeHtml($_POST["usr_photo"]),"String");
-
 $usr_statusA = admin::toSql(safeHtml($_POST["usr_status"]),"String");
-
 $usr_rolA = admin::toSql(safeHtml($_POST["usr_rol"]),"Number");
-//echo $usr_passA;
-if ($usr_passA!="") $changepassA = "usr_pass='" . md5($usr_passA) . "',";
+if ($usr_passA!=""){ $changepassA = "usr_pass='" . md5($usr_passA) . "',";}
 
 $sql = "update sys_users set
 			usr_login='".$usr_loginA."',
 			usr_firstname='".$usr_firstnameA."', 
 			usr_lastname='".$usr_lastnameA."',";
-if($usr_statusA!='') $sql .= "			usr_status='".$usr_statusA."', ";
-
-$sql .= "			".$changepassA."
-			usr_email='".$usr_emailA."'
-		where usr_uid=".$use_uidA;
-//echo $sql;die;
+if($usr_statusA!='') {$sql .= "usr_status='".$usr_statusA."', ";}
+                       $sql .= $changepassA." usr_email='".$usr_emailA."' where usr_uid=".$use_uidA;
 $db->query($sql);
-
-// SUBIENDO LA IMAGEN NOTICIAS
+// SUBIENDO LA IMAGEN
 $FILES = $_FILES ['usr_photo'];
 		
         $allowedTypes = array("jpeg","jpg","gif","bmp", "png");
@@ -64,7 +54,7 @@ if ($validFile && $FILES['error']==0)
 	
 	$sql = "update mdl_roles_users set rus_rol_uid=".$usr_rolA." where rus_usr_uid=".$use_uidA;
 	$db->query($sql);
-$token=admin::getParam("token");		
-	
-header('Location: ../../userList.php?token='.$token);		
+
+        $token=admin::getParam("token");		
+header("Location: ../../userList.php?token=".$token);		
 ?>

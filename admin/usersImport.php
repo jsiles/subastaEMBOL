@@ -108,7 +108,7 @@ if ($FILES["name"] != '')
 <META NAME="copyright" CONTENT="Software propietario de DEVZONE">
 <META NAME="rating" CONTENT="General">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; ISO-8859-1">
-<script language="javascript" type="text/javascript" src="js/ajaxlib.js"></script>
+<script language="javascript" type="text/javascript" src="js/ajaxlib.js?version=<?=VERSION?>"></script>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/interface.js"></script>
 <!--BEGINIMPROMTU-->

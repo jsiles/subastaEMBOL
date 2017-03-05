@@ -3,7 +3,7 @@
 unset($_GET['PHPSESSID']);*/
 include_once ("path.php");
 require_once("safeHtml.php");
-
+define("VERSION","1.1");
 $app_path = ".";
 $labels = array(); 
 $linksLabels = array();
@@ -1830,9 +1830,10 @@ public static function validaRav($uid, $rol, $tipologia, $moneda, $monto, $unida
 {
    // echo $uid.":".$rol."-".$tipologia."#".$moneda."%".$monto."$".$unidadUid."<br>";
     $rolAplica = 0;
-            $sql =  "select count(*) from mdl_rav where rav_tipologia=$tipologia and rav_delete=0 and rav_rol_uid=$rol and rav_cur_uid=".$moneda;
+            $sql =  "select count(*) from mdl_rav,mdl_rav_access where rav_uid=raa_rav_uid and rav_tipologia=$tipologia and rav_delete=0 and rav_rol_uid=$rol and rav_cur_uid=".$moneda." and ($monto between rav_monto_inf and rav_monto_sup) and raa_uni_uid in ($unidadUid)";
             //echo $sql;
             $valida = admin::getDbValue($sql);
+            //echo $valida;
             $unidad=0;
             switch ($tipologia){
                 case 1:
@@ -1856,15 +1857,32 @@ public static function validaRav($uid, $rol, $tipologia, $moneda, $monto, $unida
             if(($valida>0)&&($unidad>0))
             {   
                 $montoBase = $monto;
-                $montoMenor = admin::getDbValue("SELECT rav_monto_inf FROM mdl_rav WHERE rav_tipologia=$tipologia and rav_delete=0 and rav_rol_uid=".$rol." and rav_cur_uid=".$moneda." and rav_monto<=$monto ");
-                $montoMayor = admin::getDbValue("SELECT rav_monto_sup FROM mdl_rav WHERE rav_tipologia=$tipologia and rav_delete=0 and rav_rol_uid=".$rol." and rav_cur_uid=".$moneda." and rav_monto<=$monto ");
-                if($montoMayor!=0){
-            
+                $sqlMonto =  "select top 1 rav_monto_inf, rav_monto_sup from mdl_rav,mdl_rav_access where rav_uid=raa_rav_uid and rav_tipologia=$tipologia and rav_delete=0 and rav_rol_uid=$rol and rav_cur_uid=".$moneda." and ($monto between rav_monto_inf and rav_monto_sup) and raa_uni_uid in ($unidadUid)";
+                $dbNew = new DBmysql();
+                $dbNew->query($sqlMonto);
+                $montoL=$dbNew->next_record();
+                $montoMenor = $montoL["rav_monto_inf"];
+                $montoMayor = $montoL["rav_monto_sup"];
+                //echo $monto."##".$montoMenor.">>".$montoMayor;
+                if(($montoMayor!=0)&&(is_numeric($montoMayor))){
                     if(($montoBase>=$montoMenor)&&($montoBase<=$montoMayor)) {$rolAplica=1;}
-                   
-                }else{if($montoBase>=$montoMenor) {$rolAplica=1;}}                
+                }else{if(($montoBase>=$montoMenor)&&(is_numeric($montoMenor))) {$rolAplica=1;}}                
             }
             return $rolAplica;
 }
+public static function insertMail($cli_uid, $cli_email, $sol_uid='NULL', $orc_uid='NULL', $nro_oc='NULL', $nti_uid, $attach){
+    
+}
+public static function doLog($text)
+{
+      // open log file
+      $filename = PATH_ROOT."/admin/log/users.log";
+      
+      $fh = fopen($filename, "a") or die("Could not open log file.");
+      fwrite($fh, date("d-m-Y, H:i")." - $text\n") or die("Could not write file!");
+      fclose($fh);
+}
+
+
 }// LLAVE FINAL DE LA CLASE	
 ?>

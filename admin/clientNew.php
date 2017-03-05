@@ -18,8 +18,8 @@ admin::initialize('client','clientNew');
 <META NAME="rating" CONTENT="General">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; ISO-8859-1">
 <script type="text/javascript" src="js/jquery.js"></script>
-<script language="javascript" type="text/javascript" src="js/ajaxlib.js"></script>
-<script type="text/javascript" src="js/pass.js"></script>
+<script language="javascript" type="text/javascript" src="js/ajaxlib.js?version=<?=VERSION?>"></script>
+<script type="text/javascript" src="js/pass.js?version=<?=VERSION?>"></script>
 <!-- TOOLTIPS DE ACRONYM -->
 <script language="javascript" type="text/javascript" src="js/addEvent.js"></script>
 <script language="javascript" type="text/javascript" src="js/sweetTitles.js"></script>

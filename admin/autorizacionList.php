@@ -24,7 +24,7 @@ if(($rol>3)&&($rol<5))
 <meta name="rating" content="General">
 <meta http-equiv="Content-Type" content="text/html; ISO-8859-1">
 <script type="text/javascript" src="js/jquery.js"></script>
-<script language="javascript" type="text/javascript" src="js/ajaxlib.js"></script>
+<script language="javascript" type="text/javascript" src="js/ajaxlib.js?version=<?=VERSION?>"></script>
 <script type="text/javascript" src="js/interface.js"></script>
 <!--BEGINIMPROMTU-->
 <link rel="stylesheet" type="text/css" href="css/impromptu.css">

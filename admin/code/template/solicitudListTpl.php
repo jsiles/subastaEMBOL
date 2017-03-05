@@ -6,15 +6,45 @@ else $urlLangAux='';
 $search = admin::toSql(admin::getParam("search"),"String");
 if ($search || $search!='')
 {
-    $where = " and sol_observaciones like '%$search%' ";
+    $where = " and (sol_observaciones like '%$search%' ";
+    $where .= " or sol_uid like '%$search%' ";
+    $where .= " or CONVERT(VARCHAR(25), sol_date, 126) like '%$search%' )";
             
 }
+if($tipUid==2) { 
+    /*
+     * RAV tipologia 
+     * 1 Proceso Compra
+     * 2 Informe
+     * 3 Solicitud Compra
+     * 4 Aprobacion Compra
+     * 
+     */
+    $where.=" and sol_estado=0 ";
+}
 
-if($tipUid==2) $where.=" and sol_estado=0 ";
+    $rol=admin::getSession("usr_rol");
+    $unidadHabilitada =admin::dbFillArray("select rav_uid,raa_uni_uid from mdl_rav,mdl_rav_access where rav_uid=raa_rav_uid and rav_tipologia=3 and rav_delete=0 and rav_rol_uid=$rol");
+    //print_r($unidadHabilitada);
+    if(is_array($unidadHabilitada)){
+        $k=0;
+        $unidadHabUid="";
+        foreach ($unidadHabilitada as $key => $value) {
+            if($k==0) {
+                $unidadHabUid.= $value;
+            }
+        else {
+            $unidadHabUid.= ",".$value;
+            }
+            $k++;
+        }
+        $where .=" and sou_uni_uid in ($unidadHabUid) ";
+    }
 
-$_pagi_sql= "select * from mdl_solicitud_compra where sol_delete=0 $where order by sol_uid asc ";
-$nroReg=admin::getDBvalue("select count(*) from mdl_solicitud_compra where sol_delete=0 $where");
+$_pagi_sql= "select * from mdl_solicitud_compra, mdl_solicitud_unidad where sol_uid=sou_sol_uid and sol_delete=0 $where order by sol_uid asc ";
+$nroReg=$db->numrows($_pagi_sql);
 
+//echo $_pagi_sql;
 $_pagi_cuantos = 20;//Elegí un número pequeño para que se generen varias páginas
 //cantidad de enlaces que se mostrarán como máximo en la barra de navegación
 $_pagi_nav_num_enlaces = 5;//Elegí un número pequeño para que se note el resultado
@@ -22,7 +52,7 @@ $_pagi_nav_num_enlaces = 5;//Elegí un número pequeño para que se note el resulta
 $_pagi_mostrar_errores = false;//recomendado true sólo en tiempo de desarrollo.
 
 //$db->query($_pagi_sql);
-
+//if($_SESSION["usr_uid"]==14) admin::doLog ("1123");
 include("core/paginator.inc.php");
 
 if ($nroReg>0)
@@ -71,7 +101,7 @@ if ($nroReg>0)
   <table width="98%" border="0"  style="padding-left:17px;">
 	<tr>
             <td width="5%" class="list1a" style="color:#16652f;">Fecha:</td>
-            <td width="5%" class="list1a" style="color:#16652f;">Nro Solicitud:</td>
+            <td width="5%" align="center" class="list1a" style="color:#16652f;">Nro Solicitud:</td>
             <td width="12%" style="color:#16652f">Unidad Solicitante:</td>
             <td width="12%" style="color:#16652f">Monto:</td>
             <td width="12%" style="color:#16652f">Observaciones:</td>
@@ -141,7 +171,7 @@ while ($sol_list = $pagDb->next_record())
 <table class="list" width="100%" border="0">
 	<tr>
     	<td width="5%"><?=$solDate?></td>
-    	<td width="5%"><?=$solUid?></td>
+    	<td width="5%" align="center"><?=$solUid?></td>
     	<td width="12%"><?=$solUnidad?></td>
     	<td width="12%"><?=$solMonto." ".$solMoneda?></td>
     	<td width="12%"><?=$solObservaciones?></td>

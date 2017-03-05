@@ -18,6 +18,7 @@ if ($queryFilter==1)
 else $qsearch="select distinct pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, 
 iif('$timeNow'>sub_date,'concluida','subastandose') as deadtime, sub_finish as estado from mdl_product, mdl_subasta, mdl_pro_category, mdl_subasta_aprobar, mdl_subasta_informe WHERE sub_uid=pro_sub_uid and sup_sub_uid = sub_uid and sua_sub_uid = sub_uid and sup_status='ACTIVE' and sua_status='ACTIVE' and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' ";
 
+//echo $qsearch;
 $maxLine2 = admin::toSql(admin::getParam("maxLineP"),"Number");
 if ($maxLine2) {$maxLine=$maxLine2; admin::setSession("maxLineP",$maxLine2);}
 else {
@@ -44,11 +45,6 @@ else $nameOrder=3;
 if ($linClass=='up') $linOrder=6;
 else $linOrder=5;
 
-if ($lang=='es') $urlFrontLang='';
-else $urlFrontLang=$lang.'/';
-$UrlProduct=admin::getDBvalue("select col_url FROM mdl_contents_languages where col_con_uid=3 and col_language='".$lang."'");
-
-$contentURL = admin::getContentUrl($con_uid,SYS_LANG);
 ?>
 <div id="DIV_WAIT1" style="display:none;"><img border="0" src="lib/loading.gif"></div>
 <?php

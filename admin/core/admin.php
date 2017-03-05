@@ -3,7 +3,7 @@
 unset($_GET['PHPSESSID']);*/
 include_once ("path.php");
 require_once("safeHtml.php");
-
+define("VERSION","1.1");
 $app_path = ".";
 $labels = array(); 
 $linksLabels = array();

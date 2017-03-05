@@ -17,7 +17,7 @@ if ($queryFilter==1)
 }
 else $qsearch="select sub_mount_base, sub_modalidad, sub_moneda, pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif('$timeNow'>sub_deadtime,'concluida',iif('$timeNow'>sub_hour_end, 'subastandose', 'aprobada')) as deadtime, sub_finish as estado from mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' ";
 
-if($tipUid==2) $qsearch.="and sub_finish=0 ";
+if($tipUid==2) $qsearch.=" and sub_finish=0 ";
 
 //echo $qsearch;
 $maxLine2 = admin::toSql(admin::getParam("maxLineP"),"Number");
@@ -65,7 +65,7 @@ $_pagi_nav_num_enlaces = 5;//Elegí un número pequeño para que se note el resulta
 $_pagi_mostrar_errores = false;//recomendado true sólo en tiempo de desarrollo.
 $nroReg = $db->numrows($_pagi_sql);
 $db->query($_pagi_sql);
-//echo $_pagi_sql;
+
 include("core/paginator.inc.php");
 
 if ($nroReg>0)

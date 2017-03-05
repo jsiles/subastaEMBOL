@@ -41,7 +41,7 @@ admin::initialize($opcionMenu, $opocionSubMenu);
 <META NAME="rating" CONTENT="General" />
 
 <script type="text/javascript" src="js/jquery.js"></script>
-<script language="javascript" type="text/javascript" src="js/ajaxlib.js?<?=date('dmYhis')?>"></script>
+<script language="javascript" type="text/javascript" src="js/ajaxlib.js?version=<?=VERSION?>"></script>
 <script type="text/javascript" src="js/interface.js"></script>
 <!--BEGINIMPROMTU-->
 <link rel="stylesheet" type="text/css" href="css/impromptu.css">

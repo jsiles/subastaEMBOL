@@ -18,8 +18,8 @@
 <meta name="rating" content="General">
 <META HTTP-EQUIV="Content-Type" content="text/html; ISO-8859-1">
 <script language="javascript" type="text/javascript" src="js/jquery-1.3.2.js"></script>
-<script language="javascript" type="text/javascript" src="js/ajaxlib.js"></script>
-<script type="text/javascript" src="js/subastas.js"></script>
+<script language="javascript" type="text/javascript" src="js/ajaxlib.js?version=<?=VERSION?>"></script>
+<script type="text/javascript" src="js/subastas.js?version=<?=VERSION?>"></script>
 <!-- PROMPT -->
 <!--<script language="javascript" type="text/javascript" src="js/jquery.js"></script>-->
 <script language="javascript" type="text/javascript" src="js/jquery.Impromptu.js"></script>

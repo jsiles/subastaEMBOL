@@ -18,8 +18,8 @@ admin::initialize('client','clientView',false);
 <meta name="rating" content="General">
 <META HTTP-EQUIV="Content-Type" content="text/html; ISO-8859-1">
 <script type="text/javascript" src="js/jquery2.js"></script>
-<script language="javascript" type="text/javascript" src="js/ajaxlib.js"></script>
-<script language="javascript" type="text/javascript" src="js/users.js"></script>
+<script language="javascript" type="text/javascript" src="js/ajaxlib.js?version=<?=VERSION?>"></script>
+<script language="javascript" type="text/javascript" src="js/users.js?version=<?=VERSION?>"></script>
 <link href="css/jquery-ui-1.8.2.custom.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/jquery-ui-1.8.custom.min_es.js"></script>
 <script type="text/javascript" src="js/pass.js"></script>

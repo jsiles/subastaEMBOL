@@ -85,14 +85,16 @@ function numrows($_pagi_sql="")
 {
 	if(strlen($_pagi_sql)>0)
 	{
-   		//$_pagi_sql = strtoupper($_pagi_sql);
+   		$_pagi_sql = strtoupper($_pagi_sql);
    		$_pagi_sqlConta = preg_replace("[(^SELECT.*FROM)]", "SELECT COUNT(*) FROM", $_pagi_sql );
    		$_pagi_sqlConta = preg_replace("[(ORDER BY.*)]", "", $_pagi_sqlConta);
-        $_pagi_sqlConta = preg_replace("[(GROUP BY.*)]", "", $_pagi_sqlConta);
-        //echo $_pagi_sqlConta;die;
+                $_pagi_sqlConta = preg_replace("[(GROUP BY.*)]", "", $_pagi_sqlConta);
+                $_pagi_sqlConta = strtolower($_pagi_sqlConta);
+                //echo $_pagi_sqlConta;die;
    		$this->Consulta_ID = $this->Conexion_ID->query($_pagi_sqlConta); 
 	}
-   return (!$this->Consulta_ID)?0:$this->Consulta_ID->fetch()[0];
+   return ((!$this->Consulta_ID)||($this->Consulta_ID=='NULL'))?0:$this->Consulta_ID->fetch()[0];
+   
 
 }
 } //fin de la Clase DBmysql

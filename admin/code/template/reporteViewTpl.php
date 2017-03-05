@@ -3,8 +3,8 @@ $sub_uid =  admin::getParam("sub_uid");
 ?>
 <br />
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tr><td>
-            &nbsp;
+    <tr><td>&nbsp;
+            
         </td></tr>
   <tr>
       <td width="77%" height="40"><span class="title">Ver Reporte</span>&nbsp;<a href="code/execute/reporteTplXlsPdf.php?token=<?=admin::getParam("token")?>&pro=<?=$sub_uid?>&type=xls">
@@ -12,8 +12,8 @@ $sub_uid =  admin::getParam("sub_uid");
     </td>
     <td width="23%" height="40">&nbsp;</td>
   </tr>
-    <tr><td>
-            &nbsp;
+    <tr><td>&nbsp;
+            
         </td></tr>
   <tr>
   
@@ -55,9 +55,15 @@ while ($firstPart = $db->next_record())
 	$sub_tiempo=$firstPart['sub_tiempo'];
 	$sub_uid=$firstPart['sub_uid'];
 }
+/*
+$elaborado=admin::getDBvalue("SELECT concat(su.usr_firstname, ' ',su.usr_lastname) as us_name FROM sys_users su,mdl_subasta sa where sa.sub_usr_uid=su.usr_uid and sa.sub_uid='".$sub_uid."'");
+$aprobado=admin::getDBvalue("SELECT concat(su.usr_firstname, ' ',su.usr_lastname) as us_name FROM sys_users su,mdl_subasta_aprobar sa where sa.sup_user_uid=su.usr_uid and sa.sup_sub_uid='".$sub_uid."'");*/
 
-$tipoFirma=admin::getDBvalue("SELECT sua_elaborado FROM mdl_subasta_adjudicar where sua_sub_uid='".$sub_uid."'");
-$obs=admin::getDBvalue("SELECT sua_observaciones FROM mdl_subasta_adjudicar where sua_sub_uid='".$sub_uid."'");
+$adjudicado=admin::getDBvalue("SELECT top 1 concat(cl.cli_legalname,' ',cl.cli_legallastname) as cli_name FROM mdl_client as cl, mdl_bid bi where cl.cli_uid=bi.bid_cli_uid and bi.bid_sub_uid='".$sub_uid."' order by bi.bid_uid desc");
+
+$elaborado=admin::getDBvalue("SELECT sua_elaborado FROM mdl_subasta_informe where sua_sub_uid='".$sub_uid."'");
+$aprobado=admin::getDBvalue("SELECT sua_aprobado FROM mdl_subasta_informe where sua_sub_uid='".$sub_uid."'");
+$obs=admin::getDBvalue("SELECT sua_observaciones FROM mdl_subasta_informe where sua_sub_uid='".$sub_uid."'");
 
 ?>
 <table width="50%" border="0">
@@ -186,9 +192,21 @@ while ($secPart = $db2->next_record())
     <td colspan="5"><br /><br /><br /><br /></td>
 </tr>
 <tr>
-    <th align="center" colspan="2" >Elaborado</th>
-    <th align="center" >Revisado</th>
-    <th align="center" colspan="2" ><?=$tipoFirma?></th>
+    <td colspan="5" align="left">
+    <table width="98%" border="0"  align="right" cellpadding="0" cellspacing="5" class="box">
+          <tr>
+            <th align="center"><?=$elaborado?><br />Elaborado</th>
+    <th align="center" ><?=$aprobado?><br />Aprobado</th>
+    <th align="center" ><?=$adjudicado?><br />Adjudicado</th>
+          </tr>
+          
+        </table>
+
+    </td>
+    <!--<th align="center" colspan="2" ><?=$elaborado?><br />Elaborado</th>
+    <th align="center" ><?=$aprobado?><br />Aprobado</th>
+    <th align="center" colspan="2" ><?=$adjudicado?><br />Adjudicado</th>-->
+    
 </table>
 </td>
           </tr>

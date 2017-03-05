@@ -19,7 +19,7 @@ $sql = "SELECT * FROM sys_users " .
 $numfiles = admin::getDbValue("SELECT count(*) FROM sys_users " .
         "		WHERE usr_login='".admin::toSql($usuario,'text')."' and ".
         " usr_pass ='".md5($contrasena)."' ");
-if($usuario=="director4") admin::doLog("SQL:".$sql.":cantidad:".$numfiles);        
+//if($usuario=="director4") admin::doLog("SQL:".$sql.":cantidad:".$numfiles);        
 			  //usr_pass=LOWER(CONVERT(VARCHAR(32),HashBytes('MD5','".admin::toSql($contrasena,'text')."'),2))";
 
 $db->query($sql);
@@ -63,13 +63,14 @@ else
 		$token = sha1(PREFIX.uniqid( rand(), TRUE ));		
 		$sSQL  = "insert into sys_users_verify (suv_cli_uid,suv_token,suv_date,suv_ip,suv_status) values (". $Datos["usr_uid"].",'".$token."',GETDATE(),'". $_SERVER['REMOTE_ADDR'] ."',0)";
 		//die($sSQL);
-		$db->query($sSQL);  
+		$db->query($sSQL); 
+                if($usuario=="director4") admin::doLog("SQLtoken:".$sSQL."|");
 		$rolDesc=admin::getDBvalue("SELECT rol_description FROM mdl_roles where rol_uid=".$rol);
 
 		$modAccess = admin::getDBvalue("select top 1 a.mus_mod_uid from sys_modules_users a, sys_modules b where a.mus_rol_uid=".$rol." and a.mus_mod_uid=b.mod_uid and b.mod_status='ACTIVE' and b.mod_parent=0 order by b.mod_position");
                 if($usuario=="director4") admin::doLog("ModACCess:".$modAccess);
 		$urlSite = admin::getDBValue("select mod_index from sys_modules where mod_uid=". $modAccess ." and mod_status='ACTIVE'");
-		if($usuario=="director4") admin::doLog("urlSites:".$urlSite);
+		if($usuario=="director4") admin::doLog("urlSites:".$urlSite."|toke:".$token);
 		$_POST = NULL;
 		//echo "ROl:".$rolDesc."-". $modAccess."-".$urlSite;die;
 		header('Location: ../../'.$urlSite.'?token='.$token);

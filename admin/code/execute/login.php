@@ -6,6 +6,8 @@ $form = $_POST;
 
 $usuario    = strtolower( trim(safeHtml(trim($form['usuario'])) ) );
 $contrasena = trim( safeHtml($form['contrasena']) );
+
+admin::doLog("LogUsuario:".$usuario."|Pass:".$contrasena);
 if ($usuario=="" || $contrasena==""){
 	header('Location: ../../index.php');	
 	die;
@@ -13,7 +15,7 @@ if ($usuario=="" || $contrasena==""){
 $sql = "SELECT * FROM sys_users " .
         "		WHERE usr_login='".admin::toSql($usuario,'text')."' and ".
         " usr_pass ='".md5($contrasena)."' ";
-        
+admin::doLog("SQL:".$sql);        
 			  //usr_pass=LOWER(CONVERT(VARCHAR(32),HashBytes('MD5','".admin::toSql($contrasena,'text')."'),2))";
 
 $numfiles = $db->numrows($sql); 

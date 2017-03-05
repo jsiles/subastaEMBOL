@@ -127,6 +127,7 @@ $solEdit=$db->next_record();
             <input name="tipUid" type="hidden" value="<?=$tipUid?>" class="input">
                         <?php
 			$docsSavedroot = PATH_ROOT."/docs/subasta/".$solEdit["sol_doc"];
+			$docsSavedDomain = PATH_DOMAIN."/docs/subasta/".$solEdit["sol_doc"];
                         $extension = pathinfo($docsSavedroot, PATHINFO_EXTENSION);
                         //echo $solEdit["sol_doc"]."##";
 			if (file_exists($docsSavedroot) && $solEdit["sol_doc"]!=""){
@@ -160,7 +161,7 @@ $solEdit=$db->next_record();
 			<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tableUpload">
 			<tr>
 				<td width="25%" rowspan="2" align="center" valign="middle" style="padding:4px;">
-                                    <img src="<?=$imgSaved?>?<?=time();?>" border="0" />
+                                    <a target="blank" href="<?=$docsSavedDomain;?>"><img src="<?=$imgSaved?>?<?=time();?>" border="0" /></a>
                                 </td>
 				<td width="75%" style="font-size:11px;">
 				<?=$solEdit["sol_doc"];?><br />

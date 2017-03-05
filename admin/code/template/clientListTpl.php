@@ -21,20 +21,22 @@ $search = admin::toSql(admin::getParam("search"),"String");
 if (!$search || $search=='')
 {
 $_pagi_sql= "select cli_uid, cli_nit_ci, cli_socialreason, cli_user, cli_mainemail, cli_status, cli_phone, cli_status_main from mdl_client where 1=1 ".$categoria.$orderCode;
-$nroReg=admin::getDBvalue("select count(cli_uid) from mdl_client where cli_delete=0");
+//$nroReg=admin::getDBvalue("select count(cli_uid) from mdl_client where cli_delete=0");
 }
 else
 {
 $_pagi_sql= "select cli_uid, cli_nit_ci, cli_socialreason, cli_user, cli_mainemail, cli_status, cli_phone, cli_status_main from mdl_client where (cli_socialreason like '%".$search."%' or cli_nit_ci like '%".$search."%' or cli_user like '%".$search."%' or cli_mainemail like '%".$search."%') ".$categoria.$orderCode;
 
-$nroReg=admin::getDBvalue("select count(cli_uid) from mdl_client where (cli_socialreason like '%".$search."%' or cli_nit_ci like '%".$search."%' or cli_user like '%".$search."%' or cli_mainemail like '%".$search."%') ".$categoria);
+//$nroReg=admin::getDBvalue("select count(cli_uid) from mdl_client where (cli_socialreason like '%".$search."%' or cli_nit_ci like '%".$search."%' or cli_user like '%".$search."%' or cli_mainemail like '%".$search."%') ".$categoria);
 }
-
+//echo $_pagi_sql;
 $_pagi_cuantos = 20;//Elegí un número pequeño para que se generen varias páginas
 //cantidad de enlaces que se mostrarán como máximo en la barra de navegación
 $_pagi_nav_num_enlaces = 5;//Elegí un número pequeño para que se note el resultado
 //Decidimos si queremos que se muesten los errores de mysql
 $_pagi_mostrar_errores = false;//recomendado true sólo en tiempo de desarrollo.
+
+$nroReg=$db->numrows($_pagi_sql);
 include("core/paginator.inc.php");
 
 if ($nroReg>0)

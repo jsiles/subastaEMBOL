@@ -1,12 +1,6 @@
 <?php
 /*
 
- * ROLES
- * 3 ANALISTA
- * 4 SUBASTADOR
- * 5 JEFE NAL
- * 6 GERENTE
-
     ESTADOS DE UNA SUBASTA
     sub_finish
     0 SOLICITUD
@@ -22,21 +16,42 @@ define (SYS_LANG,$lang);
 $maxLine=20;
 $order=0; 
 //variables para filtros de productos*******************************************
-$queryFilter = admin::toSql(admin::getParam("qfiltro"),"Number");
 $rolAplica = false;
-$rol = $_SESSION["usr_rol"];
 $search2 = admin::toSql(admin::getParam("search2"),"String");
-if ($search2) $searchURL='&search2='.$search2.'&qfiltro=1';
-else $searchURL='';
 $timeNow= date("Y-m-d H:i:s");//sub_finish<>0
-//echo $timeNow;
-$qsearch="SELECT pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif('$timeNow'>sub_deadtime,'concluida','subastandose') as deadtime, sub_finish as estado, sub_mount_base, sub_modalidad, sub_moneda FROM mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' and sub_finish =3 ";
-$maxLine2 = admin::toSql(admin::getParam("maxLineP"),"Number");
-if ($maxLine2) {$maxLine=$maxLine2; admin::setSession("maxLineP",$maxLine2);}
-else {
-		$maxLine2=admin::getSession("maxLineP");
-		if ($maxLine2) $maxLine=$maxLine2;
-	}
+
+if ($search2!='')
+{
+	$Where="and (sub_description like '%".$search2."%' or pro_name like '%".$search2."%')";
+}
+
+$rol=admin::getSession("usr_rol");
+    $unidadHabilitada =admin::dbFillArray("select rav_uid,raa_uni_uid from mdl_rav,mdl_rav_access where rav_uid=raa_rav_uid and rav_tipologia=2 and rav_delete=0 and rav_rol_uid=$rol");
+   // print_r($unidadHabilitada);
+    if(is_array($unidadHabilitada)){
+        $k=0;
+        $unidadHabUid="";
+        foreach ($unidadHabilitada as $key => $value) {
+            if($k==0) {
+                $unidadHabUid.= $value;
+            }
+        else {
+            $unidadHabUid.= ",".$value;
+            }
+            $k++;
+        }
+        $Where .=" and suu_uni_uid in ($unidadHabUid) ";
+    }
+
+$qsearch="SELECT pro_uid, pro_name, pca_name, sub_status, sub_uid, "
+        . "sub_type, iif('$timeNow'>sub_deadtime,'concluida','subastandose') as deadtime, "
+        . "sub_finish as estado, sub_mount_base, sub_modalidad, sub_moneda "
+        . "FROM mdl_product, mdl_subasta, mdl_pro_category, mdl_subasta_unidad "
+        . "WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' and sub_finish =3 and sub_uid=suu_sub_uid "
+        . " $Where ";
+
+
+
 
 $order= admin::toSql(admin::getParam("order"),"Number");
 if ($order) admin::setSession("order",$order);
@@ -57,12 +72,6 @@ else $nameOrder=3;
 if ($linClass=='up') $linOrder=6;
 else $linOrder=5;
 
-if ($lang=='es') $urlFrontLang='';
-else $urlFrontLang=$lang.'/';
-
-$UrlProduct=admin::getDBvalue("SELECT col_url FROM mdl_contents_languages WHERE col_con_uid=3 and col_language='".$lang."'");
-
-$contentURL = admin::getContentUrl($con_uid,SYS_LANG);
 
 ?>
 <div id="DIV_WAIT1" style="display:none;"><img border="0" src="lib/loading.gif"></div>

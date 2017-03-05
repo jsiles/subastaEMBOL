@@ -9,7 +9,7 @@ if($search=='')
 $where="";        
 }else
 {
-$where .= " and (noe_fecha like '%". $search."%' or noe_fecha_envio like '%".$search."%')";
+$where .= " and (CONVERT(VARCHAR(25), noe_fecha, 126) like '%". $search."%' or CONVERT(VARCHAR(25), noe_fecha_envio, 126) like '%".$search."%')";
 $where .= " or (noe_email like '%". $search."%')";
 $where .= " or (noe_sol_uid like '%". $search."%')";
 $where .= " or (noe_nro_oc like '%". $search."%')";

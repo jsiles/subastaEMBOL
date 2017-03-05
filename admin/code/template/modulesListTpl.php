@@ -484,7 +484,7 @@ else{ ?>
 <div  style="background-color: #f7f8f8;">
 <table class="list"  width="100%">
 	<tr><td height="30px" align="center" class="bold">
-	<?=admin::labels('nocontent')?>
+	No existen registros.
 	</td></tr>	
  </table>
 </div>

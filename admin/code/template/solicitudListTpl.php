@@ -15,6 +15,7 @@ if($tipUid==2) $where.=" and sol_estado=0 ";
 $_pagi_sql= "select * from mdl_solicitud_compra where sol_delete=0 $where order by sol_uid asc ";
 $nroReg=admin::getDBvalue("select count(*) from mdl_solicitud_compra where sol_delete=0 $where");
 
+//echo $_pagi_sql;
 $_pagi_cuantos = 20;//Elegí un número pequeño para que se generen varias páginas
 //cantidad de enlaces que se mostrarán como máximo en la barra de navegación
 $_pagi_nav_num_enlaces = 5;//Elegí un número pequeño para que se note el resultado

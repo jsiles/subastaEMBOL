@@ -1870,5 +1870,19 @@ public static function validaRav($uid, $rol, $tipologia, $moneda, $monto, $unida
             }
             return $rolAplica;
 }
+public static function insertMail($cli_uid, $cli_email, $sol_uid='NULL', $orc_uid='NULL', $nro_oc='NULL', $nti_uid, $attach){
+    
+}
+public static function doLog($text)
+{
+      // open log file
+      $filename = PATH_ROOT."/admin/log/users.log";
+      
+      $fh = fopen($filename, "a") or die("Could not open log file.");
+      fwrite($fh, date("d-m-Y, H:i")." - $text\n") or die("Could not write file!");
+      fclose($fh);
+}
+
+
 }// LLAVE FINAL DE LA CLASE	
 ?>

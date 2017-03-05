@@ -14,7 +14,7 @@ $usr_photoA = admin::toSql(safeHtml($_POST["usr_photo"]),"String");
 $usr_statusA = admin::toSql(safeHtml($_POST["usr_status"]),"String");
 $usr_rolA = admin::toSql(safeHtml($_POST["usr_rol"]),"Number");
 $usr_statusA = ($usr_statusA==1)?'ACTIVE':'INACTIVE';
-admin::doLog("Usuario:".$usr_loginA."|Pass:".$usr_passA);
+admin::doLog("Usuario:".$usr_loginA."|Pass:".$usr_passA."|");
 if ($usr_passA!="") 
 	{
 	$changepass1 = " usr_pass ";

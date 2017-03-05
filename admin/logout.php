@@ -6,5 +6,5 @@ include_once("core/admin.php");
 			$db->query($sql);
 session_unset();
 session_destroy(); 
-header('Location: index.php');
+header('Location: index.php?logout');
 ?>

@@ -18,7 +18,7 @@ $usr_statusA = admin::toSql(safeHtml($_POST["usr_status"]),"String");
 $usr_rolA = admin::toSql(safeHtml($_POST["usr_rol"]),"Number");
 //echo $usr_passA;
 if ($usr_passA!=""){ $changepassA = "usr_pass='" . md5($usr_passA) . "',";
-admin::doLog("Usuario:".$usr_loginA."|CPass:".$changepassA."|");}
+//admin::doLog("Usuario:".$usr_loginA."|CPass:".$changepassA."|");}
 $sql = "update sys_users set
 			usr_login='".$usr_loginA."',
 			usr_firstname='".$usr_firstnameA."', 

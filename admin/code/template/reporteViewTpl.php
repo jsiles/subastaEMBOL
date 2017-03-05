@@ -57,9 +57,8 @@ while ($firstPart = $db->next_record())
 }
 /*
 $elaborado=admin::getDBvalue("SELECT concat(su.usr_firstname, ' ',su.usr_lastname) as us_name FROM sys_users su,mdl_subasta sa where sa.sub_usr_uid=su.usr_uid and sa.sub_uid='".$sub_uid."'");
-$aprobado=admin::getDBvalue("SELECT concat(su.usr_firstname, ' ',su.usr_lastname) as us_name FROM sys_users su,mdl_subasta_aprobar sa where sa.sup_user_uid=su.usr_uid and sa.sup_sub_uid='".$sub_uid."'");*/
-
-$adjudicado=admin::getDBvalue("SELECT top 1 concat(cl.cli_legalname,' ',cl.cli_legallastname) as cli_name FROM mdl_client as cl, mdl_bid bi where cl.cli_uid=bi.bid_cli_uid and bi.bid_sub_uid='".$sub_uid."' order by bi.bid_uid desc");
+$aprobado=admin::getDBvalue("SELECT concat(su.usr_firstname, ' ',su.usr_lastname) as us_name FROM sys_users su,mdl_subasta_aprobar sa where sa.sup_user_uid=su.usr_uid and sa.sup_sub_uid='".$sub_uid."'");
+$adjudicado=admin::getDBvalue("SELECT top 1 concat(cl.cli_legalname,' ',cl.cli_legallastname) as cli_name FROM mdl_client as cl, mdl_bid bi where cl.cli_uid=bi.bid_cli_uid and bi.bid_sub_uid='".$sub_uid."' order by bi.bid_uid desc");*/
 
 $elaborado=admin::getDBvalue("SELECT sua_elaborado FROM mdl_subasta_informe where sua_sub_uid='".$sub_uid."'");
 $aprobado=admin::getDBvalue("SELECT sua_aprobado FROM mdl_subasta_informe where sua_sub_uid='".$sub_uid."'");
@@ -197,16 +196,13 @@ while ($secPart = $db2->next_record())
           <tr>
             <th align="center"><?=$elaborado?><br />Elaborado</th>
     <th align="center" ><?=$aprobado?><br />Aprobado</th>
-    <th align="center" ><?=$adjudicado?><br />Adjudicado</th>
+    <!--<th align="center" ><?=$adjudicado?><br />Adjudicado</th>-->
           </tr>
           
         </table>
 
     </td>
-    <!--<th align="center" colspan="2" ><?=$elaborado?><br />Elaborado</th>
-    <th align="center" ><?=$aprobado?><br />Aprobado</th>
-    <th align="center" colspan="2" ><?=$adjudicado?><br />Adjudicado</th>-->
-    
+   
 </table>
 </td>
           </tr>

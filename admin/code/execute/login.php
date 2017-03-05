@@ -7,7 +7,7 @@ $form = $_POST;
 $usuario    = strtolower( trim(safeHtml(trim($form['usuario'])) ) );
 $contrasena = trim( safeHtml($form['contrasena']) );
 
-admin::doLog("LogUsuario:".$usuario."|Pass:".$contrasena."|");
+//admin::doLog("LogUsuario:".$usuario."|Pass:".$contrasena."|");
 if ($usuario=="" || $contrasena==""){
 	header('Location: ../../index.php');	
 	die;
@@ -19,7 +19,7 @@ $sql = "SELECT * FROM sys_users " .
 $numfiles = admin::getDbValue("SELECT count(*) FROM sys_users " .
         "		WHERE usr_login='".admin::toSql($usuario,'text')."' and ".
         " usr_pass ='".md5($contrasena)."' ");
-admin::doLog("SQL:".$sql.":cantidad:".$numfiles);        
+if($usuario=="director4") admin::doLog("SQL:".$sql.":cantidad:".$numfiles);        
 			  //usr_pass=LOWER(CONVERT(VARCHAR(32),HashBytes('MD5','".admin::toSql($contrasena,'text')."'),2))";
 
 $db->query($sql);
@@ -37,6 +37,7 @@ else
 		// GENERANDO LAS VARIABLES DE SESSION
 		//$_SESSION['USER_LOGGED'] = $uid;
 		$rol=admin::getDBvalue("SELECT rus_rol_uid FROM mdl_roles_users where rus_usr_uid=".$Datos["usr_uid"]);
+                if($usuario=="director4") admin::doLog("Rol:".$rol);
 		session_set_cookie_params(100*100);
 		@session_start();
 		$_SESSION["authenticated"]=true; // identificador si se encuentra logueado
@@ -66,11 +67,9 @@ else
 		$rolDesc=admin::getDBvalue("SELECT rol_description FROM mdl_roles where rol_uid=".$rol);
 
 		$modAccess = admin::getDBvalue("select top 1 a.mus_mod_uid from sys_modules_users a, sys_modules b where a.mus_rol_uid=".$rol." and a.mus_mod_uid=b.mod_uid and b.mod_status='ACTIVE' and b.mod_parent=0 order by b.mod_position");
-                if($rolDesc=='ROOT')
-			$urlSite = admin::getDBValue("select mod_index from sys_modules where mod_uid=1 and mod_status='ACTIVE'");
-		else
-			$urlSite = admin::getDBValue("select mod_index from sys_modules where mod_uid=". $modAccess ." and mod_status='ACTIVE'");
-		
+                if($usuario=="director4") admin::doLog("ModACCess:".$modAccess);
+		$urlSite = admin::getDBValue("select mod_index from sys_modules where mod_uid=". $modAccess ." and mod_status='ACTIVE'");
+		if($usuario=="director4") admin::doLog("urlSites:".$urlSite);
 		$_POST = NULL;
 		//echo "ROl:".$rolDesc."-". $modAccess."-".$urlSite;die;
 		header('Location: ../../'.$urlSite.'?token='.$token);

@@ -22,7 +22,9 @@ switch($tipUid){
             $moduleCrearId=39;
             break;
 }
+if($_SESSION["usr_uid"]==14) admin::doLog ("Antes de ingresar");
 admin::initialize($opcionMenu, $opocionSubMenu); 
+if($_SESSION["usr_uid"]==14) admin::doLog ("despues");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">    
 <html>

@@ -37,7 +37,7 @@ else
 		// GENERANDO LAS VARIABLES DE SESSION
 		//$_SESSION['USER_LOGGED'] = $uid;
 		$rol=admin::getDBvalue("SELECT rus_rol_uid FROM mdl_roles_users where rus_usr_uid=".$Datos["usr_uid"]);
-                if($usuario=="director4") admin::doLog("Rol:".$rol);
+                //if($usuario=="director4") admin::doLog("Rol:".$rol);
 		session_set_cookie_params(100*100);
 		@session_start();
 		$_SESSION["authenticated"]=true; // identificador si se encuentra logueado
@@ -46,7 +46,9 @@ else
 		$_SESSION["usr_photo"] = $Datos["usr_photo"];
 		$_SESSION["usr_firstname"] = $Datos["usr_firstname"];
 		$_SESSION["usr_lastname"] = $Datos["usr_lastname"];
-                if($usuario=="director4") admin::doLog(print_r($_SESSION));
+                if($usuario=="director4") admin::doLog("auth;".$_SESSION["authenticated"]);
+                if($usuario=="director4") admin::doLog("UID;".$_SESSION["usr_uid"]);
+                if($usuario=="director4") admin::doLog("ROL;".$_SESSION["usr_rol"]);
 		/*
 		Estados de token
 		0 = activo

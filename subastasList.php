@@ -7,7 +7,6 @@ $sql = "SELECT * FROM mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=p
 $db->query($sql);
 $details = $db->next_record();
 $moneda = admin::getDbValue("select cur_description from mdl_currency where cur_uid='".$details["sub_moneda"]."'");
-//echo "123".$details["sub_modalidad"];die;
 if($details)
 switch($details["sub_modalidad"])
 {
@@ -22,9 +21,13 @@ switch($details["sub_modalidad"])
 					break;		
 	case "ITEM":
 					include_once("subastaxItem.php");
-					break;						
+					break;		
+        case "PRECIO":
+					include_once("subastaxPrecio.php");
+					break;		                            
 	default:
-			echo "Modalidad de subasta no soportada";				
+			echo "Modalidad de subasta no soportada";
+                        break;
 }
 //echo $details["sub_modalidad"];
 ?>

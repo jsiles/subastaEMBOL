@@ -61,6 +61,36 @@ else $urlFrontLang=$lang.'/';
             
         </tr>
         <tr>
+            <td width="5%" >Monto:</td>
+            <td width="40%" ><input name="sol_monto" id="sol_monto" type="text" value="" class="input">
+                 <?php 
+				$arrayMoneda = admin::dbFillArray("select cur_uid, cur_description from mdl_currency where cur_delete=0");
+				
+				?>
+                <span id="div_sol_moneda">
+                <select name="sol_moneda" id="sol_moneda" class="input" >
+                <?php
+				foreach($arrayMoneda as $key=>$value)
+				{                
+				?>
+                	<option <?php if ($key==$solEdit["sol_moneda"]) echo 'selected="selected"';?> value="<?=$key?>"><?=$value?></option>
+				<?php
+				}
+				?>
+                </select>
+                                &nbsp;<a href="javascript:addCurrency();" class="small2">agregar</a> | 
+                <a href="javascript:delCurrency();" class="small3"><?=admin::labels('del');?></a></span>
+
+                 <div id="div_add_currency" style="display:none;">
+		<input type="text" name="add_currency" id="add_currency" class="input3" onfocus="setClassInput3(this,'ON');document.getElementById('div_add_currency_error').style.display='none';" onblur="setClassInput3(this,'OFF');document.getElementById('div_add_currency_error').style.display='none';" onclick="setClassInput3(this,'ON');document.getElementById('div_add_currency_error').style.display='none';"/>		
+		<a href="javascript:addCurrencyOption()" class="button3"><?=admin::labels('add');?></a><a href="javascript:closeCurrency();" class="link2">Cerrar</a>		</div>
+				<br /><span id="div_add_currency_error" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>
+                
+             <br /><span id="div_sol_monto" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>
+            </td>
+            <td width="7%">&nbsp;</td>
+        </tr>
+        <tr>
             <td width="5%" >Observaciones:</td>    
             <td width="20%" ><input name="sol_observaciones" value="" class="input"></td>
             <td width="7%">&nbsp;</td>
@@ -83,7 +113,7 @@ else $urlFrontLang=$lang.'/';
 	foreach($arrayClient as $value=>$name)
 	{
 	?>
-    <input name="sol_cli_uid[]" type="checkbox" value="<?=$value?>" size="9" /><?=$name?><br />
+                <input name="sol_cli_uid[]" type="checkbox" class="input3" value="<?=$value?>" size="9" /><?=$name?><br />
     <?php
         }
         }

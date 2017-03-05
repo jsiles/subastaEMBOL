@@ -10,9 +10,13 @@ $solObservaciones=  admin::getParam("sol_observaciones");
 $rav_uni_uid =admin::getParam("rav_uni_uid");
 $cli_uid =  admin::getParam("sol_cli_uid");
 $solUid =  admin::getParam("sol_uid");
-$sol_status =  admin::getParam("sol_status");
+$sol_status =admin::getParam("sol_status");
+$sol_monto =admin::getParam("sol_monto");
+$sol_moneda =admin::getParam("sol_moneda");
  
 $sql = "update mdl_solicitud_compra set
+                                 sol_monto= '$sol_monto',
+                                 sol_moneda= '$sol_moneda',
                                  sol_observaciones= '$solObservaciones',
                                  sol_status='$sol_status'
                                  where sol_uid=$solUid ";

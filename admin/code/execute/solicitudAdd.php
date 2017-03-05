@@ -11,6 +11,8 @@ $rav_uni_uid =admin::getParam("rav_uni_uid");
 $cli_uid =  admin::getParam("sol_cli_uid");
 $solUid =  admin::getDbValue("select max(sol_uid) from mdl_solicitud_compra");
 $sol_status =  admin::getParam("sol_status");
+$sol_monto =  admin::getParam("sol_monto");
+$sol_moneda =  admin::getParam("sol_moneda");
 if($solUid=='NULL') $solUid=0;
 $solUid++;
 $mythumb = new thumb(); 
@@ -19,6 +21,8 @@ $sql = "insert into mdl_solicitud_compra
                                  sol_uid,
                                  sol_date,
                                  sol_usu_uid,
+                                 sol_monto,
+                                 sol_moneda,
                                  sol_observaciones,
                                  sol_doc,
                                  sol_apr_uid,

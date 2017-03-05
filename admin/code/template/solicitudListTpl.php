@@ -4,16 +4,16 @@ if ($lang!='es') $urlLangAux=$lang.'/';
 else $urlLangAux='';
 
 $search = admin::toSql(admin::getParam("search"),"String");
-if (!$search || $search=='')
+if ($search || $search!='')
 {
-$_pagi_sql= "select * from mdl_solicitud_compra where sol_delete=0 order by sol_uid asc ";
-$nroReg=admin::getDBvalue("select count(*) from mdl_solicitud_compra where sol_delete=0");
+    $where = " and sol_observaciones like '%$search%' ";
+            
 }
-else
-{
-$_pagi_sql= "select * from mdl_solicitud_compra where sol_delete=0 and sol_observaciones like '%$search%' order by sol_uid asc ";
-$nroReg=admin::getDBvalue("select count(*) from mdl_solicitud_compra where sol_delete=0 and sol_observaciones like '%$search%' ");
-}
+
+if($tipUid==2) $where.=" and sol_estado=0 ";
+
+$_pagi_sql= "select * from mdl_solicitud_compra where sol_delete=0 $where order by sol_uid asc ";
+$nroReg=admin::getDBvalue("select count(*) from mdl_solicitud_compra where sol_delete=0 $where");
 
 $_pagi_cuantos = 20;//Elegí un número pequeño para que se generen varias páginas
 //cantidad de enlaces que se mostrarán como máximo en la barra de navegación
@@ -70,9 +70,10 @@ if ($nroReg>0)
     <td colspan="2" width="98%">
   <table width="98%" border="0"  style="padding-left:17px;">
 	<tr>
-            <td width="12%" class="list1a" style="color:#16652f;">Fecha:</td>
-            <td width="12%" class="list1a" style="color:#16652f;">Nro Solicitud:</td>
+            <td width="5%" class="list1a" style="color:#16652f;">Fecha:</td>
+            <td width="5%" class="list1a" style="color:#16652f;">Nro Solicitud:</td>
             <td width="12%" style="color:#16652f">Unidad Solicitante:</td>
+            <td width="12%" style="color:#16652f">Monto:</td>
             <td width="12%" style="color:#16652f">Observaciones:</td>
             <td width="12%" style="color:#16652f">Usuario:</td>
             <td width="12%" style="color:#16652f">Estado:</td>
@@ -98,14 +99,17 @@ while ($sol_list = $pagDb->next_record())
 	$solUsuUid = admin::getDbValue("select concat(usr_firstname,' ',usr_lastname) from sys_users where usr_uid=".$sol_list["sol_usu_uid"]);
         $solEstado = $sol_list["sol_estado"];
         $solStatus = $sol_list["sol_status"];
+        $solMonto = $sol_list["sol_monto"];
+        $solMoneda = admin::getDbValue("select cur_description from mdl_currency where cur_uid=".$sol_list["sol_moneda"]);
         $unidadArray =  admin::dbFillArray("select uni_uid, uni_description from mdl_unidad, mdl_solicitud_unidad where sou_uni_uid=uni_uid and sou_sol_uid=$solUid group by uni_uid, uni_description");
         $k=0; 
         $solUnidad="";
+        $solUnidadUid="";
         if(is_array($unidadArray))
         foreach($unidadArray as $key => $value)
         {
-            if($k==0) $solUnidad.= $value;
-            else $solUnidad.= ",".$value;
+            if($k==0) {$solUnidad.= $value;$solUnidadUid.= $key;}
+        else {$solUnidad.= ",".$value;$solUnidadUid.= ",".$key;}
             $k++;
         }
         else $solUnidad="Sin asignar";
@@ -136,9 +140,10 @@ while ($sol_list = $pagDb->next_record())
   	<div id="sub_<?=$solUid?>" class="<?=$class?>">
 <table class="list" width="100%" border="0">
 	<tr>
-    	<td width="12%"><?=$solDate?></td>
-    	<td width="12%"><?=$solUid?></td>
+    	<td width="5%"><?=$solDate?></td>
+    	<td width="5%"><?=$solUid?></td>
     	<td width="12%"><?=$solUnidad?></td>
+    	<td width="12%"><?=$solMonto." ".$solMoneda?></td>
     	<td width="12%"><?=$solObservaciones?></td>
         <td width="12%"><?=$solUsuUid?></td>        
         <td width="12%"><?=$solEstado?></td>        
@@ -215,8 +220,9 @@ while ($sol_list = $pagDb->next_record())
     <td align="center" width="5%" height="5">
 	
                 <?php
+                $rolAplica=admin::validaRav($solUid, admin::getSession("usr_rol"), 3, $sol_list["sol_moneda"], $solMonto, $solUnidadUid);
                 $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=$moduleListId and mop_lab_category='Aprobar' and moa_rol_uid=".$_SESSION['usr_rol']."");
-                if(($valuePermit=='ACTIVE')&&($solEstado=='Solicitud')){
+                if(($valuePermit=='ACTIVE')&&($rolAplica==1)){
                 ?>
                     <a href="aprobar" onclick="aprobarSolicitud('<?=$solUid?>');return false;">
                         <img src="lib/aprobar_on.png" border="0" title="Aprobar" alt="Aprobar">
@@ -235,7 +241,7 @@ while ($sol_list = $pagDb->next_record())
 	
                 <?php
                 $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=$moduleListId and mop_lab_category='Rechazar' and moa_rol_uid=".$_SESSION['usr_rol']."");
-                if(($valuePermit=='ACTIVE')&&($solEstado=='Solicitud')){
+                if(($valuePermit=='ACTIVE')&&($rolAplica==1)){
                 ?>
 
          	    <a href="rechazar" onclick="rechazarSolicitud('<?=$solUid?>');return false;">

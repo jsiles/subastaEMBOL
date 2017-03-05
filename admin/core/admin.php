@@ -1828,7 +1828,7 @@ public static function updateSubastaItem()
   }
 public static function validaRav($uid, $rol, $tipologia, $moneda, $monto, $unidadUid)
 {
-    //echo $uid.":".$rol."-".$tipologia."#".$moneda."%".$monto."$".$unidad."<br>";
+   // echo $uid.":".$rol."-".$tipologia."#".$moneda."%".$monto."$".$unidadUid."<br>";
     $rolAplica = 0;
             $sql =  "select count(*) from mdl_rav where rav_tipologia=$tipologia and rav_delete=0 and rav_rol_uid=$rol and rav_cur_uid=".$moneda;
             //echo $sql;
@@ -1837,6 +1837,10 @@ public static function validaRav($uid, $rol, $tipologia, $moneda, $monto, $unida
             switch ($tipologia){
                 case 1:
                     $sql =  "select count(*) from mdl_subasta_unidad where suu_sub_uid=$uid and suu_uni_uid in(".$unidadUid.")";
+                    $unidad = admin::getDbValue($sql);
+                    break;
+                case 3:
+                    $sql =  "select count(*) from mdl_solicitud_unidad where sou_sol_uid=$uid and sou_uni_uid in(".$unidadUid.")";
                     $unidad = admin::getDbValue($sql);
                     break;
                 case 4:
@@ -1848,14 +1852,12 @@ public static function validaRav($uid, $rol, $tipologia, $moneda, $monto, $unida
                     $unidad = admin::getDbValue($sql);
                     break;
             }
+            //echo $sql;
             if(($valida>0)&&($unidad>0))
             {   
                 $montoBase = $monto;
-                $montoMenor = admin::getDbValue("SELECT rav_monto_inf FROM mdl_rav WHERE rav_tipologia=$tipologia and rav_delete=0 and rav_rol_uid=".$rol." and rav_cur_uid=".$moneda);
-                $montoMayor = admin::getDbValue("SELECT rav_monto_sup FROM mdl_rav WHERE rav_tipologia=$tipologia and rav_delete=0 and rav_rol_uid=".$rol." and rav_cur_uid=".$moneda);
-                //echo "SELECT rav_monto_inf FROM mdl_rav WHERE rav_tipologia=$tipologia and rav_delete=0 and rav_rol_uid=".$rol." and rav_cur_uid=".$moneda."<br>";
-                //echo "SELECT rav_monto_sup FROM mdl_rav WHERE rav_tipologia=$tipologia and rav_delete=0 and rav_rol_uid=".$rol." and rav_cur_uid=".$moneda."<br>";
-                //echo $monto."##".$moneda;
+                $montoMenor = admin::getDbValue("SELECT rav_monto_inf FROM mdl_rav WHERE rav_tipologia=$tipologia and rav_delete=0 and rav_rol_uid=".$rol." and rav_cur_uid=".$moneda." and rav_monto<=$monto ");
+                $montoMayor = admin::getDbValue("SELECT rav_monto_sup FROM mdl_rav WHERE rav_tipologia=$tipologia and rav_delete=0 and rav_rol_uid=".$rol." and rav_cur_uid=".$moneda." and rav_monto<=$monto ");
                 if($montoMayor!=0){
             
                     if(($montoBase>=$montoMenor)&&($montoBase<=$montoMayor)) {$rolAplica=1;}

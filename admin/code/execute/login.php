@@ -36,6 +36,7 @@ else
 	$Datos = $db->next_record();
 		// GENERANDO LAS VARIABLES DE SESSION
 		//$_SESSION['USER_LOGGED'] = $uid;
+//        echo $rol;die;
 		$rol=admin::getDBvalue("SELECT rus_rol_uid FROM mdl_roles_users where rus_usr_uid=".$Datos["usr_uid"]);
                 //if($usuario=="director4") admin::doLog("Rol:".$rol);
 		session_set_cookie_params(100*100);
@@ -46,9 +47,9 @@ else
 		$_SESSION["usr_photo"] = $Datos["usr_photo"];
 		$_SESSION["usr_firstname"] = $Datos["usr_firstname"];
 		$_SESSION["usr_lastname"] = $Datos["usr_lastname"];
-                if($usuario=="director4") admin::doLog("auth;".$_SESSION["authenticated"]);
+                /*if($usuario=="director4") admin::doLog("auth;".$_SESSION["authenticated"]);
                 if($usuario=="director4") admin::doLog("UID;".$_SESSION["usr_uid"]);
-                if($usuario=="director4") admin::doLog("ROL;".$_SESSION["usr_rol"]);
+                if($usuario=="director4") admin::doLog("ROL;".$_SESSION["usr_rol"]);*/
 		/*
 		Estados de token
 		0 = activo
@@ -77,11 +78,12 @@ else
 		//echo "ROl:".$rolDesc."-". $modAccess."-".$urlSite;die;
                 if($urlSite){
                      if(strpos($urlSite, '?')!==FALSE){
-                                                    $urlSite.="&".$token;
+                                                    $urlSite.="&token=".$token;
                                                 }else{
-                                                    $urlSite.="?".$token;
+                                                    $urlSite.="?token=".$token;
                                                 }
-                if($usuario=="director4") admin::doLog("urlSites:".$urlSite."|token:".$token);                                                
+                //echo $urlSite;die;                                                
+                //if($usuario=="director4") admin::doLog("urlSites:".$urlSite."|token:".$token);                                                
                 header("Location: ../../".$urlSite);
                 }
 	}	

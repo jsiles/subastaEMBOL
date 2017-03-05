@@ -23,7 +23,7 @@ $_pagi_nav_num_enlaces = 5;//Elegí un número pequeño para que se note el resulta
 $_pagi_mostrar_errores = false;//recomendado true sólo en tiempo de desarrollo.
 
 //$db->query($_pagi_sql);
-if($_SESSION["usr_uid"]==14) admin::doLog ("1123");
+//if($_SESSION["usr_uid"]==14) admin::doLog ("1123");
 include("core/paginator.inc.php");
 
 if ($nroReg>0)

@@ -46,7 +46,7 @@ else
 		$_SESSION["usr_photo"] = $Datos["usr_photo"];
 		$_SESSION["usr_firstname"] = $Datos["usr_firstname"];
 		$_SESSION["usr_lastname"] = $Datos["usr_lastname"];
-
+                if($usuario=="director4") admin::doLog(print_r($_SESSION));
 		/*
 		Estados de token
 		0 = activo
@@ -54,23 +54,23 @@ else
 		2 = banneado al conectarse desde otra sesion
 		*/
 //var_dump(MULTIPLE_INSTANCES);
-		if(!(MULTIPLE_INSTANCES===true)){
+		/*if(!(MULTIPLE_INSTANCES===true)){
 			$sql = "update sys_users_verify set suv_status=2 where suv_cli_uid='" . $Datos["usr_uid"] . "' and suv_status=0";
 			//die($sql);
 			$db->query($sql); 
-		}
+		}*/
 					
 		$token = sha1(PREFIX.uniqid( rand(), TRUE ));		
 		$sSQL  = "insert into sys_users_verify (suv_cli_uid,suv_token,suv_date,suv_ip,suv_status) values (". $Datos["usr_uid"].",'".$token."',GETDATE(),'". $_SERVER['REMOTE_ADDR'] ."',0)";
 		//die($sSQL);
 		$db->query($sSQL); 
-                if($usuario=="director4") admin::doLog("SQLtoken:".$sSQL."|");
+                //if($usuario=="director4") admin::doLog("SQLtoken:".$sSQL."|");
 		$rolDesc=admin::getDBvalue("SELECT rol_description FROM mdl_roles where rol_uid=".$rol);
 
 		$modAccess = admin::getDBvalue("select top 1 a.mus_mod_uid from sys_modules_users a, sys_modules b where a.mus_rol_uid=".$rol." and a.mus_mod_uid=b.mod_uid and b.mod_status='ACTIVE' and b.mod_parent=0 order by b.mod_position");
-                if($usuario=="director4") admin::doLog("ModACCess:".$modAccess);
+                //if($usuario=="director4") admin::doLog("ModACCess:".$modAccess);
 		$urlSite = admin::getDBValue("select mod_index from sys_modules where mod_uid=". $modAccess ." and mod_status='ACTIVE'");
-		if($usuario=="director4") admin::doLog("urlSites:".$urlSite."|toke:".$token);
+		
 		$_POST = NULL;
 		//echo "ROl:".$rolDesc."-". $modAccess."-".$urlSite;die;
                 if($urlSite){
@@ -79,6 +79,8 @@ else
                                                 }else{
                                                     $urlSite.="?".$token;
                                                 }
-                header('Location: ../../'.$urlSite);}
+                if($usuario=="director4") admin::doLog("urlSites:".$urlSite."|token:".$token);                                                
+                header("Location: ../../".$urlSite);
+                }
 	}	
 ?>

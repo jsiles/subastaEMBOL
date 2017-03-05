@@ -73,6 +73,12 @@ else
 		if($usuario=="director4") admin::doLog("urlSites:".$urlSite."|toke:".$token);
 		$_POST = NULL;
 		//echo "ROl:".$rolDesc."-". $modAccess."-".$urlSite;die;
-		header('Location: ../../'.$urlSite.'?token='.$token);
+                if($urlSite){
+                     if(strpos($urlSite, '?')!==FALSE){
+                                                    $urlSite.="&".$token;
+                                                }else{
+                                                    $urlSite.="?".$token;
+                                                }
+                header('Location: ../../'.$urlSite);}
 	}	
 ?>

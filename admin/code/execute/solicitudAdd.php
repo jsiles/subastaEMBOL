@@ -36,8 +36,8 @@ $sql = "insert into mdl_solicitud_compra
                                  $solUid,
                                  GETDATE(),
                                  ".admin::getSession("usr_uid").",
-                                 '$solMonto',
-                                 '$solMoneda',
+                                 $sol_monto,
+                                 $sol_moneda,
                                  '$solObservaciones',
                                  '',
                                  0,
@@ -77,6 +77,6 @@ if(is_array($cli_uid)){
        $db->query($sql);
    }
 }
-die;
+//die;
 header('Location: ../../solicitudNew2.php?token='.$token."&sol_uid=".$solUid."&tipUid=".$tipUid);	
 ?>

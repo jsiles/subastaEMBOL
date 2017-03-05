@@ -56,11 +56,11 @@ else
 		2 = banneado al conectarse desde otra sesion
 		*/
 //var_dump(MULTIPLE_INSTANCES);
-		/*if(!(MULTIPLE_INSTANCES===true)){
+		if(!(MULTIPLE_INSTANCES===true)){
 			$sql = "update sys_users_verify set suv_status=2 where suv_cli_uid='" . $Datos["usr_uid"] . "' and suv_status=0";
 			//die($sql);
 			$db->query($sql); 
-		}*/
+		}
 					
 		$token = sha1(PREFIX.uniqid( rand(), TRUE ));		
 		$sSQL  = "insert into sys_users_verify (suv_cli_uid,suv_token,suv_date,suv_ip,suv_status) values (". $Datos["usr_uid"].",'".$token."',GETDATE(),'". $_SERVER['REMOTE_ADDR'] ."',0)";

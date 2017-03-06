@@ -10,20 +10,17 @@ if ($search2) $searchURL='&search2='.$search2.'&qfiltro=1';
 else $searchURL='';
 $timeNow= date("Y-m-d H:i:s");//sub_finish<>0
 //echo $timeNow;
-if ($queryFilter==1)
+if ($search2!="")
 {
-	if ($search2) $qsearch="select pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif('$timeNow'>sub_deadtime,'concluida','subastandose') as deadtime, sub_finish as estado from mdl_product, mdl_subasta, mdl_pro_category , mdl_subasta_aprobar, mdl_subasta_informe WHERE sub_uid=pro_sub_uid and sup_sub_uid = sub_uid and sua_sub_uid = sub_uid and sup_status='ACTIVE' and sua_status='ACTIVE' and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' and (pro_name like '%" .$search2. "%' or pro_uid like '%" .$search2. "%') ";
-	else $qsearch="select pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, iif(sub_finish<>0,'concluida','subastandose') as deadtime, sub_finish as estado from mdl_product, mdl_subasta, mdl_pro_category, mdl_subasta_aprobar, mdl_subasta_informe WHERE sub_uid=pro_sub_uid and sup_sub_uid = sub_uid and sua_sub_uid = sub_uid and sup_status='ACTIVE' and sua_status='ACTIVE' and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' ";
+	$Where = " and (pro_name like '%" .$search2. "%' or pro_uid like '%" .$search2. "%') ";
+	
 }
-else $qsearch="select distinct pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, 
-iif('$timeNow'>sub_date,'concluida','subastandose') as deadtime, sub_finish as estado from mdl_product, mdl_subasta, mdl_pro_category, mdl_subasta_aprobar, mdl_subasta_informe WHERE sub_uid=pro_sub_uid and sup_sub_uid = sub_uid and sua_sub_uid = sub_uid and sup_status='ACTIVE' and sua_status='ACTIVE' and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' ";
-
-$maxLine2 = admin::toSql(admin::getParam("maxLineP"),"Number");
-if ($maxLine2) {$maxLine=$maxLine2; admin::setSession("maxLineP",$maxLine2);}
-else {
-		$maxLine2=admin::getSession("maxLineP");
-		if ($maxLine2) $maxLine=$maxLine2;
-	}
+    
+$qsearch= " select distinct pro_uid, pro_name, pca_name, sub_status, sub_uid, sub_type, "
+        . " sub_finish as estado "
+        . " from mdl_product, mdl_subasta, mdl_pro_category, mdl_subasta_aprobar, mdl_subasta_informe "
+        . " WHERE sub_uid=pro_sub_uid and sup_sub_uid = sub_uid and sua_sub_uid = sub_uid and sup_status='ACTIVE' "
+        . " and sua_status='ACTIVE' and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' $Where ";
 
 $order= admin::toSql(admin::getParam("order"),"Number");
 if ($order) admin::setSession("order",$order);

@@ -1870,8 +1870,16 @@ public static function validaRav($uid, $rol, $tipologia, $moneda, $monto, $unida
             }
             return $rolAplica;
 }
-public static function insertMail($cli_uid, $cli_email, $sol_uid='NULL', $orc_uid='NULL', $nro_oc='NULL', $nti_uid, $attach){
-    
+public static function insertMail($cli_uid,$nti_uid, $attach, $cli_email, $sol_uid='NULL', $orc_uid='NULL', $nro_oc='NULL' ){
+    $mailDB =new DBmysql();
+    $sSQL = "   insert into mdl_notificacion_envio "
+            . " (noe_cli_uid, noe_email, noe_sol_uid, noe_orc_uid,"
+            . "  noe_nro_oc, noe_nti_uid, noe_attach_exist, noe_attach,"
+            . "  noe_status, noe_retry, noe_fecha) "
+            . " values"
+            . " ($cli_uid, '$cli_email', $sol_uid, $orc_uid, $nro_oc, $nti_uid, 1, '$attach', 0, 0, GETDATE())";
+    self::doLog($sSQL);
+    $mailDB->query($sSQL);    
 }
 public static function doLog($text)
 {

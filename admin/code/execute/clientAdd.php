@@ -109,6 +109,9 @@ if($cli_exist==0){
 
 	$cli_doc_uid = admin::getParam("cli_doc_uid");
 	if (is_array($cli_doc_uid)){
+             $sql = "delete from mdl_documentsclient where dcl_cli_uid='".$cli_uid."'";
+    $db->query($sql);
+
          foreach (array_keys($cli_doc_uid) as $value) {
               $sql = "insert into mdl_documentsclient (dcl_cli_uid, dcl_doc_uid) values (".$cli_uid.", ".$value.")";
               $db->query($sql);

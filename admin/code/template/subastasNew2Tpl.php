@@ -280,7 +280,7 @@ else
         $displayItem="";
     }
     ?>
-<div id="contentButton"  style="display:<?=$displayItem?>" >
+<div id="contentButton1"  style="display:<?=$displayItem?>" >
 	
     <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subastaxitem">
 			<tr>

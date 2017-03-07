@@ -276,7 +276,7 @@
             <p>Puede marcar los documentos entregados o Informacion completa para que se marquen todos</p>
             </td>
             <td width="64%">
-            <div style="float: left; width:50%">
+            <!--<div style="float: left; width:50%">
             <? 
 				$sql = "select doc_uid, doc_name from mdl_documents where doc_delete=0 and doc_uid=10";
 					$db2->query($sql);
@@ -287,15 +287,15 @@
               	<? 
 					}
 				?>
-            </div>
-            <div style="float: left; width:50%"><? 
-				$sql = "select doc_uid, doc_name from mdl_documents where doc_delete=0 and doc_uid!=10";
+            </div>-->
+            <div style="float: left; width:50%"><?php 
+				$sql = "select doc_uid, doc_name from mdl_documents where doc_delete=0 ";
 					$db2->query($sql);
 					while ($content=$db2->next_record())
 					{
 				?>
             	    <input id="cli_doc_uid[<?=$content["doc_uid"]?>]" name="cli_doc_uid[<?=$content["doc_uid"]?>]" type="checkbox" class="subDocs"  onclick="checkinOut2(<?=$content["doc_uid"]?>);" /><?=$content["doc_name"]?>	<br />
-              	<? 
+              	<?php 
 					}
 				?></div>
 

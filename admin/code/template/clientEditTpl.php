@@ -324,7 +324,7 @@ $sql2 = "select w.wtp_uid, w.wtp_name,  d.wde_description from mdl_waytopay w, m
           <tr>
             <td width="29%">Documentacion:</td>
             <td width="64%">
-            <div style="float: left; width:50%">
+            <!--<div style="float: left; width:50%">
             <?php 
 				$sql = "select doc_uid, doc_name from mdl_documents where doc_delete=0 and doc_uid=10";
 					$db2->query($sql);
@@ -342,9 +342,9 @@ $sql2 = "select w.wtp_uid, w.wtp_name,  d.wde_description from mdl_waytopay w, m
               	<?php 
 					}
 				?>
-            </div>
+            </div>-->
             <div style="float: left; width:50%"><?php 
-				$sql = "select doc_uid, doc_name from mdl_documents where doc_delete=0 and doc_uid!=10";
+				$sql = "select doc_uid, doc_name from mdl_documents where doc_delete=0";
 					$db2->query($sql);
 					while ($content=$db2->next_record())
 					{

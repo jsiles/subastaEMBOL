@@ -41,8 +41,8 @@ switch(valOpcion)
 					$("#tr_unidadmejora").hide();
 					//if($("#sub_type").val()=='COMPRA') $("#montotype").html('Monto m&aacute;ximo');
 					//else $("#montotype").html('Monto m&iacute;nimo');
-					$("#tbl_subasta").hide();
-                                        $("#tbl_subastaxitem").show()
+					//$("#tbl_subasta").hide();
+                                        //$("#tbl_subastaxitem").show()
 					break;
         case 'PRECIO':
                                         var valorInicial=1;
@@ -51,8 +51,8 @@ switch(valOpcion)
                                         $("#tr_montodead").hide();
 					$("#tr_montobase").hide();
 					$("#tr_unidadmejora").hide();
-					$("#tbl_subasta").hide();
-                                        $("#tbl_subastaxitem").show()
+					//$("#tbl_subasta").hide();
+                                        //("#tbl_subastaxitem").show()
 					break;
 	default:
 					$("#tr_numeroruedas").hide();

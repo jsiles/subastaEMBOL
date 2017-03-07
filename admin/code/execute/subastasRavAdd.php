@@ -6,7 +6,7 @@ include_once("../../core/thumb.php");
 admin::initialize('subastaRav','subastaRavAdd'); 
 $token=admin::getParam("token");
 $rav_uid = admin::getDbValue("select max(rav_uid) from mdl_rav");
-if(!$rav_uid) $rav_uid=1;
+if(!$rav_uid) $rav_uid=0;
 $rav_uid++;
 $rav_rol =admin::getParam("rav_rol");
 $rav_monto =admin::getParam("rav_monto"); 

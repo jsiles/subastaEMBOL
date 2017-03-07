@@ -127,6 +127,7 @@ while ($sol_list = $pagDb->next_record())
 	$solDate = substr($sol_list["sol_date"],0,10);
 	$solObservaciones = $sol_list["sol_observaciones"];
 	$solUsuUid = admin::getDbValue("select concat(usr_firstname,' ',usr_lastname) from sys_users where usr_uid=".$sol_list["sol_usu_uid"]);
+        $solEstadoUid = $sol_list["sol_estado"];
         $solEstado = $sol_list["sol_estado"];
         $solStatus = $sol_list["sol_status"];
         $solMonto = $sol_list["sol_monto"];
@@ -197,7 +198,7 @@ while ($sol_list = $pagDb->next_record())
 	<td align="center" width="5%" height="5">
             <?php
             $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=$moduleListId and mop_lab_category='Editar' and moa_rol_uid=".$_SESSION['usr_rol']."");
-            if($valuePermit=='ACTIVE'){
+            if(($valuePermit=='ACTIVE')&&($solEstadoUid==0)){
             ?>
             <a href="solicitudEdit.php?sol_uid=<?=$solUid?>&token=<?=admin::getParam("token");?>&tipUid=<?=admin::getParam("tipUid")?>">
 		<img src="lib/edit_es.gif" border="0" title="<?=admin::labels('edit')?>" alt="<?=admin::labels('edit')?>">
@@ -232,7 +233,7 @@ while ($sol_list = $pagDb->next_record())
     <div id="status_<?=$solUid?>">
         <?php
             $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=$moduleListId and mop_lab_category='Estado' and moa_rol_uid=".$_SESSION['usr_rol']."");
-            if($valuePermit=='ACTIVE'){
+            if(($valuePermit=='ACTIVE')&&($solEstadoUid==0)){
             ?>
 	   <a href="#"  onclick="solicitudCS('<?=$solUid?>','<?=$solStatus?>'); return false;">
 		<img src="<?=admin::labels($labels_content,'linkImage')?>" border="0" title="<?=admin::labels($labels_content)?>" alt="<?=admin::labels($labels_content)?>">

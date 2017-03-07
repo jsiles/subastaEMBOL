@@ -455,11 +455,26 @@ $j++;
 </div>
     </td>
     </tr>
-	<tr>
-    <td colspan="2">
-    <br />
-    </td>
-    </tr>
+	<tr><td width="100%">
+	<table border="0" width="100%">
+			  <td colspan="3" align="right" class="txt10"><span class="txt11">
+			    <?php		   
+				//Incluimos la barra de navegación
+				if ($_pagi_totalReg==0) 
+					{
+					echo "<font face=arial></font>";
+					}
+					else
+					{
+					echo $_pagi_navegacion;
+					//Incluimos la información de la página actual
+					echo $_pagi_info;
+					}		
+				?>
+			  </span></td>
+			</tr>
+			</table>
+	</td></tr>
     <tr>
     <td colspan="2">
     

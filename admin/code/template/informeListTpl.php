@@ -388,46 +388,34 @@ $j++;
 </div>
     </td>
     </tr>
-	<tr>
-    <td colspan="2">
-    <br />
-    </td>
-    </tr>
+	<tr><td width="100%">
+	<table border="0" width="100%">
+			  <td colspan="3" align="right" class="txt10"><span class="txt11">
+			    <?php		   
+				//Incluimos la barra de navegación
+				if ($_pagi_totalReg==0) 
+					{
+					echo "<font face=arial></font>";
+					}
+					else
+					{
+					echo $_pagi_navegacion;
+					//Incluimos la información de la página actual
+					echo $_pagi_info;
+					}		
+				?>
+			  </span></td>
+			</tr>
+			</table>
+	</td></tr>
     <tr>
     <td colspan="2">
-    <!--<table width="100%">
-	<form>    
-    <tr style="display:none">
-    <td align="right">
-      <p><span>Ir a:</span> <input name='webPag' id='webPag' type="text" maxlength="5" size="6"/><input type="button" onclick="goToPag();" value="Ir" /><span name='div_webPag' id='div_webPag'></span></p>
+    
     </td>
-  <td align="right" width="10%">
-   <select name="maxLineP" onchange="RowsF(this.value);">
-   	<option value="10" <? if ($maxLineP==20)  echo 'selected="selected"';?>>20 resultados</option>
-    <option value="20" <? if ($maxLineP==30)  echo 'selected="selected"';?>>30 resultados</option>
-    <option value="30" <? if ($maxLineP==40)  echo 'selected="selected"';?>>40 resultados</option>
-    <option value="50" <? if ($maxLineP==50)  echo 'selected="selected"';?>>50 resultados</option>
-    <option value="100"<? if ($maxLineP==100)  echo 'selected="selected"';?>>100 resultados</option>
-   </select>
-  </td>
-	<td align="right" class="txt11" width="20%">
-	<?	
-	//Incluimos la barra de navegación
-	if ($nroReg==0) 
-		{
-		echo "<font face=arial></font>";
-		}
-		else
-		{
-		echo $_pagi_navegacion;
-		//Incluimos la información de la página actual
-		echo $_pagi_info;
-		}		
-	?>
-	</td>
-    </tr>
-	</form>
-    </table>-->
+	</tr>
+    <tr>
+    <td colspan="2">
+    
     </td>
 	</tr>
 </table><br />

@@ -115,6 +115,7 @@ while ($user_list = $db->next_record())
 	}  ?>
     </td>
     </tr>
+    
 </table><br />
 <br />
 <br />

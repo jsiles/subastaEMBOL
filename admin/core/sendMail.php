@@ -2,7 +2,7 @@
   require_once "../phpmailer/class.phpmailer.php";
   require_once "./mail.cfg";
   require_once "./admin.php";
-  set_time_limit(60);
+  set_time_limit(310);
   $mail = new phpmailer();
   $mail->PluginDir = PLUGINDIR;
   $mail->Mailer = MAILER;
@@ -17,6 +17,13 @@
   $mail->Port=PORT;
   
   $mail->SetLanguage("en", '../phpmailer/language/');
+  /*
+  $mail->AddAddress("jorge.siles@gmail.com");
+  $mail->Subject="Prueba adjunto mail";
+  $mail->Body="Por favor q funcion este test de envio";
+  $mail->addAttachment(PATH_ROOT."/docs/subasta/test.txt");
+  $mail->Send();*/
+  
   $sSQL="select * from mdl_notificacion_envio where noe_status=0 and noe_retry<=2 and noe_email!=''";
   $nroReg=$db->numrows($sSQL);
   if($nroReg>0){
@@ -28,7 +35,7 @@
         $mail->Subject =admin::getDbValue("select not_subject from mdl_notificacion_template where not_nti_uid=".$noe["noe_tip_uid"]);
         $mail->Body =admin::getDbValue("select concat(not_template,'\n',not_sign) as body from mdl_notificacion_template where not_nti_uid=".$noe["noe_tip_uid"]);
         if($noe["noe_attach"]!=""){
-        $mail->addAttachment(PATHROOT.$noe["noe_attach"]);
+        $mail->addAttachment(PATH_ROOT.$noe["noe_attach"]);
         }
       //  $mail->AltBody = "Mensaje de prueba mandado con phpmailer en formato solo texto";
         $exito = $mail->Send();

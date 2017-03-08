@@ -40,7 +40,13 @@ admin::initialize($opcionMenu, $opocionSubMenu);
 <meta name="rating" content="General">
 <META HTTP-EQUIV="Content-Type" content="text/html; ISO-8859-1">
 <script type="text/javascript">var SERVER='<?=$domain?>'; </script>
-<script language="javascript" type="text/javascript" src="js/jquery-1.3.2.js"></script>
+<!--Buscador proveedore -->
+<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.11.4.css">
+<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.11.4.custom.js"></script>
+<!--END BUSCADOR-->
+
+<!--<script language="javascript" type="text/javascript" src="js/jquery-1.3.2.js"></script>-->
 <script language="javascript" type="text/javascript" src="js/ajaxlib.js?version=<?=VERSION?>"></script>
 <script type="text/javascript" src="js/subastas.js?version=<?=VERSION?>"></script>
 
@@ -116,7 +122,7 @@ function removeList(id){
 }
 </script>
 <script type="text/javascript">
-		$(function() {
+/*		$(function() {
 			$("ul").sortable(
 				{ 
 					update : function(event,ui){ 
@@ -144,20 +150,39 @@ function removeList(id){
 				}				
 			}	
 		});		
-	});		
+	});	
+  */      
+         $(function() {
+    $( ".proveedor" ).autocomplete({
+        source: 'code/execute/searchProv.php',
+        select: function(event, ui) {
+        /*$(".proveedor").attr('name', 'sol_cli_uid['+ui.item.value+']');
+        $(".proveedor").attr('id', ui.item.value);
+        $(".proveedor").attr('class', 'input3');*/
+        $("#inputProveedor").append('<input name="cli_uid" checked type="checkbox" class="input3" value="'+ui.item.value+'" size="20" /><label>'+ui.item.label+'</label><br>  ');
+        $("#busqueda").hide();
+        return false; // Prevent the widget from inserting the value.
+        
+    },
+    focus: function(event, ui) {
+        $(".proveedor").val('');
+        return false; // Prevent the widget from inserting the value.
+    }
+    })
+ })
 	</script>	
 <!-- FIN -->
 
 </head>
 <body>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tr><td valign="top"><? include_once("skin/header.php");?>
+<tr><td valign="top"><?php include_once("skin/header.php");?>
 </td></tr>
   <tr>
-    <td valign="top" id="content"><? include_once("code/template/subastasEditTpl.php"); ?></td>
+    <td valign="top" id="content"><?php include_once("code/template/subastasEditTpl.php"); ?></td>
   </tr>
 <tr><td>
-  <? include("skin/footer.php"); ?>
+  <?php include("skin/footer.php"); ?>
   </td></tr>
 </table>
 </body>

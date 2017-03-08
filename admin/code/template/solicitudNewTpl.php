@@ -111,7 +111,6 @@ else $urlFrontLang=$lang.'/';
                 <div>
                     
                     <input name="buscar" type="text" class="input3 proveedor" value="" size="20" /> &nbsp;<label style="color:#ff8a36">Buscar por Nit o Razon Social</label>
-                    <!--<a href="#" onclick="addProv();return false;" class="small2">+Adicionar proveedor</a>-->
                 <br><br>
                 </div> 
         

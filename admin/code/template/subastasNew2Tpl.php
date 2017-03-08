@@ -32,11 +32,8 @@ $prod = $db->next_record();
     <div id="add<?=$ind_uid?>" class="row0">
     <form name="frmIncoterm" action="code/execute/incotermAdd2.php" enctype="multipart/form-data" > 
 	<table class="list" width="100%">
-	<tr><td width="12%"><!--<input name="cli_name" id="cli_name" onkeyup="lookup(this.value);" type="text" size="15"  onfocus="document.getElementById('div_cli_name_error').style.display='none';" onblur="document.getElementById('div_cli_name_error').style.display='none';" onclick="document.getElementById('div_cli_name_error').style.display='none';" autocomplete='off' />
-					   	
-    					<br /><span id="div_cli_name_error" style="display:none;" class="error">Seleccione un nombre del listado.</span>
-                        <input name="cli_uid" id="cli_uid" value="" type="hidden" />-->
-	  <select name="cli_uid" id="cli_uid" class="input"  >
+	<tr><td width="12%">
+<!--	  <select name="cli_uid" id="cli_uid" class="input"  >
 	    <?php
                     $sql = "select cli_uid, cli_socialreason as cli_name from mdl_client where cli_delete=0 order by cli_name";
 					$db2->query($sql);
@@ -49,7 +46,17 @@ $prod = $db->next_record();
 	    <?php
 					}
                     ?>
-	    </select>	  <input name="sub_uid" id="sub_uid" value="<?=$sub_uid?>" type="hidden" /><input name="pro_uid" id="pro_uid" value="<?=$pro_uid?>" type="hidden" /></td>
+	    </select>	  
+    -->
+    <div id="inputProveedor"></div>
+                <br><br>
+                <div id="busqueda">
+                    
+                    <input name="buscar" type="text" class="input3 proveedor" value="" size="20" /> <br /><label style="color:#ff8a36">Buscar por Nit o Razon Social</label>
+                <br><br>
+                </div>
+                <input name="sub_uid" id="sub_uid" value="<?=$sub_uid?>" type="hidden" />
+                <input name="pro_uid" id="pro_uid" value="<?=$pro_uid?>" type="hidden" /></td>
     <td width="12%"><input name="inc_lugar_entrega" id="inc_lugar_entrega" type="text"  size="15" autocomplete='off'/></td>
     <td width="12%">
     <div id="div_inc_tra_uid_select">
@@ -273,14 +280,23 @@ else
     <input name="sub_modalidad" id="sub_modalidad" type="hidden" value="<?=$prod["sub_modalidad"]?>">
     <?php
     if($prod["sub_modalidad"]=="TIEMPO"){
-        $displayTiempo="";
-        $displayItem="none";
-    }else{
-        $displayTiempo="none";
-        $displayItem="";
-    }
-    ?>
-<div id="contentButton1"  style="display:<?=$displayItem?>" >
+?>
+    <div id="contentButton">
+      <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subasta" >
+			<tr>
+				<td width="59%" align="center">
+				<a href="subastasList.php?token=<?=admin::getParam("token")?>" class="button">Finalizar</a></td>
+		
+		</td>
+          
+        </tr>
+      </table>
+      
+      </div>
+<?php
+}else{
+?>
+    <div id="contentButton" >
 	
     <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subastaxitem">
 			<tr>
@@ -293,18 +309,9 @@ else
         </tr>
       </table>
 </div>
-<div id="contentButton"  style="display:<?=$displayTiempo?>">
-      <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subasta" >
-			<tr>
-				<td width="59%" align="center">
-				<a href="subastasList.php?token=<?=admin::getParam("token")?>" class="button">Finalizar</a></td>
-		
-		</td>
-          
-        </tr>
-      </table>
-      
-      </div>
+<?php
+    }
+    ?>
 <br /><br /><br /><br /><br />
 </td></tr>
 </table>

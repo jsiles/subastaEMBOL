@@ -41,7 +41,13 @@ admin::initialize($opcionMenu, $opocionSubMenu);
 <meta name="rating" content="General">
 <meta http-equiv="Content-Type" content="text/html; ISO-8859-1">
 <script type="text/javascript">var SERVER='<?=$domain?>'; </script>
-<script type="text/javascript" src="js/jquery.js"></script>
+<!--Buscador proveedore -->
+<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.11.4.css">
+<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.11.4.custom.js"></script>
+<!--END BUSCADOR-->
+
+<!--<script type="text/javascript" src="js/jquery.js"></script>-->
 <script language="javascript" type="text/javascript" src="js/ajaxlib.js?version=<?=VERSION?>"></script>
 <script type="text/javascript" src="js/interface.js"></script>
 <!--BEGINIMPROMTU-->
@@ -102,6 +108,25 @@ function removeList(id){
 		}
 	});
 }
+         $(function() {
+    $( ".proveedor" ).autocomplete({
+        source: 'code/execute/searchProv.php',
+        select: function(event, ui) {
+        /*$(".proveedor").attr('name', 'sol_cli_uid['+ui.item.value+']');
+        $(".proveedor").attr('id', ui.item.value);
+        $(".proveedor").attr('class', 'input3');*/
+        $("#inputProveedor").append('<input name="orc_cli_uid" id="orc_cli_uid" checked type="checkbox" class="input3" value="'+ui.item.value+'" size="20" /><label>'+ui.item.label+'</label><br>  ');
+        $("#busqueda").hide();
+        return false; // Prevent the widget from inserting the value.
+        
+    },
+    focus: function(event, ui) {
+        $(".proveedor").val('');
+        return false; // Prevent the widget from inserting the value.
+    }
+    })
+ })
+
 </script>
 </head>
 <body>

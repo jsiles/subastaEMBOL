@@ -415,7 +415,7 @@ $prod = $db->next_record();
 					   	
     					<br /><span id="div_cli_name_error" style="display:none;" class="error">Seleccione un nombre del listado.</span>
                         <input name="cli_uid" id="cli_uid" value="" type="hidden" />-->
-	  <select name="cli_uid" id="cli_uid" class="input"  >
+	<!--  <select name="cli_uid" id="cli_uid" class="input"  >
 	    <?php
                     $sql = "select cli_uid, cli_socialreason as cli_name from mdl_client where cli_delete=0 order by cli_name";
 					$db2->query($sql);
@@ -428,7 +428,16 @@ $prod = $db->next_record();
 	    <?php
 					}
                     ?>
-	    </select>	  <input name="sub_uid" id="sub_uid" value="<?=$sub_uid?>" type="hidden" /></td>
+	    </select>-->
+                    <div id="inputProveedor"></div>
+                <br><br>
+                <div id="busqueda">
+                    
+                    <input name="buscar" type="text" class="input3 proveedor" value="" size="20" /> <br /><label style="color:#ff8a36">Buscar por Nit o Razon Social</label>
+                <br><br>
+                </div>
+ 
+ <input name="sub_uid" id="sub_uid" value="<?=$sub_uid?>" type="hidden" /></td>
     <td width="12%"><input name="inc_lugar_entrega" id="inc_lugar_entrega" type="text"  size="15" autocomplete='off'/></td>
     <td width="12%">
     <div id="div_inc_tra_uid_select">
@@ -474,7 +483,7 @@ $prod = $db->next_record();
 				<br /><span id="div_other_incoterm_error" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>
                 </div>
                 </td>
-    <td width="12%"><input name="inc_ajuste" id="inc_ajuste" type="text" size="9" onfocus="document.getElementById('div_inc_ajuste_error').style.display='none';" onblur="document.getElementById('div_inc_ajuste_error').style.display='none';" onclick="document.getElementById('div_inc_ajuste_error').style.display='none';" />
+                <td width="12%"><input name="inc_ajuste" id="inc_ajuste" type="text" size="9" onfocus="document.getElementById('div_inc_ajuste_error').style.display='none';" onblur="document.getElementById('div_inc_ajuste_error').style.display='none';" onclick="document.getElementById('div_inc_ajuste_error').style.display='none';" value="0" />
     %<br /><span id="div_inc_ajuste_error" style="display:none;" class="error">Escriba un monto.</span></td>
 	<td align="center" width="12%" height="5">
 		<a href="guardar" onclick="verifyIncoterm(); return false;">
@@ -618,7 +627,7 @@ else
       </table>
       </div>      
 <div id="contentButton" style="display:<?=$displayTiempo?>">
-      <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subasta" style="display:">
+      <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subasta" style="">
 	<tr>
             <td width="59%" align="center">
             <a href="javascript:verifysubasta();" class="button">

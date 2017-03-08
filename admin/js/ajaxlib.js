@@ -2307,12 +2307,6 @@ function verifyIncoterm()
 	{
 	sw=true;
 	sw0=true;
-	if (document.getElementById('cli_uid').value=='')
-		{
-		document.getElementById('div_cli_name_error').className='inputError';
-		document.getElementById('div_cli_name_error').style.display='';
-		sw=false;
-		}
 	if (document.getElementById('inc_ajuste').value=='')
 		{
 		document.getElementById('div_inc_ajuste_error').className='inputError';

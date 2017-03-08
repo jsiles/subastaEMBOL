@@ -143,23 +143,28 @@ if($db->query($sSQL)) $oc=$db->next_record();
 
         <tr>
             <td width="5%" >Proveedores:</td>
-            <td width="20%"><select name="orc_cli_uid" id="orc_cli_uid" class="input">
+            <td width="20%">
          <?php
-        $arrayClient = admin::dbFillArray("select cli_uid, cli_socialreason as name from mdl_client where cli_delete=0 ");
+        $arrayClient = admin::dbFillArray("select cli_uid, cli_socialreason as name from mdl_client where cli_delete=0 and cli_uid=".$oc["orc_cli_uid"]);
         if(is_array($arrayClient))
         {
             foreach($arrayClient as $value=>$name)
             {
-                if($value==$oc["orc_cli_uid"]) {$selected = "selected='selected'";}
-                else {$selected = "";}
+                
             ?>
-                    <option value="<?=$value?>" <?=$selected?>><?=$name?></option>>
+                   <label class="provLabel"><?=$name?></label> <br/>
         <?php
             }
         }
         
         ?>
-                </select>
+                 <div id="inputProveedor"></div>
+                <br><br>
+                <div id="busqueda">
+                    
+                    <input name="buscar" type="text" class="input3 proveedor" value="" size="20" /> <br /><label style="color:#ff8a36">Buscar por Nit o Razon Social</label>
+                <br><br>
+                </div>
                 <br /><span id="div_orc_cli_uid" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>
             </td>
                        <td width="7%">&nbsp;</td>

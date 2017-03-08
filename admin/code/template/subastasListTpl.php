@@ -377,8 +377,12 @@ while ($subasta_list = $pagDb->next_record())
     <?php }
 	else{
             //echo "ACA";
+            if($sub_modalidad=="TIEMPO"){
             $rolAplica =admin::validaRav($sub_uid,admin::getSession("usr_rol"),1,$sub_moneda, $sub_monto, $unidadUid);
-
+            }else{
+                $sub_monto=admin::getDbValue("select sum(xit_price) from mdl_xitem where xit_sub_uid=$sub_uid");
+            $rolAplica =admin::validaRav($sub_uid,admin::getSession("usr_rol"),1,$sub_moneda, $sub_monto, $unidadUid);
+            }
             if($rolAplica==1)
             {
             ?>

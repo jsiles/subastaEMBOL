@@ -201,19 +201,28 @@ $solEdit=$db->next_record();
             <td width="5%" >Proveedores:</td>
             <td width="20%">
          <?php
-        $arrayClient = admin::dbFillArray("select cli_uid, cli_socialreason as name from mdl_client where cli_delete=0 ");
+        $arrayClient = admin::dbFillArray("select cli_uid, cli_socialreason as name from mdl_client,mdl_solicitud_proveedor where sop_cli_uid=cli_uid and sop_sol_uid=$sol_uid and cli_delete=0 ");
         if(is_array($arrayClient))
         {
 	foreach($arrayClient as $value=>$name)
 	{
-                  $valChecked=admin::getDbValue("select count(sop_cli_uid) from mdl_solicitud_proveedor where sop_cli_uid=$value and sop_sol_uid=$sol_uid");
-                  if($valChecked>0)$selectUni ='checked="checked"';
-                  else $selectUni ="";
                   
 	?>
-    <input name="sol_cli_uid[]" type="checkbox" class="input3" value="<?=$value?>" size="9" <?=$selectUni?> /><?=$name?><br />
+                <input name="sol_cli_uid[]" type="checkbox" class="input3" value="<?=$value?>" size="9" checked="checked"/><?=$name?><br />
+    
+    
     <?php
         }
+        ?>
+            <div id="inputProveedor"></div>
+                <br><br>
+                <div>
+                    
+                    <input name="buscar" type="text" class="input3 proveedor" value="" size="20" /> &nbsp;<label style="color:#ff8a36">Buscar por Nit o Razon Social</label>
+              
+                <br><br>
+                </div> 
+            <?php
         }
         else{
 	?>

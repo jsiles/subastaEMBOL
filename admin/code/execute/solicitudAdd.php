@@ -72,9 +72,9 @@ if(is_array($rav_uni_uid)){
 //print_r($cli_uid);
 if(is_array($cli_uid)){
        admin::getDbValue("delete from mdl_solicitud_proveedor where sop_sol_uid=$solUid");
-   foreach($cli_uid as $key => $value)
+   foreach($cli_uid as $value)
    {
-       $sql="insert into mdl_solicitud_proveedor (sop_sol_uid, sop_cli_uid, sop_date, sop_delete) values($solUid, $key, GETDATE(), 0)";
+       $sql="insert into mdl_solicitud_proveedor (sop_sol_uid, sop_cli_uid, sop_date, sop_delete) values($solUid, $value, GETDATE(), 0)";
        $db->query($sql);
    }
 }

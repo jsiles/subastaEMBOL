@@ -106,14 +106,15 @@ else $urlFrontLang=$lang.'/';
         <tr>
             <td width="5%" >Proveedores Sugeridos:</td>
             <td width="20%">
+                <div id="inputProveedor"></div>
+                <br><br>
                 <div>
                     
-                    <input name="sol_cli_uid[]" type="text" class="input3 proveedor" value="" size="20" /> &nbsp;
-                    <a href="#" onclick="addProv();return false;" class="small2">+Adicionar proveedor</a>
+                    <input name="buscar" type="text" class="input3 proveedor" value="" size="20" /> &nbsp;<label style="color:#ff8a36">Buscar por Nit o Razon Social</label>
+                    <!--<a href="#" onclick="addProv();return false;" class="small2">+Adicionar proveedor</a>-->
                 <br><br>
                 </div> 
-                <div id="addP"></div>
- 
+        
             </td>
                        <td width="7%">&nbsp;</td>
         </tr>

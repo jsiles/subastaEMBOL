@@ -110,14 +110,15 @@ $(function() {
     $( ".proveedor" ).autocomplete({
         source: 'code/execute/searchProv.php',
         select: function(event, ui) {
-        $(".proveedor").attr('name', 'sol_cli_uid['+ui.item.value+']');
+        /*$(".proveedor").attr('name', 'sol_cli_uid['+ui.item.value+']');
         $(".proveedor").attr('id', ui.item.value);
-        $(".proveedor").attr('class', 'input3');
+        $(".proveedor").attr('class', 'input3');*/
+        $("#inputProveedor").append('<input name="sol_cli_uid[]" checked type="checkbox" class="input3" value="'+ui.item.value+'" size="20" /><label>'+ui.item.label+'</label><br>  ');
         return false; // Prevent the widget from inserting the value.
         
     },
     focus: function(event, ui) {
-        $(".proveedor").val(ui.item.label);
+        $(".proveedor").val('');
         return false; // Prevent the widget from inserting the value.
     }
     })

@@ -315,8 +315,12 @@ while ($subasta_list = $pagDb->next_record())
         
 	<td align="center" width="5%" height="5">
 	<?php
-
-            $rolAplica =admin::validaRav($sub_uid, admin::getSession("usr_rol"), 2, $sub_moneda, $sub_monto, $unidadUid);
+            if($sub_modalidad=="TIEMPO"){
+            $rolAplica =admin::validaRav($sub_uid,admin::getSession("usr_rol"),2,$sub_moneda, $sub_monto, $unidadUid);
+            }else{
+                $sub_monto=admin::getDbValue("select sum(xit_price) from mdl_xitem where xit_sub_uid=$sub_uid");
+            $rolAplica =admin::validaRav($sub_uid,admin::getSession("usr_rol"),2,$sub_moneda, $sub_monto, $unidadUid);
+            }
 
             if($rolAplica)
             {

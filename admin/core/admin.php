@@ -3,7 +3,7 @@
 unset($_GET['PHPSESSID']);*/
 include_once ("path.php");
 require_once("safeHtml.php");
-define("VERSION","1.1");
+define("VERSION","1.2");
 $app_path = ".";
 $labels = array(); 
 $linksLabels = array();
@@ -643,8 +643,8 @@ class admin
 		 
           $rs = new DBmysql();
        if($indexMenu){
-	        $sqldat = "select mod_uid, mod_name, mod_index from sys_modules, sys_modules_users where mus_mod_uid=mod_uid and mod_status='ACTIVE' and mod_parent=".$indexMenu." and mod_language='".$lang."' and mus_rol_uid='".$_SESSION["usr_rol"]."' and mus_delete=0 and mus_place='MODULE' group by mod_uid, mod_name, mod_index order by mod_UID";
-               // echo $sqldat;
+	        $sqldat = "select mod_uid, mod_name, mod_index from sys_modules, sys_modules_users where mus_mod_uid=mod_uid and mod_status='ACTIVE' and mod_parent=".$indexMenu." and mod_language='".$lang."' and mus_rol_uid='".$_SESSION["usr_rol"]."' and mus_delete=0 and mus_place='MODULE' group by mod_uid, mod_name, mod_index order by mod_uid";
+                //echo $sqldat;
 	        $rs->query($sqldat);
 	        while ($row = $rs->next_record()){
 					$params = (isset($_GET["con_parent"]) ? "con_parent=".admin::toSql(safeHtml($_GET["con_parent"]),"Number")."&token=".$_GET['token'] ."&mod_uid=".$row['mod_uid'] : "token=".$_GET['token']."&mod_uid=".$row['mod_uid']);

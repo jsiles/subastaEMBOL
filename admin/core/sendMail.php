@@ -17,12 +17,6 @@
   $mail->Port=PORT;
   
   $mail->SetLanguage("en", '../phpmailer/language/');
-  /*
-  $mail->AddAddress("jorge.siles@gmail.com");
-  $mail->Subject="Prueba adjunto mail";
-  $mail->Body="Por favor q funcion este test de envio";
-  $mail->addAttachment(PATH_ROOT."/docs/subasta/test.txt");
-  $mail->Send();*/
   
   $sSQL="select * from mdl_notificacion_envio where noe_status=0 and noe_retry<=2 and noe_email!=''";
   $nroReg=$db->numrows($sSQL);

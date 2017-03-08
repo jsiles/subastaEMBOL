@@ -74,13 +74,13 @@ if($db->query($sSQL)) $oc=$db->next_record();
                 ?>
                   </span>
                          
-                <a href="javascript:addUnidad();" class="small2">agregar</a> | 
+                <!--<a href="javascript:addUnidad();" class="small2">agregar</a> | 
                 <a href="javascript:delUnidad();" class="small3"><?=admin::labels('del');?></a>
 
                  <div id="div_add_unidad" style="display:none;">
 		<input type="text" name="add_unidad" id="add_unidad" class="input3" onfocus="setClassInput3(this,'ON');document.getElementById('div_add_unidad_error').style.display='none';" onblur="setClassInput3(this,'OFF');document.getElementById('div_add_unidad_error').style.display='none';" onclick="setClassInput3(this,'ON');document.getElementById('div_add_unidad_error').style.display='none';"/>		
 		<a href="javascript:addUnidadOption()" class="button3"><?=admin::labels('add');?></a><a href="javascript:closeUnidad();" class="link2">Cerrar</a>		
-                 </div>
+                 </div>-->
 	     <br /><span id="div_add_unidad_error" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>
                 <br />
             </td>

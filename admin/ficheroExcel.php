@@ -7,7 +7,7 @@ header("Pragma: no-cache");
 header("Expires: 0");
 $PrintTable='<table border="1" >
           <tr>
-            <td colspan="2" class="titleBox">Listado de pujas:</td>
+            <td colspan="2" class="titleBox">Listado de ofertas:</td>
             <td></td>
           </tr>
              <tr>

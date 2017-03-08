@@ -9,6 +9,7 @@ $token= admin::getParam("token");
 $solObservaciones=  admin::getParam("sol_observaciones");
 $rav_uni_uid =admin::getParam("rav_uni_uid");
 $cli_uid =  admin::getParam("sol_cli_uid");
+//print_r($cli_uid);die;
 $sol_status =  admin::getParam("sol_status");
 $sol_monto =  admin::getParam("sol_monto");
 $sol_moneda =  admin::getParam("sol_moneda");
@@ -71,9 +72,9 @@ if(is_array($rav_uni_uid)){
 //print_r($cli_uid);
 if(is_array($cli_uid)){
        admin::getDbValue("delete from mdl_solicitud_proveedor where sop_sol_uid=$solUid");
-   foreach($cli_uid as $value)
+   foreach($cli_uid as $key => $value)
    {
-       $sql="insert into mdl_solicitud_proveedor (sop_sol_uid, sop_cli_uid, sop_date, sop_delete) values($solUid, $value, GETDATE(), 0)";
+       $sql="insert into mdl_solicitud_proveedor (sop_sol_uid, sop_cli_uid, sop_date, sop_delete) values($solUid, $key, GETDATE(), 0)";
        $db->query($sql);
    }
 }

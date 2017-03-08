@@ -8,6 +8,12 @@ switch($tipUid){
             $moduleListId=50;
             $moduleCrearId=50;
             break;
+    case 2: $opcionMenu = "notificacionesPen";
+            $opocionSubMenu ="notificacionesPenList";
+            $etiquetaCrear = "notificacionesPenNew";
+            $moduleListId=52;
+            $moduleCrearId=52;
+            break;        
     default :
             $opcionMenu = "notificacionesEnv";
             $opocionSubMenu ="notificacionesEnvList";

@@ -17,6 +17,7 @@ admin::initialize('client','clientUpd',false);
 <meta name="copyright" content="Software propietario de DEVZONE">
 <meta name="rating" content="General">
 <META HTTP-EQUIV="Content-Type" content="text/html; ISO-8859-1">
+<script type="text/javascript">var SERVER='<?=$domain?>'; </script>
 <script type="text/javascript" src="js/jquery2.js"></script>
 <script language="javascript" type="text/javascript" src="js/ajaxlib.js?version=<?=VERSION?>"></script>
 <script language="javascript" type="text/javascript" src="js/client.js?version=<?=VERSION?>"></script>

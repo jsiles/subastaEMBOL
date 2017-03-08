@@ -28,8 +28,8 @@ $cli_commerciallastname = admin::toSql(safeHtml($_POST["cli_commerciallastname"]
 $cli_user = admin::toSql(safeHtml($_POST["cli_user"]),"String");
 $cli_pass = md5(admin::toSql(safeHtml($_POST["cli_pass"]),"String"));
 $cli_pts_uid = admin::toSql(safeHtml($_POST["cli_pts_uid"]),"String");
-$item_uid = admin::toSql(safeHtml($_POST["item_uid"]),"String");
-$cli_ite_uid = admin::toSql(safeHtml($_POST["cli_ite_uid"]),"String");
+$item_uid = admin::getParam("nivel1_uid");
+$cli_ite_uid =  admin::getParam("nivel2_uid");
 $cli_status = admin::toSql(safeHtml($_POST["cli_status"]),"String");	
 $cli_exist = admin::getDBvalue("select count(cli_user) FROM mdl_client where cli_nit_ci='".$cli_nit_ci."' and cli_delete=0");
 

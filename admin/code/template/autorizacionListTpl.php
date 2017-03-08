@@ -123,7 +123,7 @@ if ($nroReg>0)
         <td width="10%" ><a href="subastasList.php?order=<?=$linOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$linClass;?>"><?=admin::labels('category');?>:</a></td>
         <td width="10%" ><span class="txt11 color2">Monto Base:</span></td>
         <td width="10%" ><span class="txt11 color2">Estado:</span></td>
-	<td align="left" width="10%" height="5"><span class="txt11 color2">Lista de pujas</span></td>
+	<td align="left" width="10%" height="5"><span class="txt11 color2">Lista de Ofertas</span></td>
         <td width="5%">&nbsp;</td>		
 	<td align="center" width="5%" height="5">&nbsp;</td>
 	<td align="center" width="5%" height="5">&nbsp;</td>

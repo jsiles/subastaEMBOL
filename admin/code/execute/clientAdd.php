@@ -30,8 +30,8 @@ $cli_user = admin::toSql(safeHtml($_POST["cli_user"]),"String");
 $cli_pass = admin::toSql(safeHtml($_POST["cli_pass"]),"String");
 $cli_pass = md5($cli_pass);
 $cli_pts_uid = admin::toSql(safeHtml($_POST["cli_pts_uid"]),"String");
-$item_uid = admin::toSql(safeHtml($_POST["item_uid"]),"String");
-$cli_ite_uid = admin::toSql(safeHtml($_POST["cli_ite_uid"]),"String");
+$item_uid = admin::getParam("nivel1_uid");
+$cli_ite_uid =  admin::getParam("nivel2_uid");
 /*
 $cli_pts_description = admin::toSql(safeHtml($_POST["cli_pts_description"]),"String");*/
 $cli_status = admin::toSql(safeHtml($_POST["cli_status"]),"String");

@@ -15,6 +15,8 @@ $where .= " or (noe_sol_uid like '%". $search."%')";
 $where .= " or (noe_nro_oc like '%". $search."%')";
 $where .= " or (cli_socialreason like '%". $search."%')";
 }
+if($tipUid==1) $where.=" and noe_estado=1";
+else $where.=" and noe_estado=0";
 $_pagi_sql= "select * from mdl_notificacion_envio,mdl_client where cli_uid=noe_cli_uid  $where order by noe_uid asc ";
 $nroReg=admin::getDBvalue("select * from mdl_notificacion_envio,mdl_client where cli_uid=noe_cli_uid $where");
 

@@ -1138,21 +1138,23 @@ function transporteAdd()
 }
 function nivel1Add()
 	{
+          alert(1);
 	token = $.getUrlVar('token');
 	document.getElementById('div_nivel1_error').style.display='none';
 	var other_category = document.getElementById('nivel1').value;
-	var sol_uid = document.getElementById('sol_uid').value;
+	//var sol_uid = document.getElementById('sol_uid').value;
+
 	if (other_category=="")
-		{
+		{alert(2);
 		$('#div_nivel1_error').fadeIn();
 		}
 	else
-		{
+		{alert(3);
 		divx = document.getElementById('div_nivel1_select');
 		divx.innerHTML = '<img border="0" src="lib/loading.gif">';
 		$.ajax({
 				url: 'code/execute/nivel1Add.php',
-				data: "nivel1_desc="+other_category+"&token="+token+"&sol_uid="+sol_uid,
+				data: "nivel1_desc="+other_category+"&token="+token,
 			 			error: function(objeto){
             						alert("Pasó lo siguiente: "+objeto.responseText);
         						},
@@ -1170,7 +1172,7 @@ function nivel2Add()
 	document.getElementById('div_nivel2_error').style.display='none';
         var nivel1 = document.getElementById('nivel1_uid').value;
     	var other_category = document.getElementById('nivel2').value;
-	var sol_uid = document.getElementById('sol_uid').value;
+	//var sol_uid = document.getElementById('sol_uid').value;
 	if (other_category==""||nivel1=="")
 		{
 		$('#div_nivel2_error').fadeIn();
@@ -1181,7 +1183,7 @@ function nivel2Add()
 		divx.innerHTML = '<img border="0" src="lib/loading.gif">';
 		$.ajax({
 				url: 'code/execute/nivel2Add.php',
-				data: "ca1_uid="+nivel1+"&nivel2_desc="+other_category+"&token="+token+"&sol_uid="+sol_uid,
+				data: "ca1_uid="+nivel1+"&nivel2_desc="+other_category+"&token="+token,
 			 			error: function(objeto){
             						alert("Pasó lo siguiente: "+objeto.responseText);
         						},
@@ -1199,7 +1201,7 @@ function nivel3Add()
 	document.getElementById('div_nivel3_error').style.display='none';
         var nivel2 = document.getElementById('nivel2_uid').value;
     	var other_category = document.getElementById('nivel3').value;
-	var sol_uid = document.getElementById('sol_uid').value;
+	//var sol_uid = document.getElementById('sol_uid').value;
 	if (other_category==""||nivel2=="")
 		{
 		$('#div_nivel3_error').fadeIn();
@@ -1210,7 +1212,7 @@ function nivel3Add()
 		divx.innerHTML = '<img border="0" src="lib/loading.gif">';
 		$.ajax({
 				url: 'code/execute/nivel3Add.php',
-				data: "ca2_uid="+nivel2+"&nivel3_desc="+other_category+"&token="+token+"&sol_uid="+sol_uid,
+				data: "ca2_uid="+nivel2+"&nivel3_desc="+other_category+"&token="+token,
 			 			error: function(objeto){
             						alert("Pasó lo siguiente: "+objeto.responseText);
         						},
@@ -2512,8 +2514,12 @@ function addNivel3(){
         }
 }
 function actualizaNiveles(){
+    var token = $.getUrlVar('token');
     var nivel1 = document.getElementById('nivel1_uid').value;
-    if(nivel1!='')  {document.getElementById('div_nivel1_error').style.display='none';   
+     //alert(nivel1);
+    if(nivel1!='')  {
+       // alert(4);
+        document.getElementById('div_nivel1_error').style.display='none';   
     $("#div_nivel2_select").html('<img border="0" src="'+SERVER+'/admin/lib/loading.gif">');
     $.ajax({
 		   type: "POST",
@@ -2526,6 +2532,7 @@ function actualizaNiveles(){
              }
 }
 function actualizaNiveles2(){
+    var token = $.getUrlVar('token');
     var nivel2 = document.getElementById('nivel2_uid').value;
     if(nivel2!='')  {document.getElementById('div_nivel2_error').style.display='none';   
     $("#div_nivel3_select").html('<img border="0" src="'+SERVER+'/admin/lib/loading.gif">');
@@ -3027,4 +3034,32 @@ function verifyOC()
     
     if(sw) document.addOC.submit();
     else scroll(0,0);
+}
+
+function addProv()
+{
+    //divx = document.getElementById('addP');
+    //divx.innerHTML="<div><input name=\"sol_cli_uid[]\" type=\"text\" class=\"input3 proveedor\" value=\"\" size=\"20\" /><br><br></div>";
+    $("#addP").replaceWith("<div><input name=\"sol_cli_uid[]\" type=\"text\" class=\"input3 proveedor\" value=\"\" size=\"20\" /><br><br></div><div id=\"addP\"></div>");
+/*    $( ".proveedor" ).autocomplete({
+        source: 'code/execute/searchProv.php'
+    });
+    */
+
+    $( ".proveedor" ).autocomplete({
+        source: 'code/execute/searchProv.php',
+        select: function(event, ui) {
+        $(".proveedor").attr('name', 'sol_cli_uid['+ui.item.value+']');
+        $(".proveedor").attr('id', ui.item.value);
+        $(".proveedor").attr('class', 'input3');
+        return false; // Prevent the widget from inserting the value.
+        
+    },
+    focus: function(event, ui) {
+        $(".proveedor").val(ui.item.label);
+        return false; // Prevent the widget from inserting the value.
+    }
+    })
+ 
+    
 }

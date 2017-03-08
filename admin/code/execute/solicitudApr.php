@@ -8,7 +8,7 @@ $db->query($sql);
 /*
  * Mandar solicitudes a los proveedores
  */
-$sSQL="select sop_cli_uid from mdl_solicitud_proveedor where sop_sol_uid=$sol_uid";
+/*$sSQL="select sop_cli_uid from mdl_solicitud_proveedor where sop_sol_uid=$sol_uid";
 $nroReg=$db->numrows($sSQL);
 if($nroReg>0){
     $db->query($sSQL);
@@ -20,5 +20,5 @@ if($nroReg>0){
         $attach="/docs/subasta/".admin::getDbValue("select sol_doc from mdl_solicitud_compra where sol_uid=$sol_uid");
         admin::insertMail($cli_uid, $nti_uid, $attach, $cli_email, $sol_uid);
     }
-}
+}*/
 ?>

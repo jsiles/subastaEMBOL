@@ -215,7 +215,7 @@ while ($sol_list = $pagDb->next_record())
 	<td align="center" width="5%" height="5">
             <?php
             $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=$moduleListId and mop_lab_category='Eliminar' and moa_rol_uid=".$_SESSION['usr_rol']."");
-            if($valuePermit=='ACTIVE'){
+            if(($valuePermit=='ACTIVE')&&($solEstadoUid==0)){
             ?>
                 <a href="" onclick="removeList(<?=$solUid?>); return false;">
 		<img src="lib/delete_es.gif" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">

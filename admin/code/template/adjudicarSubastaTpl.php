@@ -218,41 +218,8 @@ $prod = $db->next_record();
 				</td>
 			</tr>	
 		<tr><td colspan="2">
-         <?php
-		 $countBids=admin::getDBvalue("SELECT count(*) FROM mdl_bid where bid_sub_uid='".$prod["sub_uid"]."'");
-		 if ($countBids>0){
-		 ?>
-         <table width="100%" border="0">
-         <tr>
-            <td colspan="2" class="titleBox">Listado de pujas:</td>
-            <td><a href="excel" onclick="document.location.href='ficheroExcel.php?subasta=<?=$prod["sub_uid"]?>'; return false;" class="xls">
-				<img border="0" src="lib/ext/excel.png" alt="Excel" title="Excel" />
-					</a></td>
-          </tr>
-                
-            <tr>
-				<td width="40%" class="txt11 color2">Nombre de usuario:</td>
-				<td width="30%" class="txt11 color2">Fecha y hora:</td>
-                <td width="30%" class="txt11 color2">Monto:</td>
-			</tr>         
-               
-                 <?php
-				$sql2 = "SELECT * FROM mdl_bid where bid_sub_uid='".$prod["sub_uid"]."'";
-				$db2->query($sql2);
-				while ($content=$db2->next_record())
-				{
-				 $clientName=admin::getDBvalue("SELECT cli_socialreason FROM mdl_client where cli_uid='".$content["bid_cli_uid"]."'");
-				 ?><tr>
-				<td width="40%"><?=$clientName?></td>
-				<td width="30%"><?=$content["bid_date"]?></td>
-                <td width="30%"><?=$content["bid_mount"]?></td></tr>
-             	<?php
-				 }
-				 ?>    
-        </table>
-         <?php
-		 }
-		 ?>
+                    <?php $uidTpl=$prod["sub_uid"];
+                                  include("./code/execute/listadoOfertas.php");?>
         </td></tr>	
    </table>
 		<!--TABLA DERECHA END-->
@@ -503,94 +470,6 @@ while ($list = $db2->next_record())
 <br>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-     <td width="77%" height="40"><span class="title">Lista de la Puja</span></td>
-     <td width="23%" height="40">&nbsp;</td>
-    </tr>
-   <?php 
-   $sSQL= "select * from mdl_bid where bid_sub_uid='".$sub_uid."' order by bid_uid desc ";
-   $nroReg = $db2->numrows($sSQL);
-   $db2->query($sSQL);
-
-if ($nroReg>0)
-	{
-	?> 
-     <tr>
-    <td colspan="2" id="contentListing">
-    <div class="row0">
-    <table class="list" width="100%">
-	<tr>
-            <td width="12%" style="color:#16652f">Fecha y Hora</td>
-            <td width="12%" style="color:#16652f">Proveedor</td>
-    <td width="12%" style="color:#16652f">Monto</td>
-    	<td align="center" width="12%" height="5">&nbsp;</td>
-    <td align="center" width="12%" height="5">&nbsp;</td>
-	</tr>
-	</table>
-    </div>
-<div class="itemList" id="itemList" style="width:99%">  
-	<?php
-$i=1;
-while ($list = $db2->next_record())
-	{
-	$cli_uid = $list["bid_cli_uid"];
-	$cli_name = admin::getDBvalue("select cli_socialreason as nombre from mdl_client WHERE cli_uid='".$cli_uid."'");
-	$bid_monto = $list["bid_mount"];
-        $bid_fecha = $list["bid_date"];
-	if ($i%2==0) $class='row0';
-	else  $class='row';
-	if ($i%2==0) $class2='row';
-	else  $class2='row1';
-  	?> 
-    <div class="groupItem" id="<?=$inc_uid?>">
-  	<div id="list_<?=$inc_uid?>" class="<?=$class?>" style="width:100%" >
-<table class="list" width="100%">
-	<tr>
-            <td width="12%"><?=$bid_fecha?></td>
-            <td width="12%"><?=$cli_name?></td>
-            <td width="12%"><?=$bid_monto?></td>
-   	<td align="center" width="12%" height="5">
-		<!--<a href="#" onclick="showTab('list_<?=$inc_uid?>');showTab('Add_<?=$inc_uid?>'); return false;">
-		<img src="lib/edit_es.gif" border="0" title="<?=admin::labels('edit')?>" alt="<?=admin::labels('edit')?>">
-		</a>-->
-	</td>
-	<td align="center" width="12%" height="5">
-			</td>
-	</tr>
-	</table>
-	</div>
-    </div>
-    	<?php
-	$i++;
-	} 
- ?>
-</div> 
-    </td>
-    </tr>
-    <?php 
-    } 
-else
-	{ ?>
-    <tr>
-    <td colspan="2"><br /></td>
-    </tr>
-  <tr>
-    <td colspan="2">
-<table width="100%" border="0" cellspacing="0" cellpadding="0">   
-  <tr>
-    <td colspan="2" id="contentListing">
-<div  style="background-color: #f7f8f8;">
-<table class="list"  width="100%">
-	<tr><td height="30px" align="center" class="bold">
-	<?=admin::labels('subastas','noIncoterm')?>
-	</td></tr>	
- </table>
-</div>
-</td></tr>
-</table>
-</td>
-</tr>
-<?php 	} ?>
 <tr><td><br /></td></tr>
 <tr>
      <td width="77%" height="40"><span class="title">Informe</span></td>

@@ -71,7 +71,7 @@ $prod = $db->next_record();
                     }
                 ?>
                   </span>
-                         
+               <!--          
                 <a href="javascript:addUnidad();" class="small2">agregar</a> | 
                 <a href="javascript:delUnidad();" class="small3"><?=admin::labels('del');?></a>
 
@@ -81,7 +81,7 @@ $prod = $db->next_record();
                        onblur="setClassInput3(this,'OFF');document.getElementById('div_add_unidad_error').style.display='none';" 
                        onclick="setClassInput3(this,'ON');document.getElementById('div_add_unidad_error').style.display='none';"/>		
 		<a href="javascript:addUnidadOption()" class="button3"><?=admin::labels('add');?></a><a href="javascript:closeUnidad();" class="link2">Cerrar</a>		
-                 </div>
+                 </div>-->
 	     <br /><span id="div_add_unidad_error" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>
                 <br />
             </td>
@@ -368,41 +368,8 @@ $prod = $db->next_record();
 				</td>
 			</tr>	
 		<tr><td colspan="2">
-         <?php
-		 $countBids=admin::getDBvalue("SELECT count(*) FROM mdl_bid where bid_sub_uid='".$prod["sub_uid"]."' and bid_cli_uid!=0");
-		 if ($countBids>0){
-		 ?>
-         <table width="100%" border="0">
-         <tr>
-            <td colspan="2" class="titleBox">Listado de pujas:</td>
-            <td><a href="excel" onclick="document.location.href='ficheroExcel.php?subasta=<?=$prod["sub_uid"]?>'; return false;" class="xls">
-				<img border="0" src="lib/ext/excel.png" alt="Excel" title="Excel" />
-					</a></td>
-          </tr>
-                
-            <tr>
-				<td width="40%" class="txt11 color2">Nombre de usuario:</td>
-				<td width="30%" class="txt11 color2">Fecha y hora:</td>
-                <td width="30%" class="txt11 color2">Monto:</td>
-			</tr>         
-               
-                 <?php
-				$sql2 = "SELECT * FROM mdl_bid where bid_sub_uid='".$prod["sub_uid"]."' and bid_cli_uid!=0";
-				$db2->query($sql2);
-				while ($content=$db2->next_record())
-				{
-				 $clientName=admin::getDBvalue("SELECT cli_socialreason FROM mdl_client where cli_uid='".$content["bid_cli_uid"]."'");
-				 ?><tr>
-				<td width="40%"><?=$clientName?></td>
-				<td width="30%"><?=$content["bid_date"]?></td>
-                <td width="30%"><?=$content["bid_mount"]?></td></tr>
-             	<?php
-				 }
-				 ?>    
-        </table>
-         <?php
-		 }
-		 ?>
+                                  <?php $uidTpl=$prod["sub_uid"];
+                                  include("./code/execute/listadoOfertas.php");?>
         </td></tr>	
    </table>
 		<!--TABLA DERECHA END-->

@@ -18,7 +18,7 @@ $sql = "insert into mdl_categoria2(
 $db->query($sql);	
 }
 ?>
-<select name="nivel2_uid" id="nivel2_uid" class="input" onchange="actualizaNiveles2();">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select name="nivel2_uid" id="nivel2_uid" class="input" onchange="actualizaNiveles2();">
     <option value="" selected="selected" >Seleccionar</option>
                	<?php
                     $sql = "select ca2_uid, ca2_description from mdl_categoria2 where ca2_delete=0 and ca2_ca1_uid=$ca1_uid";

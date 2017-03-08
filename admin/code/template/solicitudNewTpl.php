@@ -47,13 +47,13 @@ else $urlFrontLang=$lang.'/';
                 ?>
                   </span>
                          
-                <a href="javascript:addUnidad();" class="small2">agregar</a> | 
+               <!-- <a href="javascript:addUnidad();" class="small2">agregar</a> | 
                 <a href="javascript:delUnidad();" class="small3"><?=admin::labels('del');?></a>
 
                  <div id="div_add_unidad" style="display:none;">
 		<input type="text" name="add_unidad" id="add_unidad" class="input3" onfocus="setClassInput3(this,'ON');document.getElementById('div_add_unidad_error').style.display='none';" onblur="setClassInput3(this,'OFF');document.getElementById('div_add_unidad_error').style.display='none';" onclick="setClassInput3(this,'ON');document.getElementById('div_add_unidad_error').style.display='none';"/>		
 		<a href="javascript:addUnidadOption()" class="button3"><?=admin::labels('add');?></a><a href="javascript:closeUnidad();" class="link2">Cerrar</a>		
-                 </div>
+                 </div>-->
 	     <br /><span id="div_add_unidad_error" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>
                 <br />
             </td>
@@ -92,7 +92,7 @@ else $urlFrontLang=$lang.'/';
         </tr>
         <tr>
             <td width="5%" >Observaciones:</td>    
-            <td width="20%" ><input name="sol_observaciones" value="" class="input"></td>
+            <td width="40%" ><textarea id="sol_observaciones" name="sol_observaciones" col="200" rows="5" class="textarea"></textarea>
             <td width="7%">&nbsp;</td>
         </tr>
         <tr>
@@ -104,25 +104,16 @@ else $urlFrontLang=$lang.'/';
         </tr>
 
         <tr>
-            <td width="5%" >Proveedores:</td>
+            <td width="5%" >Proveedores Sugeridos:</td>
             <td width="20%">
-         <?php
-        $arrayClient = admin::dbFillArray("select cli_uid, cli_socialreason as name from mdl_client where cli_delete=0 ");
-        if(is_array($arrayClient))
-        {
-	foreach($arrayClient as $value=>$name)
-	{
-	?>
-                <input name="sol_cli_uid[]" type="checkbox" class="input3" value="<?=$value?>" size="9" /><?=$name?><br />
-    <?php
-        }
-        }
-        else{
-	?>
-           No existen proveedores.
-        <?php
-        }
-        ?>
+                <div>
+                    
+                    <input name="sol_cli_uid[]" type="text" class="input3 proveedor" value="" size="20" /> &nbsp;
+                    <a href="#" onclick="addProv();return false;" class="small2">+Adicionar proveedor</a>
+                <br><br>
+                </div> 
+                <div id="addP"></div>
+ 
             </td>
                        <td width="7%">&nbsp;</td>
         </tr>

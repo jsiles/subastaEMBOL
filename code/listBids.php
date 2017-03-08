@@ -5,7 +5,7 @@ $_keycode=base64_decode(SymmetricCrypt::decrypt(admin::getParam("_keycode")));
 $sSQL="select * from mdl_bid where bid_sub_uid=$_keycode order by bid_uid desc";
 $db->query($sSQL);
 ?>
-<h2>LISTA DE PUJAS</h2>
+<h2>LISTA DE OFERTAS</h2>
 <table width="100%">
 <tr>
     <td height="35px" align="left">

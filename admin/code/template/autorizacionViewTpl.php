@@ -214,41 +214,8 @@ $prod = $db->next_record();
 				</td>
 			</tr>	
 		<tr><td colspan="2">
-         <?php
-		 $countBids=admin::getDBvalue("SELECT count(*) FROM mdl_bid where bid_sub_uid='".$prod["sub_uid"]."'");
-		 if ($countBids>0){
-		 ?>
-         <table width="100%" border="0">
-         <tr>
-            <td colspan="2" class="titleBox">Listado de pujas:</td>
-            <td><a href="excel" onclick="document.location.href='ficheroExcel.php?subasta=<?=$prod["sub_uid"]?>'; return false;" class="xls">
-				<img border="0" src="lib/ext/excel.png" alt="Excel" title="Excel" />
-					</a></td>
-          </tr>
-                
-            <tr>
-				<td width="40%" class="txt11 color2">Nombre de usuario:</td>
-				<td width="30%" class="txt11 color2">Fecha y hora:</td>
-                <td width="30%" class="txt11 color2">Monto:</td>
-			</tr>         
-               
-                 <?php
-				$sql2 = "SELECT * FROM mdl_bid where bid_sub_uid='".$prod["sub_uid"]."'";
-				$db2->query($sql2);
-				while ($content=$db2->next_record())
-				{
-				 $clientName=admin::getDBvalue("SELECT cli_socialreason FROM mdl_client where cli_uid='".$content["bid_cli_uid"]."'");
-				 ?><tr>
-				<td width="40%"><?=$clientName?></td>
-				<td width="30%"><?=$content["bid_date"]?></td>
-                <td width="30%"><?=$content["bid_mount"]?></td></tr>
-             	<?php
-				 }
-				 ?>    
-        </table>
-         <?php
-		 }
-		 ?>
+         <?php $uidTpl=$prod["sub_uid"];
+                                  include("./code/execute/listadoOfertas.php");?>
         </td></tr>	
    </table>
 		<!--TABLA DERECHA END-->

@@ -51,11 +51,17 @@ $prod = $db->next_record();
     <td width="15%">
     <?php
     $arrayClient = admin::dbFillArray("select cli_uid, cli_socialreason as name from mdl_client, mdl_incoterm where inc_cli_uid=cli_uid and inc_sub_uid=$sub_uid");
+    if(is_array($arrayClient))
+    {
 	foreach($arrayClient as $value=>$name)
 	{
 	?>
     <input name="pro_cli_id[]" type="checkbox" value="<?=$value?>" size="9" /><?=$name?><br />
     <?php
+    }}else{
+        ?>
+    Sin proveedores habilitados
+            <?php
     }
 	?>
     </td>

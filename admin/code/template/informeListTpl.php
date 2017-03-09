@@ -41,6 +41,8 @@ $rol=admin::getSession("usr_rol");
             $k++;
         }
         $Where .=" and suu_uni_uid in ($unidadHabUid) ";
+    }else{
+        $Where .=" and suu_uni_uid=-1 ";
     }
 
 $qsearch="SELECT pro_uid, pro_name, pca_name, sub_status, sub_uid, "

@@ -26,6 +26,9 @@ $rol=admin::getSession("usr_rol");
             $k++;
         }
         $Where .=" and oru_uni_uid in ($unidadHabUid) ";
+    }else{
+        
+        $Where .=" and oru_uni_uid=-1";
     }
 
 

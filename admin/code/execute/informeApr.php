@@ -10,7 +10,7 @@ $db->query($sql);
 $sSQL="select inc_cli_uid from mdl_incoterm where inc_sub_uid=$sub_uid";
 $nroReg=$db->numrows($sSQL);
 if($nroReg>0){
-    admin::doLog($nroReg);
+    //admin::doLog($nroReg);
     $db->query($sSQL);
     while($list=$db->next_record())
     {

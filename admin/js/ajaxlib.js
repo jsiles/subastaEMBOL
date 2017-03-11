@@ -1138,18 +1138,18 @@ function transporteAdd()
 }
 function nivel1Add()
 	{
-          alert(1);
+         
 	token = $.getUrlVar('token');
 	document.getElementById('div_nivel1_error').style.display='none';
 	var other_category = document.getElementById('nivel1').value;
 	//var sol_uid = document.getElementById('sol_uid').value;
 
 	if (other_category=="")
-		{alert(2);
+		{
 		$('#div_nivel1_error').fadeIn();
 		}
 	else
-		{alert(3);
+		{
 		divx = document.getElementById('div_nivel1_select');
 		divx.innerHTML = '<img border="0" src="lib/loading.gif">';
 		$.ajax({

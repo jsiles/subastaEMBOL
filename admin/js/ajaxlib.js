@@ -2510,9 +2510,7 @@ function addNivel3(){
 function actualizaNiveles(){
     var token = $.getUrlVar('token');
     var nivel1 = document.getElementById('nivel1_uid').value;
-     //alert(nivel1);
     if(nivel1!='')  {
-       // alert(4);
         document.getElementById('div_nivel1_error').style.display='none';   
     $("#div_nivel2_select").html('<img border="0" src="'+SERVER+'/admin/lib/loading.gif">');
     $.ajax({

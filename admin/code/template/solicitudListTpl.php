@@ -40,7 +40,7 @@ if($tipUid==2) {
         }
         $where .=" and sou_uni_uid in ($unidadHabUid) ";
     }else{
-        $where .=" and sou_uni_uid=-1 ";
+        if($tipUid==2) $where .=" and sou_uni_uid=-1 ";
     }
 
 $_pagi_sql= "select * from mdl_solicitud_compra, mdl_solicitud_unidad where sol_uid=sou_sol_uid and sol_delete=0 $where order by sol_uid asc ";

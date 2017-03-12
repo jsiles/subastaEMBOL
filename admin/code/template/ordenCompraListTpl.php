@@ -28,7 +28,7 @@ $rol=admin::getSession("usr_rol");
         $Where .=" and oru_uni_uid in ($unidadHabUid) ";
     }else{
         
-        $Where .=" and oru_uni_uid=-1";
+         if($tipUid==2) $Where .=" and oru_uni_uid=-1";
     }
 
 

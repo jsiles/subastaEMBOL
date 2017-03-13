@@ -353,7 +353,7 @@ $prod = $db->next_record();
 			</tr>
             
             <tr id="tr_unidadmejora" style="display:">
-				<td>Unidad de mejorar:</td>
+				<td>Unidad de mejora:</td>
 				<td>
 				<input name="sub_mount_unidad" type="text" class="input" id="sub_mount_unidad" onfocus="setClassInput(this,'ON');document.getElementById('div_sub_mount_unidad').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_sub_mount_unidad').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_sub_mount_unidad').style.display='none';" size="9" value="<?=$prod["sub_mount_unidad"]?>" />
 				<br /><span id="div_sub_mount_unidad" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('subasta','titleerror');?></span>
@@ -613,7 +613,11 @@ else
     }
     ?>
 <br />
-<div id="contentButton" style="display:<?=$displayItem?>">
+<?php
+  if($prod["sub_modalidad"]!="TIEMPO"){
+  
+?>
+<div id="contentButton">
 	  	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subastaxitem" >
 			<tr>
 				<td width="59%" align="center">
@@ -625,8 +629,11 @@ else
           
         </tr>
       </table>
-      </div>      
-<div id="contentButton" style="display:<?=$displayTiempo?>">
+<?php
+  }else{
+?>      </div>      
+
+<div id="contentButton">
       <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="tbl_subasta" style="">
 	<tr>
             <td width="59%" align="center">
@@ -640,7 +647,9 @@ else
         </tr>
      </table>
 </div>      
-
+<?php
+  }
+?>
 <br /><br /><br /><br /><br />
 </td></tr>
 </table>

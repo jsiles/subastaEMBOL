@@ -103,7 +103,7 @@ else $urlFrontLang=$lang.'/';
             <td width="7%">&nbsp;</td>
         </tr>
 
-        <tr>
+    <!--    <tr>
             <td width="5%" >Proveedores Sugeridos:</td>
             <td width="20%">
                 <div id="inputProveedor"></div>
@@ -116,7 +116,7 @@ else $urlFrontLang=$lang.'/';
         
             </td>
                        <td width="7%">&nbsp;</td>
-        </tr>
+        </tr>-->
         <tr>
             <td valign="top"><?=admin::labels('status');?></td>
             <td><select name="sol_status" class="listMenu" id="sol_status">

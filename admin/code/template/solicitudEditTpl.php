@@ -196,7 +196,7 @@ $solEdit=$db->next_record();
             </td>
             <td width="7%">&nbsp;</td>
         </tr>
-
+<!--
         <tr>
             <td width="5%" >Proveedores:</td>
             <td width="20%">
@@ -232,7 +232,7 @@ $solEdit=$db->next_record();
         ?>
             </td>
                        <td width="7%">&nbsp;</td>
-        </tr>
+        </tr> -->
         <tr>
             <td valign="top"><?=admin::labels('status');?></td>
             <td><select name="sol_status" class="listMenu" id="sol_status">

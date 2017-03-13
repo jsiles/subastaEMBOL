@@ -11,21 +11,21 @@ if ($search!='')
 }
 
 $rol=admin::getSession("usr_rol");
-    $unidadHabilitada =admin::dbFillArray("select rav_uid,raa_uni_uid from mdl_rav,mdl_rav_access where rav_uid=raa_rav_uid and rav_tipologia=4 and rav_delete=0 and rav_rol_uid=$rol");
+    $unidadHabilitada =admin::dbFillArray("select raa_uni_uid,rav_uid from mdl_rav,mdl_rav_access where rav_uid=raa_rav_uid and rav_tipologia=4 and rav_delete=0 and rav_rol_uid=$rol");
     //print_r($unidadHabilitada);
     if(is_array($unidadHabilitada)){
         $k=0;
         $unidadHabUid="";
         foreach ($unidadHabilitada as $key => $value) {
             if($k==0) {
-                $unidadHabUid.= $value;
+                $unidadHabUid.= $key;
             }
         else {
-            $unidadHabUid.= ",".$value;
+            $unidadHabUid.= ",".$key;
             }
             $k++;
         }
-        $Where .=" and oru_uni_uid in ($unidadHabUid) ";
+        if($tipUid==2) $Where .=" and oru_uni_uid in ($unidadHabUid) ";
     }else{
         
          if($tipUid==2) $Where .=" and oru_uni_uid=-1";

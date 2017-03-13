@@ -911,7 +911,7 @@ public static function setSession($param_name, $param_value)
           {
               $ar_lookup[$Array[0]] = $Array[1];
           }
-            return $ar_lookup;
+          return $ar_lookup;
      }
     /*********************************
      function: dLookUp                

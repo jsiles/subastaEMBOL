@@ -23,7 +23,7 @@ $sol_uid=  admin::getParam("sol_uid");
     <td width="12%" style="color:#16652f">Nivel 3&nbsp;</td>
     <td width="12%" style="color:#16652f">Descripci&oacute;n&nbsp;</td>
     <td width="12%" style="color:#16652f">Cantidad&nbsp;</td>
-    <td width="12%" style="color:#16652f">Unidad&nbsp;</td>
+    <td width="12%" style="color:#16652f">Unidad (Ej. Millones)&nbsp;</td>
     <td align="center" width="12%" height="5">&nbsp;</td>
     
 	</tr>

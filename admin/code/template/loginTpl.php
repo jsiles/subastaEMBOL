@@ -3,8 +3,9 @@ $get_msg = (!isset($_REQUEST["message"]))?"":$_REQUEST["message"];
 if ($get_msg!="") $message=$get_msg; else $message=0; 
 //if ($message>3) setcookie("admin",1,time() + 30*60);
 //isset($_COOKIE["admin"])
+$error=admin::getParam("error");
 if ($message>3) {
-	 ?>
+    ?>
 <script language="javascript" type="text/javascript">
 document.location.href='../';
 </script>
@@ -60,7 +61,20 @@ if ($message!=0)
 	</td>
     </tr>
 </table>
-<?php } ?>
+<?php }
+if($error==1)
+{
+?>
+<table width="400" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr>
+    <td colspan="2" align="center" >
+	<div class="error">ROL Sin modulos asignados</div>
+	</td>
+    </tr>
+</table>
+<?php
+}
+?>
 <br />
 <br />
 <br />

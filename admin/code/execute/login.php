@@ -35,7 +35,7 @@ else
 	{
 	$Datos = $db->next_record();
 		// GENERANDO LAS VARIABLES DE SESSION
-		//$_SESSION['USER_LOGGED'] = $uid;
+		$_SESSION['USER_LOGGED'] = $uid;
 //        echo $rol;die;
 		$rol=admin::getDBvalue("SELECT rus_rol_uid FROM mdl_roles_users where rus_usr_uid=".$Datos["usr_uid"]);
                 //if($usuario=="director4") admin::doLog("Rol:".$rol);
@@ -85,6 +85,8 @@ else
                 //echo $urlSite;die;                                                
                 //if($usuario=="director4") admin::doLog("urlSites:".$urlSite."|token:".$token);                                                
                 header("Location: ../../".$urlSite);
+                }else{
+                    header("Location: ../../index.php?error=1");
                 }
 	}	
 ?>

@@ -25,21 +25,21 @@ if($tipUid==2) {
 }
 
     $rol=admin::getSession("usr_rol");
-    $unidadHabilitada =admin::dbFillArray("select rav_uid,raa_uni_uid from mdl_rav,mdl_rav_access where rav_uid=raa_rav_uid and rav_tipologia=1 and rav_delete=0 and rav_rol_uid=$rol");
+    $unidadHabilitada =admin::dbFillArray("select raa_uni_uid,rav_uid from mdl_rav,mdl_rav_access where rav_uid=raa_rav_uid and rav_tipologia=1 and rav_delete=0 and rav_rol_uid=$rol");
    // print_r($unidadHabilitada);
     if(is_array($unidadHabilitada)){
         $k=0;
         $unidadHabUid="";
         foreach ($unidadHabilitada as $key => $value) {
             if($k==0) {
-                $unidadHabUid.= $value;
+                $unidadHabUid.= $key;
             }
         else {
-            $unidadHabUid.= ",".$value;
+            $unidadHabUid.= ",".$key;
             }
             $k++;
         }
-        $Where .=" and suu_uni_uid in ($unidadHabUid) ";
+        if($tipUid==2) $Where .=" and suu_uni_uid in ($unidadHabUid) ";
     }else{
          if($tipUid==2) $Where .=" and suu_uni_uid=-1 ";
     }
@@ -51,6 +51,7 @@ $qsearch="select sub_mount_base, sub_modalidad, sub_moneda, pro_uid, pro_name, p
         . "WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' and sub_uid=suu_sub_uid "
         . " $Where ";
 
+//echo $qsearch;
 
 $order= admin::toSql(admin::getParam("order"),"Number");
 if ($order) admin::setSession("order",$order);
@@ -168,15 +169,20 @@ while ($subasta_list = $pagDb->next_record())
         $sub_modalidad = $subasta_list["sub_modalidad"];
         $sub_status = $subasta_list["sub_status"];
         $sub_moneda = $subasta_list["sub_moneda"];
-        if($sub_modalidad=="ITEM")
+        if(($sub_modalidad=="ITEM")||($sub_modalidad=="PRECIO"))
         {
             //echo "SELECT SUM(xit_price) FROM mdl_xitem WHERE xit_sub_uid=$sub_uid and xit_delete=0 ";
          $sub_monto = admin::getDbValue("SELECT SUM(xit_price) FROM mdl_xitem WHERE xit_sub_uid=$sub_uid and xit_delete=0 "); 
+         $countBids=admin::getDBvalue("SELECT count(*) FROM mdl_biditem where bid_sub_uid='".$sub_uid."' and bid_cli_uid!=0");
+        }
+        else{
+            
+            $countBids=admin::getDBvalue("SELECT count(*) FROM mdl_bid where bid_sub_uid='".$sub_uid."' and bid_cli_uid!=0");
+        
         }
        
         
         if(($deadtime=='subastandose')&&($sub_finish==1)) $sub_finish=2;
-        $countBids=admin::getDBvalue("SELECT count(*) FROM mdl_bid where bid_sub_uid='".$sub_uid."' and bid_cli_uid!=0");
         if(($countBids==0)&&($sub_finish==3)) $sub_finish=7;
      /*
     
@@ -379,12 +385,12 @@ while ($subasta_list = $pagDb->next_record())
     <?php }
 	else{
             //echo "ACA";
-            if($sub_modalidad=="TIEMPO"){
+           // if($sub_modalidad=="TIEMPO"){
             $rolAplica =admin::validaRav($sub_uid,admin::getSession("usr_rol"),1,$sub_moneda, $sub_monto, $unidadUid);
-            }else{
+            /*}else{
                 $sub_monto=admin::getDbValue("select sum(xit_price) from mdl_xitem where xit_sub_uid=$sub_uid");
             $rolAplica =admin::validaRav($sub_uid,admin::getSession("usr_rol"),1,$sub_moneda, $sub_monto, $unidadUid);
-            }
+            }*/
             if($rolAplica==1)
             {
             ?>

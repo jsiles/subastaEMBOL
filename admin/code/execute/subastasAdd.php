@@ -18,7 +18,6 @@ $sub_modalidad = admin::toSql($_POST["sub_modalidad"],"String");
 $sub_date = date("Y-m-d"); //admin::changeFormatDate(admin::toSql($_POST["sub_date"],"String"),1);
 $sub_hour = date("H:i:s");//admin::toSql($_POST["sub_hour"],"String");
 $sub_mount_base = $_POST["sub_mount_base"];
-if($sub_modalidad!='TIEMPO') $sub_mount_base=0;
 $sub_moneda = admin::toSql($_POST["sub_moneda"],"String");
 $sub_mount_unidad = $_POST["sub_mount_unidad"];
 if($sub_modalidad!='TIEMPO') $sub_mount_unidad=0;
@@ -90,7 +89,7 @@ $sql = "insert into mdl_subasta
 					'".$sub_uid."', 
 					'".$sub_pca_uid."', 
 					".admin::getSession('usr_uid').", 
-					".$sub_sol_uid.", 
+					'".$sub_sol_uid."', 
 					'".$sub_description."', 
 					'".$sub_type."',
 					'".$sub_modalidad."',
@@ -109,12 +108,13 @@ $sql = "insert into mdl_subasta
 					'".$dead_time."',
 					0,
 					'SUBASTA')";
-//echo $sql;die;
-	$db->query($sql);
+//echo $sql."<br>";die;
 
-        
+$db->query($sql);
+
+$validateInsert=admin::getDbValue("select count(*) from mdl_subasta where sub_uid=$sub_uid");        
 // ingresamos producto
-
+if($validateInsert>0){
 $sql = "insert into mdl_product
 						(
 						pro_uid,
@@ -235,4 +235,8 @@ if ($FILES2["name"] != '')
 $token=admin::getParam("token");
 
 header('Location: ../../subastasNew2.php?token='.$token."&pro_uid=".$pro_uid."&sub_uid=".$sub_uid."&tipUid=".admin::getParam("tipUid"));	
+}else{
+    $token=admin::getParam("token");
+    header('Location: ../../subastasNew.php?token='.$token."&tipUid=".admin::getParam("tipUid"));	    
+}
 ?>

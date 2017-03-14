@@ -147,14 +147,14 @@ $regusers = $db->next_record();
           <tr>
             <td width="29%">Forma de pago al proveedor:</td>
             <td width="64%">
-                <? 
+                <?php 
 				$sql = "select pts_type from mdl_paymenttosupplier where pts_delete=0 and pts_uid='".$regusers["cli_pts_uid"]."'";
 					$db2->query($sql);
 					while ($content=$db2->next_record())
 					{
 				?>
             	    <?=$content["pts_type"]?>	
-              	<? 
+              	<?php 
 					}
 				?>
 			</td>
@@ -170,8 +170,8 @@ $regusers = $db->next_record();
           <tr>
             <td width="29%">Documentacion:</td>
             <td width="64%">
-                <? 
-				$sql = "select doc_uid, doc_name from mdl_documents where doc_delete=0 and doc_uid!=10";
+                <?php 
+				$sql = "select doc_uid, doc_name from mdl_documents where doc_delete=0";
 					$db2->query($sql);
 					$check = '';
 					while ($content=$db2->next_record())
@@ -185,7 +185,7 @@ $regusers = $db->next_record();
 						}
 				?>
             	    <input disabled="disabled" <?=$check?> id="cli_doc_uid[<?=$content["doc_uid"]?>]" name="cli_doc_uid[<?=$content["doc_uid"]?>]" type="checkbox" /><?=$content["doc_name"]?>	<br />
-              	<? 
+              	<?php 
 					}
 				?>
 					</td>
@@ -201,16 +201,13 @@ $regusers = $db->next_record();
           
 		  <tr>
             <td><?=admin::labels('status');?>:</td>
-            <td><?
-				switch ($cli_status)
+            <td><?php
+		switch ($regusers["cli_status"])
                       {  
-                            case 0: echo 'Solicitud';
+                            case 0: echo 'ACTIVO';
                                 break;
-                            case 1: echo 'Aprobado';
+                            case 1: echo 'INACTIVO';
                                 break;
-                            case 2: echo 'Rechazado';
-                                break;
-                          
                         }
 			?></td>
             <td>&nbsp;</td>

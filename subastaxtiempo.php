@@ -93,7 +93,7 @@ $(function () {
 	}elseif($timeInicio==2){
 	?>
 	bids();
-	$("#tiempoRestante").html('Fecha cierre de la subasta:');
+	$("#tiempoRestante").html('Fecha cierre de la compra:');
 	$('#defaultCountdown').html('<?=admin::changeFormatDate($details["sub_deadtime"],7)?>');
 	$("#tiempoSubasta").show();
 	$("#subastaP").fadeIn('slow');	
@@ -103,7 +103,7 @@ $(function () {
 	<?php 
 	}else{
 	?>
-	$("#tiempoRestante").html('Fecha de la subasta:');
+	$("#tiempoRestante").html('Fecha de la compra:');
 	$('#defaultCountdown').html('<?=admin::changeFormatDate($details["sub_deadtime"],7)?>');
 	$("#tiempoSubasta").show();
 	subastaOff();
@@ -129,7 +129,7 @@ function subastaOn()
 	bids();
 	$("#tiempoSubasta").show();
 	$("#subastaP").fadeIn('slow');	
-	$("#tiempoRestante").html('Fecha de la subasta:');
+	$("#tiempoRestante").html('Fecha de la compra:');
 	$('#defaultCountdown').html('<?=admin::changeFormatDate($details["sub_deadtime"],7)?>');
 
 	var subastaDay = new Date();
@@ -153,7 +153,7 @@ function subastaOff()
 		 if($details["sub_finish"]==0)
 		 {
 		 ?>
-		  jQuery.facebox('<form name="formBids" class="formLabel">La subasta fue concluida, '+ message+' gracias por participar!!<br><br><a href="Cerrar" onclick="$.facebox.close();return false;" class="addcart">Cerrar</a></p></form><br>');
+		  jQuery.facebox('<form name="formBids" class="formLabel">El proceso de compra fue concluido, '+ message+' gracias por participar!!<br><br><a href="Cerrar" onclick="$.facebox.close();return false;" class="addcart">Cerrar</a></p></form><br>');
 		  <?php
 		 }
 		  ?>

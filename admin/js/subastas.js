@@ -14,7 +14,7 @@ switch(valOpcion)
                                         $("#tr_unidadmejora").show();
 					$("#tr_montodead").hide();
                                         $("#tr_montobase").show();
-					$("#tbl_subastaxitem").hide();
+					//$("#tbl_subastaxitem").hide();
 					break;
 	case 'HOLANDESA': 
 					$("#tr_numeroruedas").hide();
@@ -37,7 +37,7 @@ switch(valOpcion)
 					
 					$("#tr_numeroruedas").show();
 					$("#tr_montodead").hide();
-					$("#tr_montobase").hide();
+					$("#tr_montobase").show();
 					$("#tr_unidadmejora").hide();
 					//if($("#sub_type").val()=='COMPRA') $("#montotype").html('Monto m&aacute;ximo');
 					//else $("#montotype").html('Monto m&iacute;nimo');
@@ -49,7 +49,7 @@ switch(valOpcion)
                                         $("#sub_wheels").val(valorInicial);
 					$("#tr_numeroruedas").hide();
                                         $("#tr_montodead").hide();
-					$("#tr_montobase").hide();
+					$("#tr_montobase").show();
 					$("#tr_unidadmejora").hide();
 					//$("#tbl_subasta").hide();
                                         //("#tbl_subastaxitem").show()
@@ -57,7 +57,7 @@ switch(valOpcion)
 	default:
 					$("#tr_numeroruedas").hide();
 					$("#tr_montodead").hide();
-					$("#tbl_subastaxitem").hide();
+					//$("#tbl_subastaxitem").hide();
                                         break;
 					
 	}

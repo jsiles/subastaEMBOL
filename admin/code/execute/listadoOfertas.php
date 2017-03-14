@@ -71,8 +71,8 @@ $prodTpl = $db->next_record();
 				 ?><tr>
 				<td width="25%"><?=$clientName?></td>
 				<td width="25%"><?=$content["bid_date"]?></td>
-                                <td width="25%"><?=$content["bid_mount"]?></td></tr>
-                                <td width="25%"><?=admin::getDBvalue("SELECT xit_description from mdl_xitem where xit_uid=".$content["bid_xit_uid"]." and xit_delte=0")?></td></tr>
+                                <td width="25%"><?=$content["bid_mount"]?></td>
+                                <td width="25%"><?=admin::getDBvalue("SELECT xit_description from mdl_xitem where xit_uid=".$content["bid_xit_uid"]." and xit_delete=0");?></td></tr>
              	<?php
 				 }
 				 ?>    

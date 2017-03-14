@@ -62,7 +62,7 @@ $(function () {
 	}elseif($timeInicio==2){
 	?>
 	bids();
-	$("#tiempoRestante").html('Fecha cierre de la subasta:');
+	$("#tiempoRestante").html('Fecha cierre de la compra:');
 	$('#defaultCountdown').html('<?=admin::changeFormatDate($details["sub_deadtime"],7)?>');
 	$("#tiempoSubasta").show();
 	$("#subastaP").fadeIn('slow');	
@@ -72,7 +72,7 @@ $(function () {
 	<?php 
 	}else{
 	?>
-	$("#tiempoRestante").html('Fecha cierre de la subasta:');
+	$("#tiempoRestante").html('Fecha cierre de la compra:');
 	$('#defaultCountdown').html('<?=admin::changeFormatDate($details["sub_deadtime"],7)?>');
 	$("#tiempoSubasta").show();
 	subastaOff();
@@ -98,7 +98,7 @@ function subastaOn()
 	bids();
 	$("#tiempoSubasta").show();
 	$("#subastaP").fadeIn('slow');	
-	$("#tiempoRestante").html('Fecha cierre de la subasta:');
+	$("#tiempoRestante").html('Fecha cierre de la compra:');
 	$('#defaultCountdown').html('<?=admin::changeFormatDate($details["sub_deadtime"],7)?>');
 
 	var subastaDay = new Date();
@@ -121,7 +121,7 @@ function subastaOff()
 		 if($details["sub_finish"]==0)
 		 {
 		 ?>
-		  jQuery.facebox('<form name="formBids" class="formLabel">La subasta fue concluida, '+ message+' gracias por participar!!<br><br><a href="Cerrar" onclick="$.facebox.close();return false;" class="addcart">Cerrar</a></p></form><br>');
+		  jQuery.facebox('<form name="formBids" class="formLabel">El proceso de compra fue concluido, '+ message+' gracias por participar!!<br><br><a href="Cerrar" onclick="$.facebox.close();return false;" class="addcart">Cerrar</a></p></form><br>');
 		  <?php
 		 }
 		  ?>
@@ -173,7 +173,7 @@ function subastaOff()
                                     if($regBids>0)
 									{
 									?><p class="left">
-                                    Listado de pujas:<a href="<?=$domain?>/code/listBids.php?_keycode=<?=SymmetricCrypt::encrypt(base64_encode($details["sub_uid"]))?>" rel="facebox"><label style="color:#00F"><?=$regBids?></label> puja(s)</a>
+                                    Listado de ofertas:<a href="<?=$domain?>/code/listBids.php?_keycode=<?=SymmetricCrypt::encrypt(base64_encode($details["sub_uid"]))?>" rel="facebox"><label style="color:#00F"><?=$regBids?></label> puja(s)</a>
                                     <div class="clear"></div>
                                    <?php
 								   if(isset($regBidsWin))
@@ -212,7 +212,7 @@ function subastaOff()
  <div id="defaultCountdown" class="defCountDown"></div>
  </p>
 
-<p class="left" id="tiempoSubasta" style="display:none">Tiempo de subasta:&nbsp;
+<p class="left" id="tiempoSubasta" style="display:none">Tiempo para la compra:&nbsp;
  <div id="defaultCountdown1" class="defCountDown"></div>
  </p>
 

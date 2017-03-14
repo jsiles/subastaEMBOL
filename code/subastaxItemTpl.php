@@ -33,12 +33,12 @@
                                                                         {
 									$valBids=admin::getDBvalue("SELECT min(bid_mount) FROM mdl_biditem where bid_xit_uid='".$xitem["xit_uid"]."'");
 									$valBidsCli=admin::getDBvalue("SELECT min(bid_mount) FROM mdl_biditem where bid_xit_uid='".$xitem["xit_uid"]."' and bid_cli_uid=$cli_uid");
-                                                                        if($valBids==$valBids) $mensaje="Su oferta gano.";
+                                                                        if($valBids==$valBids) $mensaje="El proceso de compra ha concluido. El BNB agradece su participaci&oacute;n";//$mensaje="Su oferta gano.";
                                                                         }
 									else{
 									$valBids=admin::getDBvalue("SELECT max(bid_mount) FROM mdl_biditem where bid_xit_uid='".$xitem["xit_uid"]."'");
 									$valBidsCli=admin::getDBvalue("SELECT max(bid_mount) FROM mdl_biditem where bid_xit_uid='".$xitem["xit_uid"]."' and bid_cli_uid=$cli_uid");
-                                                                        if($valBids==$valBids) $mensaje="Su oferta gano.";
+                                                                        if($valBids==$valBids) $mensaje="El proceso de compra ha concluido. El BNB agradece su participaci&oacute;n.";//$mensaje="Su oferta gano.";
                                                                         }								
 									$factor = admin::getDbValue("select inc_ajuste from mdl_incoterm where inc_delete=0 and inc_cli_uid=".admin::getSession("uidClient")." and inc_sub_uid=".$xitem["xit_sub_uid"]);
 									//$regBids = admin::getDbValue("select count(*) from mdl_bid where bid_sub_uid = ".$details["sub_uid"]);
@@ -81,7 +81,7 @@
  
 
  <p id="tiempoSubasta_<?=$xitem["xit_uid"]?>" class="left tiempoSubasta" style="display:none">
-    Tiempo de subasta:&nbsp;</p>
+    Tiempo para la compra:&nbsp;</p>
  <div id="defaultCountdown_<?=$xitem["xit_uid"]?>" class="defCountDown1 subastandose" style="display:none"></div>
  
  <p class="left mensaje" style="display:none;"><?=$mensaje?></p>
@@ -135,7 +135,7 @@
 					?>
                     <?php
 					 if ((strlen($imgextension)>0)&&(strlen($details["pro_document"])>0)) { ?>
-                    <p>Reglamento espec&iacute;fico de la subasta:
+                    <p>Reglamento espec&iacute;fico de la compra:
 				  <a href="<?=$domain?>/docs/subasta/<?=$details["pro_document"]?>" target="_blank"><img border="0" src="<?=$domain."../admin/".$imgextension?>" width="16" height="16"/><!-- <?=$details["pro_document"]?>--></a></p><?php } ?>	
 						<p><?=utf8_encode($details["pro_description"])?></p>
 					</div>

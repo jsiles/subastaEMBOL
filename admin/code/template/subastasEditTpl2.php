@@ -25,7 +25,7 @@ $prod = $db->next_record();
     <td width="15%" style="color:#16652f" align="left">Descripci&oacute;n</td>
     <td width="20%" style="color:#16652f" align="left">Imagen</td>
     <td width="10%" style="color:#16652f" align="left">Precio Base</td>
-    <td width="15%" style="color:#16652f" align="left">Unidad de mejora</td>
+    <td width="15%" style="color:#16652f" align="left">Unidad de Mejora</td>
 	<td width="15%" style="color:#16652f" align="left">Proveedor</td> <td align="center" width="10%" height="5">&nbsp;</td>
     
 	</tr>
@@ -47,7 +47,7 @@ $prod = $db->next_record();
     <td width="10%"><input name="pro_precio" id="pro_precio" type="text" size="9" />
                 </td>
     <td width="15%"><input name="pro_unidad" id="pro_unidad" type="text" size="9" />
-                </td>            
+                </td> 
     <td width="15%">
     <?php
     $arrayClient = admin::dbFillArray("select cli_uid, cli_socialreason as name from mdl_client, mdl_incoterm where inc_cli_uid=cli_uid and inc_sub_uid=$sub_uid");
@@ -133,7 +133,7 @@ while ($list = $db2->next_record())
     <td width="12%"><?=utf8_decode($flddescription)?></td>
     <td width="12%"><img src="<?=PATH_DOMAIN."/img/subasta/thumb2_".utf8_decode($fldimage)?>"  border="0"> </td>
     <td width="12%" align="center"><?=round($fldprice,2)?></td>
-	<td width="12%" align="center"><?=$fldunidad?></td>
+    <td width="12%" align="center"><?=$fldunidad?></td>
 	<td width="12%"><?php
     $db3->query("select clx_cli_uid from mdl_clixitem where clx_delete=0 and clx_xit_uid=$flduid ");
 	

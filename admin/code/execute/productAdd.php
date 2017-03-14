@@ -10,6 +10,7 @@ $fldpro_product=admin::getParam("pro_product");
 $fldpro_description=admin::getParam("pro_description");
 $fldpro_precio=admin::getParam("pro_precio");
 $fldpro_unidad=admin::getParam("pro_unidad");
+if(!$fldpro_unidad) $fldpro_unidad=0;
 $fldpro_cli_id=admin::getParam("pro_cli_id");
 $fldxitem = admin::getDbValue("select max(xit_uid) from mdl_xitem");
 if(!$fldxitem) $fldxitem=1;
@@ -33,13 +34,16 @@ $sSQL = "insert into mdl_xitem(
 						'".$fldpro_description."', 
 						'',
 						".$fldpro_precio.", 
-						".$fldpro_unidad.", 
+						'".$fldpro_unidad."', 
 						0
 					)";
 
 $db->query($sSQL);
-
+//echo $sSQL;die;
 //die;
+
+$valInsrt=admin::getDbValue("select count(*) from mdl_xitem where xit_uid=$fldxitem");
+if($valInsrt>0){
 /*********************************************/
 /*			BEGIN IMAGE						 */
 /*********************************************/
@@ -90,6 +94,7 @@ if ($FILES["name"] != '')
 /*********************************************/
 foreach($fldpro_cli_id as $fldvalue)
 {
+    admin::getDbValue("delete from mdl_clixitem where clx_cli_uid=$fldvalue and clx_xit_uid=$fldxitem");
 $sql = "insert into mdl_clixitem(
 					clx_cli_uid,
 					clx_xit_uid,
@@ -106,4 +111,11 @@ $db->query($sql);
 }
 $token=admin::getParam("token");
 header('Location: ../../subastasEdit2.php?token='.$token.'&pro_uid='.$pro_uid.'&sub_uid='.$sub_uid.'&tipUid='.admin::getParam("tipUid"));
+}
+else{
+    $token=admin::getParam("token");
+header('Location: ../../subastasEdit2.php?token='.$token.'&pro_uid='.$pro_uid.'&sub_uid='.$sub_uid.'&tipUid='.admin::getParam("tipUid"));
+
+    
+}
 ?>

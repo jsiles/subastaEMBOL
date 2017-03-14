@@ -92,7 +92,7 @@
  <div id="defaultCountdown" class="defCountDown"></div>
  </p>
 
-<p class="left" id="tiempoSubasta" style="display:none">Tiempo de subasta:&nbsp;
+<p class="left" id="tiempoSubasta" style="display:none">Tiempo para la compra:&nbsp;
  <div id="defaultCountdown1" class="defCountDown"></div>
  </p>
 
@@ -133,7 +133,7 @@
 					?>
                     <?php
 					 if ((strlen($imgextension)>0)&&(strlen($details["pro_document"])>0)) { ?>
-                    <p>Reglamento espec&iacute;fico de la subasta:
+                    <p>Reglamento espec&iacute;fico de la compra:
 				  <a href="<?=$domain?>/docs/subasta/<?=$details["pro_document"]?>" target="_blank"><img border="0" src="<?=$domain."/admin/".$imgextension?>" width="16" height="16"/><!-- <?=$details["pro_document"]?>--></a></p><?php } ?>	
 						<p><?=utf8_encode($details["pro_description"])?></p>
 					</div>

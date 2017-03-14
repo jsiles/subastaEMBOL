@@ -96,7 +96,7 @@ function removeList(id){
 										   
 			if(v){
 				var uid = m.find('#list').val();
-				  $('#sub_'+id).fadeOut(500, function(){ $(this).remove(); });
+				  $('#list_'+id).fadeOut(500, function(){ $(this).remove(); });
 					  $.ajax({
 						url: 'code/execute/subastasRavDel.php',
 						type: 'POST',

@@ -17,7 +17,6 @@ $sub_modalidad = admin::toSql($_POST["sub_modalidad"],"String");
 //$sub_date = admin::changeFormatDate(admin::toSql($_POST["sub_date"],"String"),1);
 //$sub_hour = admin::toSql($_POST["sub_hour"],"String");
 $sub_mount_base = $_POST["sub_mount_base"];
-if($sub_modalidad!='TIEMPO') $sub_mount_base=0;
 $sub_moneda = admin::toSql($_POST["sub_moneda"],"String");
 $sub_mount_unidad = $_POST["sub_mount_unidad"];
 if($sub_modalidad!='TIEMPO') $sub_mount_unidad=0;

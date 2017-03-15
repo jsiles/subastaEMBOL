@@ -1828,7 +1828,7 @@ public static function updateSubastaItem()
   }
 public static function validaRav($uid, $rol, $tipologia, $moneda, $monto, $unidadUid)
 {
-   self::doLog("UID:". $uid." Rol:".$rol." TIPO:".$tipologia." MONEDA:".$moneda." monto:".$monto." Unidad:".$unidadUid);
+//   self::doLog("UID:". $uid." Rol:".$rol." TIPO:".$tipologia." MONEDA:".$moneda." monto:".$monto." Unidad:".$unidadUid);
     $rolAplica = 0;
             $sql =  "select count(*) from mdl_rav,mdl_rav_access where rav_uid=raa_rav_uid and rav_tipologia=$tipologia and rav_delete=0 and rav_rol_uid=$rol and rav_cur_uid=".$moneda." and ($monto between rav_monto_inf and rav_monto_sup) and raa_uni_uid in ($unidadUid)";
             //echo $sql;

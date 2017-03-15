@@ -191,9 +191,9 @@ while ($subasta_list = $pagDb->next_record())
     0 SOLICITUD
     1 APROBADA
     2 SUBASTANDOSE
-    3 INFORME
-    4 ADJUDICADA
-    5 ANULADA
+    3 CONCLUIDO
+    4 INFORME
+    5 ADJUDICADA
     6 RECHAZADA
     7 DESIERTA
 
@@ -210,13 +210,13 @@ while ($subasta_list = $pagDb->next_record())
     		$sub_estado  ='SUBASTANDOSE';
     		break;
     	case  3:
-    		$sub_estado  ='INFORME';
+    		$sub_estado  ='CONCLUIDO';
     		break;
     	case  4:
-    		$sub_estado  ='ADJUDICADA';
+    		$sub_estado  ='INFORME';
     		break;
     	case  5:
-    		$sub_estado  ='ANULADA';
+    		$sub_estado  ='ADJUDICADA';
     		break;
     	case  6:
     		$sub_estado  ='RECHAZADA';
@@ -378,21 +378,13 @@ while ($subasta_list = $pagDb->next_record())
 	</td>
         <td align="center" width="5%" height="5">
 	<?php
-		if($sub_finish!=0)
+		if($sub_finish!=3)
 		{
 	?>
 		<img src="lib/aprobar_off.png" border="0" title="APROBAR" alt="APROBAR">
     <?php }
 	else{
-            //echo "ACA";
-           // if($sub_modalidad=="TIEMPO"){
-            echo "###".$sub_monto;
             $rolAplica =admin::validaRav($sub_uid,admin::getSession("usr_rol"),1,$sub_moneda, $sub_monto, $unidadUid);
-            //echo $sub_monto;
-            /*}else{
-                $sub_monto=admin::getDbValue("select sum(xit_price) from mdl_xitem where xit_sub_uid=$sub_uid");
-            $rolAplica =admin::validaRav($sub_uid,admin::getSession("usr_rol"),1,$sub_moneda, $sub_monto, $unidadUid);
-            }*/
             if($rolAplica==1)
             {
             ?>

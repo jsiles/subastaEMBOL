@@ -13,7 +13,7 @@ $orc_sol_uid=admin::getParam("orc_sol_uid");
 $orc_nro_oc=admin::getParam("orc_nro_oc");
 $orc_monto=admin::getParam("orc_monto");
 $orc_moneda=admin::getParam("sub_moneda");
-$orc_fecha=admin::getParam("orc_fecha");
+$orc_fecha=admin::changeFormatDate(admin::getParam("orc_fecha"),1);
 $orc_hora=admin::getParam("orc_hora");
 $orc_cli_uid=admin::getParam("orc_cli_uid");
 $orc_aprobado=admin::getParam("orc_aprobado");
@@ -51,7 +51,7 @@ $sql = "insert into mdl_orden_compra
                                  0,
                                  '$orc_status',
                                  0)";
-echo $sql;die;	
+//echo $sql;die;	
 $db->query($sql);
 
 $rav_uni_uid=  admin::getParam("rav_uni_uid");

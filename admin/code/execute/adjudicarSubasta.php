@@ -9,11 +9,12 @@ $elaborado=admin::getParam("elaborado");
 $aprobado = admin::getParam("aprobado");
 $observaciones = admin::getParam("observaciones");
 $ahorro = admin::getParam("ahorro");
+$monto = admin::getParam("monto");
 $token = admin::getParam("token");
 $sql = "insert into mdl_subasta_informe "
-        . "(sua_user_uid, sua_sub_uid, sua_elaborado, sua_aprobado, sua_observaciones, sua_date, sua_ahorro, sua_status)"
+        . "(sua_user_uid, sua_sub_uid, sua_elaborado, sua_aprobado, sua_observaciones, sua_date, sua_ahorro, sua_monto, sua_status)"
         . " values "
-        . "($userUID, $sub_uid, '".admin::toSql($elaborado, "Text")."','".admin::toSql($aprobado, "Text")."','".admin::toSql($observaciones, "Text")."',GETDATE(),$ahorro,'ACTIVE' )";
+        . "($userUID, $sub_uid, '".admin::toSql($elaborado, "Text")."','".admin::toSql($aprobado, "Text")."','".admin::toSql($observaciones, "Text")."',GETDATE(), '$ahorro', '$monto','ACTIVE' )";
 $db->query($sql);
 header('Location: ../../informeList.php?token='.$token);
 ?>

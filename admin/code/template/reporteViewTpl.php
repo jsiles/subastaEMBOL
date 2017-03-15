@@ -68,14 +68,14 @@ $obs=admin::getDBvalue("SELECT sua_observaciones FROM mdl_subasta_informe where 
 <table width="50%" border="0">
     <tr>
         <td ><img src="<?=$domain?>/lib/logo.png" width="100" /></td>
-        <td colspan="4"><h1>Parametrizaci&oacute;n de subastas</h1><br /><span>Fecha: <?=date("d/m/Y")?></span></td>
+        <td colspan="4"><h1>Parametrizaci&oacute;n del proceso de compra</h1><br /><span>Fecha: <?=date("d/m/Y")?></span></td>
     </tr>
 <tr>
     <td colspan="5"><br /><br /></td>
     
 </tr>
 <tr>
-    <td colspan="5"><h2>1: Datos generales de la subasta</h2></td>
+    <td colspan="5"><h2>1: Datos generales del proceso de compra</h2></td>
 </tr>
 <tr>
     <td colspan="5"><br /></td>
@@ -105,33 +105,33 @@ $obs=admin::getDBvalue("SELECT sua_observaciones FROM mdl_subasta_informe where 
     <td colspan="5"><br /><br /></td>
 </tr>
 <tr>
-    <td colspan="5"><h2>2: Datos particulares de la subasta</h2></td>
+    <td colspan="5"><h2>2: Datos particulares del proceso de compra</h2></td>
 </tr>
 <tr>
     <td colspan="5"><br /></td>
 </tr>
 <tr>
-    <td>Modalidad de subasta:</td>
+    <td>Modalidad del proceso de compra:</td>
     <td align="left"><?=$sub_modalidad?></td>
     <td></td>
     <td>Fecha de subasta:</td>
     <td align="left"><?=$sub_hour_end[0]?></td>
 </tr>
 <tr>
-    <td>Tipo de subasta:</td>
+    <td>Tipo:</td>
     <td align="left"><?=$sub_type?></td>
     <td></td>
     <td>Hora de subasta:</td>
     <td align="left"><?=$sub_hour_end[1]?></td>
 </tr>
 <tr>
-    <td >Monto base:</td>
+    <td >Monto Referencial:</td>
     <td align="left"><?=$sub_mount_base?></td>
-    <td></td><td width="21%">Tiempo l&iacute;mite de mejora en min.:</td>
+    <td></td><td width="21%">Tiempo l&iacute;mite para ofertar en min.:</td>
     <td align="left"><?=$sub_tiempo?></td>
 </tr>
 <tr>
-    <td >Unidad de mejorar:</td>
+    <td >Unidad de mejora:</td>
     <td  align="left"><?=$sub_mount_unidad?></td>
     <td ></td><td width="21%"></td>
     <td ></td>

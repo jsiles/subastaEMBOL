@@ -81,6 +81,10 @@ $regBidsWin = admin::getDbValue("select max(bid_uid) from mdl_bid where bid_sub_
 
 <script type="text/javascript">
 $(function () {
+    setInterval(function(){
+   $.get('<?=$domain?>/code/keepalive.php');
+}, 300000);
+
 	<?php
 	if($timeInicio==1)
 	{

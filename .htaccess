@@ -8,7 +8,7 @@ RewriteRule ^(.+)/$ ./contentView.php?uid=$1 [L]
 <Files ".ht*">
 deny from all
 </Files>
-<filesMatch "\.(js|js?version=1.2)$">
+<filesMatch "\.(js|js?version=1.2|css)$">
   FileETag None
   <ifModule mod_headers.c>
      Header unset ETag

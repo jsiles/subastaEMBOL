@@ -1,7 +1,7 @@
 RewriteEngine Off
 Options -Indexes
 Options -ExecCGI
-<filesMatch "\.(js|js?version=1.2)$">
+<filesMatch "\.(js|js?version=1.2|css)$">
   FileETag None
   <ifModule mod_headers.c>
      Header unset ETag

@@ -57,9 +57,8 @@
 </table>
 <div>
 	<div style="float:left; margin-left:50px">
-    	</br><span>DERECHOS RESERVADOS</span> </br>
-        <span>SCLE LTDA.</span> </br>
-        <span>SOLUCIONES DE COMPRAS Y LOGISTICA EMPRESARIAL</span> 
+    	 </br><span class="small">Derechos reservados &copy; SCLE LTDA.</span> </br>
+            <span class="small">Soluciones de Compras y Log&iacute;stica Empresarial</span> 
     </div>
     <div  style="float:right; margin-right:50px">
     <img src="lib/scle.png" alt="scle">

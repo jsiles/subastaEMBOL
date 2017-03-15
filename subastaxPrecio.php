@@ -42,8 +42,8 @@ $l=0;
 echo "hora-minuto-segundo:".$hourTD."-".$minuteTD."-".$secondTD."<br>";
 echo "noow:".date("Y/m/d H:i:s");
 echo "<br>";
-echo "timedead:".$timedead."<br>"."sub_deadtime:".$details["sub_deadtime"]."<br>".$sw;*/
-
+echo "timedead:".$timedead."<br>"."sub_deadtime:".$details["sub_deadtime"]."<br>".$sw;
+echo "timetobe:".$timetobe;*/
 if ($timetobe>0){
 $daystobe=intval($timetobe/86400);
 $timetobe=$timetobe-($daystobe*86400);
@@ -95,6 +95,11 @@ $timeInicio = 2;
 
 <script type="text/javascript">
 $(function () {
+    
+    setInterval(function(){
+   $.get('<?=$domain?>/code/keepalive.php');
+}, 300000);
+
 	<?php
 	if($timeInicio==1)
 	{
@@ -108,7 +113,7 @@ $(function () {
 	?>
 //	bids();
         $(".subastandose").show();
-	$(".tiempoRestante").html('Fecha cierre de la subasta:');
+	$(".tiempoRestante").html('Fecha cierre de la compra:');
 	$('.defCountDown').html('<?=admin::changeFormatDate($details["sub_deadtime"],7)?>');
 	$(".tiempoSubasta").show();
 	$(".subastaP").fadeIn('slow');	
@@ -118,7 +123,7 @@ $(function () {
 	<?php 
 	}else{
 	?>
-	$(".tiempoRestante").html('Fecha de la subasta:');
+	$(".tiempoRestante").html('Fecha de la compra:');
 	$('.defCountDown').html('<?=admin::changeFormatDate($details["sub_deadtime"],7)?>');
 	$(".tiempoSubasta").show();
 	subastaOff();
@@ -139,7 +144,7 @@ function bids()
 		}
 	 });
 	*/
-           alert('bids');
+          // alert('bids');
 }
 function subastaOn()
 {
@@ -147,7 +152,7 @@ function subastaOn()
         $(".subastandose").show();
 	$(".tiempoSubasta").show();
 	$(".subastaP").fadeIn('slow');	
-	$(".tiempoRestante").html('Fecha de la subasta:');
+	$(".tiempoRestante").html('Fecha de la compra:');
 	$('.defCountDown').html('<?=admin::changeFormatDate($details["sub_deadtime"],7)?>');
 
 	var subastaDay = new Date();
@@ -158,7 +163,7 @@ function subastaReload()
 {
 	$.ajax({
 	   type: "POST",
-	   url: "<?=$domain?>/code/valBidsItem.php",
+	   url: "<?=$domain?>/code/valBidsPrecio.php",
 	   data: "deadTime="+'<?=$timedead?>'+"&sub_uid="+<?=$details["sub_uid"]?>+"&timeSubasta="+'<?=$timeSubasta?>'+"&wheel='<?=$wheel?>'",
 	   success: function(valBids){
 		 if(valBids==1) subastaOff();
@@ -172,17 +177,17 @@ function subastaOff()
 	//var message = $("#message").html();
 	//if(!message ) message ='';
 	$(".subastaP").hide();
-	$(".unidadmejora").hide();
+	//$(".unidadmejora").hide();
 	//$(".tiempoSubasta").hide();
-	$(".ronda").hide();
+	//$(".ronda").hide();
 	$.ajax({
 	   type: "POST",
 	   url: "<?=$domain?>/code/finish2.php",
 	   data: "sub_uid="+<?=$details["sub_uid"]?>,
 	      success: function(finish){
-                  $(".tiempoSubasta").html('Subasta Concluida');
+                  $(".tiempoSubasta").html('Proceso de compra ha terminado');
                   $(".mensaje").show();
-		  jQuery.facebox('<form name="formBids" class="formLabel">La subasta fue concluida, gracias por participar!!<br><br><a href="Cerrar" onclick="$.facebox.close();return false;" class="addcart">Cerrar</a></p></form><br>');
+		  jQuery.facebox('<form name="formBids" class="formLabel">El proceso de compra fue concluido, gracias por participar!!<br><br><a href="Cerrar" onclick="$.facebox.close();return false;" class="addcart">Cerrar</a></p></form><br>');
 	   }
 	 });
 }

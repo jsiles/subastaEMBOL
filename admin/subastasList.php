@@ -115,8 +115,8 @@ function aprobarSubasta(id){
 						url: 'code/execute/autorizacionApr.php',
 						type: 'POST',
 						data: 'uid='+id,
-						 success: function() { 
-								window.location.href='./subastasList.php?token=<?=admin::getParam("token")?>&tipUid=<?=admin::getParam("tipUid")?>';
+						 success: function(msg) { 
+							    if (msg=='OK') window.location.href='./subastasList.php?token=<?=admin::getParam("token")?>&tipUid=<?=admin::getParam("tipUid")?>';
 							}
 					});
 					 

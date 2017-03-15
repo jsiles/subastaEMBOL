@@ -16,6 +16,7 @@ if(is_array($list)){
         $nti_uid=2;
         $nro_oc=$list["orc_nro_oc"];
         $attach="/admin/upload/oc/".$list["orc_document"];
-        if (strlen($attach)>0) admin::insertMail($cli_uid, $nti_uid, $attach, $cli_email, 'NULL','NULL',$nro_oc);
+        //if (strlen($attach)>0)
+         admin::insertMail($cli_uid, $nti_uid, $attach, $cli_email, 'NULL','NULL',$nro_oc);
 }
 ?>

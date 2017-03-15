@@ -66,3 +66,13 @@ function valOfertIt(i)
 		$('#planCuentas_'+i).attr('href',domain+'/code/bidsIt.php?cli_uid='+cli_uid+'&sub_uid='+sub_uid+'&uid='+uid+'&ofert='+ofert);
 
 }
+function valOfertPrecio(i)
+{
+		domain=document.getElementById('domain_'+i).value;
+		uid=document.getElementById('uid_'+i).value;
+		ofert=document.getElementById('ct_value_'+i).value;
+		sub_uid=document.getElementById('sub_uid_'+i).value;
+                cli_uid=document.getElementById('cli_uid_'+i).value;
+		$('#planCuentas_'+i).attr('href',domain+'/code/bidsPrecio.php?cli_uid='+cli_uid+'&sub_uid='+sub_uid+'&uid='+uid+'&ofert='+ofert);
+
+}

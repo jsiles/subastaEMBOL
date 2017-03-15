@@ -199,12 +199,13 @@ $prod = $db->next_record();
 					</td>
 				</tr>  
               <tr id="tr_montobase" style="display:">
-				<td>Monto base:</td>
+				<td>Monto Referencial:</td>
 				<td><?=$prod["sub_mount_base"]?>
                 <?=admin::getDbValue("select cur_description from mdl_currency where cur_uid=".$prod["sub_moneda"])?>
 				</td>
 			</tr>
-            <tr id="tr_unidadmejora" style="display:">
+            
+                        <tr id="tr_unidadmejora" style="display:">
 				<td>Unidad de mejorar:</td>
 				<td><?=$prod["sub_mount_unidad"]?>
 				</td>
@@ -413,8 +414,10 @@ if ($nroReg>0)
     <td width="12%" style="color:#16652f">Descripci&oacute;n</td>
     <td width="12%" style="color:#16652f">Imagen</td>
     <td width="12%" style="color:#16652f">Precio base</td>
-    <td width="12%" style="color:#16652f">Unidad de mejora</td>
-	<td width="12%" style="color:#16652f">Proveedor</td>
+     <?php
+    if($prod["sub_modalidad"]!="PRECIO"){
+    ?><td width="12%" style="color:#16652f">Unidad de mejora</td>
+    <?php } ?>	<td width="12%" style="color:#16652f">Proveedor</td>
 	<td align="center" width="12%" height="5">&nbsp;</td>
 	</tr>
 	</table>
@@ -443,9 +446,11 @@ while ($list = $db2->next_record())
     <td width="12%"><?=utf8_decode($fldproduct)?></td>
     <td width="12%"><?=utf8_decode($flddescription)?></td>
     <td width="12%"><img src="<?=PATH_DOMAIN."/img/subasta/thumb2_".utf8_decode($fldimage)?>"  border="0"> </td>
-    <td width="12%" align="center"><?=round($fldprice,2)?></td>
-	<td width="12%" align="center"><?=$fldunidad?></td>
-	<td width="12%"><?php
+    <td width="12%"><?=round($fldprice,2)?></td>
+	 <?php
+    if($prod["sub_modalidad"]!="PRECIO"){
+    ?><td width="12%" align="center"><?=$fldunidad?></td>
+    <?php } ?>	<td width="12%"><?php
     $db3->query("select clx_cli_uid from mdl_clixitem where clx_delete=0 and clx_xit_uid=$flduid ");
 	
 	while ($user = $db3->next_record())

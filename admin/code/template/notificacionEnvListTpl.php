@@ -15,11 +15,11 @@ $where .= " or (noe_sol_uid like '%". $search."%')";
 $where .= " or (noe_nro_oc like '%". $search."%')";
 $where .= " or (cli_socialreason like '%". $search."%')";
 }
-if($tipUid==1) $where.=" and noe_estado=1";
-else $where.=" and noe_estado=0";
+if($tipUid==1) $where.=" and noe_status=1";
+else $where.=" and noe_status=0";
 $_pagi_sql= "select * from mdl_notificacion_envio,mdl_client where cli_uid=noe_cli_uid  $where order by noe_uid asc ";
-$nroReg=admin::getDBvalue("select * from mdl_notificacion_envio,mdl_client where cli_uid=noe_cli_uid $where");
-
+//$nroReg=admin::getDBvalue("select count(*) from mdl_notificacion_envio,mdl_client where cli_uid=noe_cli_uid $where");
+$nroReg = $db->numrows($_pagi_sql);
 $_pagi_cuantos = 20;//Elegí un número pequeño para que se generen varias páginas
 //cantidad de enlaces que se mostrarán como máximo en la barra de navegación
 $_pagi_nav_num_enlaces = 5;//Elegí un número pequeño para que se note el resultado
@@ -27,7 +27,7 @@ $_pagi_nav_num_enlaces = 5;//Elegí un número pequeño para que se note el resulta
 $_pagi_mostrar_errores = false;//recomendado true sólo en tiempo de desarrollo.
 
 //$db->query($_pagi_sql);
-
+//echo $_pagi_sql;
 include("core/paginator.inc.php");
 
 if ($nroReg>0)

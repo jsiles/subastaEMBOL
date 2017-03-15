@@ -618,12 +618,12 @@ span, label, p, td, h2 {
 
 .listings .item-box .details {
 	display: inline-block;
-	width: 240px;
+	width: 640px;
 }
 
 .details .item-box .details {
 	display: inline-block;
-	width: 240px;
+	width: 640px;
 }
 
 .item-box .left {
@@ -706,6 +706,17 @@ font-size:12px;
 font-weight:bold;
 color:#dd2d26;	
 }
+.defCountDown1
+{
+width:500px;
+margin-top:9px;
+margin-left:4px;
+height:25px;
+font-size:12px;
+font-weight:bold;
+color:#dd2d26;	
+}
+
 
 #subastaP{
 width:750px;

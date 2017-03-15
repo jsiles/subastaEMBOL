@@ -198,7 +198,7 @@ $prod = $db->next_record();
 					</td>
 				</tr>  
               <tr id="tr_montobase" style="display:">
-				<td>Monto base:</td>
+				<td>Monto Referencial:</td>
 				<td><?=$prod["sub_mount_base"]?>
                 <?=admin::getDbValue("select cur_description from mdl_currency where cur_uid=".$prod["sub_moneda"])?>
 				</td>
@@ -489,6 +489,12 @@ while ($list = $db2->next_record())
             <td width="12%" style="color:#16652f">Aprobado por:</td>
             <td><input id="aprobado" name="aprobado">
             <br /><span id="div_aprobado" style="display:none; padding-left:5px; padding-right:5px;" class="error">* Campo requerido</span>
+            </td>
+        </tr>
+        <tr>
+            <td width="12%" style="color:#16652f">Monto total adjudicar:</td>
+            <td><input id="monto" name="monto">
+            <br /><span id="div_monto" style="display:none; padding-left:5px; padding-right:5px;" class="error">* Campo requerido</span>
             </td>
         </tr>
         <tr>

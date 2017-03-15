@@ -1,5 +1,5 @@
 		<div id="content">
-				<div id="box7" class="box-style">
+                    <div id="box7" style="width: 75%" class="box-style">
                 	
 					<!-- info de productos -->
                   	<?php
@@ -29,7 +29,7 @@
                                 <?php
 //echo $timeSubasta;
 								   $bidsCompra=admin::getDBvalue("SELECT sub_type FROM mdl_subasta where sub_uid=".$xitem["xit_sub_uid"]);
-									if($bidsCompra=='COMPRA') 
+/*									if($bidsCompra=='COMPRA') 
                                                                         {
 									$valBids=admin::getDBvalue("SELECT min(bid_mount) FROM mdl_biditem where bid_xit_uid='".$xitem["xit_uid"]."'");
 									$valBidsCli=admin::getDBvalue("SELECT min(bid_mount) FROM mdl_biditem where bid_xit_uid='".$xitem["xit_uid"]."' and bid_cli_uid=$cli_uid");
@@ -54,12 +54,14 @@
                                                                             	$centavos=substr($valBids,-3);
 										$montoGlobal=str_replace($centavos,'',$valBids);
                                                                                 }
-								
+*/                                                                              $centavos=substr($xitem["xit_price"],-3);
+										$montoGlobal=str_replace($centavos,'',$xitem["xit_price"]);
 									$centavos=str_replace('.','',$centavos);
 									
 								?>
-									<p class="left">Precio: <?=$moneda?> 
-					       <?=$montoGlobal?>.<sup><?=$centavos?></sup></p> <div class="clear"></div>
+									<p class="left">Precio:
+					       <?=$montoGlobal?>.<sup><?=$centavos?></sup></p> 
+                                                                        <div class="clear"></div>
                                    <?php
                                    if(isset($factor))
 								   {
@@ -71,9 +73,9 @@
 								    }
 				                    ?>
                                     
-                                    <p class="left ronda">Ronda:&nbsp;<?=$wheel?>
-                                    </p>
-                                    <br>
+                                    <!--<p class="left ronda">Ronda:&nbsp;<?=$wheel?>
+                                    </p>-->
+                                
                                     <br>
                                     <p class="left tiempoRestante" style="display:">Tiempo de inicio:&nbsp; 
  </p>
@@ -86,28 +88,28 @@
  
  <p class="left mensaje" style="display:none;"><?=$mensaje?></p>
 	<form name="frmContact" id="formA" action="" method="post">
-	<div class="subastaP" style="display:none;">
+	<div class="subastaP" style="display:none; width: 100%">
 	<label class="bold">Oferta:</label>
-	<input name="ct_value_<?=$xitem["xit_uid"]?>" id="ct_value_<?=$xitem["xit_uid"]?>" type="text" size="15" class="inputB" value="" onKeyUp="valOfertIt(<?=$xitem["xit_uid"]?>);"/>
+	<input name="ct_value_<?=$xitem["xit_uid"]?>" id="ct_value_<?=$xitem["xit_uid"]?>" type="text" size="15" class="inputB" value="" onKeyUp="valOfertPrecio(<?=$xitem["xit_uid"]?>);"/>
         
-        <a href="<?=$domain?>/code/bidsIt.php?sub_uid=<?=$xitem["xit_sub_uid"]?>&ofert=<?=$valBids?>&uid=<?=$xitem["xit_uid"]?>" id="planCuentas_<?= $xitem["xit_uid"] ?>" rel="facebox" class="addcart">Aceptar</a> (Ingrese <?php 
+        <a href="<?=$domain?>/code/bidsPrecio.php?sub_uid=<?=$xitem["xit_sub_uid"]?>&ofert=<?=$valBids?>&uid=<?=$xitem["xit_uid"]?>" id="planCuentas_<?= $xitem["xit_uid"] ?>" rel="facebox" class="addcart">Aceptar</a> (Ingrese <?php 
 		if($bidsCompra=='COMPRA')
 		{
 		//if($xitem["xit_price"]<=$valBids) echo $moneda.' '.number_format(round(($xitem["xit_price"]-$xitem["xit_unity"]),2),2).' o menos)'; 
 		//else
-                    echo $moneda.' '.($valBids-$xitem["xit_unity"]).' o menos)'; 
+                    echo $moneda.' '.($xitem["xit_price"]).' o menos)'; 
 		
 			}
 		else
 		{
 		//if($xitem["xit_price"]>=$valBids) echo $moneda.' '.number_format(round(($xitem["xit_price"]+$xitem["xit_unity"]),2),2).' o m&aacute;s)'; 
 		//else 
-                echo $moneda.' '.($valBids+$xitem["xit_unity"]).' o m&aacute;s)'; 
+                echo $moneda.' '.($xitem["xit_price"]).' o m&aacute;s)'; 
 			}
 		?>
         </div>
       
-	  <p class="unidadmejora"><label class="bold">Unidad de Mejora:</label> <?=$moneda?> <?=$xitem["xit_unity"]?></p>
+	  <!--<p class="unidadmejora"><label class="bold">Unidad de Mejora:</label> <?=$moneda?> <?=$xitem["xit_unity"]?></p>-->
                                 
            <input type="hidden" name="hOk_<?=$xitem["xit_uid"]?>" id="hOk_<?=$xitem["xit_uid"]?>" value="" />
            <input type="hidden" name="cli_uid_<?=$xitem["xit_uid"]?>" id="cli_uid_<?=$xitem["xit_uid"]?>" value="<?=$cli_uid?>" />

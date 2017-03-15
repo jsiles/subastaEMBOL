@@ -161,7 +161,7 @@
 			</tr>    
                 
 			  <tr>
-				<td>Monto base/Tipo de cambio:</td>
+				<td>Monto Referencial/Tipo de cambio:</td>
 				<td>
 				<input name="sub_mount_base" type="text" class="input" id="sub_mount_base" onfocus="setClassInput(this,'ON');document.getElementById('div_sub_mount_base').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_sub_mount_base').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_sub_mount_base').style.display='none';" size="9" />
     <?php 

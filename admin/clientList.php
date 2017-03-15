@@ -87,7 +87,7 @@ function aprobarSubasta(id){
 										   
 			if(v){
 				var uid = m.find('#list').val();
-				  $('#sub_'+id).fadeOut(500, function(){ $(this).remove(); });
+				  //$('#sub_'+id).fadeOut(500, function(){ $(this).remove(); });
 					  $.ajax({
 						url: 'code/execute/clientApr.php',
 						type: 'POST',
@@ -114,7 +114,7 @@ function rechazarSubasta(id){
 										   
 			if(v){
 				var uid = m.find('#list').val();
-				  $('#sub_'+id).fadeOut(500, function(){ $(this).remove(); });
+				 // $('#sub_'+id).fadeOut(500, function(){ $(this).remove(); });
 					  $.ajax({
 						url: 'code/execute/clientRechazar.php',
 						type: 'POST',

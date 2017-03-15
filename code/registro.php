@@ -20,7 +20,7 @@ else  $msgP='';
 <div id="content">
 				<div id="box6" class="box-style">
 					<div class="title">
-                                            <h2><span>Cambio de contrase&ntilde;a</span></h2>
+                    <h2><span>Cambio de contrase&ntilde;a</span></h2>
 					</div>
 					<div class="content">
 						<p><?=$msgP?></p>

@@ -386,7 +386,7 @@ while ($subasta_list = $pagDb->next_record())
 	else{
             //echo "ACA";
            // if($sub_modalidad=="TIEMPO"){
-            echo $sub_monto;
+            echo "###".$sub_monto;
             $rolAplica =admin::validaRav($sub_uid,admin::getSession("usr_rol"),1,$sub_moneda, $sub_monto, $unidadUid);
             //echo $sub_monto;
             /*}else{

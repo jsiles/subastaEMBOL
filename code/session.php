@@ -17,7 +17,7 @@ if (strlen($uidClient)>0)
         if($controlaSesion==0) { header("Location:".$domain."/logout.php?uidClient=$uidClient");}
 */	
 
-	$iValidaSesion = admin::getDBValue("SELECT count(*) FROM sys_session WHERE (ses_user_uid=" .admin::toSql($uidClient,"Integer"). " or ses_ipaddress='".admin::toSql($_SERVER['REMOTE_ADDR'],"Text")."') and ses_registered='V'");
+	$iValidaSesion = admin::getDBValue("SELECT count(*) FROM sys_session WHERE (ses_user_uid=" .admin::toSql($uidClient,"Integer"). ") and (ses_ipaddress='".admin::toSql($_SERVER['REMOTE_ADDR'],"Text")."') and ses_registered='V'");
 	//echo "Cantidad de sesiones" . $iValidaSesion;die;
 	if($iValidaSesion==0)
 	{

@@ -21,7 +21,7 @@ if($tipUid==2) {
      * 4 Aprobacion Compra
      * 
      */
-    $Where.=" and sub_finish=0 ";
+    $Where.=" and sub_finish=3 ";
 }
 
     $rol=admin::getSession("usr_rol");
@@ -51,7 +51,7 @@ $qsearch="select sub_mount_base, sub_modalidad, sub_moneda, pro_uid, pro_name, p
         . "WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' and sub_uid=suu_sub_uid "
         . " $Where ";
 
-echo $qsearch;
+//echo $qsearch;
 
 $order= admin::toSql(admin::getParam("order"),"Number");
 if ($order) admin::setSession("order",$order);

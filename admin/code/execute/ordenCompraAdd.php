@@ -51,7 +51,8 @@ $sql = "insert into mdl_orden_compra
                                  0,
                                  '$orc_status',
                                  0)";
-	$db->query($sql);
+echo $sql;	
+$db->query($sql);
 
 $rav_uni_uid=  admin::getParam("rav_uni_uid");
 if(is_array($rav_uni_uid)){

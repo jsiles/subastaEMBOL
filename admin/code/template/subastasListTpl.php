@@ -414,7 +414,7 @@ while ($subasta_list = $pagDb->next_record())
         
         <td align="center" width="5%" height="5">
 	<?php
-		if($sub_finish!=0)
+		if($sub_finish!=3)
 		{
 	?>
 		<img src="lib/rechazar_off.png" border="0" title="Rechazar" alt="Rechazar">

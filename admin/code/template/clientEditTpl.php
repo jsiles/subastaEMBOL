@@ -465,7 +465,7 @@ $sql2 = "select w.wtp_uid, w.wtp_name,  d.wde_description from mdl_waytopay w, m
 			<tr>
 				<td width="59%" align="center">
 				<a href="#" onclick="verifyClient();" class="button">
-				<?=admin::labels('register');?>
+				Actualizar
 				</a> 
 				</td>
           <td width="41%" style="font-size:11px;">

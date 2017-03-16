@@ -22,7 +22,8 @@ $qsearch="select * from mdl_rav where rav_tipologia=$tipUid order by rav_uid asc
 ?>
 <div id="DIV_WAIT1" style="display:none;"><img border="0" src="lib/loading.gif"></div>
 <br>
-    <form name="addRav" method="post" action="code/execute/subastasRavAdd.php?token=<?=admin::getParam("token")?>" enctype="multipart/form-data">
+
+<form name="addRav" method="post" action="code/execute/subastasRavAdd.php?token=<?=admin::getParam("token")?>" enctype="multipart/form-data">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="77%" height="40"><span class="title"><?=admin::modulesLabels()?></span></td>
@@ -151,8 +152,10 @@ $qsearch="select * from mdl_rav where rav_tipologia=$tipUid order by rav_uid asc
 </td></tr>
 </table>
     </td>
-  </tr></table>
-       
+  </tr>
+</table>
+</form>   
+
 <br />
       <br />
       <div id="contentButton">

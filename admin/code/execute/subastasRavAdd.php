@@ -22,13 +22,18 @@ $rav_moneda = admin::getParam("rav_moneda");
             . " values ($rav_uid,$rav_rol,$rav_monto,$rav_monto1, $rav_tipo, $rav_moneda, 0, '$rav_status') ";
     //echo $sql;die;
    $db->query($sql);
-   if(is_array($rav_uni_uid))
+   $valRavUID=admin::getDbValue("select count(*) from mdl_rav where rav_uid=$rav_uid");
+   if($valRavUID>0){
+   if(is_array($rav_uni_uid)){
+       admin::getDbValue("delete from mdl_rav_access where raa_rav_uid=$rav_uid");   
    foreach($rav_uni_uid as $value)
    {
        $sql="insert into mdl_rav_access (raa_rav_uid, raa_uni_uid) values($rav_uid, $value)";
        //echo $sql;
        $db->query($sql);
    }//die;
+  }
+   }
 //die;
 header("Location: ../../subastasRavList.php?tipUid=$rav_tipo&token=$token");	    
 ?>

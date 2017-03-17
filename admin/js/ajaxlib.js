@@ -49,11 +49,11 @@ function viewInputFile2(uid,status)
 	{
 	if (status=='on')
 		{
-		$('#imageChange_'+uid).fadeIn();
+		$('#imageChange_'+uid).show();
 		}
 	if (status=='off')
 		{
-		$('#imageChange_'+uid).fadeOut();
+		$('#imageChange_'+uid).hide();
 		}
 	}
 // SCRIPT PARA LOS ARCHIVOS SUBIDOS POR FORMULARIO
@@ -61,11 +61,11 @@ function viewInputFile(status)
 	{
 	if (status=='on')
 		{
-		$('#imageChange1').fadeIn();
+		$('#imageChange1').show();
 		}
 	if (status=='off')
 		{
-		$('#imageChange1').fadeOut();
+		$('#imageChange1').hide();
 		}
 	}
 function showHide(e)

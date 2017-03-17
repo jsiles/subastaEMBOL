@@ -464,7 +464,7 @@ $sql2 = "select w.wtp_uid, w.wtp_name,  d.wde_description from mdl_waytopay w, m
 	  	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 			<tr>
 				<td width="59%" align="center">
-				<a href="#" onclick="verifyClient();" class="button">
+				<a href="#" onclick="verifyClientEdit();" class="button">
 				Actualizar
 				</a> 
 				</td>

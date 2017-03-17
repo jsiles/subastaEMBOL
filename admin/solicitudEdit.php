@@ -40,11 +40,11 @@ admin::initialize($opcionMenu, $opocionSubMenu);
 <meta name="rating" content="General">
 <meta http-equiv="Content-Type" content="text/html; ISO-8859-1">
 <script type="text/javascript">var SERVER='<?=$domain?>'; </script>
-<!--<script type="text/javascript" src="js/jquery.js"></script>-->
+<script type="text/javascript" src="js/jquery.js"></script>
 <!--Buscador proveedore -->
-<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.11.4.css">
+<!--<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.11.4.css">
 <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
-<script type="text/javascript" src="js/jquery-ui-1.11.4.custom.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.11.4.custom.js"></script>-->
 <!--END BUSCADOR-->
 
 <script language="javascript" type="text/javascript" src="js/ajaxlib.js?version=<?=VERSION?>"></script>
@@ -54,6 +54,35 @@ admin::initialize($opcionMenu, $opocionSubMenu);
 <link rel="stylesheet" type="text/css" href="css/impromptu.css">
 <script type="text/javascript" src="js/jquery.Impromptu.js"></script>
 <!--ENDIMPROMTU--> 
+<script type="text/javascript">
+function removeImg(id){
+	var txt = '<?=admin::labels('imagequestion');?>?<br><input type="hidden" id="list" name="list" value="'+ id +'" />';
+	$.prompt(txt,{
+		show:'fadeIn' ,
+		opacity:0,
+		buttons:{Eliminar:true, Cancelar:false},
+		callback: function(v,m){
+										   
+			if(v){
+				var uid = id; /* m.find('#list').val(); */
+
+				  $('#image_edit_'+uid).fadeOut(1, function(){ $(this).remove(); });
+				  
+					  $.ajax({
+						url: 'code/execute/solicitudImageDel.php',
+						type: 'POST',
+						data: 'uid='+uid
+					});
+					document.getElementById('image_add_'+uid).innerHTML = '<input type="file" name="sol_document" id="sol_document" size="31" class="input">';
+					$('#image_add_'+uid).fadeIn(700);
+			}
+			else{}
+			
+		}
+	});
+}	
+
+</script>
 <script type="text/javascript">      
 // ELIMINA LOS REGISTROS DE LA CATEGORIA PRINCIPAL
 function removeListCat(id){
@@ -108,13 +137,11 @@ function removeList(id){
 		}
 	});
 }
-$(function() {
+/*$(function() {
     $( ".proveedor" ).autocomplete({
         source: 'code/execute/searchProv.php',
         select: function(event, ui) {
-        /*$(".proveedor").attr('name', 'sol_cli_uid['+ui.item.value+']');
-        $(".proveedor").attr('id', ui.item.value);
-        $(".proveedor").attr('class', 'input3');*/
+      
         $("#inputProveedor").append('<input name="sol_cli_uid[]" checked type="checkbox" class="input3" value="'+ui.item.value+'" size="20" /><label>'+ui.item.label+'</label><br>  ');
         return false; // Prevent the widget from inserting the value.
         
@@ -124,7 +151,7 @@ $(function() {
         return false; // Prevent the widget from inserting the value.
     }
     })
- })
+ })*/
 </script>
 </head>
 <body>

@@ -95,6 +95,97 @@ function verifyClient()
 	}
 }
 
+function verifyClientEdit()
+{
+	sw=true;
+	document.getElementById('div_cli_nit_ci').style.display='none';
+	document.getElementById('div_cli_user').style.display='none';
+	document.getElementById('div_cli_pass').style.display='none';
+	document.getElementById('div_cli_socialreason').style.display='none';
+	document.getElementById('div_cli_mainemail').style.display='none';
+	document.getElementById('div_cli_interno').style.display='none';
+	document.getElementById('div_cli_legalname').style.display='none';
+	document.getElementById('div_cli_legallastname').style.display='none';
+	
+	if(document.getElementById('cli_pts_uid').value==4){
+		document.getElementById('div_cli_pts_description8').style.display='none';
+		document.getElementById('div_cli_pts_description9').style.display='none';
+	}
+
+	if (document.getElementById('cli_nit_ci').value==''){
+		document.getElementById('cli_nit_ci').className='inputError';
+		document.getElementById('div_cli_nit_ci').style.display='';
+		document.getElementById('div_cli_nit_ci').innerHTML = "NIT o CI es necesario!";
+		sw=false;
+	}
+	else
+	{
+		if (!isNumeric(document.getElementById('cli_nit_ci').value)){
+			document.getElementById('cli_nit_ci').className='inputError';
+			document.getElementById('div_cli_nit_ci').style.display='';
+			document.getElementById('div_cli_nit_ci').innerHTML = "Solo Numeros";
+			sw=false;
+		}
+	}
+		
+	if (document.getElementById('cli_user').value==''){
+		document.getElementById('cli_user').className='inputError';
+		document.getElementById('div_cli_user').style.display='';
+		sw=false;
+	}
+		
+	if (document.getElementById('cli_socialreason').value==''){
+		document.getElementById('cli_socialreason').className='inputError';
+		document.getElementById('div_cli_socialreason').style.display='';
+		sw=false;
+	}
+	
+	if (document.getElementById('cli_mainemail').value==''){
+		document.getElementById('cli_mainemail').className='inputError';
+		document.getElementById('div_cli_mainemail').style.display='';
+		sw=false;
+	}
+	
+	if (document.getElementById('cli_interno').value==''){
+		document.getElementById('cli_interno').className='inputError';
+		document.getElementById('div_cli_interno').style.display='';
+		sw=false;
+	}
+	
+	if (document.getElementById('cli_legalname').value==''){
+		document.getElementById('cli_legalname').className='inputError';
+		document.getElementById('div_cli_legalname').style.display='';
+		sw=false;
+	}
+		
+	if (document.getElementById('cli_legallastname').value==''){
+		document.getElementById('cli_legallastname').className='inputError';
+		document.getElementById('div_cli_legallastname').style.display='';
+		sw=false;
+	}
+
+	if(document.getElementById('cli_pts_uid').value==4){
+		if (document.getElementById('cli_pts_description8').value==''){
+			document.getElementById('cli_pts_description8').className='inputError';
+			document.getElementById('div_cli_pts_description8').style.display='';
+			sw=false;
+		}
+		if (document.getElementById('cli_pts_description9').value==''){
+			document.getElementById('cli_pts_description9').className='inputError';
+			document.getElementById('div_cli_pts_description9').style.display='';
+			sw=false;
+		}
+	}
+
+	if (sw){
+		document.frmClient.submit();
+	}
+	else{
+		scroll(0,0);
+	}
+}
+
+
 function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }

@@ -173,7 +173,7 @@ $solEdit=$db->next_record();
 				<div id="imageChange1" style="display:none">
                                     <input type="file" name="sol_document" id="sol_document" size="14" style="font-size:11px;" onclick="verifyFileUpload()" >  
                         <a href="javascript:viewInputFile('off')" 
-                           onclick="document.getElementById('sol_document').value='';document.getElementById('button_next').innerHTML='<?=admin::labels('public');?>';">
+                           onclick="document.getElementById('sol_document').value='';">
                             <img border="0" src="lib/close.gif" align="top"/></a>
 			
 			<span id="div_sol_document" class="error" style="display:none">Solo archivos jpg bmp gif png doc pdf xls</span></div></td>
@@ -185,7 +185,7 @@ $solEdit=$db->next_record();
                         }
 			else
 				{ ?>
-				<input type="file" name="sol_document" id="cli_photo" size="32" class="input" onchange="verifyFileUpload();">
+				<input type="file" name="sol_document" id="sol_document" size="32" class="input" onchange="verifyFileUpload();">
 				<span id="div_sol_document" class="error" style="display:none">Solo archivos jpg bmp gif png </span>	
 			<?php
                         } 

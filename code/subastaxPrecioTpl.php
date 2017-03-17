@@ -33,12 +33,12 @@
                                                                         {
 									$valBids=admin::getDBvalue("SELECT min(bid_mount) FROM mdl_biditem where bid_xit_uid='".$xitem["xit_uid"]."'");
 									$valBidsCli=admin::getDBvalue("SELECT min(bid_mount) FROM mdl_biditem where bid_xit_uid='".$xitem["xit_uid"]."' and bid_cli_uid=$cli_uid");
-                                                                        if($valBids==$valBids) $mensaje="El proceso de compra ha concluido. El BNB agradece su participaci&oacute;n.";//$mensaje="Su oferta gano.";
+                                                                        if($valBids==$valBids) $mensaje="El proceso de compra ha concluido. Se agradece su participaci&oacute;n.";//$mensaje="Su oferta gano.";
                                                                         }
 									else{
 									$valBids=admin::getDBvalue("SELECT max(bid_mount) FROM mdl_biditem where bid_xit_uid='".$xitem["xit_uid"]."'");
 									$valBidsCli=admin::getDBvalue("SELECT max(bid_mount) FROM mdl_biditem where bid_xit_uid='".$xitem["xit_uid"]."' and bid_cli_uid=$cli_uid");
-                                                                        if($valBids==$valBids) $mensaje="El proceso de compra ha concluido. El BNB agradece su participaci&oacute;n.";//$mensaje="Su oferta gano.";
+                                                                        if($valBids==$valBids) $mensaje="El proceso de compra ha concluido. Se agradece su participaci&oacute;n.";//$mensaje="Su oferta gano.";
                                                                         }								
 									$factor = admin::getDbValue("select inc_ajuste from mdl_incoterm where inc_delete=0 and inc_cli_uid=".admin::getSession("uidClient")." and inc_sub_uid=".$xitem["xit_sub_uid"]);
 									//$regBids = admin::getDbValue("select count(*) from mdl_bid where bid_sub_uid = ".$details["sub_uid"]);

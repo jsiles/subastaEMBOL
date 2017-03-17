@@ -10,7 +10,7 @@ $ban_name = admin::getDbValue("select top 1 ban_title from mdl_banners_contents,
     <table width="100%" border="0" cellpadding="0" cellspacing="0" id="header">
         <tr><td height="10px" colspan="3"></td></tr>
       <tr>
-          <td width="15%" height="135px"  rowspan="3" align="center"><div style="alignment-adjust: central"><img src="lib/logo.png" width="120px" height="120px" alt="bnb logo"></div></td>
+          <td width="15%" height="135px"  rowspan="3" align="center"><div style="alignment-adjust: central"><img src="lib/logo.png"></div></td>
         <td width="60%" align="center"><? if($imgs){?>
 
 					<img src="<?=$domain?>/img/banner/img_<?=$imgs?>?<?=time()?>" alt="<?=$ban_name?>" title="<?=$ban_name?>" border="0"/>

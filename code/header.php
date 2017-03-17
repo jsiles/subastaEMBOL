@@ -12,7 +12,7 @@ $ban_name = admin::getDbValue("select top 1 ban_title from mdl_banners_contents,
 ?>
 <div id="top-header" class="container">
 			<div id="logo">
-				<h1><a href="<?=$domain?>">Subastas Online</a></h1>
+				<h1><a href="<?=$domain?>" > Sistema de Compras Online</a></h1>
 				<p></p>
 			</div>
 				
